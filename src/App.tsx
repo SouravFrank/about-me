@@ -1,26 +1,23 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import GradientBackground from "./Components/Background/GradientBackground";
+import GradientBackground_v2 from "./Components/Background/GradientBackground_v2";
 
-function App() {
+const App: React.FC = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <GradientBackground
+        numberOfShades={10}
+        startColor="#1f141c"
+        endColor="#bf3b6d"
+      />
+      <GradientBackground_v2
+        numberOfShades={10}
+        startColor="#1f141c"
+        endColor="#bf3b6d"
+      />
+      {/* Your other components and content go here */}
     </div>
   );
-}
+};
 
 export default App;
