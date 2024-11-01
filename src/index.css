@@ -1,0 +1,31 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer utilities {
+  .shadow-neumorph {
+    @apply transition-all duration-300;
+  }
+
+  .dark .shadow-neumorph {
+    background: #1f2937;
+    box-shadow: 5px 5px 10px #151b24,
+                -5px -5px 10px #293548;
+  }
+
+  .shadow-neumorph {
+    background: #ffffff;
+    box-shadow: 5px 5px 10px #e2e8f0,
+                -5px -5px 10px #ffffff;
+  }
+
+  .dark .shadow-neumorph:hover {
+    box-shadow: 8px 8px 16px #151b24,
+                -8px -8px 16px #293548;
+  }
+
+  .shadow-neumorph:hover {
+    box-shadow: 8px 8px 16px #e2e8f0,
+                -8px -8px 16px #ffffff;
+  }
+}
