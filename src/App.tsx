@@ -37,7 +37,7 @@ function App() {
           className="text-center"
         >
           <motion.img
-            src="https://images.unsplash.com/photo-1539571696357-5a69c17a67c6"
+            src="./assets/sourav_Dp.jpg"
             alt="Profile"
             className="w-40 h-40 rounded-full mx-auto mb-8 shadow-neumorph object-cover"
             whileHover={{ scale: 1.1 }}

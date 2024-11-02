@@ -7,7 +7,7 @@ interface SkillCardProps extends Skill {
 }
 
 export default function SkillCard({ title, src, description, index }: SkillCardProps) {
-  const logoUrl = `https://cdn.jsdelivr.net/gh/devicons/devicon/icons/${src}/${src}-original.svg`;
+  const logoUrl = `https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/${src}/${src}-original.svg`;
 
   return (
     <motion.div

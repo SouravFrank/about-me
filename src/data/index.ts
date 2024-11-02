@@ -26,14 +26,14 @@ export const timelineData = [
 ];
 
 export const mySkills = [
-  { title: "HTML", src: "html", description: "Backbone of webpages." },
-  { title: "CSS", src: "css", description: "Paint brush of webpages." },
+  { title: "HTML", src: "html5", description: "Backbone of webpages." },
+  { title: "CSS", src: "css3", description: "Paint brush of webpages." },
   { title: "JavaScript", src: "javascript", description: "Scripting language enabling interaction in webpages." },
   { title: "React JS", src: "react", description: "Front-end library for live UI" },
   { title: "React Native", src: "react", description: "Native mobile framework for Android, iOS." },
   { title: "Node JS", src: "nodejs", description: "Runtime JS environment for building network apps." },
   { title: "Redux", src: "redux", description: "Predictable state container for JavaScript apps." },
-  { title: "Material UI", src: "mui", description: "Customizable component library for UI." },
+  { title: "Material UI", src: "materialui", description: "Customizable component library for UI." },
   { title: "Swagger", src: "swagger", description: "Interface description language for RESTful APIs." },
   { title: "Linux", src: "linux", description: "Operating system connecting hardware & software." },
   { title: "Git", src: "git", description: "Open-source distributed version control system." }
