@@ -1,13 +1,39 @@
 import { motion } from 'framer-motion';
-import { Briefcase, GraduationCap, Cake } from 'lucide-react';
-import type { TimelineItem } from '../types';
+import { Briefcase, GraduationCap, Award, BookOpen } from 'lucide-react';
+import type { TimelineItem } from '../data/timeline';
 
 interface TimelineEventProps extends TimelineItem {
   index: number;
 }
 
-export default function TimelineEvent({ title, description, date, icon, subsection, index }: TimelineEventProps) {
-  const Icon = icon === 'work' ? Briefcase : icon === 'study' ? GraduationCap : Cake;
+export default function TimelineEvent({ 
+  title, 
+  company, 
+  location, 
+  date, 
+  icon, 
+  type,
+  highlights,
+  technologies,
+  index 
+}: TimelineEventProps) {
+  // Map icon types to Lucide icons
+  const getIcon = () => {
+    switch (type) {
+      case 'work':
+        return Briefcase;
+      case 'education':
+        return GraduationCap;
+      case 'achievement':
+        return Award;
+      case 'certification':
+        return BookOpen;
+      default:
+        return Briefcase;
+    }
+  };
+
+  const Icon = getIcon();
 
   return (
     <motion.div
@@ -33,16 +59,32 @@ export default function TimelineEvent({ title, description, date, icon, subsecti
         className="flex-1 shadow-neumorph p-4 rounded-lg"
         whileHover={{ scale: 1.02 }}
       >
-        <h3 className="font-bold">{title}</h3>
-        <p className="text-sm opacity-75 mt-1">{description}</p>
-        {subsection && (
-          <div className="mt-4 space-y-3">
-            {subsection.map((sub, idx) => (
-              <div key={idx} className="pl-4 border-l-2 border-blue-500">
-                <h4 className="font-medium">{sub.title}</h4>
-                {sub.description && <p className="text-sm opacity-75">{sub.description}</p>}
-                <span className="text-xs opacity-75">{sub.date}</span>
-              </div>
+        <h3 className="font-bold text-lg">{title}</h3>
+        <p className="text-sm opacity-75 mt-1">
+          {company} • {location}
+        </p>
+        
+        {/* Highlights */}
+        {highlights.length > 0 && (
+          <ul className="mt-4 space-y-2">
+            {highlights.map((highlight, idx) => (
+              <li key={idx} className="text-sm pl-4 border-l-2 border-blue-500">
+                {highlight}
+              </li>
+            ))}
+          </ul>
+        )}
+
+        {/* Technologies */}
+        {technologies && technologies.length > 0 && (
+          <div className="mt-4 flex flex-wrap gap-2">
+            {technologies.map((tech, idx) => (
+              <span 
+                key={idx}
+                className="px-2 py-1 text-xs rounded-full bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-100"
+              >
+                {tech}
+              </span>
             ))}
           </div>
         )}

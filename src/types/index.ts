@@ -16,7 +16,7 @@ export interface Skill {
   description: string;
 }
 
-export interface ContactInfo {
+export interface ContactInfoItem {
   title: string;
   value: string;
   link: string;
@@ -28,4 +28,18 @@ export interface SocialMedia {
   github: string;
   linkedin: string;
   whatsapp: string;
+}
+
+export interface PersonalInfo {
+  name: string;
+  location: string;
+  email: string;
+  phone: string;
+  profileImage: string;
+  links: {
+    linkedin: string;
+    github: string;
+    portfolio: string;
+  };
+  summary: string;
 }

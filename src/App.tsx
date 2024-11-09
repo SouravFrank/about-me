@@ -1,25 +1,31 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { Download } from 'lucide-react';
-import IntroAnimation from './components/IntroAnimation';
-import TimelineEvent from './components/TimelineEvent';
-import SkillCard from './components/SkillCard';
-import ThemeToggle from './components/ThemeToggle';
-import ContactInfo from './components/ContactInfo';
-import ContactForm from './components/ContactForm';
-import GoToTop from './components/GoToTop';
-import LocationMap from './components/LocationMap';
-import { timelineData, mySkills, myPersonalInfo, socialMediaLinks } from './data';
+import {
+  IntroAnimation,
+  TimelineEvent,
+  SkillCard,
+  ThemeToggle,
+  ContactInfo,
+  ContactForm,
+  GoToTop,
+  LocationMap
+} from './components';
+
+import {
+  timelineData,
+  skills,
+  personalInfo,
+  socialMediaLinks,
+  contactInfo
+} from './data';
 
 function App() {
   const [isDark, setIsDark] = useState(false);
+  const [imageError, setImageError] = useState(false);
 
   useEffect(() => {
-    if (isDark) {
-      document.documentElement.classList.add('dark');
-    } else {
-      document.documentElement.classList.remove('dark');
-    }
+    document.documentElement.classList.toggle('dark', isDark);
   }, [isDark]);
 
   return (
@@ -37,29 +43,33 @@ function App() {
           className="text-center"
         >
           <motion.img
-            src="./assets/sourav_Dp.jpg"
-            alt="Profile"
+            src={personalInfo.profileImage}
+            alt={`${personalInfo.name}'s Profile`}
             className="w-40 h-40 rounded-full mx-auto mb-8 shadow-neumorph object-cover"
             whileHover={{ scale: 1.1 }}
+            onError={() => {
+              setImageError(true);
+              const img = document.querySelector('img');
+              if (img) {
+                img.src = 'https://ui-avatars.com/api/?name=' + 
+                  encodeURIComponent(personalInfo.name) +
+                  '&background=random';
+              }
+            }}
           />
-          <motion.h1
-            className="text-4xl font-bold mb-4"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.2 }}
-          >
-            Sourav Sadhukhan
+          <motion.h1 className="text-4xl font-bold mb-4">
+            {personalInfo.name}
           </motion.h1>
           <IntroAnimation />
         </motion.div>
       </section>
 
-      {/* Journey Section */}
+      {/* Timeline Section */}
       <section className="py-20 px-8">
         <h2 className="text-3xl font-bold text-center mb-12">My Journey</h2>
         <div className="max-w-4xl mx-auto">
-          {timelineData.map((event, index) => (
-            <TimelineEvent key={index} {...event} index={index} />
+          {timelineData.map((item, index) => (
+            <TimelineEvent key={index} {...item} index={index} />
           ))}
         </div>
       </section>
@@ -67,24 +77,50 @@ function App() {
       {/* Skills Section */}
       <section className="py-20 px-8">
         <h2 className="text-3xl font-bold text-center mb-12">Skills</h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
-          {mySkills.map((skill, index) => (
-            <SkillCard key={index} {...skill} index={index} />
-          ))}
+        <div className="max-w-6xl mx-auto">
+          {/* Technical Skills */}
+          <div className="mb-12">
+            <h3 className="text-2xl font-semibold mb-6">Technical Skills</h3>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+              {skills.technical.map((skill, index) => (
+                <SkillCard key={index} {...skill} index={index} />
+              ))}
+            </div>
+          </div>
+
+          {/* Tools */}
+          <div className="mb-12">
+            <h3 className="text-2xl font-semibold mb-6">Tools</h3>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+              {skills.tools.map((skill, index) => (
+                <SkillCard key={index} {...skill} index={index} />
+              ))}
+            </div>
+          </div>
+
+          {/* Additional Skills */}
+          <div>
+            <h3 className="text-2xl font-semibold mb-6">Additional Skills</h3>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+              {skills.additional.map((skill, index) => (
+                <SkillCard key={index} {...skill} index={index} />
+              ))}
+            </div>
+          </div>
         </div>
       </section>
 
       {/* Contact Section */}
-      <section className="py-20 px-8">
+      {/* <section className="py-20 px-8">
         <h2 className="text-3xl font-bold text-center mb-12">Get in Touch</h2>
         <div className="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12">
           <div className="space-y-12">
-            <ContactInfo personalInfo={myPersonalInfo} socialLinks={socialMediaLinks} />
+            <ContactInfo contactInfo={contactInfo} socialLinks={socialMediaLinks} />
             <LocationMap />
           </div>
           <ContactForm />
         </div>
-      </section>
+      </section> */}
 
       {/* CV Download Section */}
       <section className="py-20 px-8">
