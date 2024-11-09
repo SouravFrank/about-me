@@ -1,6 +1,7 @@
 import { motion } from 'framer-motion';
 import { Mail, Phone, MapPin, Facebook, Instagram, Github, Linkedin, MessageCircle } from 'lucide-react';
 import type { ContactInfoItem, SocialMedia } from '../types';
+import SocialLinks from './SocialLinks';
 
 interface ContactInfoProps {
   contactInfo: ContactInfoItem[];
@@ -51,31 +52,7 @@ export default function ContactInfo({ contactInfo, socialLinks }: ContactInfoPro
       </div>
       
       {/* Social Links */}
-      <div>
-        <h4 className="text-lg font-semibold mb-4">Connect With Me</h4>
-        <div className="flex gap-4">
-          {[
-            { icon: Linkedin, href: socialLinks.linkedin, label: 'LinkedIn', color: 'bg-[#0077B5]' },
-            { icon: Github, href: socialLinks.github, label: 'GitHub', color: 'bg-[#333]' },
-            { icon: Facebook, href: socialLinks.facebook, label: 'Facebook', color: 'bg-[#1877F2]' },
-            { icon: Instagram, href: socialLinks.instagram, label: 'Instagram', color: 'bg-gradient-to-r from-[#833AB4] via-[#FD1D1D] to-[#F77737]' },
-            { icon: MessageCircle, href: socialLinks.whatsapp, label: 'WhatsApp', color: 'bg-[#25D366]' },
-          ].map(({ icon: Icon, href, label, color }, index) => (
-            <motion.a
-              key={index}
-              href={href}
-              target="_blank"
-              rel="noopener noreferrer"
-              className={`w-10 h-10 ${color} rounded-lg flex items-center justify-center text-white hover:opacity-90 transition-opacity duration-300`}
-              whileHover={{ y: -3 }}
-              whileTap={{ scale: 0.95 }}
-              title={label}
-            >
-              <Icon className="w-5 h-5" />
-            </motion.a>
-          ))}
-        </div>
-      </div>
-      </>
+      <SocialLinks socialLinks={socialLinks} />
+    </>
   );
 }

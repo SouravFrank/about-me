@@ -139,7 +139,7 @@ export default function ContactForm() {
             </div>
           </div>
 
-          {/* Updated CTA Section with Shimmer */}
+          {/* Updated CTA Section with cleaner effects */}
           <div className="md:col-span-2 space-y-4 flex flex-col items-end">
             <motion.div
               className="relative w-fit"
@@ -221,15 +221,6 @@ export default function ContactForm() {
                     {status === 'sending' ? 'Sending...' : 'Send Message'}
                   </span>
                 </span>
-
-                {/* Hover glow effect */}
-                <motion.div
-                  className="absolute inset-0 rounded-lg opacity-0 group-hover:opacity-100"
-                  style={{
-                    background: 'radial-gradient(circle at center, rgba(59,130,246,0.5) 0%, transparent 70%)',
-                  }}
-                  transition={{ duration: 0.3 }}
-                />
 
                 {/* Click ripple effect */}
                 <motion.div
