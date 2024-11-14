@@ -1,0 +1,111 @@
+@import url(https://fonts.googleapis.com/css?family=Fira+Sans:400,300,700,500,400italic,500italic,700italic,300italic);
+
+.download-button-container {
+  position: relative;
+  display: inline-block;
+}
+
+.download-button-container input {
+  display: none;
+}
+
+.button_inner {
+  display: inline-block;
+  padding: 16px 32px;
+  background: linear-gradient(90deg, rgba(255, 255, 255, 0.8), rgba(240, 240, 240, 0.8));
+  color: #333;
+  border-radius: 30px;
+  font-size: 20px;
+  font-weight: bold;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  transition: background 0.3s, transform 0.3s, box-shadow 0.3s;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.button_inner:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+}
+
+.button_text {
+  position: relative;
+  z-index: 1;
+}
+
+.tick {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%) scale(0);
+  color: #333;
+  font-size: 24px;
+  transition: transform 0.3s;
+}
+
+.particles {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+.particle {
+  position: absolute;
+  width: 6px;
+  height: 6px;
+  background: rgba(255, 255, 255, 0.8);
+  border-radius: 50%;
+  opacity: 0;
+  animation: particle-animation 1s forwards;
+}
+
+@keyframes particle-animation {
+  0% {
+    transform: translate(0, 0);
+    opacity: 1;
+  }
+  100% {
+    transform: translate(var(--x), var(--y));
+    opacity: 0;
+  }
+}
+
+input:checked + label .button_inner {
+  background: transparent;
+  transform: rotate(90deg);
+}
+
+input:checked + label .button_inner .button_text {
+  opacity: 0;
+}
+
+input:checked + label .button_inner .tick {
+  transform: translateX(-50%) scale(1);
+}
+
+input:checked + label .button_inner .particles .particle {
+  animation: particle-animation 1s forwards;
+}
+
+input:checked + label .button_inner .particles .particle:nth-child(1) {
+  --x: 20px;
+  --y: -30px;
+  animation-delay: 0.1s;
+}
+
+input:checked + label .button_inner .particles .particle:nth-child(2) {
+  --x: -20px;
+  --y: 30px;
+  animation-delay: 0.2s;
+}
+
+input:checked + label .button_inner .particles .particle:nth-child(3) {
+  --x: 30px;
+  --y: 15px;
+  animation-delay: 0.3s;
+}
+
+/* Add more nth-child animations as needed */ 
