@@ -11,6 +11,7 @@ import {
   LocationMap
 } from './components';
 import DownloadButton from './components/DownloadButton';
+import Footer from './components/Footer';
 
 import {
   timelineData,
@@ -155,20 +156,8 @@ function App() {
         </motion.div>
       </section>
 
-      {/* Outro Section */}
-      <section className="py-20 px-8 text-center">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          className="max-w-2xl mx-auto"
-        >
-          <h2 className="text-3xl font-bold mb-6">Let's Create Something Amazing Together</h2>
-          <p className="text-xl opacity-75">
-            Always open to new opportunities and exciting projects.
-          </p>
-        </motion.div>
-      </section>
+      {/* Footer Section */}
+      <Footer />
     </div>
   );
 }
