@@ -28,9 +28,9 @@ const HorizontalScroll: React.FC<HorizontalScrollProps> = ({ projects }) => {
     <div className="relative px-12 py-6">
       <button
         onClick={() => scroll('left')}
-        className="absolute left-2 top-1/2 -translate-y-1/2 bg-white dark:bg-gray-700 rounded-full p-2 shadow-lg hover:bg-gray-100 dark:hover:bg-gray-600 transition-colors z-10"
+        className="absolute left-2 top-1/2 -translate-y-1/2 bg-white dark:bg-gray-700 rounded-full p-2 shadow-lg transition-transform duration-200 z-10 transform group hover:scale-110"
       >
-        <ChevronLeft className="w-6 h-6" />
+        <ChevronLeft className="w-6 h-6 transition-transform duration-200 transform group-hover:-translate-x-1" />
       </button>
       
       <div
@@ -47,9 +47,9 @@ const HorizontalScroll: React.FC<HorizontalScrollProps> = ({ projects }) => {
       
       <button
         onClick={() => scroll('right')}
-        className="absolute right-2 top-1/2 -translate-y-1/2 bg-white dark:bg-gray-700 rounded-full p-2 shadow-lg hover:bg-gray-100 dark:hover:bg-gray-600 transition-colors z-10"
+        className="absolute right-2 top-1/2 -translate-y-1/2 bg-white dark:bg-gray-700 rounded-full p-2 shadow-lg transition-transform duration-200 z-10 transform group hover:scale-110"
       >
-        <ChevronRight className="w-6 h-6" />
+        <ChevronRight className="w-6 h-6 transition-transform duration-200 transform group-hover:translate-x-1" />
       </button>
     </div>
   );
