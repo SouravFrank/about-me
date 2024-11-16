@@ -12,6 +12,8 @@ import {
 } from './components';
 import DownloadButton from './components/DownloadButton';
 import Footer from './components/Footer';
+import ProjectCard from './components/ProjectCard';
+import HorizontalScroll from './components/HorizontalScroll';
 
 import {
   timelineData,
@@ -20,6 +22,7 @@ import {
   socialMediaLinks,
   contactInfo
 } from './data';
+import { projects } from './data/projects';
 
 function App() {
   const [isDark, setIsDark] = useState(false);
@@ -109,6 +112,12 @@ function App() {
             </div>
           </div>
         </div>
+      </section>
+
+      {/* Industry Standard Projects Section */}
+      <section className="py-20 px-8">
+        <h2 className="text-3xl font-bold text-center mb-12">Industry Standard Projects</h2>
+        <HorizontalScroll projects={projects} />
       </section>
 
       {/* Contact Section */}

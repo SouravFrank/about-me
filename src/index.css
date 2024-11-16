@@ -37,3 +37,29 @@ a, button, [role="button"], .cursor-link {
                 -8px -8px 16px #ffffff;
   }
 }
+
+.scrollbar-hide {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;  /* Safari and Chrome */
+}
+
+/* Optional: Add some responsive styles */
+@media (max-width: 768px) {
+  .project-card {
+    width: 100%; /* Full width on smaller screens */
+  }
+}
+
+.project-card {
+  width: 250px; /* Fixed width for desktop */
+}
+
+@media (max-width: 768px) {
+  .project-card {
+    width: 200px; /* Fixed width for mobile */
+  }
+}
