@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import { ExternalLink } from 'lucide-react';
+import { ExternalLink, Brain, BarChart2, Users, Workflow } from 'lucide-react';
 import type { Skill } from '../data/skills';
 
 interface SkillCardProps extends Skill {
@@ -7,24 +7,35 @@ interface SkillCardProps extends Skill {
 }
 
 export default function SkillCard({ name, src, description, index }: SkillCardProps) {
-  const getLogoUrl = (src: string) => {
-    // Special cases for logos that don't follow the standard pattern
-    const specialCases: Record<string, string> = {
-      // html5: 'html5/html5-original.svg',
-      // css3: 'css3/css3-original.svg',
-      express: 'express/express-original.svg',
-      xcode: 'xcode/xcode-original.svg',
-      // Add more special cases as needed
+  const getIcon = (src: string) => {
+    // Special cases for soft skills
+    const softSkillIcons: Record<string, JSX.Element> = {
+      strategy: <Brain className="w-10 h-10 text-blue-500" />,
+      analysis: <BarChart2 className="w-10 h-10 text-green-500" />,
+      team: <Users className="w-10 h-10 text-purple-500" />,
+      adapt: <Workflow className="w-10 h-10 text-orange-500" />
     };
 
-    if (specialCases[src]) {
-      return `https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/${specialCases[src]}`;
+    if (softSkillIcons[src]) {
+      return softSkillIcons[src];
     }
 
-    return `https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/${src}/${src}-original.svg`;
-  };
+    // For technical skills, use the original devicon logic
+    const logoUrl = src; // Directly use the src from the skills object
 
-  const logoUrl = getLogoUrl(src);
+    console.log(src, "logoUrl:: ", logoUrl);
+    return (
+      <img 
+        src={logoUrl} 
+        alt={name} 
+        className="w-10 h-10"
+        onError={(e) => {
+          const target = e.target as HTMLImageElement;
+          target.style.display = 'none';
+        }}
+      />
+    );
+  };
 
   return (
     <motion.div
@@ -37,16 +48,7 @@ export default function SkillCard({ name, src, description, index }: SkillCardPr
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-4">
           <div className="w-12 h-12 flex items-center justify-center">
-            <img 
-              src={logoUrl} 
-              alt={name} 
-              className="w-10 h-10"
-              onError={(e) => {
-                // Fallback for additional skills that don't have icons
-                const target = e.target as HTMLImageElement;
-                target.style.display = 'none';
-              }}
-            />
+            {getIcon(src)}
           </div>
           <h3 className="text-xl font-bold">{name}</h3>
         </div>
@@ -58,7 +60,7 @@ export default function SkillCard({ name, src, description, index }: SkillCardPr
       >
         <p className="text-lg">{description}</p>
         <motion.a
-          href={`https://www.google.com/search?q=${name}+programming`}
+          href={`https://www.google.com/search?q=${encodeURIComponent(name)}+skill+development`}
           target="_blank"
           rel="noopener noreferrer"
           className="inline-flex items-center text-blue-500 hover:text-blue-600 mt-4"
