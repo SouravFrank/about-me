@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion';
 import { Briefcase, GraduationCap, Award, BookOpen } from 'lucide-react';
-import type { TimelineItem } from '../data/timeline';
+import type { TimelineItem } from '../data/timelineBornEducation';
 
 interface TimelineEventProps extends TimelineItem {
   index: number;

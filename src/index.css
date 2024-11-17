@@ -3,11 +3,11 @@
 @tailwind utilities;
 
 html, body {
-  cursor: url('public/cursors/cursor-normal.png'), auto; 
+  cursor: url('cursors/cursor-normal.png'), auto; 
 }
 
 a, button, [role="button"], .cursor-link {
-  cursor: url('public/cursors/cursor-link.png'), pointer; /* Cursor for links and buttons */
+  cursor: url('cursors/cursor-link.png'), pointer; /* Cursor for links and buttons */
 }
 
 @layer utilities {

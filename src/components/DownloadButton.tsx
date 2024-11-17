@@ -6,7 +6,7 @@ const DownloadButton = () => {
   const handleClick = () => {
     setIsChecked(true);
     // Reset the checkbox after the animation
-    setTimeout(() => setIsChecked(false), 3000); // Adjust time as needed
+    setTimeout(() => setIsChecked(false), 3000);
   };
 
   return (

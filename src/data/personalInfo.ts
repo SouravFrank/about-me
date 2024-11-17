@@ -1,18 +1,30 @@
-export const personalInfo = {
+// Define the interface for personal information
+export interface PersonalInfo {
+  name: string;
+  location: string;
+  email: string;
+  phone: string;
+  profileImage: string;
+}
+
+// Define the interface for contact information
+export interface ContactInfo {
+  title: string;
+  value: string;
+  link: string;
+}
+
+// Export the personal information object
+export const personalInfo: PersonalInfo = {
   name: "Sourav Sadhukhan",
   location: "Kolkata, India",
   email: "ssadhukhan990@gmail.com",
   phone: "+91 9038516950",
   profileImage: "/images/profile.jpg",
-  links: {
-    linkedin: "https://linkedin.com/in/souravsadhukhan",
-    github: "https://github.com/Sourav2282",
-    portfolio: "https://souravfrank.github.io/about-me/"
-  },
-  summary: "Accomplished Mobile Developer specializing in React Native, with a focus on developing robust cross-platform native modules..."
 };
 
-export const contactInfo = [
+// Export the contact information array
+export const contactInfo: ContactInfo[] = [
   {
     title: "Email",
     value: "ssadhukhan990@gmail.com",
@@ -26,6 +38,6 @@ export const contactInfo = [
   {
     title: "Location",
     value: "Kolkata, India",
-    link: "https://goo.gl/maps/YourLocation"
+    link: "https://maps.app.goo.gl/cXMbUdWTD3DdSoUP6"
   }
 ]; 

@@ -1,0 +1,40 @@
+export const timelineBornEducation = [
+  {
+    title: 'Birth',
+    location: 'Howrah, West Bengal, India',
+    date: 'June 1998',
+    icon: 'cake',
+    type: 'personal',
+    highlights: ['Welcomed into the world with love and joy!'],
+  },
+  {
+    title: '10th Grade',
+    company: 'Shibpur Dinobandhu Institution (Branch)',
+    location: 'Howrah, West Bengal, India',
+    date: 'March 2013',
+    icon: 'study',
+    type: 'education',
+    highlights: ['Navigated the challenges of school life with resilience and determination!'],
+  },
+  {
+    title: '12th Grade',
+    company: 'Shibpur Dinobandhu Institution (Branch)',
+    location: 'Howrah, West Bengal, India',
+    date: 'June 2013 - July 2015',
+    icon: 'study',
+    type: 'education',
+    highlights: ["Science enthusiast with a passion for discovery!"],
+  },
+  {
+    title: 'B.Tech in Electronics and Communication',
+    company: 'Narula Institute of Technology',
+    location: 'Kolkata, India',
+    date: 'August 2015 - June 2019',
+    icon: 'study',
+    type: 'education',
+    highlights: [
+      'Graduated from Maulana Abul Kalam Azad University of Technology (MAKAUT)',
+      'Technical Finesse Award for outstanding technical support during college fests',
+    ],
+  },
+]; 
