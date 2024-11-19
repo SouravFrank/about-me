@@ -59,6 +59,21 @@ export const skills: SkillsData = {
       name: "Material UI", 
       src: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/materialui/materialui-original.svg", 
       description: "React component library for faster and easier web development" 
+    },
+    { 
+      name: "Axios", 
+      src: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/axios/axios-plain.svg", 
+      description: "Promise-based HTTP client for the browser and Node.js" 
+    },
+    { 
+      name: "Socket.io", 
+      src: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/socketio/socketio-original.svg", 
+      description: "Library for real-time web applications" 
+    },
+    { 
+      name: "Bash",
+      src: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/bash/bash-original.svg",
+      description: "Scripts for automation in Unix/Linux environments"
     }
   ],
   tools: [
@@ -69,7 +84,7 @@ export const skills: SkillsData = {
     },
     { 
       name: "Android Studio", 
-      src: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/androidstudio/androidstudio-original.svg", 
+      src: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/android/android-original.svg", 
       description: "IDE for Android app development" 
     },
     { 
@@ -91,6 +106,26 @@ export const skills: SkillsData = {
       name: "Git", 
       src: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/git/git-original.svg", 
       description: "Version control system for tracking changes in code" 
+    },
+    { 
+      name: "Postman", 
+      src: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/postman/postman-original.svg", 
+      description: "API development environment for testing and documentation" 
+    },
+    { 
+      name: "Jira", 
+      src: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/jira/jira-original.svg", 
+      description: "Project management tool for agile teams" 
+    },
+    { 
+      name: "npm", 
+      src: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/npm/npm-original-wordmark.svg", 
+      description: "Package manager for JavaScript" 
+    },
+    { 
+      name: "SonarQube", 
+      src: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/sonarqube/sonarqube-original.svg", 
+      description: "Continuous inspection tool for code quality" 
     }
   ],
   additional: [
@@ -113,11 +148,6 @@ export const skills: SkillsData = {
       name: "Adaptability",
       src: "adapt",
       description: "Quick to learn and adapt to new technologies and situations"
-    },
-    { 
-      name: "Linux Scripting",
-      src: "linux",
-      description: "Proficient in writing scripts for automation in Linux environments"
     }
   ]
 }; 

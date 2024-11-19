@@ -2,10 +2,12 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { useState, useEffect } from 'react';
 
 const introTexts = [
-  "Building exceptional user experiences",
-  "Crafting elegant solutions",
-  "Transforming ideas into reality",
-  "Creating seamless interactions"
+  "Crafting innovative mobile experiences with React Native",
+  "Building robust cross-platform solutions that delight users",
+  "Transforming ideas into scalable applications with Node.js",
+  "Expert in integrating seamless payment solutions for modern apps",
+  "Passionate about delivering high-quality code and user-centric designs",
+  "Navigating the complexities of Agile project management with ease"
 ];
 
 export default function IntroAnimation() {

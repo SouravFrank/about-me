@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import { Mail, Phone, MapPin, Facebook, Instagram, Github, Linkedin, MessageCircle } from 'lucide-react';
+import { Mail, Phone, MapPin } from 'lucide-react';
 import type { ContactInfoItem, SocialMedia } from '../types';
 import SocialLinks from './SocialLinks';
 
