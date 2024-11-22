@@ -2,11 +2,15 @@
 @tailwind components;
 @tailwind utilities;
 
-html, body {
-  cursor: url('cursors/cursor-normal.png'), auto; 
+html,
+body {
+  cursor: url('cursors/cursor-normal.png'), auto;
 }
 
-a, button, [role="button"], .cursor-link {
+a,
+button,
+[role='button'],
+.cursor-link {
   cursor: url('cursors/cursor-link.png'), pointer; /* Cursor for links and buttons */
 }
 
@@ -17,34 +21,30 @@ a, button, [role="button"], .cursor-link {
 
   .dark .shadow-neumorph {
     background: #1f2937;
-    box-shadow: 5px 5px 10px #151b24,
-                -5px -5px 10px #293548;
+    box-shadow: 5px 5px 10px #151b24, -5px -5px 10px #293548;
   }
 
   .shadow-neumorph {
     background: #ffffff;
-    box-shadow: 5px 5px 10px #e2e8f0,
-                -5px -5px 10px #ffffff;
+    box-shadow: 5px 5px 10px #e2e8f0, -5px -5px 10px #ffffff;
   }
 
   .dark .shadow-neumorph:hover {
-    box-shadow: 8px 8px 16px #151b24,
-                -8px -8px 16px #293548;
+    box-shadow: 8px 8px 16px #151b24, -8px -8px 16px #293548;
   }
 
   .shadow-neumorph:hover {
-    box-shadow: 8px 8px 16px #e2e8f0,
-                -8px -8px 16px #ffffff;
+    box-shadow: 8px 8px 16px #e2e8f0, -8px -8px 16px #ffffff;
   }
 }
 
 .scrollbar-hide {
-  -ms-overflow-style: none;  /* IE and Edge */
-  scrollbar-width: none;  /* Firefox */
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
 }
 
 .scrollbar-hide::-webkit-scrollbar {
-  display: none;  /* Safari and Chrome */
+  display: none; /* Safari and Chrome */
 }
 
 /* Optional: Add some responsive styles */
@@ -62,4 +62,40 @@ a, button, [role="button"], .cursor-link {
   .project-card {
     width: 200px; /* Fixed width for mobile */
   }
+}
+
+@keyframes gradientAnimation {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+@keyframes glowAnimation {
+  0% {
+    box-shadow: 0 0 5px rgba(0, 0, 255, 0.5);
+  }
+  50% {
+    box-shadow: 0 0 15px rgba(0, 0, 255, 0.7);
+  }
+  100% {
+    box-shadow: 0 0 5px rgba(0, 0, 255, 0.5);
+  }
+}
+
+.glow-border {
+  position: absolute;
+  top: -4px; /* Adjust to control the distance of the glow */
+  left: -4px; /* Adjust to control the distance of the glow */
+  right: -4px; /* Adjust to control the distance of the glow */
+  bottom: -4px; /* Adjust to control the distance of the glow */
+  border-radius: 8px; /* Match the card's border radius */
+  border: 2px solid transparent; /* Transparent border */
+  animation: glowAnimation 1.5s infinite; /* Apply glow animation */
+  pointer-events: none; /* Prevent interaction */
 }
