@@ -1,5 +1,5 @@
 import React from 'react';
-import { ChevronLeft, ChevronRight, Github } from 'lucide-react';
+import { Github } from 'lucide-react';
 
 interface ProjectCardProps {
   title: string;
