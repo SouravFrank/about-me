@@ -60,27 +60,21 @@ const GradientBlobCursor = ({ children }) => {
   const isDarkMode = document.body.classList.contains('dark'); // Adjust based on your theme management
 
   return (
-    <div className='container relative w-full h-screen' ref={ref} onMouseMove={handleMove} onTouchMove={handleMove}>
-      <svg style={{ position: 'absolute', width: 0, height: 0 }}>
-        <filter id="blob">
-          <feGaussianBlur in="SourceGraphic" result="blur" stdDeviation="30" />
-          <feColorMatrix
-            in="blur"
-            values="1 0 0 0 0 0 1 0 0 0 0 0 1 0 0 0 0 0 35 -10"
-          />
-        </filter>
-      </svg>
-
+    <div className='relative w-full h-full overflow-hidden' ref={ref} onMouseMove={handleMove} onTouchMove={handleMove}>
       {children}
 
       {trail.map((props, index) => (
         <animated.div
           key={index}
           style={{
+            position: 'absolute',
             transform: props.xy.to(trans),
             borderRadius: '50%',
+            width: '100px',
+            height: '100px',
             background: gradientColors[isDarkMode ? 'dark' : 'light'],
             boxShadow: `0 0 20px hsl(${hue}, 100%, 50%, 0.5)`,
+            pointerEvents: 'none',
           }}
         />
       ))}
