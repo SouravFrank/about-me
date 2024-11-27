@@ -24,6 +24,7 @@ import {
   contactInfo
 } from './data';
 import { projects } from './data/projects';
+import GradientBlobCursor from './components/GradientBlob';
 
 function App() {
   const [isDark, setIsDark] = useState(false);
@@ -34,6 +35,7 @@ function App() {
   }, [isDark]);
 
   return (
+    <GradientBlobCursor>
     <div className={`min-h-screen transition-colors duration-300 ${
       isDark ? 'dark bg-gray-900 text-white' : 'bg-gray-100 text-gray-900'
     }`}>
@@ -189,6 +191,7 @@ function App() {
       {/* Footer Section */}
       <Footer />
     </div>
+    </GradientBlobCursor>
   );
 }
 export default App;
