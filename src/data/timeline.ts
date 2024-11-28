@@ -1,3 +1,18 @@
+// Type definitions for better TypeScript support
+export type TimelineItemType = 'work' | 'education' | 'achievement' | 'certification' | 'personal';
+
+export interface TimelineItem {
+  title: string;
+  company?: string;
+  specialization?: string;
+  location?: string;
+  date: string;
+  icon: string;
+  type: TimelineItemType;
+  highlights: string[];
+  technologies?: string[];
+}
+
 export const timelineData = [
   {
     title: 'Birth',
@@ -8,8 +23,9 @@ export const timelineData = [
     highlights: ['Welcomed into the world with love and joy!'],
   },
   {
-    title: '10th',
+    title: '10th Grade',
     company: 'Shibpur Dinobandhu Institution (Branch)',
+    specialization: 'General',
     location: 'Howrah, West Bengal, India',
     date: 'March 2013',
     icon: 'study',
@@ -17,8 +33,9 @@ export const timelineData = [
     highlights: ['Navigated the challenges of school life with resilience and determination!'],
   },
   {
-    title: '12th',
+    title: '12th Grade',
     company: 'Shibpur Dinobandhu Institution (Branch)',
+    specialization: 'Science',
     location: 'Howrah, West Bengal, India',
     date: 'June 2013 - July 2015',
     icon: 'study',
@@ -28,11 +45,12 @@ export const timelineData = [
   {
     title: 'B.Tech',
     company: 'Narula Institute of Technology',
+    specialization: 'Electronics and Communication Engineering',
     location: 'Kolkata, India',
     date: 'August 2015 - June 2019',
     icon: 'study',
     type: 'education',
-    highlights: ['Electronics & Communication Engineering'],
+    highlights: ['Graduated from Maulana Abul Kalam Azad University of Technology (MAKAUT)', 'Technical Finesse Award for outstanding technical support during college fests'],
   },
   {
     title: 'Assistant System Engineer',
@@ -74,37 +92,4 @@ export const timelineData = [
     highlights: ['Engineered and implemented an in-house dynamic bundle system for React Native apps, reducing delays in critical fixes and feature releases by bypassing app store reviews', 'Led code reviews and mentored junior developers, ensuring timely delivery of promotional in-app games under tight deadlines', 'Collaborated with cross-functional teams to deliver key features and approve release builds for Google Play and Apple App Store', 'Developed and integrated native modules for iOS (Objective-C) and Android (Java)', 'Implemented Firebase Performance Monitoring SDK and Crashlytics SDK for app stability'],
     technologies: ['React Native', 'iOS', 'Android', 'Firebase', 'Azure'],
   },
-
-  {
-    title: 'B.Tech in Electronics and Communication',
-    company: 'Narula Institute of Technology',
-    location: 'Kolkata, India',
-    date: '2019',
-    icon: 'education',
-    type: 'education',
-    highlights: ['Graduated from Maulana Abul Kalam Azad University of Technology (MAKAUT)', 'Technical Finesse Award for outstanding technical support during college fests'],
-  },
-  {
-    title: 'Prompt Engineering Certification',
-    company: 'Vanderbilt University - Coursera',
-    location: 'Online',
-    date: 'September 2023',
-    icon: 'certificate',
-    type: 'certification',
-    highlights: ['Completed comprehensive training in ChatGPT prompt engineering'],
-  },
 ];
-
-// Type definitions for better TypeScript support
-export type TimelineItemType = 'work' | 'education' | 'achievement' | 'certification' | 'personal';
-
-export interface TimelineItem {
-  title: string;
-  company: string;
-  location: string;
-  date: string;
-  icon: string;
-  type: TimelineItemType;
-  highlights: string[];
-  technologies?: string[];
-}

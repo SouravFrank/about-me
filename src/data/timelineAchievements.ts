@@ -1,4 +1,16 @@
-export const timelineAchievements = [
+interface AchievementEntry {
+  title: string;
+  company: string;
+  location?: string; // Optional, as not all achievements may have a location
+  date: string;
+  icon: string;
+  type: 'achievement'; // Specify the type of entry
+  highlights: string[];
+  image: string; // Path to the achievement image
+  companyImage: string; // Path to the company logo
+}
+
+export const timelineAchievements: AchievementEntry[] = [
   {
     title: 'Ownership and Accountability Award',
     company: 'Fareportal',
