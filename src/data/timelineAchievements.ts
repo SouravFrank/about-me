@@ -8,6 +8,7 @@ export const timelineAchievements = [
     type: 'achievement',
     highlights: ['Recognized for showcasing exceptional accountability and dedication to success.'],
     image: '/images/ownership-accountability-award.png',
+    companyImage: '/images/FareportalLogo.webp'
   },
   {
     title: 'Fast Execution Award',
@@ -18,6 +19,7 @@ export const timelineAchievements = [
     type: 'achievement',
     highlights: ['Recognized for timely delivery of critical projects under tight deadlines.'],
     image: '/images/fast-execution-award-2023.png',
+    companyImage: '/images/FareportalLogo.webp'
   },
   {
     title: 'Fast Execution Award',
@@ -28,6 +30,7 @@ export const timelineAchievements = [
     type: 'achievement',
     highlights: ['Recognized for timely delivery of critical projects under tight deadlines.'],
     image: '/images/fast-execution-award-2022.png',
+    companyImage: '/images/FareportalLogo.webp'
   },
   {
     title: 'Passion For Customers Award',
@@ -38,6 +41,7 @@ export const timelineAchievements = [
     type: 'achievement',
     highlights: ['Awarded for delivering bug-free, efficient code enhancing user satisfaction.'],
     image: '/images/passion-for-customers-award.png',
+    companyImage: '/images/FareportalLogo.webp'
   },
   {
     title: 'Technical Excellence Award',
@@ -48,6 +52,7 @@ export const timelineAchievements = [
     type: 'achievement',
     highlights: ['For rapid learning and efficient delivery of high-impact coding projects.'],
     image: '/images/technical-excellence-award.png',
+    companyImage: '/images/Tata-Consultancy-Services-TCS.png'
   },
   {
     title: 'Technical Finesse Award',
@@ -58,5 +63,6 @@ export const timelineAchievements = [
     type: 'achievement',
     highlights: ['For outstanding technical and graphical support during college fests.'],
     image: '/images/technical-finesse-award.png',
+    companyImage: '/images/Narula_Institute_of_Technology_logo.png'
   },
 ];

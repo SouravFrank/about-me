@@ -1,31 +1,17 @@
 import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import {
-  IntroAnimation,
-  TimelineEvent,
-  SkillCard,
-  ThemeToggle,
-  ContactInfo,
-  ContactForm,
-  GoToTop,
-  LocationMap
-} from './components';
+import { IntroAnimation, TimelineEvent, SkillCard, ThemeToggle, ContactInfo, ContactForm, GoToTop, LocationMap } from './components';
 import DownloadButton from './components/DownloadButton';
 import Footer from './components/Footer';
 import ProjectCard from './components/ProjectCard';
 import HorizontalScroll from './components/HorizontalScroll';
 import { Download } from 'lucide-react';
 
-import {
-  timelineData,
-  skills,
-  personalInfo,
-  socialMediaLinks,
-  contactInfo
-} from './data';
+import { timelineData, skills, personalInfo, socialMediaLinks, contactInfo } from './data';
 import { projects } from './data/projects';
 import GradientBlobCursor from './components/GradientBlob';
 import RewardsRecognition from './components/RewardsRecognition';
+import ProjectSection from './components/ProjectSection';
 
 function App() {
   const [isDark, setIsDark] = useState<boolean>(false);
@@ -37,19 +23,13 @@ function App() {
 
   return (
     // <GradientBlobCursor isDarkMode={isDark}>
-    <div className={`min-h-screen transition-colors duration-300 ${
-      isDark ? 'dark bg-gray-900 text-white' : 'bg-gray-100 text-gray-900'
-    }`}>
+    <div className={`min-h-screen transition-colors duration-300 ${isDark ? 'dark bg-gray-900 text-white' : 'bg-gray-100 text-gray-900'}`}>
       <ThemeToggle isDark={isDark} toggle={() => setIsDark(!isDark)} />
       <GoToTop />
 
       {/* Intro Section */}
       <section className="min-h-screen flex items-center justify-center p-8">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          className="text-center"
-        >
+        <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="text-center">
           <motion.img
             src={personalInfo.profileImage}
             alt={`${personalInfo.name}'s Profile`}
@@ -59,15 +39,11 @@ function App() {
               setImageError(true);
               const img = document.querySelector('img');
               if (img) {
-                img.src = 'https://ui-avatars.com/api/?name=' + 
-                  encodeURIComponent(personalInfo.name) +
-                  '&background=random';
+                img.src = 'https://ui-avatars.com/api/?name=' + encodeURIComponent(personalInfo.name) + '&background=random';
               }
             }}
           />
-          <motion.h1 className="text-4xl font-bold mb-4">
-            {personalInfo.name}
-          </motion.h1>
+          <motion.h1 className="text-4xl font-bold mb-4">{personalInfo.name}</motion.h1>
           <IntroAnimation />
         </motion.div>
       </section>
@@ -121,7 +97,9 @@ function App() {
       {/* Industry Standard Projects Section */}
       <section className="py-20 px-8">
         <h2 className="text-3xl font-bold text-center mb-12">Industry Standard Projects</h2>
-        <HorizontalScroll projects={projects} />
+        <HorizontalScroll>
+          <ProjectSection projects={projects} />
+        </HorizontalScroll>
       </section>
 
       <RewardsRecognition />
@@ -131,9 +109,7 @@ function App() {
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-16">
             <h2 className="text-4xl font-bold mb-4">Get in Touch</h2>
-            <p className="text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
-              Feel free to reach out for collaborations, opportunities, or just a friendly chat about technology and development.
-            </p>
+            <p className="text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">Feel free to reach out for collaborations, opportunities, or just a friendly chat about technology and development.</p>
           </div>
 
           <div className="space-y-8">
@@ -160,23 +136,13 @@ function App() {
 
       {/* CV Download Section */}
       <section className="py-20 px-8">
-        <motion.div
-          className="max-w-md mx-auto shadow-neumorph p-8 rounded-lg text-center"
-          whileHover={{ scale: 1.05 }}
-        >
+        <motion.div className="max-w-md mx-auto shadow-neumorph p-8 rounded-lg text-center" whileHover={{ scale: 1.05 }}>
           <h2 className="text-2xl font-bold mb-4">Download My Resume</h2>
-          <motion.a
-            href="/resume.pdf"
-            download
-            className="inline-flex items-center px-6 py-3 rounded-full shadow-neumorph"
-            whileHover={{ scale: 1.1 }}
-            whileTap={{ scale: 0.95 }}
-          >
+          <motion.a href="/resume.pdf" download className="inline-flex items-center px-6 py-3 rounded-full shadow-neumorph" whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.95 }}>
             <Download className="w-5 h-5 mr-2" /> Download CV
           </motion.a>
         </motion.div>
       </section>
-
 
       {/* Footer Section */}
       <Footer />
