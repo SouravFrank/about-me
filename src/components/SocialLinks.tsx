@@ -62,7 +62,7 @@ const socialIcons = [
 export default function SocialLinks() {
   return (
     <motion.div 
-      className="h-[70px] flex flex-row gap-4 m-[25px_0px_20px_0px]"
+      className="h-[70px] flex flex-row gap-4"
       initial={{ x: -100 }}
       animate={{ x: 0 }}
       transition={{ duration: 0.5 }}

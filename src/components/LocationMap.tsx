@@ -1,11 +1,10 @@
-import { motion } from 'framer-motion';
 import { mapURI } from '../config';
 
 export default function LocationMap() {
   return (
     <div className="h-full">
       <h3 className="text-2xl font-bold mb-4">Location</h3>
-      <div className="relative h-[calc(100%-2rem)] rounded-lg overflow-hidden">
+      <div className="relative h-[calc(100%-3rem)] rounded-lg overflow-hidden">
         <iframe
           src={mapURI}
           width="100%"

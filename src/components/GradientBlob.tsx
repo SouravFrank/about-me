@@ -56,33 +56,33 @@ const GradientBlobCursor: React.FC<{ isDarkMode: boolean; children: React.ReactN
     };
   }, [updatePosition]);
 
-  // More distinct color schemes
+  // More distinct neon color schemes
   const gradientColors = {
     light: {
       blob: `linear-gradient(135deg, 
-        hsl(${hue}, 90%, 30%), 
-        hsl(${(hue + 60) % 360}, 90%, 20%)
+        hsl(${hue}, 100%, 50%), 
+        hsl(${(hue + 60) % 360}, 100%, 40%)
       )`,
-      boxShadow: `0 0 30px hsl(${hue}, 80%, 40%, 0.4)`,
+      boxShadow: `0 0 30px hsl(${hue}, 100%, 60%, 0.6)`,
       particle: `radial-gradient(
         circle at center, 
-        hsl(${hue}, 90%, 25%), 
+        hsl(${hue}, 100%, 45%), 
         transparent
       )`,
-      particleBoxShadow: `0 0 20px hsl(${hue}, 90%, 30%, 0.5)`
+      particleBoxShadow: `0 0 20px hsl(${hue}, 100%, 50%, 0.7)`
     },
     dark: {
       blob: `linear-gradient(135deg, 
-        hsl(${hue}, 100%, 60%), 
+        hsl(${hue}, 100%, 70%), 
         hsl(${(hue + 60) % 360}, 100%, 80%)
       )`,
-      boxShadow: `0 0 40px hsl(${hue}, 100%, 50%, 0.7)`,
+      boxShadow: `0 0 40px hsl(${hue}, 100%, 60%, 0.8)`,
       particle: `radial-gradient(
         circle at center, 
-        hsl(${hue}, 100%, 35%), 
+        hsl(${hue}, 100%, 55%), 
         transparent
       )`,
-      particleBoxShadow: `0 0 20px hsl(${hue}, 100%, 50%, 0.6)`
+      particleBoxShadow: `0 0 20px hsl(${hue}, 100%, 70%, 0.6)`
     }
   };
 
