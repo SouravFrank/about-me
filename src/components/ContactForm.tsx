@@ -132,7 +132,7 @@ export default function ContactForm() {
                 required
                 value={formData.message}
                 onChange={(e) => setFormData(prev => ({ ...prev, message: e.target.value }))}
-                className="w-full h-[calc(100%-2rem)] min-h-[150px] p-4 pl-12 rounded-lg bg-gray-50 dark:bg-gray-700/50 border border-gray-200 dark:border-gray-600 focus:ring-2 focus:ring-blue-500 dark:focus:ring-blue-400 focus:border-transparent outline-none transition-all duration-200 resize-none"
+                className="w-full h-[calc(100%-2rem)] min-h-[165px] p-4 pl-12 rounded-lg bg-gray-50 dark:bg-gray-700/50 border border-gray-200 dark:border-gray-600 focus:ring-2 focus:ring-blue-500 dark:focus:ring-blue-400 focus:border-transparent outline-none transition-all duration-200 resize-none"
                 placeholder="Write your message here..."
               />
               <MessageSquare className="w-5 h-5 text-gray-400 absolute left-4 top-[1.2rem]" />

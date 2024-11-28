@@ -25,9 +25,10 @@ import {
 } from './data';
 import { projects } from './data/projects';
 import GradientBlobCursor from './components/GradientBlob';
+import RewardsRecognition from './components/RewardsRecognition';
 
 function App() {
-  const [isDark, setIsDark] = useState(false);
+  const [isDark, setIsDark] = useState<boolean>(false);
   const [imageError, setImageError] = useState(false);
 
   useEffect(() => {
@@ -35,7 +36,7 @@ function App() {
   }, [isDark]);
 
   return (
-    <GradientBlobCursor isDarkMode={isDark}>
+    // <GradientBlobCursor isDarkMode={isDark}>
     <div className={`min-h-screen transition-colors duration-300 ${
       isDark ? 'dark bg-gray-900 text-white' : 'bg-gray-100 text-gray-900'
     }`}>
@@ -123,6 +124,8 @@ function App() {
         <HorizontalScroll projects={projects} />
       </section>
 
+      <RewardsRecognition />
+
       {/* Contact Section */}
       <section className="py-20 px-8 bg-gray-50 dark:bg-gray-900">
         <div className="max-w-7xl mx-auto">
@@ -156,19 +159,6 @@ function App() {
       </section>
 
       {/* CV Download Section */}
-      <section className="py-20 px-8 text-center">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          className="max-w-2xl mx-auto"
-        >
-          <h2 className="text-3xl font-bold mb-6">Download My CV</h2>
-          <DownloadButton />
-        </motion.div>
-      </section>
-
-      {/* CV Download Section */}
       <section className="py-20 px-8">
         <motion.div
           className="max-w-md mx-auto shadow-neumorph p-8 rounded-lg text-center"
@@ -191,7 +181,7 @@ function App() {
       {/* Footer Section */}
       <Footer />
     </div>
-    </GradientBlobCursor>
+    // </GradientBlobCursor>
   );
 }
 export default App;
