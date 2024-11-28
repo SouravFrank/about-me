@@ -78,36 +78,16 @@ const HorizontalScroll: React.FC<HorizontalScrollProps> = ({ projects }) => {
     setIsDragging(false);
     containerRef.current.style.cursor = 'grab';
 
-    const startTime = performance.now();
-    let currentVelocity = velocity.current * 100; // Scale up the velocity for more noticeable effect
+    // Reset the velocity to zero when stopping dragging
+    velocity.current = 0;
 
-    // Only apply momentum if there's significant velocity
-    if (Math.abs(currentVelocity) > 0.1) {
-      const momentumScroll = () => {
-        if (!containerRef.current) return;
+    // Re-enable snap behavior immediately
+    containerRef.current.style.scrollSnapType = 'x mandatory';
+  };
 
-        const now = performance.now();
-        const elapsed = now - startTime;
-        
-        // Apply momentum scrolling
-        containerRef.current.scrollLeft += currentVelocity;
-        
-        // Reduce velocity with friction
-        currentVelocity *= 0.95;
-
-        if (Math.abs(currentVelocity) > 0.1) {
-          animationRef.current = requestAnimationFrame(momentumScroll);
-        } else {
-          // Re-enable snap behavior after momentum scrolling ends
-          containerRef.current.style.scrollSnapType = 'x mandatory';
-        }
-      };
-
-      animationRef.current = requestAnimationFrame(momentumScroll);
-    } else {
-      // If no significant velocity, re-enable snap immediately
-      containerRef.current.style.scrollSnapType = 'x mandatory';
-    }
+  const handleButtonClick = (direction: 'left' | 'right') => {
+    stopDragging(); // Ensure dragging is stopped before scrolling
+    scroll(direction); // Call the scroll function
   };
 
   const handleMouseDown = (e: MouseEvent<HTMLDivElement>) => {
@@ -154,7 +134,7 @@ const HorizontalScroll: React.FC<HorizontalScrollProps> = ({ projects }) => {
   return (
     <div className="relative px-12 py-6">
       <button
-        onClick={() => scroll('left')}
+        onClick={() => handleButtonClick('left')}
         className="absolute left-2 top-1/2 -translate-y-1/2 bg-white dark:bg-gray-700 rounded-full p-2 shadow-lg transition-transform duration-200 z-10 transform group hover:scale-110"
       >
         <ChevronLeft className="w-6 h-6 transition-transform duration-200 transform group-hover:-translate-x-1" />
@@ -187,7 +167,7 @@ const HorizontalScroll: React.FC<HorizontalScrollProps> = ({ projects }) => {
       </div>
       
       <button
-        onClick={() => scroll('right')}
+        onClick={() => handleButtonClick('right')}
         className="absolute right-2 top-1/2 -translate-y-1/2 bg-white dark:bg-gray-700 rounded-full p-2 shadow-lg transition-transform duration-200 z-10 transform group hover:scale-110"
       >
         <ChevronRight className="w-6 h-6 transition-transform duration-200 transform group-hover:translate-x-1" />

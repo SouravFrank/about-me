@@ -1,33 +1,7 @@
 import React, { useRef } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { timelineAchievements } from '../data/timelineAchievements';
-
-// Achievement Cup SVG Component
-const AchievementCup = ({ rotation = 0 }) => (
-  <svg 
-    xmlns="http://www.w3.org/2000/svg" 
-    viewBox="0 0 100 100" 
-    className="w-24 h-24 mx-auto"
-    style={{ transform: `rotate(${rotation}deg)` }}
-  >
-    <path 
-      d="M30 20 L70 20 L70 40 Q50 50, 30 40 Z" 
-      fill="url(#goldGradient)" 
-      stroke="#D4AF37" 
-      strokeWidth="2"
-    />
-    <path 
-      d="M25 15 L75 15 L75 20 L25 20 Z" 
-      fill="#D4AF37"
-    />
-    <defs>
-      <linearGradient id="goldGradient" x1="0%" y1="0%" x2="0%" y2="100%">
-        <stop offset="0%" style={{stopColor:'#FFD700', stopOpacity:1}} />
-        <stop offset="100%" style={{stopColor:'#DAA520', stopOpacity:1}} />
-      </linearGradient>
-    </defs>
-  </svg>
-);
+import trophyIcon from '../assets/icons/trophy.svg'; // Import the SVG
 
 const RewardsRecognition: React.FC = () => {
   const sectionRef = useRef(null);
@@ -43,7 +17,7 @@ const RewardsRecognition: React.FC = () => {
     <motion.section 
       ref={sectionRef}
       style={{ opacity, y: yTranslate }}
-      className="py-20 px-8 bg-gradient-to-br from-neutral-50 to-neutral-100"
+      className="py-20 px-8"
     >
       <div className="text-center mb-16">
         <h2 className="text-5xl font-thin text-neutral-800 tracking-wide mb-4">
@@ -65,13 +39,14 @@ const RewardsRecognition: React.FC = () => {
             }}
           >
             <div className="bg-white/40 backdrop-blur-lg rounded-2xl border border-white/20 shadow-2xl p-8 transform transition-all duration-300 hover:shadow-4xl">
-              {/* Achievement Cup with Rotation on Hover */}
-              <motion.div 
+              {/* Trophy Icon using require */}
+              <motion.img 
+                src={trophyIcon} // Use the imported SVG
+                alt="Trophy Icon"
+                className="w-24 h-24 mx-auto transition-transform duration-300"
                 whileHover={{ rotate: 10 }}
                 transition={{ type: "spring", stiffness: 300 }}
-              >
-                <AchievementCup />
-              </motion.div>
+              />
 
               {/* Achievement Details */}
               <div className="text-center mt-6">
