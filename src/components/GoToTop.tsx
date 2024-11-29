@@ -2,8 +2,8 @@ import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ArrowUp } from 'lucide-react';
 
-export default function GoToTop() {
-  const [isVisible, setIsVisible] = useState(false);
+const GoToTop: React.FC = () => {
+  const [isVisible, setIsVisible] = useState<boolean>(false);
 
   useEffect(() => {
     const toggleVisibility = () => {
@@ -42,4 +42,6 @@ export default function GoToTop() {
       )}
     </AnimatePresence>
   );
-}
+};
+
+export default GoToTop;

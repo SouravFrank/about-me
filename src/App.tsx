@@ -23,7 +23,6 @@ function App() {
   }, [isDark]);
 
   return (
-    // <GradientBlobCursor isDarkMode={isDark}>
     <div className={`min-h-screen transition-colors duration-300 ${isDark ? 'dark bg-gray-900 text-white' : 'bg-gray-100 text-gray-900'}`}>
       <ThemeToggle isDark={isDark} toggle={() => setIsDark(!isDark)} />
       <GoToTop />
@@ -60,8 +59,7 @@ function App() {
       </section>
 
       {/* Skills Section */}
-      <section className="py-20 px-8">
-        <h2 className="text-3xl font-bold text-center mb-12">Skills</h2>
+      <SectionWrapper isDark={isDark} titleBold={'Unlocking '} titleLight={'Your Technical Potential'} description={'Discover the cutting-edge technologies and skills that drive innovation and success.'}>
         <div className="max-w-6xl mx-auto">
           {/* Technical Skills */}
           <div className="mb-12">
@@ -93,14 +91,9 @@ function App() {
             </div>
           </div>
         </div>
-      </section>
+        </SectionWrapper>
 
       {/* Industry Standard Projects Section */}
-      {/* <section className="py-20 px-8">
-        <h2 className="text-3xl font-bold text-center mb-12">Industry Standard Projects</h2>
-        
-      </section> */}
-
       <SectionWrapper isDark={isDark} titleBold={'Pioneering '} titleLight={'Industry Projects'} description={'Explore my contributions to the industry through these projects, showcasing innovation and excellence.'}>
         <HorizontalScroll>
           <ProjectSection projects={projects} />
@@ -111,7 +104,6 @@ function App() {
 
       {/* Contact Section */}
       <SectionWrapper isDark={isDark} titleBold={'Get '} titleLight={'in Touch'} description={'Feel free to reach out for collaborations, opportunities, or just a friendly chat about technology and development.'}>
-        {/* <section className="py-20 px-8 bg-gray-50 dark:bg-gray-900"> */}
           <div className="space-y-8 px-8">
             {/* Contact Info & Map Row */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
@@ -131,7 +123,6 @@ function App() {
               <ContactForm />
             </div>
           </div>
-        {/* </section> */}
       </SectionWrapper>
 
       {/* CV Download Section */}
@@ -145,9 +136,8 @@ function App() {
       </section>
 
       {/* Footer Section */}
-      <Footer />
+      <Footer isDark={isDark} />
     </div>
-    // </GradientBlobCursor>
   );
 }
 export default App;

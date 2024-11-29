@@ -10,7 +10,7 @@ export default function ThemeToggle({ isDark, toggle }: ThemeToggleProps) {
   return (
     <motion.button
       onClick={toggle}
-      className="fixed top-4 right-4 p-3 rounded-full shadow-neumorph"
+      className="fixed top-4 right-4 p-3 rounded-full shadow-neumorph z-50"
       whileHover={{ scale: 1.1 }}
       whileTap={{ scale: 0.9 }}
     >
