@@ -19,7 +19,7 @@ export const timelineAchievements: AchievementEntry[] = [
     icon: 'award',
     type: 'achievement',
     highlights: ['Recognized for showcasing exceptional accountability and dedication to success.'],
-    image: '/images/ownership-accountability-award.png',
+    image: '/images/ownership-accountability-award.jpg',
     companyImage: '/images/FareportalLogo.webp'
   },
   {
@@ -30,7 +30,7 @@ export const timelineAchievements: AchievementEntry[] = [
     icon: 'award',
     type: 'achievement',
     highlights: ['Recognized for timely delivery of critical projects under tight deadlines.'],
-    image: '/images/fast-execution-award-2023.png',
+    image: '/images/fast-execution-award-2023.jpg',
     companyImage: '/images/FareportalLogo.webp'
   },
   {
@@ -41,7 +41,7 @@ export const timelineAchievements: AchievementEntry[] = [
     icon: 'award',
     type: 'achievement',
     highlights: ['Recognized for timely delivery of critical projects under tight deadlines.'],
-    image: '/images/fast-execution-award-2022.png',
+    image: '/images/fast-execution-award-2022.jpg',
     companyImage: '/images/FareportalLogo.webp'
   },
   {
@@ -52,7 +52,7 @@ export const timelineAchievements: AchievementEntry[] = [
     icon: 'award',
     type: 'achievement',
     highlights: ['Awarded for delivering bug-free, efficient code enhancing user satisfaction.'],
-    image: '/images/passion-for-customers-award.png',
+    image: '/images/passion-for-customers-award.jpg',
     companyImage: '/images/FareportalLogo.webp'
   },
   {
@@ -63,7 +63,7 @@ export const timelineAchievements: AchievementEntry[] = [
     icon: 'award',
     type: 'achievement',
     highlights: ['For rapid learning and efficient delivery of high-impact coding projects.'],
-    image: '/images/technical-excellence-award.png',
+    image: '/images/technical-excellence-award.jpg',
     companyImage: '/images/Tata-Consultancy-Services-TCS.png'
   },
   {
@@ -74,7 +74,7 @@ export const timelineAchievements: AchievementEntry[] = [
     icon: 'award',
     type: 'achievement',
     highlights: ['For outstanding technical and graphical support during college fests.'],
-    image: '/images/technical-finesse-award.png',
+    image: '/images/technical-finesse-award.jpg',
     companyImage: '/images/Narula_Institute_of_Technology_logo.png'
   },
 ];

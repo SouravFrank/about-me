@@ -25,7 +25,7 @@ const RewardsRecognition: React.FC = () => {
       <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-6">
         {timelineAchievements.map((achievement, index) => (
           <motion.div key={index} className="relative group flex-shrink-0">
-            <div className="bg-white rounded-lg shadow-lg overflow-hidden transition-transform duration-300 group-hover:scale-105">
+            <div className="bg-white rounded-lg shadow-lg overflow-hidden transition-transform duration-300 group-hover:scale-105" style={{ minHeight: '200px' }}>
               <div className="flex flex-col items-center p-4">
                 {/* Trophy Icon using require */}
                 <motion.img
@@ -38,17 +38,17 @@ const RewardsRecognition: React.FC = () => {
                 <h3 className="text-lg font-semibold text-neutral-800 mb-1 text-center">{achievement.title}</h3>
                 <p className="text-neutral-500 italic mb-2 text-center">{achievement.date}</p>
                 <div className="flex flex-row items-center justify-center" style={{ height: 50 }}>
-                  <img src={achievement.companyImage} style={{ height: achievement.company === 'Narula Institute of Technology' ? 40 : 'auto', width: achievement.company === 'Narula Institute of Technology' ? 'auto' : '50%' }} />
-                  <span className="text-neutral-600 ml-2">{achievement.company === 'Narula Institute of Technology' ? achievement.company : ''}</span>
+                  <img src={achievement.companyImage} style={{ height: 'auto', width: '50%' }} />
                 </div>
               </div>
-              <motion.img
-                src={achievement.image} // Use the image path from the achievement data
-                alt={achievement.title}
-                className="w-full h-32 object-cover transition-opacity duration-300 opacity-0 group-hover:opacity-100"
-              />
-              <div className="absolute inset-0 flex items-center justify-center bg-white bg-opacity-0 group-hover:bg-opacity-80 transition duration-300 rounded-lg">
-                <div className="text-center p-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+
+              <div className="absolute inset-0 flex items-center justify-center bg-white bg-opacity-0 group-hover:bg-opacity-95 transition duration-300 rounded-lg">
+                <motion.img
+                  src={achievement.image} // Use the image path from the achievement data
+                  alt={achievement.title}
+                  className="w-full h-32 object-cover transition-opacity duration-300 opacity-0 group-hover:opacity-100"
+                />
+                <div className="p-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                   <p className="text-neutral-700">
                     {achievement.highlights[0]} {/* Display the description as a paragraph */}
                   </p>
