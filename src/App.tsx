@@ -12,6 +12,7 @@ import { projects } from './data/projects';
 import GradientBlobCursor from './components/GradientBlob';
 import RewardsRecognition from './components/RewardsRecognition';
 import ProjectSection from './components/ProjectSection';
+import SectionWrapper from './components/common/SectionWrapper';
 
 function App() {
   const [isDark, setIsDark] = useState<boolean>(false);
@@ -95,24 +96,23 @@ function App() {
       </section>
 
       {/* Industry Standard Projects Section */}
-      <section className="py-20 px-8">
+      {/* <section className="py-20 px-8">
         <h2 className="text-3xl font-bold text-center mb-12">Industry Standard Projects</h2>
+        
+      </section> */}
+
+      <SectionWrapper isDark={isDark} titleBold={'Pioneering '} titleLight={'Industry Projects'} description={'Explore my contributions to the industry through these projects, showcasing innovation and excellence.'}>
         <HorizontalScroll>
           <ProjectSection projects={projects} />
         </HorizontalScroll>
-      </section>
+      </SectionWrapper>
 
-      <RewardsRecognition />
+      <RewardsRecognition isDark={isDark} />
 
       {/* Contact Section */}
-      <section className="py-20 px-8 bg-gray-50 dark:bg-gray-900">
-        <div className="max-w-7xl mx-auto">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold mb-4">Get in Touch</h2>
-            <p className="text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">Feel free to reach out for collaborations, opportunities, or just a friendly chat about technology and development.</p>
-          </div>
-
-          <div className="space-y-8">
+      <SectionWrapper isDark={isDark} titleBold={'Get '} titleLight={'in Touch'} description={'Feel free to reach out for collaborations, opportunities, or just a friendly chat about technology and development.'}>
+        {/* <section className="py-20 px-8 bg-gray-50 dark:bg-gray-900"> */}
+          <div className="space-y-8 px-8">
             {/* Contact Info & Map Row */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
               {/* Contact Info */}
@@ -131,8 +131,8 @@ function App() {
               <ContactForm />
             </div>
           </div>
-        </div>
-      </section>
+        {/* </section> */}
+      </SectionWrapper>
 
       {/* CV Download Section */}
       <section className="py-20 px-8">

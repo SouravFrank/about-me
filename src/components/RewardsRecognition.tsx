@@ -1,33 +1,26 @@
-import React, { useRef } from 'react';
-import { motion, useScroll, useTransform } from 'framer-motion';
-import { timelineAchievements } from '../data/timelineAchievements';
+import React from 'react';
+import { motion } from 'framer-motion';
+import { timelineAchievements, achievementsSectionDetails } from '../data/timelineAchievements';
 import trophyIcon from '../assets/icons/trophy.svg'; // Import the SVG
+import SectionWrapper from './common/SectionWrapper';
 
-const RewardsRecognition: React.FC = () => {
-  const sectionRef = useRef(null);
-  const { scrollYProgress } = useScroll({
-    target: sectionRef,
-    offset: ['start end', 'end start'],
-  });
+interface RewardsRecognitionProps {
+  isDark: boolean; // Add isDark prop
+}
 
-  const opacity = useTransform(scrollYProgress, [0, 0.5, 1], [0, 1, 0]);
-  const yTranslate = useTransform(scrollYProgress, [0, 0.5, 1], [50, 0, -50]);
-
+const RewardsRecognition: React.FC<RewardsRecognitionProps> = ({ isDark }) => {
   return (
-    <motion.section ref={sectionRef} style={{ opacity, y: yTranslate }} className="py-20 px-8">
-      <div className="text-center mb-16">
-        <h2 className="text-5xl font-thin text-neutral-800 tracking-wide mb-4">
-          Milestones of <span className="text-gold-600 font-semibold">Excellence</span>
-        </h2>
-        <p className="text-lg text-neutral-600 max-w-2xl mx-auto">A journey marked by significant achievements and remarkable accomplishments.</p>
-      </div>
-
+    <SectionWrapper 
+      titleBold={achievementsSectionDetails.titleBold} 
+      titleLight={achievementsSectionDetails.titleLight} 
+      description={achievementsSectionDetails.description}
+      isDark={isDark} // Pass isDark prop
+    >
       <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-6">
         {timelineAchievements.map((achievement, index) => (
           <motion.div key={index} className="relative group flex-shrink-0">
-            <div className="bg-white rounded-lg shadow-lg overflow-hidden transition-transform duration-300 group-hover:scale-105" style={{ minHeight: '200px' }}>
+            <div className={`bg-white rounded-lg shadow-lg overflow-hidden transition-transform duration-300 group-hover:scale-105 ${isDark ? 'bg-gray-800' : 'bg-white'}`} style={{ minHeight: '200px' }}>
               <div className="flex flex-col items-center p-4">
-                {/* Trophy Icon using require */}
                 <motion.img
                   src={trophyIcon} // Use the imported SVG
                   alt="Trophy Icon"
@@ -35,21 +28,21 @@ const RewardsRecognition: React.FC = () => {
                   whileHover={{ rotate: 10 }}
                   transition={{ type: 'spring', stiffness: 300 }}
                 />
-                <h3 className="text-lg font-semibold text-neutral-800 mb-1 text-center">{achievement.title}</h3>
-                <p className="text-neutral-500 italic mb-2 text-center">{achievement.date}</p>
+                <h3 className={`text-lg font-semibold mb-1 text-center ${isDark ? 'text-white' : 'text-neutral-800'}`}>{achievement.title}</h3>
+                <p className={`text-neutral-500 italic mb-2 text-center ${isDark ? 'text-gray-400' : 'text-neutral-500'}`}>{achievement.date}</p>
                 <div className="flex flex-row items-center justify-center" style={{ height: 50 }}>
                   <img src={achievement.companyImage} style={{ height: 'auto', width: '50%' }} />
                 </div>
               </div>
 
-              <div className="absolute inset-0 flex items-center justify-center bg-white bg-opacity-0 group-hover:bg-opacity-95 transition duration-300 rounded-lg">
+              <div className={`absolute inset-0 flex items-center justify-center bg-opacity-0 group-hover:bg-opacity-95 transition duration-300 rounded-lg ${isDark ? 'bg-gray-800' : 'bg-white'}`}>
                 <motion.img
                   src={achievement.image} // Use the image path from the achievement data
                   alt={achievement.title}
                   className="w-full h-32 object-cover transition-opacity duration-300 opacity-0 group-hover:opacity-100"
                 />
-                <div className="p-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                  <p className="text-neutral-700">
+                <div className={`p-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300 ${isDark ? 'text-gray-300' : 'text-neutral-700'}`}>
+                  <p>
                     {achievement.highlights[0]} {/* Display the description as a paragraph */}
                   </p>
                 </div>
@@ -58,7 +51,7 @@ const RewardsRecognition: React.FC = () => {
           </motion.div>
         ))}
       </div>
-    </motion.section>
+    </SectionWrapper>
   );
 };
 
