@@ -1,23 +1,13 @@
 import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { IntroAnimation, TimelineEvent, SkillCard, ThemeToggle, ContactInfo, ContactForm, GoToTop, LocationMap, ArticlesSection } from './components';
-import DownloadButton from './components/DownloadButton';
-import Footer from './components/Footer';
-import ProjectCard from './components/ProjectCard';
-import HorizontalScroll from './components/HorizontalScroll';
 import { Download } from 'lucide-react';
 
-import { timelineData, skills, personalInfo, socialMediaLinks, contactInfo } from './data';
-import { projects } from './data/projects';
-import GradientBlobCursor from './components/GradientBlob';
-import RewardsRecognition from './components/RewardsRecognition';
-import ProjectSection from './components/ProjectSection';
-import SectionWrapper from './components/common/SectionWrapper';
-import IntroSection from './components/IntroSection';
+import { TimelineEvent, SkillCard, ThemeToggle, ContactInfo, ContactForm, GoToTop, LocationMap, ArticlesSection, Footer, HorizontalScroll, GradientBlobCursor, RewardsRecognition, ProjectSection, SectionWrapper, IntroSection } from './components';
+
+import { contactInfo, skills, timelineData, socialMediaLinks, projects } from './data';
 
 function App() {
   const [isDark, setIsDark] = useState<boolean>(false);
-  const [imageError, setImageError] = useState(false);
 
   useEffect(() => {
     document.documentElement.classList.toggle('dark', isDark);
@@ -28,9 +18,9 @@ function App() {
       <div className={`min-h-screen transition-colors duration-300 ${isDark ? 'dark bg-gray-900 text-white' : 'bg-gray-100 text-gray-900'}`}>
         <ThemeToggle isDark={isDark} toggle={() => setIsDark(!isDark)} />
         <GoToTop />
-        
+
         <IntroSection />
-        
+
         {/* Timeline Section */}
         <section className="py-20 px-8">
           <h2 className="text-3xl font-bold text-center mb-12">My Journey</h2>
