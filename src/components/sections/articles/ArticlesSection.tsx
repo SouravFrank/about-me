@@ -1,5 +1,5 @@
+import { articles } from '../../../data';
 import ArticleCard from './ArticleCard';
-import { articles } from '../data/articles';
 
 const ArticlesSection = () => {
   return (

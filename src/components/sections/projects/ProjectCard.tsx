@@ -1,12 +1,6 @@
 import React from 'react';
 import { Github } from 'lucide-react';
-
-interface ProjectCardProps {
-  title: string;
-  description: string;
-  thumbnail: string;
-  githubLink: string;
-}
+import { ProjectCardProps } from './types';
 
 export const ProjectCard: React.FC<ProjectCardProps> = ({ title, description, thumbnail, githubLink }) => {
   return (

@@ -1,16 +1,13 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { timelineAchievements, achievementsSectionDetails } from '../data/timelineAchievements';
-import trophyIcon from '../assets/icons/trophy.svg'; // Import the SVG
-import SectionWrapper from './common/SectionWrapper';
-
-interface RewardsRecognitionProps {
-  isDark: boolean; // Add isDark prop
-}
+import { timelineAchievements, achievementsSectionDetails } from '../../../data';
+import trophyIcon from '../../../assets/icons/trophy.svg'; // Import the SVG
+import { SectionWrapper } from '../../common';
+import { RewardsRecognitionProps } from './types';
 
 const RewardsRecognition: React.FC<RewardsRecognitionProps> = ({ isDark }) => {
   return (
-    <SectionWrapper 
+    <SectionWrapper
       titleBold={achievementsSectionDetails.titleBold} 
       titleLight={achievementsSectionDetails.titleLight} 
       description={achievementsSectionDetails.description}

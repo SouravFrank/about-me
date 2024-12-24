@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { Download } from 'lucide-react';
 
-import { TimelineEvent, SkillCard, ThemeToggle, ContactInfo, ContactForm, GoToTop, LocationMap, ArticlesSection, Footer, HorizontalScroll, GradientBlobCursor, RewardsRecognition, ProjectSection, SectionWrapper, IntroSection } from './components';
+import { TimelineEvent, SkillCard, ThemeToggle, ContactInfo, ContactForm, GoToTop, LocationMap, ArticlesSection, Footer, HorizontalScroll, GradientBlobCursor, RewardsRecognition, ProjectSection, SectionWrapper, IntroSection, TimelineEventProps } from './components';
 
 import { contactInfo, skills, timelineData, socialMediaLinks, projects } from './data';
 
@@ -26,7 +26,11 @@ function App() {
           <h2 className="text-3xl font-bold text-center mb-12">My Journey</h2>
           <div className="max-w-4xl mx-auto">
             {timelineData.map((item, index) => (
-              <TimelineEvent key={index} {...item} index={index} />
+              <TimelineEvent 
+                key={index} 
+                {...item} 
+                index={index} 
+              />
             ))}
           </div>
         </section>

@@ -1,9 +1,6 @@
 import React, { useRef, useState, useEffect, TouchEvent, MouseEvent, useCallback } from 'react';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
-
-interface HorizontalScrollProps {
-  children: React.ReactNode;
-}
+import { HorizontalScrollProps } from './types';
 
 const HorizontalScroll: React.FC<HorizontalScrollProps> = ({ children }) => {
   const containerRef = useRef<HTMLDivElement>(null);

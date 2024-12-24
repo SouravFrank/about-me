@@ -1,10 +1,6 @@
 import { motion, useAnimation } from 'framer-motion';
 import { ExternalLink, Brain, BarChart2, Users, Workflow } from 'lucide-react';
-import type { Skill } from '../data/skills';
-
-interface SkillCardProps extends Skill {
-  index: number;
-}
+import { SkillCardProps } from './types';
 
 export default function SkillCard({ name, src, description, expertise, index }: SkillCardProps) {
   const controls = useAnimation();

@@ -1,14 +1,6 @@
 import React from 'react';
 import { ProjectCard } from './ProjectCard';
-
-interface ProjectSectionProps {
-  projects: {
-    title: string;
-    description: string;
-    thumbnail: string;
-    githubLink: string;
-  }[];
-}
+import { ProjectSectionProps } from './types';
 
 const ProjectSection: React.FC<ProjectSectionProps> = ({ projects }) => {
   return (

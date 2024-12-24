@@ -1,14 +1,9 @@
 import { motion } from 'framer-motion';
 import { Mail, Phone, MapPin } from 'lucide-react';
-import type { ContactInfoItem, SocialMedia } from '../types';
 import SocialLinks from './SocialLinks';
+import { ContactInfoProps } from './types';
 
-interface ContactInfoProps {
-  contactInfo: ContactInfoItem[];
-  socialLinks: SocialMedia;
-}
-
-export default function ContactInfo({ contactInfo, socialLinks }: ContactInfoProps) {
+export default function ContactInfo({ contactInfo }: ContactInfoProps) {
   const getIcon = (title: string) => {
     switch (title.toLowerCase()) {
       case 'email':
@@ -52,7 +47,7 @@ export default function ContactInfo({ contactInfo, socialLinks }: ContactInfoPro
       </div>
       
       {/* Social Links */}
-      <SocialLinks socialLinks={socialLinks} />
+      <SocialLinks />
     </>
   );
 }

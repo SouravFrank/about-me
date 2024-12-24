@@ -1,10 +1,7 @@
 import React from 'react';
 import madeWithLoveImage from '/images/loveIndiaWeb.png'; // Adjust the path as necessary
-import SectionWrapper from './common/SectionWrapper'; // Import SectionWrapper
-
-interface FooterProps {
-  isDark: boolean; // Add isDark prop
-}
+import { FooterProps } from './types';
+import { SectionWrapper } from '../index';
 
 const Footer: React.FC<FooterProps> = ({ isDark }) => {
   return (

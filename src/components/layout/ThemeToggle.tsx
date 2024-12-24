@@ -1,10 +1,6 @@
 import { motion } from 'framer-motion';
 import { Moon, Sun } from 'lucide-react';
-
-interface ThemeToggleProps {
-  isDark: boolean;
-  toggle: () => void;
-}
+import { ThemeToggleProps } from './types';
 
 export default function ThemeToggle({ isDark, toggle }: ThemeToggleProps) {
   return (

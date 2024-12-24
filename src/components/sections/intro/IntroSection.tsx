@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { personalInfo } from '../data';
 import IntroAnimation from './IntroAnimation';
+import { personalInfo } from '../../../data';
 
 const IntroSection: React.FC = () => {
   const [imageError, setImageError] = useState(false);

@@ -2,8 +2,8 @@ import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Send, User, Mail, MessageSquare } from 'lucide-react';
 import emailjs from '@emailjs/browser';
-import { emailServices } from '../config';
 import { cva } from 'class-variance-authority';
+import { emailServices } from '../../../config';
 
 const buttonStyles = cva(
   "relative overflow-hidden px-8 py-4 rounded-lg font-medium text-white flex items-center gap-3 group",

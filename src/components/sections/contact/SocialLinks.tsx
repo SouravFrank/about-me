@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion';
 import { Facebook, Instagram, Github, Linkedin } from 'lucide-react';
-import { socialMediaLinks } from '../data';
+import { socialMediaLinks } from '../../../data';
 
 const socialIcons = [
   {

@@ -1,12 +1,6 @@
 import { motion } from 'framer-motion';
 import { ExternalLink } from 'lucide-react';
-
-interface ArticleCardProps {
-  title: string;
-  description: string;
-  url: string;
-  image?: string;
-}
+import { ArticleCardProps } from './types';
 
 const ArticleCard: React.FC<ArticleCardProps> = ({ title, description, url, image }) => {
   return (

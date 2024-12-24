@@ -1,4 +1,4 @@
-import { mapURI } from '../config';
+import { mapURI } from "../../../config";
 
 export default function LocationMap() {
   return (
