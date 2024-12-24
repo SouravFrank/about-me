@@ -1,93 +1,70 @@
-import React, { useState, useEffect, useRef, useCallback } from 'react';
+import React, { useState, useRef, useCallback } from 'react';
 import { useTrail, animated } from '@react-spring/web';
-import { motion, AnimatePresence } from 'framer-motion';
 
-const fast = { tension: 1200, friction: 40 };
-const slow = { mass: 10, tension: 200, friction: 50 };
-const trans = (x, y) => `translate3d(${x}px, ${y}px, 0) translate3d(-50%, -50%, 0)`;
+const TRAIL_COUNT = Math.floor(Math.random() * 5) + 4; // Random number of blobs (4-8)
+const MIN_SIZE = 40;
+const MAX_SIZE = 300;
+
+// Generate random sizes with smaller ones first
+const generateBlobSizes = () => {
+  const sizes = Array.from({ length: TRAIL_COUNT }, (_, i) => {
+    const progress = i / (TRAIL_COUNT - 1); // 0 to 1
+    const minSize = MIN_SIZE + (progress * 100); // Minimum size increases with index
+    const maxSize = Math.min(MAX_SIZE, minSize + 100); // Cap maximum size
+    return Math.floor(Math.random() * (maxSize - minSize) + minSize);
+  });
+  return sizes.sort((a, b) => a - b); // Sort from smallest to largest
+};
+
+const BLOB_SIZES = generateBlobSizes();
+const FRICTION_VALUES = BLOB_SIZES.map((_, i) => 20 + (i * 15)); // Increasing friction for larger blobs
 
 const GradientBlobCursor: React.FC<{ isDarkMode: boolean; children: React.ReactNode }> = ({ isDarkMode, children }) => {
-  const [trail, api] = useTrail(3, (i) => ({
+  const [trails, api] = useTrail(TRAIL_COUNT, (index) => ({
     xy: [0, 0],
-    config: i === 0 ? fast : slow,
-  }));
-
-  const [hue, setHue] = useState(0);
-  const [particles, setParticles] = useState([]);
-  const ref = useRef<HTMLDivElement>(null);
-
-  const updatePosition = useCallback(() => {
-    if (ref.current) {
-      const rect = ref.current.getBoundingClientRect();
-      return { left: rect.left, top: rect.top };
-    }
-    return { left: 0, top: 0 };
-  }, []);
-
-  const handleMove = (e: React.MouseEvent | React.TouchEvent) => {
-    const { left, top } = updatePosition();
-    const x = 'clientX' in e ? e.clientX : (e.touches[0].clientX);
-    const y = 'clientY' in e ? e.clientY : (e.touches[0].clientY);
-    
-    api.start({ xy: [x - left, y - top] });
-    
-    const newHue = (x || 0) % 360;
-    setHue(newHue);
-    
-    const newParticles = Array.from({ length: 3 }, () => ({
-      id: Date.now() + Math.random(),
-      x: x + (Math.random() - 0.5) * 20,
-      y: y + (Math.random() - 0.5) * 20,
-      size: Math.random() * 3 + 2,
-      intensity: Math.random() * 0.5 + 0.5,
-    }));
-    
-    setParticles((prev) => [...prev, ...newParticles].slice(-30));
-  };
-
-  useEffect(() => {
-    const handleResize = () => {
-      updatePosition();
-    };
-    
-    window.addEventListener('resize', handleResize);
-    return () => {
-      window.removeEventListener('resize', handleResize);
-    };
-  }, [updatePosition]);
-
-  // More distinct neon color schemes
-  const gradientColors = {
-    light: {
-      blob: `linear-gradient(135deg, 
-        hsl(${hue}, 100%, 50%), 
-        hsl(${(hue + 60) % 360}, 100%, 40%)
-      )`,
-      boxShadow: `0 0 30px hsl(${hue}, 100%, 60%, 0.6)`,
-      particle: `radial-gradient(
-        circle at center, 
-        hsl(${hue}, 100%, 45%), 
-        transparent
-      )`,
-      particleBoxShadow: `0 0 20px hsl(${hue}, 100%, 50%, 0.7)`
+    config: { 
+      mass: 1 + index * 1.5,
+      tension: 120 - index * 15,
+      friction: FRICTION_VALUES[index],
     },
-    dark: {
-      blob: `linear-gradient(135deg, 
-        hsl(${hue}, 100%, 70%), 
-        hsl(${(hue + 60) % 360}, 100%, 80%)
-      )`,
-      boxShadow: `0 0 40px hsl(${hue}, 100%, 60%, 0.8)`,
-      particle: `radial-gradient(
-        circle at center, 
-        hsl(${hue}, 100%, 55%), 
-        transparent
-      )`,
-      particleBoxShadow: `0 0 20px hsl(${hue}, 100%, 70%, 0.6)`
-    }
-  };
+  }));
+  
+  const [hue, setHue] = useState(0);
+  const ref = useRef<HTMLDivElement>(null);
+  const rafRef = useRef<number>();
 
-  const currentMode = isDarkMode ? 'dark' : 'light';
-  const modeColors = gradientColors[currentMode];
+  const handleMove = useCallback((e: React.MouseEvent | React.TouchEvent) => {
+    if (rafRef.current) {
+      cancelAnimationFrame(rafRef.current);
+    }
+
+    rafRef.current = requestAnimationFrame(() => {
+      if (!ref.current) return;
+      
+      const rect = ref.current.getBoundingClientRect();
+      const clientX = 'clientX' in e ? e.clientX : e.touches[0].clientX;
+      const clientY = 'clientY' in e ? e.clientY : e.touches[0].clientY;
+      
+      trails.forEach((_, index) => {
+        const randomX = (Math.random() - 0.5) * (index * 15);
+        const randomY = (Math.random() - 0.5) * (index * 15);
+        
+        api.start(i => {
+          if (i === index) {
+            return {
+              xy: [
+                clientX - rect.left + randomX,
+                clientY - rect.top + randomY
+              ],
+              immediate: false,
+            };
+          }
+        });
+      });
+      
+      setHue((clientX || 0) % 360);
+    });
+  }, [api, trails]);
 
   return (
     <div 
@@ -97,53 +74,30 @@ const GradientBlobCursor: React.FC<{ isDarkMode: boolean; children: React.ReactN
       onTouchMove={handleMove}
     >
       {children}
-
-      {trail.map((props, index) => (
+      {trails.map((props, index) => (
         <animated.div
           key={index}
           style={{
             position: 'absolute',
-            transform: props.xy.to(trans),
+            left: 0,
+            top: 0,
+            transform: props.xy.to((x, y) => `translate3d(${x}px, ${y}px, 0) translate3d(-50%, -50%, 0)`),
+            width: BLOB_SIZES[index],
+            height: BLOB_SIZES[index],
             borderRadius: '50%',
-            width: '100px',
-            height: '100px',
-            background: modeColors.blob,
-            boxShadow: modeColors.boxShadow,
             pointerEvents: 'none',
-            opacity: 1,
+            willChange: 'transform',
+            background: isDarkMode
+              ? `radial-gradient(circle at center, 
+                  hsla(${hue}, 100%, 70%, ${0.25 - index * 0.03}) 0%, 
+                  hsla(${(hue + 60) % 360}, 100%, 80%, ${0.15 - index * 0.02}) 100%)`
+              : `radial-gradient(circle at center, 
+                  hsla(${hue}, 100%, 50%, ${0.2 - index * 0.02}) 0%, 
+                  hsla(${(hue + 60) % 360}, 100%, 40%, ${0.1 - index * 0.015}) 100%)`,
+            filter: `blur(${8 + index * 6}px)`,
           }}
         />
       ))}
-
-      <AnimatePresence>
-        {particles.map((particle, index) => (
-          <motion.div
-            key={particle.id}
-            className="fixed pointer-events-none"
-            style={{
-              left: particle.x,
-              top: particle.y,
-              x: '-50%',
-              y: '-50%',
-            }}
-            initial={{ opacity: particle.intensity, scale: 0 }}
-            animate={{ opacity: 0, scale: particle.size }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 1, ease: 'easeOut' }}
-          >
-            <div
-              className="rounded-full"
-              style={{
-                width: `${particle.size * 4}px`,
-                height: `${particle.size * 4}px`,
-                background: modeColors.particle,
-                filter: 'blur(2px)',
-                boxShadow: modeColors.particleBoxShadow,
-              }}
-            />
-          </motion.div>
-        ))}
-      </AnimatePresence>
     </div>
   );
 };

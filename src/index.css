@@ -99,3 +99,20 @@ button,
   animation: glowAnimation 1.5s infinite; /* Apply glow animation */
   pointer-events: none; /* Prevent interaction */
 }
+
+@keyframes rotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.blob-animation {
+  animation: rotate 20s linear infinite;
+}
+
+.blob-animation--reverse {
+  animation: rotate 25s linear infinite reverse;
+}
