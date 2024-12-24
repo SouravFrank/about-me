@@ -46,7 +46,7 @@ export const timelineData = [
     title: 'B.Tech',
     company: 'Narula Institute of Technology',
     specialization: 'Electronics and Communication Engineering',
-    location: 'Kolkata, India',
+    location: 'Kolkata, West Bengal, India',
     date: 'August 2015 - June 2019',
     icon: 'study',
     type: 'education',
@@ -55,7 +55,7 @@ export const timelineData = [
   {
     title: 'Assistant System Engineer',
     company: 'Tata Consultancy Services',
-    location: 'Kolkata, India',
+    location: 'Kolkata, West Bengal, India',
     date: 'July 2019 - June 2020',
     icon: 'work',
     type: 'work',
@@ -65,7 +65,7 @@ export const timelineData = [
   {
     title: 'System Engineer',
     company: 'Tata Consultancy Services',
-    location: 'Kolkata, India',
+    location: 'Kolkata, West Bengal, India',
     date: 'July 2020 - October 2021',
     icon: 'work',
     type: 'work',

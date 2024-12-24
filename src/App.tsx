@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { IntroAnimation, TimelineEvent, SkillCard, ThemeToggle, ContactInfo, ContactForm, GoToTop, LocationMap } from './components';
+import { IntroAnimation, TimelineEvent, SkillCard, ThemeToggle, ContactInfo, ContactForm, GoToTop, LocationMap, ArticlesSection } from './components';
 import DownloadButton from './components/DownloadButton';
 import Footer from './components/Footer';
 import ProjectCard from './components/ProjectCard';
@@ -91,7 +91,7 @@ function App() {
             </div>
           </div>
         </div>
-        </SectionWrapper>
+      </SectionWrapper>
 
       {/* Industry Standard Projects Section */}
       <SectionWrapper isDark={isDark} titleBold={'Pioneering '} titleLight={'Industry Projects'} description={'Explore my contributions to the industry through these projects, showcasing innovation and excellence.'}>
@@ -102,27 +102,32 @@ function App() {
 
       <RewardsRecognition isDark={isDark} />
 
+      {/* Articles Section */}
+      <SectionWrapper isDark={isDark} titleBold={'Industry Insights'} titleLight={'My Articles'} description={'Explore the articles I have published, sharing insights and knowledge on various topics.'}>
+        <ArticlesSection />
+      </SectionWrapper>
+
       {/* Contact Section */}
       <SectionWrapper isDark={isDark} titleBold={'Get '} titleLight={'in Touch'} description={'Feel free to reach out for collaborations, opportunities, or just a friendly chat about technology and development.'}>
-          <div className="space-y-8 px-8">
-            {/* Contact Info & Map Row */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-              {/* Contact Info */}
-              <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-neumorph p-8">
-                <ContactInfo contactInfo={contactInfo} socialLinks={socialMediaLinks} />
-              </div>
-
-              {/* Location Map */}
-              <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-neumorph p-8">
-                <LocationMap />
-              </div>
+        <div className="space-y-8 px-8">
+          {/* Contact Info & Map Row */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            {/* Contact Info */}
+            <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-neumorph p-8">
+              <ContactInfo contactInfo={contactInfo} socialLinks={socialMediaLinks} />
             </div>
 
-            {/* Contact Form */}
+            {/* Location Map */}
             <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-neumorph p-8">
-              <ContactForm />
+              <LocationMap />
             </div>
           </div>
+
+          {/* Contact Form */}
+          <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-neumorph p-8">
+            <ContactForm />
+          </div>
+        </div>
       </SectionWrapper>
 
       {/* CV Download Section */}
@@ -140,4 +145,5 @@ function App() {
     </div>
   );
 }
+
 export default App;

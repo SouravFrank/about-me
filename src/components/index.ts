@@ -6,3 +6,4 @@ export { default as ContactInfo } from './ContactInfo';
 export { default as ContactForm } from './ContactForm';
 export { default as GoToTop } from './GoToTop';
 export { default as LocationMap } from './LocationMap'; 
+export { default as ArticlesSection } from './ArticlesSection'; 
