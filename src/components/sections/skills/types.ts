@@ -10,5 +10,5 @@ export interface SkillCardProps extends Skill {
 }
 
 export interface SkillsSectionProps {
-  skills: Skill[];
+  isDark: boolean;
 }

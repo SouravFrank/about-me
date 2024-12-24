@@ -38,7 +38,7 @@ const IntroSection: React.FC = () => {
                 },
                 scale: {
                   duration: isHovered 
-                    ? 2 + index * 0.5
+                    ? 0.9 + index * 0.5
                     : 3 + index,
                   ease: "easeInOut",
                   repeat: Infinity,
@@ -64,7 +64,7 @@ const IntroSection: React.FC = () => {
               className="w-112 h-112 rounded-full object-cover bg-white dark:bg-gray-800"
               whileHover={{ 
                 scale: 1.15,
-                transition: { duration: 0.3 }
+                transition: { duration: 0.5 }
               }}
               onError={() => {
                 setImageError(true);

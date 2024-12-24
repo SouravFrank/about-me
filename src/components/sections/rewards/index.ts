@@ -1,2 +1,2 @@
 export { default as RewardsRecognition } from './RewardsRecognition';
-export type { RewardProps } from './types';
+export type { RewardProps, Achievement, AchievementSectionDetails, RewardsRecognitionProps } from './types';

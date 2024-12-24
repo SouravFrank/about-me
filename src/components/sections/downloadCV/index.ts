@@ -1,2 +1,7 @@
 export { default as DownloadButton } from './DownloadButton';
-export type { DownloadButtonProps, DownloadCVSectionProps } from './types';
+export { CVDownloadSection } from './CVDownloadSection';
+export type { 
+  DownloadButtonProps, 
+  CVDownloadSectionProps,
+  DownloadCVProps 
+} from './types';

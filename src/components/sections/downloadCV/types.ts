@@ -7,10 +7,14 @@ export interface DownloadButtonProps {
   onClick?: () => void;
 }
 
-export interface DownloadCVSectionProps {
+export interface CVDownloadSectionProps {
   isDark: boolean;
   titleBold?: string;
   titleLight?: string;
   description?: string;
   cvPath?: string;
+}
+
+export interface DownloadCVProps extends CVDownloadSectionProps {
+  onDownload?: () => void;
 }

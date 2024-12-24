@@ -1,11 +1,6 @@
 import { motion } from 'framer-motion';
 import { Briefcase, GraduationCap, Cake } from 'lucide-react';
-import { TimelineItem } from '../../../data';
-
-
-interface TimelineEventProps extends TimelineItem {
-  index: number;
-}
+import { TimelineEventProps } from './types';
 
 export default function TimelineEvent({ title, location, date, type, highlights, index }: TimelineEventProps) {
   // Map icon types to Lucide icons

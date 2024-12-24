@@ -21,7 +21,5 @@ export interface RewardProps {
 }
 
 export interface RewardsRecognitionProps {
-  achievements: Achievement[];
-  sectionDetails: AchievementSectionDetails;
   isDark: boolean;
 }

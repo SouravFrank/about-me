@@ -12,11 +12,12 @@ export interface SocialMedia {
   whatsapp: string;
 }
 
-export interface ContactInfoProps {
-  contactInfo: ContactInfoItem[];
-  socialLinks: SocialMedia;
-}
+export interface ContactInfoProps {}
 
 export interface ContactFormProps {
   onSubmit?: (data: any) => void;
+}
+
+export interface ContactSectionProps {
+  isDark: boolean;
 }

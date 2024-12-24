@@ -11,4 +11,5 @@ export interface TimelineItem {
 
 export interface TimelineEventProps extends TimelineItem {
   index: number;
+  type: TimelineItemType;
 }
