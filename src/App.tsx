@@ -103,8 +103,10 @@ function App() {
       <RewardsRecognition isDark={isDark} />
 
       {/* Articles Section */}
-      <SectionWrapper isDark={isDark} titleBold={'Industry Insights'} titleLight={'My Articles'} description={'Explore the articles I have published, sharing insights and knowledge on various topics.'}>
-        <ArticlesSection />
+      <SectionWrapper isDark={isDark} titleBold={'Industry Insights '} titleLight={'My Articles'} description={'Explore the articles I have published, sharing insights and knowledge on various topics.'}>
+        <HorizontalScroll>
+          <ArticlesSection />
+        </HorizontalScroll>
       </SectionWrapper>
 
       {/* Contact Section */}
