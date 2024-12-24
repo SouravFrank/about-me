@@ -16,13 +16,13 @@ export default function IntroAnimation() {
   useEffect(() => {
     const timer = setInterval(() => {
       setCurrentIndex((prev) => (prev + 1) % introTexts.length);
-    }, 1500);
+    }, 1800);
 
     return () => clearInterval(timer);
   }, []);
 
   return (
-    <div className="h-8 overflow-hidden">
+    <div className="h-8 overflow-hidden w-full mx-auto">
       <AnimatePresence mode="wait">
         <motion.p
           key={currentIndex}
@@ -30,7 +30,7 @@ export default function IntroAnimation() {
           animate={{ y: 0, opacity: 1 }}
           exit={{ y: -20, opacity: 0 }}
           transition={{ duration: 0.3 }}
-          className="text-xl text-blue-600 dark:text-blue-400"
+          className="text-xl text-blue-600 dark:text-blue-400 px-4 whitespace-nowrap text-center"
         >
           {introTexts[currentIndex]}
         </motion.p>
