@@ -3,12 +3,14 @@ import { articles } from '../data/articles';
 
 const ArticlesSection = () => {
   return (
-      articles.map((article, index) => (
-        <div key={index} className="snap-start shrink-0">
+    <div className="flex flex-row mt-4 mb-4 gap-8 px-8">
+      {articles.map((article, index) => (
+        <div key={index} className="snap-start shrink-0 hover:z-10">
           <ArticleCard {...article} />
         </div>
-      ))
+      ))}
+    </div>
   );
 };
 
-export default ArticlesSection; 
+export default ArticlesSection;

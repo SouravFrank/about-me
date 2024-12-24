@@ -1,4 +1,5 @@
 import { motion } from 'framer-motion';
+import { ExternalLink } from 'lucide-react';
 
 interface ArticleCardProps {
   title: string;
@@ -10,20 +11,28 @@ interface ArticleCardProps {
 const ArticleCard: React.FC<ArticleCardProps> = ({ title, description, url, image }) => {
   return (
     <div className="p-2">
-      <motion.a
-        href={url}
-        target="_blank"
-        rel="noopener noreferrer"
-        className="block w-[320px] h-[310px] bg-white dark:bg-gray-800 rounded-2xl shadow-lg overflow-hidden cursor-pointer group relative"
+      <motion.div
+        className="block w-[320px] h-[310px] bg-white dark:bg-gray-800 rounded-2xl shadow-lg overflow-hidden cursor-grab group relative"
         whileHover={{ scale: 1.15 }}
         transition={{ duration: 0.15 }}
       >
-        <div className="aspect-w-16 aspect-h-9">
+        <div className="relative aspect-w-16 aspect-h-9">
           <img 
             src={image || '/default-thumbnail.jpg'} 
             alt={title} 
             className="w-full h-full object-cover rounded-t-2xl"
           />
+          <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+            <a
+              href={url}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="p-4 hover:bg-white/20 rounded-full transition-colors duration-200 cursor-pointer"
+              onClick={(e) => e.stopPropagation()}
+            >
+              <ExternalLink className="w-6 h-6 text-white" />
+            </a>
+          </div>
         </div>
         <div className="p-4 group-hover:p-2 transition-all duration-300">
           <h3 className="text-base leading-normal font-semibold text-gray-800 dark:text-gray-200 mb-2 group-hover:text-[12px] group-hover:leading-tight group-hover:mb-1 transition-all duration-400">
@@ -33,7 +42,7 @@ const ArticleCard: React.FC<ArticleCardProps> = ({ title, description, url, imag
             {description}
           </p>
         </div>
-      </motion.a>
+      </motion.div>
     </div>
   );
 };
