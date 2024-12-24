@@ -1,6 +1,8 @@
 import axios from 'axios';
 
-const LINK_PREVIEW_API_KEY = '74f95fe9da1e3553fd85e90c91649d32'; // Replace with your actual API key
+const LINK_PREVIEW_API_KEY = 'API_KEY'; // Replace with your actual API key
+// const LINK_PREVIEW_API_KEY = '74f95fe9da1e3553fd85e90c91649d32'; // Replace with your actual API key
+
 
 export const fetchMetadata = async (url: string) => {
   try {
