@@ -13,10 +13,10 @@ const RewardsRecognition: React.FC<RewardsRecognitionProps> = ({ isDark }) => {
       description={achievementsSectionDetails.description}
       isDark={isDark} // Pass isDark prop
     >
-      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-6">
+      <div className={`grid grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-6 ${isDark ? 'bg-gray-900' : 'bg-white'}`}>
         {timelineAchievements.map((achievement, index) => (
           <motion.div key={index} className="relative group flex-shrink-0">
-            <div className={`bg-white rounded-lg shadow-lg overflow-hidden transition-transform duration-300 group-hover:scale-105 ${isDark ? 'bg-gray-800' : 'bg-white'}`} style={{ minHeight: '200px' }}>
+            <div className={`rounded-lg shadow-lg overflow-hidden transition-transform duration-300 group-hover:scale-105 ${isDark ? 'bg-gray-800' : 'bg-white'}`} style={{ minHeight: '200px' }}>
               <div className="flex flex-col items-center p-4">
                 <motion.img
                   src={trophyIcon} // Use the imported SVG
