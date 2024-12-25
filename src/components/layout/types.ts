@@ -15,3 +15,5 @@ export interface ThemeToggleProps {
   isDark: boolean;
   toggle: () => void;
 }
+
+export interface PreloaderProps {}

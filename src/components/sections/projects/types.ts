@@ -9,6 +9,4 @@ export interface ProjectCardProps extends Project {
   index?: number;
 }
 
-export interface ProjectSectionProps {
-  projects: Project[];
-}
+export interface ProjectSectionProps {}

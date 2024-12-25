@@ -1,8 +1,9 @@
 import React from 'react';
 import { ProjectCard } from './ProjectCard';
 import { ProjectSectionProps } from './types';
+import { projects } from '../../../data';
 
-const ProjectSection: React.FC<ProjectSectionProps> = ({ projects }) => {
+const ProjectSection: React.FC<ProjectSectionProps> = () => {
   return (
     <>
       {projects.map((project, index) => (
