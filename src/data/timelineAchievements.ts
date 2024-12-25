@@ -24,6 +24,17 @@ export const achievementsSectionDetails: AchievementsSectionDetails = {
 
 export const timelineAchievements: AchievementEntry[] = [
   {
+    title: 'Employee of the Year Award',
+    company: 'Fareportal',
+    location: 'Remote',
+    date: '2024',
+    icon: 'award',
+    type: 'achievement',
+    highlights: ['Awarded for pioneering Mobile App development with unparalleled dedication.'],
+    image: '/images/employee-of-the-year2024-.jpg',
+    companyImage: '/images/FareportalLogo.webp',
+  },
+  {
     title: 'Ownership and Accountability Award',
     company: 'Fareportal',
     location: 'Remote',

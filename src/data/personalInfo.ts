@@ -38,6 +38,6 @@ export const contactInfo: ContactInfo[] = [
   {
     title: "Location",
     value: "Kolkata, India",
-    link: "https://maps.app.goo.gl/cXMbUdWTD3DdSoUP6"
+    link: "https://maps.app.goo.gl/cWVq1S6euoYtkfw99"
   }
 ]; 

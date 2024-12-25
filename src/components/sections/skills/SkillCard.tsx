@@ -16,7 +16,7 @@ const SkillCard: React.FC<SkillCardProps> = ({ name, src, description, expertise
         <img
           src={src}
           alt={name}
-          className={`w-10 h-10 ${['express', 'socketio', 'bash'].includes(src.toLowerCase()) ? 'dark:invert dark:brightness-100 dark:transition-all' : ''}`}
+          className={`w-10 h-10 ${['express.js', 'socket.io', 'bash'].includes(name.toLowerCase()) ? 'dark:invert dark:brightness-100 dark:transition-all' : ''}`}
           onError={(e) => {
             const target = e.target as HTMLImageElement;
             target.style.display = 'none';
