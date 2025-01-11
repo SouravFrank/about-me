@@ -4,7 +4,7 @@ export interface PersonalInfo {
   location: string;
   email: string;
   phone: string;
-  profileImage: string;
+  profileImages: Array<string>;
 }
 
 // Define the interface for contact information
@@ -20,7 +20,7 @@ export const personalInfo: PersonalInfo = {
   location: "Kolkata, India",
   email: "ssadhukhan990@gmail.com",
   phone: "+91 9038516950",
-  profileImage: "/images/profile.jpg",
+  profileImages: ["/images/profile(1).jpg", "/images/profile(2).jpg", "/images/profile(3).png", "/images/profile(4).jpg"],
 };
 
 // Export the contact information array

@@ -1,11 +1,40 @@
-import React, { useState } from 'react';
-import { motion } from 'framer-motion';
+import React, { useState, useEffect } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 import IntroAnimation from './IntroAnimation';
 import { personalInfo } from '../../../data';
 
 const IntroSection: React.FC = () => {
   const [imageError, setImageError] = useState(false);
   const [isHovered, setIsHovered] = useState(false);
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  const [nextImageIndex, setNextImageIndex] = useState(1);
+  const [isTransitioning, setIsTransitioning] = useState(false);
+
+  // Auto-advance images
+  useEffect(() => {
+    const timer = setInterval(() => {
+      if (!isHovered) {  // Only advance if not hovered
+        setIsTransitioning(true); // Start transition
+        setNextImageIndex((prev) => 
+          (prev + 1) % personalInfo.profileImages.length
+        );
+      }
+    }, 2000);  // Change image every 3 seconds
+
+    return () => clearInterval(timer);
+  }, [isHovered]);
+
+  // Handle transition end
+  useEffect(() => {
+    if (isTransitioning) {
+      const transitionTimer = setTimeout(() => {
+        setCurrentImageIndex(nextImageIndex); // Update current image after transition
+        setIsTransitioning(false); // End transition
+      }, 1000); // Overlap duration (adjust as needed)
+
+      return () => clearTimeout(transitionTimer);
+    }
+  }, [isTransitioning, nextImageIndex]);
 
   return (
     <section className="min-h-screen flex items-center justify-center p-8">
@@ -52,28 +81,58 @@ const IntroSection: React.FC = () => {
             />
           ))}
 
-          {/* Profile Image */}
+          {/* Profile Images with Overlapping Transition */}
           <motion.div
             className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-10"
             onHoverStart={() => setIsHovered(true)}
             onHoverEnd={() => setIsHovered(false)}
           >
+            {/* Current Image */}
             <motion.img
-              src={personalInfo.profileImage}
-              alt={`${personalInfo.name}'s Profile`}
+              key={`current-${currentImageIndex}`}
+              src={imageError ? 
+                `https://ui-avatars.com/api/?name=${encodeURIComponent(personalInfo.name)}&background=random` 
+                : personalInfo.profileImages[currentImageIndex]
+              }
+              alt={`${personalInfo.name}'s Profile ${currentImageIndex + 1}`}
               className="w-112 h-112 rounded-full object-cover bg-white dark:bg-gray-800"
+              initial={{ opacity: 1 }}
+              animate={{ opacity: isTransitioning ? 0 : 1 }} // Fade out current image during transition
+              transition={{ duration: 0.5 }}
               whileHover={{ 
                 scale: 1.15,
                 transition: { duration: 0.5 }
               }}
               onError={() => {
                 setImageError(true);
-                const img = document.querySelector('img');
-                if (img) {
-                  img.src = 'https://ui-avatars.com/api/?name=' + encodeURIComponent(personalInfo.name) + '&background=random';
-                }
               }}
             />
+
+            {/* Next Image */}
+            <AnimatePresence>
+              {isTransitioning && (
+                <motion.img
+                  key={`next-${nextImageIndex}`}
+                  src={imageError ? 
+                    `https://ui-avatars.com/api/?name=${encodeURIComponent(personalInfo.name)}&background=random` 
+                    : personalInfo.profileImages[nextImageIndex]
+                  }
+                  alt={`${personalInfo.name}'s Profile ${nextImageIndex + 1}`}
+                  className="w-112 h-112 rounded-full object-cover bg-white dark:bg-gray-800 absolute top-0 left-0"
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }} // Fade in next image during transition
+                  exit={{ opacity: 0 }}
+                  transition={{ duration: 0.5 }}
+                  whileHover={{ 
+                    scale: 1.15,
+                    transition: { duration: 0.5 }
+                  }}
+                  onError={() => {
+                    setImageError(true);
+                  }}
+                />
+              )}
+            </AnimatePresence>
           </motion.div>
         </div>
 
@@ -81,12 +140,10 @@ const IntroSection: React.FC = () => {
         <motion.h1 className="text-4xl font-bold mb-4 relative z-10">
           {personalInfo.name}
         </motion.h1>
-        {/* <div className="relative z-10"> */}
-          <IntroAnimation />
-        {/* </div> */}
+        <IntroAnimation />
       </motion.div>
     </section>
   );
 };
 
-export default IntroSection; 
+export default IntroSection;
