@@ -12,6 +12,15 @@ export interface SocialMedia {
   whatsapp: string;
 }
 
+// Define the type for social icons
+export interface SocialIcon {
+  name: string;
+  icon: React.FC<any>; // Adjust the type based on how the icon is used
+  href: string;
+  color: string;
+  background: string;
+}
+
 export interface ContactInfoProps {}
 
 export interface ContactFormProps {

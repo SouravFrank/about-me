@@ -82,5 +82,4 @@ export const articles: Article[] = [
   }
 ];
 
-// Export the interface if needed elsewhere in the application
 export type { Article };

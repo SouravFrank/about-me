@@ -20,37 +20,43 @@ export const skills: SkillsData = {
       name: 'React Native',
       src: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/react/react-original.svg',
       description: 'Cross-platform mobile framework for building native apps',
-      expertise: 4,
+      expertise: 8,
     },
     {
       name: 'React',
       src: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/react/react-original.svg',
       description: 'Front-end library for building user interfaces',
-      expertise: 5,
+      expertise: 8,
     },
     {
       name: 'Redux',
       src: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/redux/redux-original.svg',
       description: 'State management library for JavaScript applications',
-      expertise: 4,
+      expertise: 9,
     },
     {
       name: 'Node.js',
       src: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/nodejs/nodejs-original.svg',
       description: 'JavaScript runtime for server-side development',
-      expertise: 4,
+      expertise: 6,
     },
     {
       name: 'Express.js',
       src: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/express/express-original.svg',
       description: 'Web application framework for Node.js',
-      expertise: 3,
+      expertise: 5,
     },
     {
       name: 'JavaScript',
       src: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/javascript/javascript-original.svg',
       description: 'Core programming language for web development',
-      expertise: 5,
+      expertise: 8,
+    },
+    {
+      name: 'TypeScript',
+      src: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/typescript/typescript-original.svg',
+      description: 'Superset of JavaScript that adds static types',
+      expertise: 4,
     },
     {
       name: 'HTML5',
@@ -67,28 +73,28 @@ export const skills: SkillsData = {
     {
       name: 'Material UI',
       src: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/materialui/materialui-original.svg',
-      description:
-        'React component library for faster and easier web development',
+      description: 'React component library for faster and easier web development',
       expertise: 4,
     },
     {
       name: 'Axios',
       src: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/axios/axios-plain.svg',
       description: 'Promise-based HTTP client for the browser and Node.js',
-      expertise: 4,
+      expertise: 6,
     },
     {
       name: 'Socket.io',
       src: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/socketio/socketio-original.svg',
       description: 'Library for real-time web applications',
-      expertise: 3,
+      expertise: 4,
     },
     {
       name: 'Bash',
       src: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/bash/bash-original.svg',
       description: 'Scripts for automation in Unix/Linux environments',
-      expertise: 3,
+      expertise: 6,
     },
+    
   ],
   tools: [
     {
@@ -151,8 +157,7 @@ export const skills: SkillsData = {
     {
       name: 'Analytical & Problem Solving',
       src: 'analysis',
-      description:
-        'Strong capability in breaking down and solving complex problems',
+      description: 'Strong capability in breaking down and solving complex problems',
     },
     {
       name: 'Teamwork & Leadership',
@@ -162,8 +167,7 @@ export const skills: SkillsData = {
     {
       name: 'Adaptability',
       src: 'adapt',
-      description:
-        'Quick to learn and adapt to new technologies and situations',
+      description: 'Quick to learn and adapt to new technologies and situations',
     },
   ],
 };

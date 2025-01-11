@@ -27,7 +27,7 @@ const SkillCard: React.FC<SkillCardProps> = ({ name, src, description, expertise
   };
 
   return (
-    <motion.div className={`shadow-neumorph p-6 rounded-lg group relative overflow-hidden bg-white dark:bg-gray-800 ${expertise > 3 ? 'border-2 border-transparent' : ''}`} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: index * 0.1 }}>
+    <motion.div className={`shadow-neumorph p-6 rounded-lg group relative overflow-hidden bg-white dark:bg-gray-800 ${ expertise && expertise > 5 ? 'border-2 border-transparent' : ''}`} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: index * 0.1 }}>
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-4">
           <div className="w-12 h-12 flex items-center justify-center">{getIcon(src)}</div>
@@ -41,7 +41,7 @@ const SkillCard: React.FC<SkillCardProps> = ({ name, src, description, expertise
           <motion.div
             className="absolute h-2.5 bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500"
             initial={{ width: 0 }}
-            animate={{ width: `${(expertise / 5) * 100}%` }}
+            animate={{ width: `${(expertise / 10) * 100}%` }}
             transition={{ type: 'spring', stiffness: 300, damping: 20 }}
             style={{
               backgroundSize: '300% 100%',
@@ -61,7 +61,7 @@ const SkillCard: React.FC<SkillCardProps> = ({ name, src, description, expertise
         </div>
       </motion.div>
 
-      {expertise && expertise > 3 && (
+      {expertise && expertise > 6 && (
         <motion.div
           className="absolute inset-0 pointer-events-none z-10"
           style={{
