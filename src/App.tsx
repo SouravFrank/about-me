@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { ThemeToggle, GoToTop, ArticlesSection, Footer, HorizontalScroll, GradientBlobCursor, RewardsRecognition, ProjectSection, SectionWrapper, IntroSection, TimelineSection, SkillsSection, ContactSection, CVDownloadSection, HexagonPreloader } from './components';
+import { sectionData } from './data/sectionData';
 
 function App() {
   const [isDark, setIsDark] = useState<boolean>(false);
@@ -13,23 +14,26 @@ function App() {
 
   return (
     <>
-      {loading && <HexagonPreloader  isDark={isDark} />}
+      {loading && <HexagonPreloader isDark={isDark} />}
       <GradientBlobCursor isDarkMode={isDark}>
         <div className={`min-h-screen transition-colors duration-300 ${isDark ? 'dark bg-gray-900 text-white' : 'bg-gray-100 text-gray-900'}`}>
           <ThemeToggle isDark={isDark} toggle={() => setIsDark(!isDark)} />
           <GoToTop />
 
           <IntroSection />
-          <TimelineSection />
+          <SectionWrapper isDark={isDark} titleBold={sectionData.timeline.titleBold} titleLight={sectionData.timeline.titleLight} description={sectionData.timeline.description}>
+            <TimelineSection />
+          </SectionWrapper>
+
           <SkillsSection isDark={isDark} />
 
-          <SectionWrapper isDark={isDark} titleBold="Pioneering " titleLight="Industry Projects" description={'Explore my contributions to the industry through these projects, showcasing innovation and excellence.'}>
+          <SectionWrapper isDark={isDark} titleBold={sectionData.projects.titleBold} titleLight={sectionData.projects.titleLight} description={sectionData.projects.description}>
             <HorizontalScroll>
               <ProjectSection />
             </HorizontalScroll>
           </SectionWrapper>
 
-          <SectionWrapper isDark={isDark} titleBold="Industry Insights " titleLight="My Articles" description="Explore the articles I have published, sharing insights and knowledge on various topics.">
+          <SectionWrapper isDark={isDark} titleBold={sectionData.articles.titleBold} titleLight={sectionData.articles.titleLight} description={sectionData.articles.description}>
             <HorizontalScroll>
               <ArticlesSection />
             </HorizontalScroll>
