@@ -11,7 +11,7 @@ export const TimelineSection: FC = () => (
     </h2>
     <div className="max-w-4xl mx-auto">
       {timelineData.map((item, index) => (
-        <TimelineEvent key={index} type={item.type} {...item} index={index} />
+        <TimelineEvent key={index} {...item} index={index} />
       ))}
     </div>
   </section>

@@ -5,6 +5,7 @@ export interface SectionWrapperProps {
   titleLight: string;
   description: string;
   className?: string;
+  opacityPosition?: number;
 }
 
 export interface HorizontalScrollProps {

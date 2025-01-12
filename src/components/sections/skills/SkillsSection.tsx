@@ -5,7 +5,7 @@ import { Skill, SkillsSectionProps } from './types';
 import { sectionData } from '../../../data/sectionData';
 
 export const SkillsSection = ({ isDark }: SkillsSectionProps) => (
-  <SectionWrapper isDark={isDark} titleBold={sectionData.skills.titleBold} titleLight={sectionData.skills.titleLight} description={sectionData.skills.description}>
+  <SectionWrapper isDark={isDark} titleBold={sectionData.skills.titleBold} titleLight={sectionData.skills.titleLight} description={sectionData.skills.description} opacityPosition={0.8}>
     <div className="max-w-6xl mx-auto">
       {Object.entries(skills).map(([category, items]) => (
         <div key={category} className="mb-12 last:mb-0">
