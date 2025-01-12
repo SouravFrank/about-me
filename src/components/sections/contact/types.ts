@@ -1,3 +1,5 @@
+import { LucideIcon } from 'lucide-react';
+
 export interface ContactInfoItem {
   title: string;
   value: string;
@@ -12,10 +14,15 @@ export interface SocialMedia {
   whatsapp: string;
 }
 
-// Define the type for social icons
+export interface WhatsAppIconProps {
+  className?: string;
+  size?: number | string;
+  style?: React.CSSProperties;
+}
+
 export interface SocialIcon {
-  name: string;
-  icon: React.FC<any>; // Adjust the type based on how the icon is used
+  name: 'facebook' | 'instagram' | 'github' | 'linkedin' | 'whatsapp';
+  icon: LucideIcon | (({ className, size, style }: WhatsAppIconProps) => JSX.Element);
   href: string;
   color: string;
   background: string;
