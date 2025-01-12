@@ -1,9 +1,12 @@
+@import url('https://fonts.googleapis.com/css2?family=Comfortaa&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 html,
 body {
+  font-family: 'Comfortaa', sans-serif; /* Apply Comfortaa font */
   cursor: url('cursors/cursor-normal.png'), auto;
 }
 

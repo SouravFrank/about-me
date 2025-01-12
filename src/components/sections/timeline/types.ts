@@ -3,13 +3,11 @@ export type TimelineItemType = 'work' | 'education' | 'achievement' | 'certifica
 export interface TimelineItem {
   title: string;
   company?: string;
+  specialization?: string;
   location?: string;
   date: string;
-  icon: TimelineItemType;
+  icon: string;
+  type: 'work' | 'education' | 'personal';
   highlights: string[];
-}
-
-export interface TimelineEventProps extends TimelineItem {
-  index: number;
-  type: TimelineItemType;
+  technologies?: string[];
 }
