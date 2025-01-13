@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import { ExternalLink, Brain, BarChart2, Users, Workflow } from 'lucide-react';
+import { ExternalLink, Brain, BarChart2, Users, Workflow, Bot } from 'lucide-react';
 import { SkillCardProps } from './types';
 
 const SkillCard: React.FC<SkillCardProps> = ({ name, src, description, expertise, index }) => {
@@ -9,6 +9,7 @@ const SkillCard: React.FC<SkillCardProps> = ({ name, src, description, expertise
       analysis: <BarChart2 className="w-10 h-10 text-green-500 dark:text-green-400" />,
       team: <Users className="w-10 h-10 text-purple-500 dark:text-purple-400" />,
       adapt: <Workflow className="w-10 h-10 text-orange-500 dark:text-orange-400" />,
+      prompt: <Bot className="w-10 h-10 text-red-500 dark:text-red-400" />,
     };
 
     return (
@@ -27,7 +28,7 @@ const SkillCard: React.FC<SkillCardProps> = ({ name, src, description, expertise
   };
 
   return (
-    <motion.div className={`shadow-neumorph p-6 rounded-lg group relative overflow-hidden bg-white dark:bg-gray-800 ${ expertise && expertise > 5 ? 'border-2 border-transparent' : ''}`} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: index * 0.1 }}>
+    <motion.div className={`shadow-neumorph p-6 rounded-lg group relative overflow-hidden bg-white dark:bg-gray-800 ${expertise && expertise > 5 ? 'border-2 border-transparent' : ''}`} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: index * 0.1 }}>
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-4">
           <div className="w-12 h-12 flex items-center justify-center">{getIcon(src)}</div>

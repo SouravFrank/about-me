@@ -4,7 +4,6 @@ import { Check } from 'lucide-react';
 interface CTAButtonProps {
   label: string;
   onClick?: () => void;
-  download?: boolean;
   variant?: 'colored' | 'white';
   Icon?: React.ElementType;
   downloadClicked?: boolean;
@@ -48,7 +47,7 @@ const CTAButton: React.FC<CTAButtonProps> = ({ label, onClick, variant = 'colore
       {/* Shimmer effect on hover */}
       <div className="absolute inset-0 overflow-hidden rounded-full">
         <div
-          className="absolute inset-0 animate-[shimmer_1s_infinite]"
+          className="absolute inset-0 animate-shimmer"
           style={{
             background: 'linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent)',
             transform: 'translateX(-100%)',
@@ -57,7 +56,7 @@ const CTAButton: React.FC<CTAButtonProps> = ({ label, onClick, variant = 'colore
           }}
         />
         <div
-          className="absolute inset-0 animate-[shimmer_1s_infinite]"
+          className="absolute inset-0 animate-shimmer"
           style={{
             background: 'linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent)',
             transform: 'translateX(-100%)',
@@ -69,8 +68,17 @@ const CTAButton: React.FC<CTAButtonProps> = ({ label, onClick, variant = 'colore
       </div>
       {/* Show shimmer on hover */}
       <style jsx>{`
-        button:hover .animate-[shimmer_1s_infinite] {
+        @keyframes shimmer {
+          0% {
+            transform: translateX(-100%);
+          }
+          100% {
+            transform: translateX(100%);
+          }
+        }
+        button:hover .animate-shimmer {
           opacity: 1; // Show shimmer on hover
+          animation: shimmer 1s infinite; // Apply shimmer animation
         }
       `}</style>
     </motion.button>

@@ -94,7 +94,12 @@ export const skills: SkillsData = {
       description: 'Scripts for automation in Unix/Linux environments',
       expertise: 6,
     },
-    
+    {
+      name: 'Lottie',
+      src: 'https://cdn.jsdelivr.net/gh/airbnb/lottie/lottie-logo.webp',
+      description: 'Library for rendering animations in web and mobile applications',
+      expertise: 5,
+    },
   ],
   tools: [
     {
@@ -150,6 +155,16 @@ export const skills: SkillsData = {
   ],
   additional: [
     {
+      name: 'Prompt Engineering',
+      src: 'prompt',
+      description: 'Skill in designing effective prompts for AI models',
+    },
+    {
+      name: 'Adaptability',
+      src: 'adapt',
+      description: 'Quick to learn and adapt to new technologies and situations',
+    },
+    {
       name: 'Big Picture Thinking',
       src: 'strategy',
       description: 'Ability to understand and plan for large-scale solutions',
@@ -164,10 +179,6 @@ export const skills: SkillsData = {
       src: 'team',
       description: 'Experience in leading teams and collaborating effectively',
     },
-    {
-      name: 'Adaptability',
-      src: 'adapt',
-      description: 'Quick to learn and adapt to new technologies and situations',
-    },
+    
   ],
 };

@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Download, Eye, X } from 'lucide-react';
-// import { SectionWrapper } from '../../common';
 import { sectionData } from '../../../data/sectionData';
 import CTAButton from '../../common/CTAButton';
 
@@ -42,7 +41,6 @@ export const CVDownloadSection = () => {
             <CTAButton 
               label="Download CV" 
               onClick={handleDownload} 
-              download={true} 
               variant="colored"
               Icon={Download}
               downloadClicked={downloadClicked}
@@ -50,7 +48,6 @@ export const CVDownloadSection = () => {
             <CTAButton 
               label="Preview CV" 
               onClick={() => setModalOpen(true)} 
-              download={false} 
               variant="white"
               Icon={Eye}
             />
