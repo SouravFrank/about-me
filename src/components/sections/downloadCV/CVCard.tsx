@@ -13,7 +13,7 @@ interface CVCardProps {
 
 const CVCard: React.FC<CVCardProps> = ({ isDark, title, description, onPreview, onDownload, downloadClicked }) => {
   return (
-    <div className={`relative overflow-hidden rounded-3xl shadow-2xl p-10 ${isDark ? 'bg-gray-800 text-white' : 'bg-white'}`}>
+    <div className={`relative overflow-hidden rounded-3xl shadow-2xl p-10 ${isDark ? 'bg-gray-800 text-white' : 'bg-white text-black'}`}>
       <div className="text-center mb-10">
         <h2 className="text-4xl font-bold mb-4">{title}</h2>
         <p className="text-lg">{description}</p>
