@@ -2,14 +2,15 @@ import React from 'react';
 import madeWithLoveImage from '/images/loveIndiaWeb.png'; // Adjust the path as necessary
 import { FooterProps } from './types';
 import { SectionWrapper } from '../index';
+import { sectionData } from '../../data/sectionData'; // Import sectionData
 
 const Footer: React.FC<FooterProps> = ({ isDark }) => {
   return (
     <SectionWrapper 
       isDark={isDark} 
-      titleBold="Let's Collaborate!" 
-      titleLight="" 
-      description="I'm always open to new opportunities and collaborations. If you have a project in mind or just want to chat about technology, feel free to reach out!"
+      titleBold={sectionData.footer.titleBold} // Use titleBold from sectionData.footer
+      titleLight={sectionData.footer.titleLight} // Use titleLight from sectionData.footer
+      description={sectionData.footer.description} // Use description from sectionData.footer
     >
       <div className="max-w-7xl mx-auto text-center px-4 py-8">
         <img 
