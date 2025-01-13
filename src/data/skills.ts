@@ -96,7 +96,7 @@ export const skills: SkillsData = {
     },
     {
       name: 'Lottie',
-      src: 'https://cdn.jsdelivr.net/gh/airbnb/lottie/lottie-logo.webp',
+      src: 'https://stp-v4-cdn.lottiefiles.com/Lottie_Creator_d015ee2074.svg',
       description: 'Library for rendering animations in web and mobile applications',
       expertise: 5,
     },

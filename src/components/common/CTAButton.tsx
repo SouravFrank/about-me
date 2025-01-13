@@ -10,9 +10,7 @@ interface CTAButtonProps {
 }
 
 const CTAButton: React.FC<CTAButtonProps> = ({ label, onClick, variant = 'colored', Icon, downloadClicked }) => {
-  const buttonStyles = variant === 'colored'
-    ? 'bg-gradient-to-r from-blue-500 via-indigo-500 to-purple-500 text-white'
-    : 'bg-white border-2 border-gray-200 text-gray-700 dark:bg-gray-800 dark:border-gray-600 dark:text-white';
+  const buttonStyles = variant === 'colored' ? 'bg-gradient-to-r from-blue-500 via-indigo-500 to-purple-500 text-white' : 'bg-white border-2 border-gray-200 text-gray-700 dark:bg-gray-800 dark:border-gray-600 dark:text-white';
 
   return (
     <motion.button
@@ -85,4 +83,4 @@ const CTAButton: React.FC<CTAButtonProps> = ({ label, onClick, variant = 'colore
   );
 };
 
-export default CTAButton; 
+export default CTAButton;

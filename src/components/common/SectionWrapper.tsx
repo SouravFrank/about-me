@@ -21,7 +21,7 @@ const SectionWrapper: React.FC<SectionWrapperProps> = ({ titleBold, titleLight, 
       <div className={`text-center mb-16 ${isDark ? 'text-gray-300' : 'text-gray-600'}`}>
         <h2 className={`text-5xl font-thin tracking-wide mb-4 ${isDark ? 'text-gray-200' : 'text-gray-600'}`}>
           {titleBold}
-          <span className={`text-gray-800 font-semibold ${isDark ? 'text-gray-50' : 'text-gray-800'}`}>{titleLight}</span>
+          <span className={`text-gray-800 font-semibold ${isDark ? 'text-gray-100' : 'text-gray-800'}`}>{titleLight}</span>
         </h2>
         <p className={`text-lg max-w-2xl mx-auto ${isDark ? 'text-gray-400' : 'text-gray-700'}`}>{description}</p>
       </div>

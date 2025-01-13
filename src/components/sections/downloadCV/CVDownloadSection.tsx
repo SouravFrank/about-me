@@ -1,13 +1,14 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Download, Eye, X } from 'lucide-react';
+import { X } from 'lucide-react';
 import { sectionData } from '../../../data/sectionData';
-import CTAButton from '../../common/CTAButton';
+import CVCard from './CVCard';
+import { CVDownloadSectionProps } from './types';
 
-export const CVDownloadSection = () => {
+export const CVDownloadSection: React.FC<CVDownloadSectionProps> = ({ isDark }) => {
   const [isModalOpen, setModalOpen] = useState(false);
-  const [downloadClicked, setDownloadClicked] = useState(false);
   const [loadingPdf, setLoadingPdf] = useState(true);
+  const [downloadClicked, setDownloadClicked] = useState(false);
 
   const handleDownload = () => {
     setDownloadClicked(true);
@@ -19,40 +20,15 @@ export const CVDownloadSection = () => {
 
   return (
     <div className="max-w-4xl mx-auto py-12">
-      <motion.div className="relative overflow-hidden bg-gradient-to-br from-white via-gray-50 to-blue-50 rounded-3xl shadow-2xl p-10" whileHover={{ scale: 1.02 }} transition={{ duration: 0.3 }}>
-        {/* Animated background elements */}
-        <div className="absolute inset-0 overflow-hidden">
-          <div className="absolute top-0 right-0 -mt-8 -mr-8 w-40 h-40 bg-blue-100 rounded-full opacity-20 blur-xl" />
-          <div className="absolute bottom-0 left-0 -mb-8 -ml-8 w-32 h-32 bg-indigo-100 rounded-full opacity-20 blur-xl" />
-          <div className="absolute top-1/2 left-1/4 w-24 h-24 bg-purple-100 rounded-full opacity-10 blur-lg" />
-        </div>
-
-        <div className="relative z-10">
-          <div className="text-center mb-10">
-            <motion.h2 className="text-4xl font-bold mb-4 bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 bg-clip-text text-transparent" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}>
-              {sectionData.cvDownload.titleBold} {sectionData.cvDownload.titleLight}
-            </motion.h2>
-            <motion.p className="text-gray-600 max-w-2xl mx-auto text-lg" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.2 }}>
-              {sectionData.cvDownload.description}
-            </motion.p>
-          </div>
-
-          <div className="flex flex-col sm:flex-row justify-center items-center gap-6">
-            <CTAButton 
-              label="Download CV" 
-              onClick={handleDownload} 
-              variant="colored"
-              Icon={Download}
-              downloadClicked={downloadClicked}
-            />
-            <CTAButton 
-              label="Preview CV" 
-              onClick={() => setModalOpen(true)} 
-              variant="white"
-              Icon={Eye}
-            />
-          </div>
-        </div>
+      <motion.div whileHover={{ scale: 1.02 }} transition={{ duration: 0.3 }}>
+        <CVCard 
+          isDark={isDark}
+          title={`${sectionData.cvDownload.titleBold} ${sectionData.cvDownload.titleLight}`}
+          description={sectionData.cvDownload.description}
+          onPreview={() => setModalOpen(true)}
+          onDownload={handleDownload}
+          downloadClicked={downloadClicked}
+        />
       </motion.div>
 
       {/* Enhanced Modal with AnimatePresence */}
