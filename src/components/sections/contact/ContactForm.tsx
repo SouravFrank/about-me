@@ -4,6 +4,7 @@ import { Send, User, Mail, MessageSquare } from 'lucide-react';
 import emailjs from '@emailjs/browser';
 import { cva } from 'class-variance-authority';
 import { emailServices } from '../../../config';
+import CTAButton from '../../common/CTAButton';
 
 const buttonStyles = cva(
   "relative overflow-hidden px-8 py-4 rounded-lg font-medium text-white flex items-center gap-3 group",
@@ -141,100 +142,12 @@ export default function ContactForm() {
 
           {/* Updated CTA Section with cleaner effects */}
           <div className="md:col-span-2 space-y-4 flex flex-col items-end">
-            <motion.div
-              className="relative w-fit"
-              whileHover={{ scale: 1.02 }}
-              whileTap={{ scale: 0.98 }}
-            >
-              <motion.button
-                type="submit"
-                disabled={status === 'sending'}
-                className={`${buttonStyles({ state: status as 'idle' | 'sending' | 'success' | 'error' })} 
-                  shadow-[0_0_15px_rgba(59,130,246,0.5)] hover:shadow-[0_0_25px_rgba(59,130,246,0.7)]
-                  group relative`}
-              >
-                {/* Animated background gradient */}
-                <motion.div
-                  className="absolute inset-0 -z-10"
-                  style={{
-                    background: 'linear-gradient(-45deg, #3b82f6, #6366f1, #8b5cf6, #3b82f6)',
-                    backgroundSize: '400% 400%',
-                  }}
-                  animate={{
-                    backgroundPosition: ['0% 0%', '100% 100%'],
-                  }}
-                  transition={{
-                    duration: 3,
-                    repeat: Infinity,
-                    repeatType: 'reverse',
-                    ease: 'easeInOut',
-                  }}
-                />
-
-                {/* Shimmer effect */}
-                <div className="absolute inset-0 overflow-hidden rounded-lg">
-                  <div
-                    className="absolute inset-0 group-hover:animate-[shimmer_2s_infinite]"
-                    style={{
-                      background: 'linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent)',
-                      transform: 'translateX(-100%)',
-                    }}
-                  />
-                </div>
-
-                {/* Glowing border effect */}
-                <motion.div
-                  className="absolute inset-0 rounded-lg"
-                  style={{
-                    border: '1px solid rgba(255,255,255,0.2)',
-                  }}
-                  animate={{
-                    opacity: [0.2, 0.5, 0.2],
-                    scale: [1, 1.02, 1],
-                  }}
-                  transition={{
-                    duration: 2,
-                    repeat: Infinity,
-                    ease: 'easeInOut',
-                  }}
-                />
-
-                {/* Button content with icon */}
-                <span className="relative flex items-center gap-2">
-                  {status === 'sending' ? (
-                    <motion.span
-                      animate={{ rotate: 360 }}
-                      transition={{ duration: 1, repeat: Infinity, ease: 'linear' }}
-                    >
-                      <Send className="w-5 h-5" />
-                    </motion.span>
-                  ) : (
-                    <motion.span
-                      initial={{ x: -10, opacity: 0 }}
-                      animate={{ x: 0, opacity: 1 }}
-                      exit={{ x: 10, opacity: 0 }}
-                    >
-                      <Send className="w-5 h-5" />
-                    </motion.span>
-                  )}
-                  <span className="relative">
-                    {status === 'sending' ? 'Sending...' : 'Send Message'}
-                  </span>
-                </span>
-
-                {/* Click ripple effect */}
-                <motion.div
-                  className="absolute inset-0 pointer-events-none"
-                  whileTap={{
-                    boxShadow: [
-                      "0 0 0 0 rgba(99,102,241,0.8)",
-                      "0 0 0 30px rgba(99,102,241,0)"
-                    ]
-                  }}
-                  transition={{ duration: 0.8 }}
-                />
-              </motion.button>
-            </motion.div>
+            <CTAButton 
+              label={status === 'sending' ? 'Sending...' : 'Send Message'} 
+              onClick={handleSubmit} 
+              variant="colored"
+              Icon={Send}
+            />
 
             {/* Status messages with futuristic animations */}
             {status === 'success' && (

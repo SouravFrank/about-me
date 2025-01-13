@@ -129,3 +129,12 @@ button,
   background-repeat: repeat;
   background-image: url('data:image/svg+xml;utf8,%3Csvg viewBox=%220 0 1000 1000%22 xmlns=%22http:%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%3Cdefs%3E%3ClinearGradient id=%22b%22 gradientTransform=%22rotate(-45 .5 .5)%22%3E%3Cstop offset=%220%25%22 stop-color=%22%23FFDEE9%22%2F%3E%3Cstop offset=%22100%25%22 stop-color=%22%23B5FFFC%22%2F%3E%3C%2FlinearGradient%3E%3CclipPath id=%22a%22%3E%3Cpath fill=%22currentColor%22 d=%22M826.5 684.5Q794 869 601.5 885T247 800.5Q85 700 138 525.5t167.5-275Q420 150 573.5 183T793 358q66 142 33.5 326.5Z%22%2F%3E%3C%2FclipPath%3E%3C%2Fdefs%3E%3Cg clip-path=%22url(%23a)%22%3E%3Cpath fill=%22url(%23b)%22 d=%22M826.5 684.5Q794 869 601.5 885T247 800.5Q85 700 138 525.5t167.5-275Q420 150 573.5 183T793 358q66 142 33.5 326.5Z%22%2F%3E%3C%2Fg%3E%3C%2Fsvg%3E');
 }
+
+@keyframes shimmer {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}

@@ -1,8 +1,9 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Download, Eye, X, Check } from 'lucide-react';
+import { Download, Eye, X } from 'lucide-react';
 // import { SectionWrapper } from '../../common';
 import { sectionData } from '../../../data/sectionData';
+import CTAButton from '../../common/CTAButton';
 
 export const CVDownloadSection = () => {
   const [isModalOpen, setModalOpen] = useState(false);
@@ -11,7 +12,10 @@ export const CVDownloadSection = () => {
 
   const handleDownload = () => {
     setDownloadClicked(true);
-    setTimeout(() => setDownloadClicked(false), 2000);
+    setTimeout(() => {
+      setDownloadClicked(false);
+      // Add actual download logic here
+    }, 2000);
   };
 
   return (
@@ -35,54 +39,21 @@ export const CVDownloadSection = () => {
           </div>
 
           <div className="flex flex-col sm:flex-row justify-center items-center gap-6">
-            <motion.a
-              href="/resume.pdf"
-              download
-              onClick={handleDownload}
-              className={`
-                  relative overflow-hidden px-10 py-4 rounded-full
-                  ${downloadClicked ? 'bg-green-500' : 'bg-gradient-to-r from-blue-500 via-indigo-500 to-purple-500'}
-                  text-white font-medium shadow-xl
-                  hover:shadow-2xl transition-all duration-300
-                `}
-              whileHover={{ scale: 1.05, boxShadow: '0 20px 40px rgba(0,0,0,0.1)' }}
-              whileTap={{ scale: 0.95 }}
-            >
-              <motion.span
-                initial={false}
-                animate={{
-                  opacity: downloadClicked ? 0 : 1,
-                  y: downloadClicked ? -20 : 0,
-                }}
-                className="flex items-center gap-3 text-lg"
-              >
-                <Download className="w-6 h-6" />
-                Download CV
-              </motion.span>
-              <motion.span
-                initial={{ opacity: 0, y: 20 }}
-                animate={{
-                  opacity: downloadClicked ? 1 : 0,
-                  y: downloadClicked ? 0 : 20,
-                }}
-                className="absolute inset-0 flex items-center justify-center"
-              >
-                <Check className="w-6 h-6" />
-              </motion.span>
-            </motion.a>
-
-            <motion.button
-              onClick={() => setModalOpen(true)}
-              className="px-10 py-4 rounded-full bg-white border-2 border-gray-200
-                  text-gray-700 font-medium shadow-lg hover:shadow-xl
-                  hover:border-gray-300 transition-all duration-300
-                  flex items-center gap-3 text-lg"
-              whileHover={{ scale: 1.05, boxShadow: '0 20px 40px rgba(0,0,0,0.1)' }}
-              whileTap={{ scale: 0.95 }}
-            >
-              <Eye className="w-6 h-6" />
-              Preview CV
-            </motion.button>
+            <CTAButton 
+              label="Download CV" 
+              onClick={handleDownload} 
+              download={true} 
+              variant="colored"
+              Icon={Download}
+              downloadClicked={downloadClicked}
+            />
+            <CTAButton 
+              label="Preview CV" 
+              onClick={() => setModalOpen(true)} 
+              download={false} 
+              variant="white"
+              Icon={Eye}
+            />
           </div>
         </div>
       </motion.div>
