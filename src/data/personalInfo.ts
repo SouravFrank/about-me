@@ -5,6 +5,8 @@ export interface PersonalInfo {
   email: string;
   phone: string;
   profileImages: Array<string>;
+  viewResumeLink: string;
+  downLoadResumeLink: string;
 }
 
 // Define the interface for contact information
@@ -21,6 +23,8 @@ export const personalInfo: PersonalInfo = {
   email: "ssadhukhan990@gmail.com",
   phone: "+91 9038516950",
   profileImages: ["/images/profile(1).jpg", "/images/profile(2).jpg", "/images/profile(3).png", "/images/profile(4).jpg"],
+  viewResumeLink: 'https://drive.google.com/file/d/1LtBoIPz0b3qf9LHT5uOePARB0W1urxZE/preview',
+  downLoadResumeLink: 'https://drive.google.com/uc?export=download&id=1LtBoIPz0b3qf9LHT5uOePARB0W1urxZE'
 };
 
 // Export the contact information array

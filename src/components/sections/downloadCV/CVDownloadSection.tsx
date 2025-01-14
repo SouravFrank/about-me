@@ -4,6 +4,7 @@ import { X } from 'lucide-react';
 import { sectionData } from '../../../data/sectionData';
 import CVCard from './CVCard';
 import { CVDownloadSectionProps } from './types';
+import { personalInfo } from '../../../data/personalInfo';
 
 export const CVDownloadSection: React.FC<CVDownloadSectionProps> = ({ isDark }) => {
   const [isModalOpen, setModalOpen] = useState(false);
@@ -11,24 +12,32 @@ export const CVDownloadSection: React.FC<CVDownloadSectionProps> = ({ isDark }) 
   const [downloadClicked, setDownloadClicked] = useState(false);
 
   const handleDownload = () => {
-    setDownloadClicked(true);
+    setLoadingPdf(true);
+
+    const link = document.createElement('a');
+    link.href = personalInfo.downLoadResumeLink;
+    link.download = 'Resume_Sourav_Sadhukhan.pdf';
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+    setTimeout(() => {
+      setDownloadClicked(true);
+      setLoadingPdf(false);
+    }, 1000);
     setTimeout(() => {
       setDownloadClicked(false);
-      // Add actual download logic here
-    }, 2000);
+    }, 2500);
+  };
+
+  const handleShow = () => {
+    setLoadingPdf(true);
+    setModalOpen(true);
   };
 
   return (
     <div className="max-w-4xl mx-auto py-12">
       <motion.div whileHover={{ scale: 1.02 }} transition={{ duration: 0.3 }}>
-        <CVCard 
-          isDark={isDark}
-          title={`${sectionData.cvDownload.titleBold} ${sectionData.cvDownload.titleLight}`}
-          description={sectionData.cvDownload.description}
-          onPreview={() => setModalOpen(true)}
-          onDownload={handleDownload}
-          downloadClicked={downloadClicked}
-        />
+        <CVCard isDark={isDark} title={`${sectionData.cvDownload.titleBold} ${sectionData.cvDownload.titleLight}`} description={sectionData.cvDownload.description} onPreview={handleShow} onDownload={handleDownload} downloadClicked={downloadClicked} />
       </motion.div>
 
       {/* Enhanced Modal with AnimatePresence */}
@@ -51,7 +60,7 @@ export const CVDownloadSection: React.FC<CVDownloadSectionProps> = ({ isDark }) 
                 )}
                 <div className="p-6 bg-gray-50">
                   <div className="bg-white rounded-xl shadow-lg overflow-hidden">
-                    <iframe src="/resume.pdf" className="w-full h-[70vh] border-0" title="Resume Preview" onLoad={() => setLoadingPdf(false)} />
+                    <iframe src={personalInfo.viewResumeLink} className="w-full h-[70vh] border-0" title="Resume Preview" onLoad={() => setLoadingPdf(false)} />
                   </div>
                 </div>
               </div>
