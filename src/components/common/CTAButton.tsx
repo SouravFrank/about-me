@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import { Check } from 'lucide-react';
+import { Check, Loader } from 'lucide-react';
 
 interface CTAButtonProps {
   label: string;
@@ -7,19 +7,21 @@ interface CTAButtonProps {
   variant?: 'colored' | 'white';
   Icon?: React.ElementType;
   downloadClicked?: boolean;
+  disabled?: boolean;
 }
 
-const CTAButton: React.FC<CTAButtonProps> = ({ label, onClick, variant = 'colored', Icon, downloadClicked }) => {
+const CTAButton: React.FC<CTAButtonProps> = ({ label, onClick, variant = 'colored', Icon, downloadClicked, disabled }) => {
   const buttonStyles = variant === 'colored' ? 'bg-gradient-to-r from-blue-500 via-indigo-500 to-purple-500 text-white' : 'bg-white border-2 border-gray-200 text-gray-700 dark:bg-gray-800 dark:border-gray-600 dark:text-white';
 
   return (
     <motion.button
-      onClick={onClick}
+      onClick={disabled ? undefined : onClick}
       className={`relative overflow-hidden px-10 py-4 rounded-full font-medium shadow-xl 
         ${downloadClicked ? 'bg-green-500' : buttonStyles} 
+        ${disabled ? 'opacity-50 cursor-not-allowed' : ''}
         hover:shadow-2xl transition-all duration-300`}
-      whileHover={{ scale: 1.05, boxShadow: '0 20px 40px rgba(0,0,0,0.1)' }}
-      whileTap={{ scale: 0.95 }}
+      whileHover={{ scale: disabled ? 1 : 1.05, boxShadow: '0 20px 40px rgba(0,0,0,0.1)' }}
+      whileTap={{ scale: disabled ? 1 : 0.95 }}
     >
       <motion.span
         initial={false}
@@ -29,8 +31,7 @@ const CTAButton: React.FC<CTAButtonProps> = ({ label, onClick, variant = 'colore
         }}
         className="flex items-center gap-3 text-lg"
       >
-        {Icon && <Icon className="w-6 h-6" />}
-        {label}
+        {disabled ? <Loader className="w-6 h-6 animate-spin text-white" /> : Icon && !downloadClicked && <Icon className="w-6 h-6" />} {label}
       </motion.span>
       <motion.span
         initial={{ opacity: 0, y: 20 }}

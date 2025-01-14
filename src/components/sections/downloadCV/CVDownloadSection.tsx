@@ -8,11 +8,13 @@ import { personalInfo } from '../../../data/personalInfo';
 
 export const CVDownloadSection: React.FC<CVDownloadSectionProps> = ({ isDark }) => {
   const [isModalOpen, setModalOpen] = useState(false);
-  const [loadingPdf, setLoadingPdf] = useState(true);
+  const [loadingPdf, setLoadingPdf] = useState(false);
   const [downloadClicked, setDownloadClicked] = useState(false);
+  const [isButtonDisabled, setButtonDisabled] = useState(false);
 
   const handleDownload = () => {
     setLoadingPdf(true);
+    setButtonDisabled(true);
 
     const link = document.createElement('a');
     link.href = personalInfo.downLoadResumeLink;
@@ -20,10 +22,13 @@ export const CVDownloadSection: React.FC<CVDownloadSectionProps> = ({ isDark }) 
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
+
     setTimeout(() => {
       setDownloadClicked(true);
       setLoadingPdf(false);
-    }, 1000);
+      setButtonDisabled(false);
+    }, 1500);
+    
     setTimeout(() => {
       setDownloadClicked(false);
     }, 2500);
@@ -37,7 +42,7 @@ export const CVDownloadSection: React.FC<CVDownloadSectionProps> = ({ isDark }) 
   return (
     <div className="max-w-4xl mx-auto py-12">
       <motion.div whileHover={{ scale: 1.02 }} transition={{ duration: 0.3 }}>
-        <CVCard isDark={isDark} title={`${sectionData.cvDownload.titleBold} ${sectionData.cvDownload.titleLight}`} description={sectionData.cvDownload.description} onPreview={handleShow} onDownload={handleDownload} downloadClicked={downloadClicked} />
+        <CVCard isDark={isDark} title={`${sectionData.cvDownload.titleBold} ${sectionData.cvDownload.titleLight}`} description={sectionData.cvDownload.description} onPreview={handleShow} onDownload={handleDownload} downloadClicked={downloadClicked} isButtonDisabled={isButtonDisabled} />
       </motion.div>
 
       {/* Enhanced Modal with AnimatePresence */}

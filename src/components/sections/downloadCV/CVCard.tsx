@@ -9,9 +9,10 @@ interface CVCardProps {
   onPreview: () => void;
   onDownload: () => void;
   downloadClicked: boolean;
+  isButtonDisabled: boolean;
 }
 
-const CVCard: React.FC<CVCardProps> = ({ isDark, title, description, onPreview, onDownload, downloadClicked }) => {
+const CVCard: React.FC<CVCardProps> = ({ isDark, title, description, onPreview, onDownload, downloadClicked, isButtonDisabled }) => {
   return (
     <div className={`relative overflow-hidden rounded-3xl shadow-2xl p-10 ${isDark ? 'bg-gray-800 text-white' : 'bg-white text-black'}`}>
       <div className="text-center mb-10">
@@ -25,6 +26,7 @@ const CVCard: React.FC<CVCardProps> = ({ isDark, title, description, onPreview, 
           variant="colored" 
           Icon={Download}
           downloadClicked={downloadClicked}
+          disabled={isButtonDisabled}
         />
         <CTAButton 
           label="Preview CV" 
