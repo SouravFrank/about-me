@@ -48,20 +48,13 @@ const CTAButton: React.FC<CTAButtonProps> = ({ label, onClick, variant = 'colore
         <div
           className="absolute inset-0 animate-shimmer"
           style={{
-            background: 'linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent)',
+            background: 'linear-gradient(90deg, transparent, rgba(255,255,255,0.6), transparent)',
+            backgroundSize: '200% 100%',
+            width: '150%',
+            left: '-25%',
             transform: 'translateX(-100%)',
-            animationDuration: '1s',
-            opacity: 0, // Start hidden
-          }}
-        />
-        <div
-          className="absolute inset-0 animate-shimmer"
-          style={{
-            background: 'linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent)',
-            transform: 'translateX(-100%)',
-            animationDuration: '1s',
-            animationDelay: '0.5s',
-            opacity: 0, // Start hidden
+            animationDuration: '1.5s',
+            opacity: 0,
           }}
         />
       </div>
@@ -70,14 +63,16 @@ const CTAButton: React.FC<CTAButtonProps> = ({ label, onClick, variant = 'colore
         @keyframes shimmer {
           0% {
             transform: translateX(-100%);
+            opacity: 0.5;
           }
           100% {
             transform: translateX(100%);
+            opacity: 0.5;
           }
         }
         button:hover .animate-shimmer {
-          opacity: 1; // Show shimmer on hover
-          animation: shimmer 1s infinite; // Apply shimmer animation
+          opacity: 1;
+          animation: shimmer 1.5s linear infinite;
         }
       `}</style>
     </motion.button>
