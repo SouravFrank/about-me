@@ -37,3 +37,8 @@ export interface ContactFormProps {
 export interface ContactSectionProps {
   isDark: boolean;
 }
+
+// New interface for LocationMap props
+export interface LocationMapProps {
+  isDark: boolean; // Add any props that LocationMap might need
+}

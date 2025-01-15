@@ -11,7 +11,7 @@ export const ContactSection = ({ isDark }: ContactSectionProps) => (
           <ContactInfo />
         </div>
         <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-neumorph p-8">
-          <LocationMap />
+          <LocationMap isDark={isDark}  />
         </div>
       </div>
       <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-neumorph p-8">

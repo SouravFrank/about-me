@@ -17,7 +17,7 @@ const SocialLinks: React.FC = () => {
           href={href}
           target="_blank"
           rel="noopener noreferrer"
-          className="relative inline-block bg-white w-[60px] h-[60px] text-center overflow-hidden rounded-[28%] shadow-[0_5px_15px_-5px_rgba(0,0,0,0.3)] opacity-[0.99] group"
+          className={"relative inline-block w-[60px] h-[60px] text-center overflow-hidden rounded-[28%] shadow-[0_5px_15px_-5px_rgba(0,0,0,0.3)] opacity-[0.99] group dark:bg-gray-700"}
           whileHover={{ scale: 1.02 }}
         >
           <div
