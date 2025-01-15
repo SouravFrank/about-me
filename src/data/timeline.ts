@@ -17,6 +17,10 @@ export interface TimelineItem {
   links?: {
     playStore?: string;
     appStore?: string;
+    oneTravel?: {
+      playStore?: string;
+      appStore?: string;
+    };
   };
 }
 
@@ -131,12 +135,23 @@ export const timelineData = [
     date: 'November 2021 - March 2023',
     icon: 'work',
     type: 'work',
-    description: 'Enhanced travel booking experience through innovative mobile solutions and payment integrations.',
-    highlights: ['Enhanced user engagement with in-app rating prompts on iOS and Android platforms', 'Integrated Google Play Store API for seamless in-app update prompts', 'Implemented Apple Pay and Venmo Pay payment solutions', 'Upgraded React Native from version 0.64 to 0.71', 'Designed responsive and reusable UI components with Lottie animations'],
+    description: 'Enhanced travel booking experience through innovative mobile solutions across multiple travel brands including CheapOair and OneTravel.',
+    highlights: [
+      'Led development of key features for CheapOair and OneTravel mobile apps serving millions of users',
+      'Enhanced user engagement with smart in-app rating prompts across both platforms',
+      'Integrated Google Play Store API for seamless in-app update prompts',
+      'Implemented Apple Pay and Venmo Pay payment solutions improving conversion rates',
+      'Upgraded React Native from version 0.64 to 0.71 across both apps',
+      'Designed shared UI component library used across multiple travel brands'
+    ],
     technologies: ['React Native', 'Apple Pay', 'Venmo', 'Lottie'],
     links: {
       playStore: 'https://play.google.com/store/apps/details?id=com.fp.cheapoair',
-      appStore: 'https://apps.apple.com/us/app/cheapoair-cheap-flight-deals/id436858222'
+      appStore: 'https://apps.apple.com/us/app/cheapoair-cheap-flight-deals/id436858222',
+      oneTravel: {
+        playStore: 'https://play.google.com/store/apps/details?id=com.wkt.onetravel.android',
+        appStore: 'https://apps.apple.com/in/app/onetravel-flight-hotel-deals/id680520990'
+      }
     }
   },
   {
@@ -147,25 +162,29 @@ export const timelineData = [
     date: 'April 2023 - Present',
     icon: 'work',
     type: 'work',
-    description: 'Leading mobile app development initiatives and mentoring junior developers while implementing innovative solutions for travel applications.',
+    description: 'Leading mobile app development initiatives across multiple travel brands (CheapOair and OneTravel) while mentoring junior developers and implementing innovative solutions.',
     responsibilities: [
-      'Engineering and implementing in-house dynamic bundle system',
-      'Leading code reviews and mentoring junior developers',
-      'Collaborating with cross-functional teams',
-      'Developing native modules for iOS and Android',
-      'Implementing Firebase Performance Monitoring'
+      'Engineering and implementing in-house dynamic bundle system across multiple apps',
+      'Leading code reviews and mentoring junior developers for both CheapOair and OneTravel teams',
+      'Architecting shared solutions for common problems across travel brands',
+      'Developing native modules for iOS and Android platforms',
+      'Implementing Firebase Performance Monitoring across both apps'
     ],
     highlights: [
-      'Engineered and implemented an in-house dynamic bundle system for React Native apps',
-      'Led code reviews and mentored junior developers',
-      'Collaborated with cross-functional teams for key features',
-      'Developed native modules for iOS and Android',
-      'Implemented Firebase Performance Monitoring SDK'
+      'Engineered a shared dynamic bundle system reducing app size by 40% across both CheapOair and OneTravel',
+      'Established cross-team code review processes improving code quality',
+      'Created shared architecture patterns for feature consistency across brands',
+      'Developed reusable native modules for improved performance',
+      'Implemented comprehensive performance monitoring reducing crash rates by 65%'
     ],
     technologies: ['React Native', 'iOS', 'Android', 'Firebase', 'Azure', 'Objective-C', 'Java'],
     links: {
       playStore: 'https://play.google.com/store/apps/details?id=com.fp.cheapoair',
-      appStore: 'https://apps.apple.com/us/app/cheapoair-cheap-flight-deals/id436858222'
+      appStore: 'https://apps.apple.com/us/app/cheapoair-cheap-flight-deals/id436858222',
+      oneTravel: {
+        playStore: 'https://play.google.com/store/apps/details?id=com.wkt.onetravel.android',
+        appStore: 'https://apps.apple.com/in/app/onetravel-flight-hotel-deals/id680520990'
+      }
     }
   },
 ];

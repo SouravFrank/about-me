@@ -157,18 +157,41 @@ export default function TimelineEvent({
                 {links && (
                   <div className="mt-4">
                     <h4 className="font-medium text-gray-900 dark:text-white">Available On</h4>
-                    <div className="mt-2 flex gap-4">
-                      {links.playStore && (
-                        <a href={links.playStore} target="_blank" rel="noopener noreferrer" 
-                           className="text-sm text-blue-500 hover:text-blue-600 flex items-center gap-1">
-                          Play Store <ExternalLink className="h-3 w-3" />
-                        </a>
-                      )}
-                      {links.appStore && (
-                        <a href={links.appStore} target="_blank" rel="noopener noreferrer"
-                           className="text-sm text-blue-500 hover:text-blue-600 flex items-center gap-1">
-                          App Store <ExternalLink className="h-3 w-3" />
-                        </a>
+                    <div className="mt-2 space-y-2">
+                      {/* CheapOair Links */}
+                      <div className="flex gap-4">
+                        <span className="text-sm text-gray-500 dark:text-gray-400">CheapOair:</span>
+                        {links.playStore && (
+                          <a href={links.playStore} target="_blank" rel="noopener noreferrer" 
+                             className="text-sm text-blue-500 hover:text-blue-600 flex items-center gap-1">
+                            Play Store <ExternalLink className="h-3 w-3" />
+                          </a>
+                        )}
+                        {links.appStore && (
+                          <a href={links.appStore} target="_blank" rel="noopener noreferrer"
+                             className="text-sm text-blue-500 hover:text-blue-600 flex items-center gap-1">
+                            App Store <ExternalLink className="h-3 w-3" />
+                          </a>
+                        )}
+                      </div>
+                      
+                      {/* OneTravel Links */}
+                      {links.oneTravel && (
+                        <div className="flex gap-4">
+                          <span className="text-sm text-gray-500 dark:text-gray-400">OneTravel:</span>
+                          {links.oneTravel.playStore && (
+                            <a href={links.oneTravel.playStore} target="_blank" rel="noopener noreferrer" 
+                               className="text-sm text-blue-500 hover:text-blue-600 flex items-center gap-1">
+                              Play Store <ExternalLink className="h-3 w-3" />
+                            </a>
+                          )}
+                          {links.oneTravel.appStore && (
+                            <a href={links.oneTravel.appStore} target="_blank" rel="noopener noreferrer"
+                               className="text-sm text-blue-500 hover:text-blue-600 flex items-center gap-1">
+                              App Store <ExternalLink className="h-3 w-3" />
+                            </a>
+                          )}
+                        </div>
                       )}
                     </div>
                   </div>

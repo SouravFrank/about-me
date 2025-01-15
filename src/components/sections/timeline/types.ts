@@ -10,4 +10,12 @@ export interface TimelineItem {
   type: 'work' | 'education' | 'personal';
   highlights: string[];
   technologies?: string[];
+  links?: {
+    playStore?: string;
+    appStore?: string;
+    oneTravel?: {
+      playStore: string;
+      appStore: string;
+    };
+  };
 }
