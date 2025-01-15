@@ -5,8 +5,12 @@ export interface Project {
   githubLink: string;
 }
 
-export interface ProjectCardProps extends Project {
-  index?: number;
+export interface ProjectCardProps {
+  title: string;
+  description: string;
+  thumbnail: string;
+  githubLink: string;
+  technologies: string[];
 }
 
 export interface ProjectSectionProps {}
