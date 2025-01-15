@@ -1,16 +1,23 @@
-import { Briefcase, GraduationCap, Cake, MapPin } from 'lucide-react';
+import { Briefcase, GraduationCap, Cake, MapPin, ChevronDown, ChevronUp, ExternalLink } from 'lucide-react';
+import { useState } from 'react';
 import { TimelineItem } from './types';
 
 export default function TimelineEvent({
   title,
   company,
+  companyUrl,
   location,
   specialization,
   date,
   type,
   highlights,
+  description,
+  responsibilities, 
   technologies,
+  links,
 }: TimelineItem) {
+  const [isExpanded, setIsExpanded] = useState(false);
+
   const getIcon = () => {
     switch (type) {
       case 'personal':
@@ -69,7 +76,14 @@ export default function TimelineEvent({
                 <h3 className="font-semibold text-gray-900 dark:text-white">
                   {title}
                   {company && (
-                    <span className="text-gray-600 dark:text-gray-400"> @ {company}</span>
+                    <span className="text-gray-600 dark:text-gray-400">
+                      {' '}@ {companyUrl ? (
+                        <a href={companyUrl} target="_blank" rel="noopener noreferrer" className="hover:text-blue-500 inline-flex items-center">
+                          {company}
+                          <ExternalLink className="ml-1 h-3 w-3" />
+                        </a>
+                      ) : company}
+                    </span>
                   )}
                 </h3>
                 {specialization && (
@@ -91,19 +105,75 @@ export default function TimelineEvent({
               </div>
             )}
 
-            {/* Highlights with modern bullets */}
-            {highlights.length > 0 && (
-              <ul className="mt-4 space-y-3">
-                {highlights.map((highlight, idx) => (
-                  <li
-                    key={idx}
-                    className="relative pl-6 text-sm text-gray-700 dark:text-gray-300"
-                  >
-                    <span className={`absolute left-0 top-1.5 h-1.5 w-1.5 rounded-full bg-gradient-to-r ${getIconColor()}`} />
-                    {highlight}
-                  </li>
-                ))}
-              </ul>
+            {/* Collapsed Content */}
+            {!isExpanded && description && (
+              <p className="mt-2 text-sm text-gray-600 dark:text-gray-400">
+                {description}
+              </p>
+            )}
+
+            {/* Expanded Content */}
+            {isExpanded && (
+              <>
+                {responsibilities && (
+                  <div className="mt-4">
+                    <h4 className="font-medium text-gray-900 dark:text-white">Key Responsibilities</h4>
+                    <ul className="mt-2 space-y-2">
+                      {responsibilities.map((resp, idx) => (
+                        <li key={idx} className="flex items-start gap-2 text-sm text-gray-700 dark:text-gray-300">
+                          <span className={`mt-1.5 h-1.5 w-1.5 flex-none rounded-full bg-gradient-to-r ${getIconColor()}`} />
+                          {resp}
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                )}
+
+                {/* Highlights */}
+                {type !== 'personal' && (
+                  <div className="mt-4">
+                    <h4 className="font-medium text-gray-900 dark:text-white">Highlights</h4>
+                    <ul className="mt-2 space-y-2">
+                      {highlights.map((highlight, idx) => (
+                        <li key={idx} className="flex items-start gap-2 text-sm text-gray-700 dark:text-gray-300">
+                          <span className={`mt-1.5 h-1.5 w-1.5 flex-none rounded-full bg-gradient-to-r ${getIconColor()}`} />
+                          {highlight}
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                )}
+
+                {/* Special rendering for personal type cards */}
+                {type === 'personal' && (
+                  <div className="mt-4">
+                    <p className="text-sm text-gray-700 dark:text-gray-300">
+                      {highlights[0]}
+                    </p>
+                  </div>
+                )}
+
+                {/* App Links */}
+                {links && (
+                  <div className="mt-4">
+                    <h4 className="font-medium text-gray-900 dark:text-white">Available On</h4>
+                    <div className="mt-2 flex gap-4">
+                      {links.playStore && (
+                        <a href={links.playStore} target="_blank" rel="noopener noreferrer" 
+                           className="text-sm text-blue-500 hover:text-blue-600 flex items-center gap-1">
+                          Play Store <ExternalLink className="h-3 w-3" />
+                        </a>
+                      )}
+                      {links.appStore && (
+                        <a href={links.appStore} target="_blank" rel="noopener noreferrer"
+                           className="text-sm text-blue-500 hover:text-blue-600 flex items-center gap-1">
+                          App Store <ExternalLink className="h-3 w-3" />
+                        </a>
+                      )}
+                    </div>
+                  </div>
+                )}
+              </>
             )}
 
             {/* Technologies with glassmorphism */}
@@ -119,6 +189,20 @@ export default function TimelineEvent({
                   </span>
                 ))}
               </div>
+            )}
+
+            {/* Show More/Less Button - Hidden for birth card */}
+            {type !== 'personal' && (description || responsibilities || highlights.length > 0) && (
+              <button
+                onClick={() => setIsExpanded(!isExpanded)}
+                className="mt-4 flex items-center gap-1 text-sm font-medium text-blue-500 hover:text-blue-600"
+              >
+                {isExpanded ? (
+                  <>Show Less <ChevronUp className="h-4 w-4" /></>
+                ) : (
+                  <>Show More <ChevronDown className="h-4 w-4" /></>
+                )}
+              </button>
             )}
           </div>
         </div>
