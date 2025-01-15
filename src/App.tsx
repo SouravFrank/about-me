@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { ThemeToggle, GoToTop, ArticlesSection, Footer, HorizontalScroll, GradientBlobCursor, RewardsRecognition, ProjectSection, SectionWrapper, IntroSection, TimelineSection, SkillsSection, ContactSection, CVDownloadSection, HexagonPreloader } from './components';
+import ProgressSteps from './ProgressSteps.jsx';
 import { sectionData } from './data/sectionData';
 
 function App() {
@@ -14,6 +15,8 @@ function App() {
 
   return (
     <>
+      <ProgressSteps />
+
       {loading && <HexagonPreloader isDark={isDark} />}
       <GradientBlobCursor isDarkMode={isDark}>
         <div className={`min-h-screen transition-colors duration-300 ${isDark ? 'dark bg-gray-900 text-white' : 'bg-gray-100 text-gray-900'}`}>
@@ -42,7 +45,7 @@ function App() {
           <RewardsRecognition isDark={isDark} />
           <ContactSection isDark={isDark} />
 
-          <CVDownloadSection />
+          <CVDownloadSection isDark={isDark} />
           <Footer isDark={isDark} />
         </div>
       </GradientBlobCursor>
