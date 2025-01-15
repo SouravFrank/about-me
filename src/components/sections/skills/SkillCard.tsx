@@ -55,7 +55,7 @@ const SkillCard: React.FC<SkillCardProps> = ({ name, src, description, expertise
 
       <motion.div className="absolute inset-0 bg-white dark:bg-gray-800 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300" initial={false}>
         <div className="p-4 h-full flex flex-col justify-between">
-          <p className="text-base dark:text-gray-200 leading-relaxed">{description}</p>
+          <p className="text-sm dark:text-gray-200 leading-relaxed">{description}</p>
           <motion.a href={`https://www.google.com/search?q=${encodeURIComponent(name)}+skill+development`} target="_blank" rel="noopener noreferrer" className="inline-flex items-center text-blue-500 hover:text-blue-600 dark:text-blue-400 dark:hover:text-blue-300 text-sm font-medium mt-2" whileHover={{ x: 5 }}>
             Learn More <ExternalLink className="w-3.5 h-3.5 ml-1" />
           </motion.a>

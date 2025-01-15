@@ -12,12 +12,12 @@ const SectionWrapper: React.FC<SectionWrapperProps> = ({ titleBold, titleLight, 
   });
 
   // Adjusted opacity transformation for smoother transitions
-  const opacity = useTransform(scrollYProgress, [0, 0.3, opacityPosition || 0.75, 1], [0, 1, 1, 0]);
+  const opacity = 1 //useTransform(scrollYProgress, [0, 0.3, opacityPosition || 0.75, 1], [0, 1, 1, 0]);
   // Adjusted yTranslate transformation for better visual effect
   const yTranslate = useTransform(scrollYProgress, [0, 0.3, 0.75, 1], [50, 0, 0, -50]);
 
   return (
-    <motion.div ref={sectionRef} style={{ opacity, y: yTranslate }} className={`py-5 px-8 w-full ${isDark ? 'bg-gray-900 text-white' : 'bg-white text-black'}`}>
+    <motion.div ref={sectionRef} style={{ opacity, y: yTranslate }} className={`py-5 px-8 w-full ${isDark ? 'bg-gray-900 text-white' : 'text-black'}`}>
       <div className={`text-center mb-16 ${isDark ? 'text-gray-300' : 'text-gray-600'}`}>
         <h2 className={`text-5xl font-thin tracking-wide mb-4 ${isDark ? 'text-gray-200' : 'text-gray-600'}`}>
           {titleBold}

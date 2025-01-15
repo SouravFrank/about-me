@@ -11,6 +11,8 @@ export interface ProjectCardProps {
   thumbnail: string;
   githubLink: string;
   technologies: string[];
+  index: number;
+  isLastCard: boolean;
 }
 
 export interface ProjectSectionProps {}

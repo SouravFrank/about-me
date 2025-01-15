@@ -8,7 +8,7 @@ const ProjectSection: React.FC<ProjectSectionProps> = () => {
     <>
       {projects.map((project, index) => (
         <div key={index} className="snap-start shrink-0" style={{ minWidth: 'fit-content' }}>
-          <ProjectCard {...project} />
+          <ProjectCard {...project} index={index} isLastCard={index === projects.length - 1} />
         </div>
       ))}
     </>

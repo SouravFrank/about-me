@@ -133,7 +133,7 @@ const HorizontalScroll: React.FC<HorizontalScrollProps> = ({ children }) => {
       <button
         onClick={() => smoothScroll('left')}
         disabled={isAtStart}
-        className={`absolute left-2 top-1/2 -translate-y-1/2 bg-white dark:bg-gray-700 rounded-full p-2 shadow-lg transition-all duration-200 z-10 ${isAtStart ? 'opacity-30' : 'hover:scale-110 hover:bg-gray-100 dark:hover:bg-gray-600'}`}
+        className={`absolute left-0 top-1/2 -translate-y-1/2 bg-white dark:bg-gray-700 rounded-full p-2 shadow-lg transition-all duration-200 z-10 ${isAtStart ? 'opacity-30' : 'hover:scale-110 hover:bg-gray-100 dark:hover:bg-gray-600'}`}
       >
         <ChevronLeft className="w-6 h-6" />
       </button>
@@ -152,7 +152,7 @@ const HorizontalScroll: React.FC<HorizontalScrollProps> = ({ children }) => {
       <button
         onClick={() => smoothScroll('right')}
         disabled={isAtEnd}
-        className={`absolute right-2 top-1/2 -translate-y-1/2 bg-white dark:bg-gray-700 rounded-full p-2 shadow-lg transition-all duration-200 z-10 ${isAtEnd ? 'opacity-30' : 'hover:scale-110 hover:bg-gray-100 dark:hover:bg-gray-600'}`}
+        className={`absolute right-0 top-1/2 -translate-y-1/2 bg-white dark:bg-gray-700 rounded-full p-2 shadow-lg transition-all duration-200 z-10 ${isAtEnd ? 'opacity-30' : 'hover:scale-110 hover:bg-gray-100 dark:hover:bg-gray-600'}`}
       >
         <ChevronRight className="w-6 h-6" />
       </button>
