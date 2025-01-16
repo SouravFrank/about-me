@@ -1,0 +1,99 @@
+.progress-container {
+    width: 100%;
+    max-width: 1000px;
+    margin: 20px auto;
+    padding: 16px;
+  }
+  
+  .progress-bar-container {
+    border-radius: 8px;
+    overflow: hidden;
+  }
+  
+  .steps-container {
+    display: flex;
+    align-items: center;
+    width: 100%;
+  }
+  
+  .step-item {
+    position: relative;
+    flex: 1;
+    height: 48px;
+  }
+  
+  .step-button {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    transition: background-color 0.3s;
+    border: none;
+    width: 100%;
+    height: 100%;
+  }
+  
+  .step-button.completed {
+    background-color: #115e59;
+    color: white;
+  }
+  
+  .step-button.current {
+    background-color: #0d9488;
+    color: white;
+  }
+  
+  .step-button.available {
+    background-color: #14b8a6;
+    color: white;
+  }
+  
+  .step-button.locked {
+    background-color: #f8fafc;
+    color: #64748b;
+  }
+  
+  .step-title {
+    padding-left: 46px;
+    font-weight: 500;
+    white-space: nowrap;
+    display: flex;
+    align-items: center;
+  }
+  
+  .step-arrow {
+    position: absolute;
+    right: 0;
+    height: 100%;
+    width: 32px;
+    clip-path: polygon(0 0, 100% 50%, 0 100%);
+    transform: translateX(99%);
+    z-index: 1;
+  }
+  
+  .step-arrow.completed {
+    background-color: #115e59;
+  }
+  
+  .step-arrow.current {
+    background-color: #0d9488;
+  }
+  
+  .step-arrow.available {
+    background-color: #14b8a6;
+  }
+  
+  .step-arrow.locked {
+    background-color: #f8fafc;
+  }
+  
+  .white-arrow {
+    position: absolute;
+    right: 0;
+    height: 120%;
+    width: 38px;
+    clip-path: polygon(0 0, 100% 50%, 0 100%);
+    transform: translateX(38px);
+    background-color: #fff;
+    z-index: 1;
+  }
