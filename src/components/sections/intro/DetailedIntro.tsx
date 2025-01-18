@@ -55,36 +55,88 @@ export default function DetailedIntro({ onClose }: DetailedIntroProps) {
         </button>
 
         <div className="prose dark:prose-invert prose-lg max-w-none">
-          <motion.h2 
-            className="text-3xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent"
+          <motion.h2
+            className="text-3xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent mb-8"
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.2 }}
           >
-            Hello, I'm [Your Name]
+            Hello, I'm Sourav Sadhukhan
           </motion.h2>
-          
+
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.3 }}
+            className="space-y-8"
           >
-            <p className="text-gray-700 dark:text-gray-300">
-              A passionate Full Stack Developer with expertise in React Native and Node.js. 
-              With [X] years of experience in developing scalable applications, I specialize 
-              in creating seamless mobile experiences and robust backend solutions.
-            </p>
-            <p className="text-gray-700 dark:text-gray-300">
-              My journey in software development has led me to work with various technologies 
-              and frameworks, always focusing on writing clean, maintainable code and 
-              delivering user-centric solutions.
-            </p>
-            <p className="text-gray-700 dark:text-gray-300">
-              I invite you to explore my portfolio to learn more about my professional 
-              journey, projects, and the impact I've made in the software development world.
-            </p>
+            {/* Introduction Section */}
+            <div className="flex flex-col space-y-4">
+              <div className="flex items-center space-x-3">
+                <div className="h-2 w-2 rounded-full bg-blue-500" />
+                <h3 className="text-xl font-semibold text-gray-800 dark:text-gray-200">Who I Am ?</h3>
+              </div>
+              <div className="ml-5 pl-4 border-l-2 border-gray-200 dark:border-gray-700 text-left">
+                <p className="text-gray-700 dark:text-gray-300 text-base leading-relaxed">
+                  A results-driven <strong>Mobile Developer</strong> specializing in <strong>React Native</strong>, crafting seamless cross-platform experiences with the finesse of a front-end artist and the logic of a back-end strategist.
+                </p>
+              </div>
+            </div>
+
+            {/* Technical Expertise Section */}
+            <div className="flex flex-col space-y-4">
+              <div className="flex items-center space-x-3">
+                <div className="h-2 w-2 rounded-full bg-purple-500" />
+                <h3 className="text-xl font-semibold text-gray-800 dark:text-gray-200">Technical Prowess</h3>
+              </div>
+              <div className="ml-5 pl-4 border-l-2 border-gray-200 dark:border-gray-700 text-left">
+                <p className="text-gray-700 dark:text-gray-300 text-base leading-relaxed">
+                  Whether it's integrating <strong>Apple Pay, Venmo</strong>, or building native modules that play well across iOS and Android, I thrive on engineering solutions that make apps both performant and delightful.
+                </p>
+              </div>
+            </div>
+
+            {/* Backend Expertise Section */}
+            <div className="flex flex-col space-y-4">
+              <div className="flex items-center space-x-3">
+                <div className="h-2 w-2 rounded-full bg-blue-500" />
+                <h3 className="text-xl font-semibold text-gray-800 dark:text-gray-200">Backend Mastery</h3>
+              </div>
+              <div className="ml-5 pl-4 border-l-2 border-gray-200 dark:border-gray-700 text-left">
+                <p className="text-gray-700 dark:text-gray-300 text-base leading-relaxed">
+                  Backend wizardry? Absolutely. I leverage <strong>Node.js</strong> to architect scalable APIs, while <strong>Redux</strong> ensures smooth state management, preventing app chaos before it begins.
+                </p>
+              </div>
+            </div>
+
+            {/* Development Philosophy Section */}
+            <div className="flex flex-col space-y-4">
+              <div className="flex items-center space-x-3">
+                <div className="h-2 w-2 rounded-full bg-purple-500" />
+                <h3 className="text-xl font-semibold text-gray-800 dark:text-gray-200">Development Philosophy</h3>
+              </div>
+              <div className="ml-5 pl-4 border-l-2 border-gray-200 dark:border-gray-700 text-left">
+                <p className="text-gray-700 dark:text-gray-300 text-base leading-relaxed">
+                  Agile workflows, clean architecture, and a relentless focus on user experience drive my development approach. Basically, I turn coffee into high-quality, maintainable code—one feature at a time.
+                </p>
+              </div>
+            </div>
+
+            {/* Call to Action Section */}
+            <div className="flex flex-col space-y-4">
+              <div className="flex items-center space-x-3">
+                <div className="h-2 w-2 rounded-full bg-blue-500" />
+                <h3 className="text-xl font-semibold text-gray-800 dark:text-gray-200">Next ?</h3>
+              </div>
+              <div className="ml-5 pl-4 border-l-2 border-gray-200 dark:border-gray-700 text-left">
+                <p className="text-gray-700 dark:text-gray-300 text-base leading-relaxed">
+                  Feel free to explore my portfolio and see how I blend technology with innovation to build solutions that matter.
+                </p>
+              </div>
+            </div>
           </motion.div>
         </div>
+
       </motion.div>
     </motion.div>
   );
