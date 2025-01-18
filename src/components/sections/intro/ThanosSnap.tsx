@@ -16,7 +16,7 @@ export default function ThanosSnap({ onComplete }: ThanosSnapProps) {
     }));
     setParticles(particlesArray);
     
-    const timer = setTimeout(onComplete, 1000);
+    const timer = setTimeout(onComplete, 200);
     return () => clearTimeout(timer);
   }, [onComplete]);
 

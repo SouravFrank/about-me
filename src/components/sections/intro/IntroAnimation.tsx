@@ -15,22 +15,19 @@ const introTexts = [
   "Navigating the complexities of Agile project management with ease"
 ];
 
-export default function IntroAnimation({ showDetailed, setShowDetailed }: IntroAnimationProps) {
+export default function IntroAnimation({ setShowDetailed }: IntroAnimationProps) {
   const [currentIndex, setCurrentIndex] = useState(0);
 
   useEffect(() => {
-    if (!showDetailed) {
       const timer = setInterval(() => {
         setCurrentIndex((prev) => (prev + 1) % introTexts.length);
       }, 1800);
       return () => clearInterval(timer);
-    }
-  }, [showDetailed]);
+  }, []);
 
   return (
     <div className="transition-all duration-500 ease-in-out">
       <AnimatePresence mode="wait">
-        {!showDetailed ? (
           <motion.div
             key="intro"
             initial={{ opacity: 0 }}
@@ -50,16 +47,6 @@ export default function IntroAnimation({ showDetailed, setShowDetailed }: IntroA
               {introTexts[currentIndex]}
             </motion.p>
           </motion.div>
-        ) : (
-          <motion.div
-            key="detailed"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-          >
-            <DetailedIntro onClose={() => setShowDetailed(false)} />
-          </motion.div>
-        )}
       </AnimatePresence>
     </div>
   );

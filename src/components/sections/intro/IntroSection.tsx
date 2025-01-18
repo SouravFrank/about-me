@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import IntroAnimation from './IntroAnimation';
 import { personalInfo } from '../../../data';
 import DetailedIntro from './DetailedIntro';
+import ThanosSnap from './ThanosSnap';
 
 const IntroSection: React.FC = () => {
   const [imageError, setImageError] = useState(false);
@@ -158,6 +159,7 @@ const IntroSection: React.FC = () => {
             exit={{ opacity: 0 }}
           >
             <DetailedIntro onClose={() => setShowDetailed(false)} />
+            <ThanosSnap onComplete={()=>{}} />
           </motion.div>
         )}
       </motion.div>
