@@ -4,6 +4,7 @@ import IntroAnimation from './IntroAnimation';
 import { personalInfo } from '../../../data';
 import DetailedIntro from './DetailedIntro';
 import ThanosSnap from './ThanosSnap';
+import '../../../styles/gradientText.css';
 
 const IntroSection: React.FC = () => {
   const [imageError, setImageError] = useState(false);
@@ -143,7 +144,7 @@ const IntroSection: React.FC = () => {
         {!showDetailed ? (
           <>
             <motion.h1
-              className="text-4xl font-bold mb-4 relative z-10 cursor-pointer"
+              className="text-4xl font-bold mb-4 relative z-10 cursor-pointer gradient-text"
               onClick={() => setShowDetailed(true)}
               whileHover={{ scale: 1.05 }}
               transition={{ duration: 0.2 }}
@@ -159,7 +160,7 @@ const IntroSection: React.FC = () => {
             exit={{ opacity: 0 }}
           >
             <DetailedIntro onClose={() => setShowDetailed(false)} />
-            <ThanosSnap onComplete={()=>{}} />
+            <ThanosSnap onComplete={() => { }} />
           </motion.div>
         )}
       </motion.div>
