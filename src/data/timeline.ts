@@ -1,5 +1,5 @@
 // Type definitions for better TypeScript support
-export type TimelineItemType = 'work' | 'education' | 'personal';
+export type TimelineItemType = 'work' | 'education' | 'personal' | 'certification';
 
 export interface TimelineItem {
   title: string;
@@ -22,9 +22,10 @@ export interface TimelineItem {
       appStore?: string;
     };
   };
+  credLink?: string;
 }
 
-export const timelineData = [
+export const timelineData: TimelineItem[] = [
   {
     title: 'Birth',
     location: 'Howrah, West Bengal, India',
@@ -128,6 +129,58 @@ export const timelineData = [
     technologies: ['React Native', 'React Web', 'Express.js', 'Redux'],
   },
   {
+    title: 'Become a React Native Developer',
+    company: 'LinkedIn',
+    companyUrl: 'https://www.linkedin.com/',
+    location: 'Online',
+    date: 'September 2020',
+    icon: 'certificate',
+    type: 'certification',
+    credLink: 'https://media.licdn.com/dms/image/v2/D4D2DAQHmqQkVlCcENg/profile-treasury-document-images_800/profile-treasury-document-images_800/1/1719346344531?e=1738195200&v=beta&t=rGE-fCs9UH9RosDScDb390UXXSNt02cFov-USpyPCkE',
+    highlights: [
+      'Comprehensive training in React Native development',
+    ],
+  },
+  {
+    title: 'React Native - The Practical Guide',
+    company: 'Udemy',
+    companyUrl: 'https://www.udemy.com/',
+    location: 'Online',
+    date: 'September 2020',
+    icon: 'certificate',
+    type: 'certification',
+    credLink: 'https://media.licdn.com/dms/image/v2/D4D2DAQGt2MBGauaKqg/profile-treasury-document-images_800/profile-treasury-document-images_800/1/1719346545892?e=1738195200&v=beta&t=L5lKnHxpee-4263ErFRPIS2cFXiyPc35S7KK_QsquF4',
+    highlights: [
+      'Hands-on approach to learning React Native',
+    ],
+  },
+  {
+    title: 'The Complete React Native + Hooks Course',
+    company: 'Udemy',
+    companyUrl: 'https://www.udemy.com/',
+    location: 'Online',
+    date: 'October 2020',
+    icon: 'certificate',
+    type: 'certification',
+    credLink: 'https://media.licdn.com/dms/image/v2/D4D2DAQFD-B2MvvMOwQ/profile-treasury-document-images_800/profile-treasury-document-images_800/1/1719346056813?e=1738195200&v=beta&t=oxPUINBQ1gnTXArT1NL7Wy1i13zSPuAEf_kTJkfalNg',
+    highlights: [
+      'Learn to build mobile applications using React Native and Hooks',
+    ],
+  },
+  {
+    title: 'Javascript (Basic)',
+    company: 'HackerRank',
+    companyUrl: 'https://www.hackerrank.com/',
+    location: 'Online',
+    date: 'June 2021',
+    icon: 'certificate',
+    type: 'certification',
+    credLink: 'https://www.hackerrank.com/certificates/c902fc16abf7',
+    highlights: [
+      'It covers topics like Functions, Currying, Hoisting, Scope, Inheritance, Events and Error Handling.',
+    ],
+  },
+  {
     title: 'Mobile Application Developer',
     company: 'Fareportal',
     companyUrl: 'https://www.fareportal.com/',
@@ -186,5 +239,19 @@ export const timelineData = [
         appStore: 'https://apps.apple.com/in/app/onetravel-flight-hotel-deals/id680520990'
       }
     }
+  },
+  {
+    title: 'Prompt Engineering Certification',
+    company: 'Vanderbilt University - Coursera',
+    location: 'Online',
+    date: 'September 2023',
+    icon: 'certificate',
+    type: 'certification',
+    credLink: 'https://www.coursera.org/account/accomplishments/verify/APX8AEZUPQTF',
+    highlights: [
+      'How to apply prompt engineering to effectively work with large language models, like ChatGPT',
+      'How to use prompt patterns to tap into powerful capabilities within large language models',
+      'How to create complex prompt-based applications for your life, business, or education'
+    ],
   },
 ];
