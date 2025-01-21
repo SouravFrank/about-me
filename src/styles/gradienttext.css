@@ -1,10 +1,10 @@
 :root {
-  --gradient-color-1: #2563eb;
-  --gradient-color-2: #4ECDC4;
-  --gradient-color-3: #45B7D1;
-  --gradient-color-4: #7e22ce;
-  --gradient-speed: 1.5s;
-}
+    --gradient-color-1: #7e22ce; /* Purple */
+    --gradient-color-2: #c026d3; /* Magenta */
+    --gradient-color-3: #e879f9; /* Light Pink */
+    --gradient-color-4: #ff17ff; /* Bright Pink */
+    --gradient-speed: 2s; /* Slower animation for smoother transitions */
+  }
 
 .gradient-text {
   background-clip: text;

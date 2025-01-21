@@ -144,7 +144,7 @@ const IntroSection: React.FC = () => {
         {!showDetailed ? (
           <>
             <motion.h1
-              className="text-4xl font-bold mb-4 relative z-10 cursor-pointer gradient-text"
+              className="text-4xl font-bold mb-4 relative z-10 cursor-link gradient-text"
               onClick={() => setShowDetailed(true)}
               whileHover={{ scale: 1.05 }}
               transition={{ duration: 0.2 }}
