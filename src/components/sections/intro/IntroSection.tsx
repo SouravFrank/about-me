@@ -4,7 +4,7 @@ import IntroAnimation from './IntroAnimation';
 import { personalInfo } from '../../../data';
 import DetailedIntro from './DetailedIntro';
 import ThanosSnap from './ThanosSnap';
-import '../../../styles/gradientText.css';
+import '../../../styles/gradienttext.css';
 
 const IntroSection: React.FC = () => {
   const [imageError, setImageError] = useState(false);
