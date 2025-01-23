@@ -43,11 +43,7 @@ export const timelineData: TimelineItem[] = [
     date: 'March 2013',
     icon: 'study',
     type: 'education',
-    highlights: [
-      'Early exposure to computers sparked a lasting fascination with technology',
-      'Started learning basic programming concepts through school computer lab',
-      'Demonstrated natural aptitude for logical problem-solving',
-    ],
+    highlights: ['Early exposure to computers sparked a lasting fascination with technology', 'Started learning basic programming concepts through school computer lab', 'Demonstrated natural aptitude for logical problem-solving'],
   },
   {
     title: '12th Grade',
@@ -57,12 +53,7 @@ export const timelineData: TimelineItem[] = [
     date: 'June 2013 - July 2015',
     icon: 'study',
     type: 'education',
-    highlights: [
-      'Chose Computer Science as a major subject, diving deep into programming fundamentals',
-      'Developed first small applications using C++',
-      'Active participant in school technical activities',
-      'Discovered passion for software development through practical projects',
-    ],
+    highlights: ['Chose Computer Science as a major subject, diving deep into programming fundamentals', 'Developed first small applications using C++', 'Active participant in school technical activities', 'Discovered passion for software development through practical projects'],
   },
   {
     title: 'B.Tech',
@@ -72,13 +63,7 @@ export const timelineData: TimelineItem[] = [
     date: 'August 2015 - June 2019',
     icon: 'study',
     type: 'education',
-    highlights: [
-      'Merged electronics knowledge with programming skills to create innovative solutions',
-      'Led technical teams in college hackathons and projects',
-      'Self-learned web development technologies alongside curriculum',
-      'Received Technical Finesse Award for outstanding contributions',
-      'Built several full-stack applications during final year',
-    ],
+    highlights: ['Merged electronics knowledge with programming skills to create innovative solutions', 'Led technical teams in college hackathons and projects', 'Self-learned web development technologies alongside curriculum', 'Received Technical Finesse Award for outstanding contributions', 'Developed an Automated Whiteboard Cleaner using Image Processing and Arduino, featuring a motor-operated duster for precise area cleaning based on image selection.'],
   },
   {
     title: 'Assistant System Engineer',
@@ -89,19 +74,12 @@ export const timelineData: TimelineItem[] = [
     icon: 'work',
     type: 'work',
     description: 'Kickstarted my professional journey with React Native development and DevOps practices.',
-    responsibilities: [
-      'Led development of Scan & Go mobile application for retail clients',
-      'Implemented robust monitoring and alerting systems',
-      'Optimized application performance and deployment workflows',
-      'Collaborated with global teams for feature development',
-    ],
-    highlights: [
-      'Successfully launched React Native shopping apps with 1M+ downloads',
-      'Reduced application crash rate by 60% through robust error handling',
-      'Implemented automated deployment pipelines reducing deployment time by 70%',
-      'Recognized for exceptional problem-solving skills in critical situations',
-    ],
-    technologies: ['React Native', 'Node.js', 'PM2', 'Jenkins'],
+    highlights: ['Optimized log management and load balancing in the API service layer using PM2’s advanced process management features, including log rotation.', 'Proactively notified teams of potential outages by creating precise failure alerts using Splunk and Dynatrace.', 'Streamlined deployment processes using Fastlane, reducing manual errors and deployment time.', 'Deployed the Scan & Go React Native shopping app to Google Play Store and Apple App Store, achieving over 1 million downloads with bug-free functionality.'],
+    technologies: ['React Native', 'Node.js', 'PM2', 'Jenkins', 'Splunk', 'Dynatrace', 'Fastlane', 'Airwatch'],
+    links: {
+      playStore: 'https://play.google.com/store/apps/details?id=com.asda.ScanandGoMobile&pcampaignid=web_share',
+      appStore: 'https://apps.apple.com/gb/app/asda-scan-go/id1413258515',
+    },
   },
   {
     title: 'System Engineer',
@@ -111,22 +89,16 @@ export const timelineData: TimelineItem[] = [
     date: 'July 2020 - October 2021',
     icon: 'work',
     type: 'work',
-    description: 'Led development of inventory management applications for ASDA, a Walmart subsidiary and major UK retail client.',
-    responsibilities: [
-      'Architected and developed enterprise-level inventory management solutions',
-      'Led team of 5 developers in Agile environment',
-      'Established coding standards and review processes',
-      'Managed client communications and requirement gathering',
-      'Mentored junior developers in React Native best practices',
-    ],
+    description: 'Contributed to the development of inventory management applications for ASDA, a Walmart subsidiary and major UK retail client, as a key developer and team collaborator.',
     highlights: [
-      'Built 3 critical inventory management apps for Walmart\'s UK subsidiary ASDA',
-      'Created reusable component library reducing development time by 40%',
-      'Improved app performance by 50% through code optimization',
-      'Successfully managed distributed team across time zones',
-      'Implemented modular architecture for better code maintainability',
+      'Collaborated with clients and UX/UI designers to clarify requirements and suggest design improvements for React Native and React Web apps.',
+      'Developed multiple features and worked closely with QA teams to ensure bug-free delivery of applications.',
+      'Built 3 internal inventory management apps using React Native, React Web, and Express.js, increasing store efficiency by 40% by transitioning operations from paperwork to app-based management.',
+      'Architected and implemented a standalone repository for Redux and business logic, reused as node modules across apps, ensuring code efficiency and maintainability.',
+      'Actively debugged and resolved live bugs across backend and frontend, ensuring app reliability and stability as a key contributor to the team.',
+      'Participated in Agile practices, including daily stand-ups, sprint planning, and reviews, fostering a collaborative and efficient team environment.',
     ],
-    technologies: ['React Native', 'React Web', 'Express.js', 'Redux'],
+    technologies: ['React Native', 'React Web', 'Express.js', 'Redux', 'Redux Saga', 'JavaScript', 'Node.js', 'Material UI', 'HTML', 'CSS', 'Axios'],
   },
   {
     title: 'Become a React Native Developer',
@@ -137,9 +109,7 @@ export const timelineData: TimelineItem[] = [
     icon: 'certificate',
     type: 'certification',
     credLink: 'https://media.licdn.com/dms/image/v2/D4D2DAQHmqQkVlCcENg/profile-treasury-document-images_800/profile-treasury-document-images_800/1/1719346344531?e=1738195200&v=beta&t=rGE-fCs9UH9RosDScDb390UXXSNt02cFov-USpyPCkE',
-    highlights: [
-      'Comprehensive training in React Native development',
-    ],
+    highlights: ["Mastered cross-platform development while discovering why 'it works on my machine' isn't a valid excuse", 'Built production-ready features including smooth animations that even Android and iOS could agree on', 'Learned to debug layout issues without throwing my phone out the window (most days)'],
   },
   {
     title: 'React Native - The Practical Guide',
@@ -150,9 +120,7 @@ export const timelineData: TimelineItem[] = [
     icon: 'certificate',
     type: 'certification',
     credLink: 'https://media.licdn.com/dms/image/v2/D4D2DAQGt2MBGauaKqg/profile-treasury-document-images_800/profile-treasury-document-images_800/1/1719346545892?e=1738195200&v=beta&t=L5lKnHxpee-4263ErFRPIS2cFXiyPc35S7KK_QsquF4',
-    highlights: [
-      'Hands-on approach to learning React Native',
-    ],
+    highlights: ['Shipped 5 practice apps while finally understanding Flexbox layouts (column vs row: 1, Me: 0)', 'Became best friends with the React Native debugger - our relationship is complicated but productive', 'Discovered 37 ways to center a div... and then learned proper mobile UI/UX practices'],
   },
   {
     title: 'The Complete React Native + Hooks Course',
@@ -163,9 +131,7 @@ export const timelineData: TimelineItem[] = [
     icon: 'certificate',
     type: 'certification',
     credLink: 'https://media.licdn.com/dms/image/v2/D4D2DAQFD-B2MvvMOwQ/profile-treasury-document-images_800/profile-treasury-document-images_800/1/1719346056813?e=1738195200&v=beta&t=oxPUINBQ1gnTXArT1NL7Wy1i13zSPuAEf_kTJkfalNg',
-    highlights: [
-      'Learn to build mobile applications using React Native and Hooks',
-    ],
+    highlights: ['Tamed state management with Hooks after initial attempts that resembled spaghetti code', 'Built async storage solutions that actually persisted data (most of the time)', "Reduced 'prop drilling' anxiety through proper context API implementation", 'Coffee consumption remained stable at 3 cups/hour during Redux integration modules'],
   },
   {
     title: 'Javascript (Basic)',
@@ -176,9 +142,7 @@ export const timelineData: TimelineItem[] = [
     icon: 'certificate',
     type: 'certification',
     credLink: 'https://www.hackerrank.com/certificates/c902fc16abf7',
-    highlights: [
-      'It covers topics like Functions, Currying, Hoisting, Scope, Inheritance, Events and Error Handling.',
-    ],
+    highlights: ["Solved algorithmic puzzles without Googling '== vs ===' for the 100th time", "Mastered closures after realizing they're just functions with commitment issues", "Finally wrote error-free code (note: 'error-free' may exclude semicolon debates)", 'Earned official proof that I understand hoisting (variables up, confidence down)'],
   },
   {
     title: 'Mobile Application Developer',
@@ -190,22 +154,23 @@ export const timelineData: TimelineItem[] = [
     type: 'work',
     description: 'Enhanced travel booking experience through innovative mobile solutions across multiple travel brands including CheapOair and OneTravel.',
     highlights: [
-      'Led development of key features for CheapOair and OneTravel mobile apps serving millions of users',
-      'Enhanced user engagement with smart in-app rating prompts across both platforms',
-      'Integrated Google Play Store API for seamless in-app update prompts',
-      'Implemented Apple Pay and Venmo Pay payment solutions improving conversion rates',
-      'Upgraded React Native from version 0.64 to 0.71 across both apps',
-      'Designed shared UI component library used across multiple travel brands'
+      'Designed smart native rating prompts boosting Apple App Store ratings to 4.8★ (iOS) and Google Play Store to 4.6★ (Android) across 200K+ user reviews',
+      'Engineered robust in-app update system that dramatically increased update adoption rates from 52% to 91% of users within a 5-day window',
+      'Engineered in-house Codepush-like dynamic javascript bundle update system slashing hotfix deployment time from 2 days → 30 minutes.',
+      'Achieved 99.95% (iOS) and 99.9% (Android) crash-free sessions via Firebase Crashlytics-driven error resolution',
+      'Boosted checkout conversion by 18% through modernized payment stack with Venmo and Apple Pay integration, adding support for 9 new currencies',
+      'Proposed and spearheaded adoption of Lottie animation framework, implementing UI components that reduced design-to-code time by 65% and enhanced user experience through fluid, complex animations',
+      'Led React Native migration from version 0.64 to 0.71, successfully resolving 120+ compatibility issues while achieving a 20% APK size reduction through dependency tree optimization.',
     ],
-    technologies: ['React Native', 'Apple Pay', 'Venmo', 'Lottie'],
+    technologies: ['React Native', 'JavaScript', 'Apple Pay', 'Venmo', 'Lottie', 'Firebase Crashlytics', 'CodePush'],
     links: {
       playStore: 'https://play.google.com/store/apps/details?id=com.fp.cheapoair',
       appStore: 'https://apps.apple.com/us/app/cheapoair-cheap-flight-deals/id436858222',
       oneTravel: {
         playStore: 'https://play.google.com/store/apps/details?id=com.wkt.onetravel.android',
-        appStore: 'https://apps.apple.com/in/app/onetravel-flight-hotel-deals/id680520990'
-      }
-    }
+        appStore: 'https://apps.apple.com/in/app/onetravel-flight-hotel-deals/id680520990',
+      },
+    },
   },
   {
     title: 'Senior Mobile Application Developer',
@@ -216,30 +181,27 @@ export const timelineData: TimelineItem[] = [
     icon: 'work',
     type: 'work',
     description: 'Leading mobile app development initiatives across multiple travel brands (CheapOair and OneTravel) while mentoring junior developers and implementing innovative solutions.',
-    responsibilities: [
-      'Engineering and implementing in-house dynamic bundle system across multiple apps',
-      'Leading code reviews and mentoring junior developers for both CheapOair and OneTravel teams',
-      'Architecting shared solutions for common problems across travel brands',
-      'Developing native modules for iOS and Android platforms',
-      'Implementing Firebase Performance Monitoring across both apps'
-    ],
     highlights: [
-      'Engineered a shared dynamic bundle system reducing app size by 40% across both CheapOair and OneTravel',
-      'Established cross-team code review processes improving code quality',
-      'Created shared architecture patterns for feature consistency across brands',
-      'Developed reusable native modules for improved performance',
-      'Implemented comprehensive performance monitoring reducing crash rates by 65%'
+      'Introduced error boundary patterns to isolate component-level failures, reducing unhandled exceptions by 50% and improving app stability',
+      'Led development of 5+ promotional mini-games (Football, Tennis, Olympic Archery, Hurdles Run, Disc Shooting, and Easter Egg Hunt) and two quizzes with reward-sharing features, resulting in an 18% increase in user retention through time-sensitive sports-themed campaigns.',
+      'Implemented Firebase Performance Monitoring to detect and resolve API latency issues below 800ms threshold.',
+      'Developed 8+ native modules bridging React Native with iOS/Android SDKs for payment processing, fraud detection, and GDPR cookie permission management',
+      'Implemented A/B tests for UI components and features, increasing conversion rates and user engagement significantly.',
+      'Adopted microfrontend architecture, breaking the app into modular, independently deployable chunks, enabling faster feature rollouts and reducing build times by 30%',
+      'Collaborated with cross-functional teams to deliver key features and approve release builds for Google Play and Apple App Store before every release',
+      'Mentored 3 junior developers through bi-weekly code reviews and pair programming sessions, significantly accelerating feature delivery velocity',
     ],
-    technologies: ['React Native', 'iOS', 'Android', 'Firebase', 'Azure', 'Objective-C', 'Java'],
+    technologies: ['React Native', 'A/B Testing', 'Microfrontend', 'Firebase Crashlytics', 'Azure Pipelines', 'Objective-C', 'Java', 'Firebase Performance Monitoring'],
     links: {
       playStore: 'https://play.google.com/store/apps/details?id=com.fp.cheapoair',
       appStore: 'https://apps.apple.com/us/app/cheapoair-cheap-flight-deals/id436858222',
       oneTravel: {
         playStore: 'https://play.google.com/store/apps/details?id=com.wkt.onetravel.android',
-        appStore: 'https://apps.apple.com/in/app/onetravel-flight-hotel-deals/id680520990'
-      }
-    }
+        appStore: 'https://apps.apple.com/in/app/onetravel-flight-hotel-deals/id680520990',
+      },
+    },
   },
+
   {
     title: 'Prompt Engineering Certification',
     company: 'Vanderbilt University - Coursera',
@@ -248,10 +210,6 @@ export const timelineData: TimelineItem[] = [
     icon: 'certificate',
     type: 'certification',
     credLink: 'https://www.coursera.org/account/accomplishments/verify/APX8AEZUPQTF',
-    highlights: [
-      'How to apply prompt engineering to effectively work with large language models, like ChatGPT',
-      'How to use prompt patterns to tap into powerful capabilities within large language models',
-      'How to create complex prompt-based applications for your life, business, or education'
-    ],
+    highlights: ['Learned to talk to AI like a pro (without accidentally triggering robot uprising scenarios)', "Discovered that 'be creative' means very different things to humans vs. LLMs - mastered the middle ground", 'Built prompt chains that make ChatGPT work smarter, not harder - 10x efficiency, 0x existential dread', "Turned 'vague idea' → 'precise output' faster than you can say 'hallucinated response'", 'Now certified in making AI do useful work while keeping my prompts more organized than my browser tabs'],
   },
 ];
