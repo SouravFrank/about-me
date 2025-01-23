@@ -12,5 +12,4 @@ export { skills } from './skills';
 export { socialMediaLinks } from './social';
 export { timelineData } from './timeline';
 export { achievementsSectionDetails, timelineAchievements } from './timelineAchievements';
-export { timelineCourses } from './timelineCourses';
 export { projects } from './projects';

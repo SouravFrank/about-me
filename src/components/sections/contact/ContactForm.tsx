@@ -98,7 +98,7 @@ export default function ContactForm() {
         {/* Left Column */}
         <div className="space-y-6">
           <div className="relative">
-            <label htmlFor="name" className="block text-sm font-medium mb-2 text-gray-700 dark:text-gray-300">
+            <label htmlFor="name" className="block text-sm font-medium mb-2 text-gray-700 cursor-normal dark:text-gray-300">
               Your Name
             </label>
             <div className="relative">
@@ -108,7 +108,7 @@ export default function ContactForm() {
           </div>
 
           <div className="relative">
-            <label htmlFor="contact" className="block text-sm font-medium mb-2 text-gray-700 dark:text-gray-300">
+            <label htmlFor="contact" className="block text-sm font-medium mb-2 text-gray-700 cursor-normal dark:text-gray-300">
               Your Email
             </label>
             <div className="relative">
@@ -120,7 +120,7 @@ export default function ContactForm() {
 
         {/* Right Column */}
         <div className="relative">
-          <label htmlFor="message" className="block text-sm font-medium mb-2 text-gray-700 dark:text-gray-300">
+          <label htmlFor="message" className="block text-sm font-medium mb-2 text-gray-700 cursor-normal dark:text-gray-300">
             Your Message
           </label>
           <div className="relative h-full">

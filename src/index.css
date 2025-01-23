@@ -5,8 +5,10 @@
 @tailwind utilities;
 
 html,
-body {
-  font-family: 'Comfortaa', sans-serif; /* Apply Comfortaa font */
+body,
+.cursor-normal {
+  font-family: 'Comfortaa', sans-serif;
+  /* Apply Comfortaa font */
   cursor: url('cursors/cursor-normal.png'), auto;
 }
 
@@ -14,7 +16,39 @@ a,
 button,
 [role='button'],
 .cursor-link {
-  cursor: url('cursors/cursor-link.png'), pointer; /* Cursor for links and buttons */
+  cursor: url('cursors/cursor-link.png'), pointer !important;
+  /* Cursor for links and buttons */
+}
+
+/* add cursor text for relevant */
+textarea,
+input[type='text'],
+input[type='password'],
+input[type='email'],
+input[type='number'],
+input[type='tel'],
+input[type='url'],
+input[type='search'],
+input[type='date'],
+input[type='time'],
+input[type='datetime-local'],
+input[type='month'],
+input[type='week'],
+input[type='color'],
+input[type='range'],
+input[type='file'],
+input[type='checkbox'],
+input[type='radio'],
+select,
+.cursor-text {
+  cursor: url('cursors/cursor-text.png'), text !important;
+  /* Cursor for text input */
+}
+
+
+.cursor-grab {
+  cursor: url('cursors/cursor-drag.png'), move !important;
+  /* Cursor for draggable elements */
 }
 
 @layer utilities {
@@ -42,28 +76,34 @@ button,
 }
 
 .scrollbar-hide {
-  -ms-overflow-style: none; /* IE and Edge */
-  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none;
+  /* IE and Edge */
+  scrollbar-width: none;
+  /* Firefox */
 }
 
 .scrollbar-hide::-webkit-scrollbar {
-  display: none; /* Safari and Chrome */
+  display: none;
+  /* Safari and Chrome */
 }
 
 /* Optional: Add some responsive styles */
 @media (max-width: 768px) {
   .project-card {
-    width: 100%; /* Full width on smaller screens */
+    width: 100%;
+    /* Full width on smaller screens */
   }
 }
 
 .project-card {
-  width: 250px; /* Fixed width for desktop */
+  width: 250px;
+  /* Fixed width for desktop */
 }
 
 @media (max-width: 768px) {
   .project-card {
-    width: 200px; /* Fixed width for mobile */
+    width: 200px;
+    /* Fixed width for mobile */
   }
 }
 
@@ -71,9 +111,11 @@ button,
   0% {
     background-position: 0% 50%;
   }
+
   50% {
     background-position: 100% 50%;
   }
+
   100% {
     background-position: 0% 50%;
   }
@@ -83,9 +125,11 @@ button,
   0% {
     box-shadow: 0 0 5px rgba(0, 0, 255, 0.5);
   }
+
   50% {
     box-shadow: 0 0 15px rgba(0, 0, 255, 0.7);
   }
+
   100% {
     box-shadow: 0 0 5px rgba(0, 0, 255, 0.5);
   }
@@ -93,14 +137,22 @@ button,
 
 .glow-border {
   position: absolute;
-  top: -4px; /* Adjust to control the distance of the glow */
-  left: -4px; /* Adjust to control the distance of the glow */
-  right: -4px; /* Adjust to control the distance of the glow */
-  bottom: -4px; /* Adjust to control the distance of the glow */
-  border-radius: 8px; /* Match the card's border radius */
-  border: 2px solid transparent; /* Transparent border */
-  animation: glowAnimation 1.5s infinite; /* Apply glow animation */
-  pointer-events: none; /* Prevent interaction */
+  top: -4px;
+  /* Adjust to control the distance of the glow */
+  left: -4px;
+  /* Adjust to control the distance of the glow */
+  right: -4px;
+  /* Adjust to control the distance of the glow */
+  bottom: -4px;
+  /* Adjust to control the distance of the glow */
+  border-radius: 8px;
+  /* Match the card's border radius */
+  border: 2px solid transparent;
+  /* Transparent border */
+  animation: glowAnimation 1.5s infinite;
+  /* Apply glow animation */
+  pointer-events: none;
+  /* Prevent interaction */
 }
 
 .magicpattern3 {
@@ -134,7 +186,50 @@ button,
   0% {
     transform: translateX(-100%);
   }
+
   100% {
     transform: translateX(100%);
   }
 }
+
+/* Scrollbar Track */
+::-webkit-scrollbar {
+  width: 12px;
+  /* Width of the scrollbar */
+}
+
+/* Scrollbar Thumb (the draggable part) */
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(
+    45deg,
+    #7e22ce, /* Purple */
+    #c026d3, /* Magenta */
+    #ff17ff  /* Bright Pink */
+  );
+  border-radius: 6px; /* Rounded corners */
+  border: 3px solid transparent; /* Optional: Add a border */
+  background-clip: content-box; /* Ensure the gradient stays within the thumb */
+}
+
+/* Scrollbar Track (the background) */
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  /* Light gray background */
+  border-radius: 6px;
+  /* Rounded corners */
+}
+
+/* Scrollbar Corner (optional) */
+::-webkit-scrollbar-corner {
+  background: #f1f1f1;
+  /* Match the track color */
+}
+
+.dark ::-webkit-scrollbar-track {
+  background: #1f2937;
+}
+
+.dark ::-webkit-scrollbar-corner {
+  background: #1f2937;
+}
+

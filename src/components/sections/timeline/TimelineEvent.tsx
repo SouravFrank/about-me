@@ -1,6 +1,7 @@
-import { Briefcase, GraduationCap, Cake, MapPin, ChevronDown, ChevronUp, ExternalLink } from 'lucide-react';
+import { Briefcase, GraduationCap, Cake, MapPin, ChevronDown, ChevronUp, ExternalLink, Award } from 'lucide-react';
 import { useState } from 'react';
 import { TimelineItem } from './types';
+import { motion } from 'framer-motion';
 
 export default function TimelineEvent({
   title,
@@ -15,6 +16,7 @@ export default function TimelineEvent({
   responsibilities, 
   technologies,
   links,
+  credLink,
 }: TimelineItem) {
   const [isExpanded, setIsExpanded] = useState(false);
 
@@ -24,6 +26,8 @@ export default function TimelineEvent({
         return Cake;
       case 'education':
         return GraduationCap;
+      case 'certification':
+        return Award;
       default:
         return Briefcase;
     }
@@ -38,13 +42,26 @@ export default function TimelineEvent({
         return 'from-purple-500 to-pink-500';
       case 'education':
         return 'from-blue-500 to-cyan-500';
+      case 'certification':
+        return 'from-yellow-500 to-orange-500';
       default:
         return 'from-emerald-500 to-teal-500';
     }
   };
 
   return (
-    <div className="group relative flex gap-6 pb-8 last:pb-0">
+    <motion.div 
+      className="group relative flex gap-6 pb-8 last:pb-0"
+      initial={{ opacity: 0, y: 50, scale: 0.9 }}
+      whileInView={{ opacity: 1, y: 0, scale: 1 }}
+      viewport={{ once: true, margin: "-100px" }}
+      transition={{ 
+        duration: 0.5,
+        type: "spring",
+        stiffness: 100,
+        damping: 15
+      }}
+    >
       {/* Modern timeline line with gradient */}
       <div className="absolute left-9 top-12 -bottom-3 w-px bg-gradient-to-b from-gray-200 to-transparent dark:from-gray-800 last:hidden" />
 
@@ -97,11 +114,12 @@ export default function TimelineEvent({
               </time>
             </div>
 
-            {/* Location with modern icon */}
-            {location && (
-              <div className="mt-2 flex items-center gap-1.5">
-                <MapPin className="h-3.5 w-3.5 text-gray-500/80 dark:text-gray-400/80" />
-                <p className="text-sm text-gray-600 dark:text-gray-400">{location}</p>
+            {/* Show Credentials link for certifications */}
+            {type === 'certification' && credLink && (
+              <div className="mt-2">
+                <a href={credLink} target="_blank" rel="noopener noreferrer" className="text-blue-500 hover:text-blue-600">
+                  Show Credentials <ExternalLink className="h-3 w-3 inline" />
+                </a>
               </div>
             )}
 
@@ -230,6 +248,6 @@ export default function TimelineEvent({
           </div>
         </div>
       </div>
-    </div>
+    </motion.div>
   );
 }
