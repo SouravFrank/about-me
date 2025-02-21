@@ -8,4 +8,7 @@ export default defineConfig({
     host: true, // or '0.0.0.0' or your local IP address
     port: 5173, // Keep your port
   },
+  build: {
+    outDir: 'build', // Changed output directory
+  },
 });

@@ -9,14 +9,14 @@ body,
 .cursor-normal {
   font-family: 'Comfortaa', sans-serif;
   /* Apply Comfortaa font */
-  cursor: url('cursors/cursor-normal.png'), auto;
+  cursor: url('/cursors/cursor-normal.png'), auto;
 }
 
 a,
 button,
 [role='button'],
 .cursor-link {
-  cursor: url('cursors/cursor-link.png'), pointer !important;
+  cursor: url('/cursors/cursor-link.png'), pointer !important;
   /* Cursor for links and buttons */
 }
 
@@ -41,13 +41,13 @@ input[type='checkbox'],
 input[type='radio'],
 select,
 .cursor-text {
-  cursor: url('cursors/cursor-text.png'), text !important;
+  cursor: url('/cursors/cursor-text.png'), text !important;
   /* Cursor for text input */
 }
 
 
 .cursor-grab {
-  cursor: url('cursors/cursor-drag.png'), move !important;
+  cursor: url('/cursors/cursor-drag.png'), move !important;
   /* Cursor for draggable elements */
 }
 
