@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { ThemeToggle, GoToTop, ArticlesSection, Footer, HorizontalScroll, GradientBlobCursor, RewardsRecognition, ProjectSection, SectionWrapper, IntroSection, TimelineSection, SkillsSection, ContactSection, CVDownloadSection, HexagonPreloader } from './components';
 import { sectionData } from './data/sectionData';
+// import { fetchMetadata } from './utils/fetchMetadata';
 
 function App() {
   const [isDark, setIsDark] = useState<boolean>(false);
@@ -11,6 +12,11 @@ function App() {
     const timer = setTimeout(() => setLoading(false), 2000);
     return () => clearTimeout(timer);
   }, [isDark]);
+
+  // only one time fetching data
+  // useEffect(() => {
+  //   fetchMetadata('https://www.linkedin.com/pulse/master-dry-yagni-kiss-frontend-code-principles-made-simple-sadhukhan-buokf/?trackingId=%2F8sh8PO%2Bf5vZ7I8WSTC3Tg%3D%3D')
+  // }, []);
 
   return (
     <>

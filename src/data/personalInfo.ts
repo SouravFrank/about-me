@@ -1,3 +1,9 @@
+// Import profile images
+import profileImage1 from '../assets/images/profile(1).jpg';
+import profileImage2 from '../assets/images/profile(2).jpg';
+import profileImage3 from '../assets/images/profile(3).png';
+import profileImage4 from '../assets/images/profile(4).jpg';
+
 // Define the interface for personal information
 export interface PersonalInfo {
   name: string;
@@ -22,7 +28,7 @@ export const personalInfo: PersonalInfo = {
   location: "Kolkata, India",
   email: "ssadhukhan990@gmail.com",
   phone: "+91 9038516950",
-  profileImages: ["/images/profile(1).jpg", "/images/profile(2).jpg", "/images/profile(3).png", "/images/profile(4).jpg"],
+  profileImages: [profileImage1, profileImage2, profileImage3, profileImage4],
   viewResumeLink: 'https://drive.google.com/file/d/1LtBoIPz0b3qf9LHT5uOePARB0W1urxZE/preview',
   downLoadResumeLink: 'https://drive.google.com/uc?export=download&id=1LtBoIPz0b3qf9LHT5uOePARB0W1urxZE'
 };
@@ -44,4 +50,4 @@ export const contactInfo: ContactInfo[] = [
     value: "Kolkata, India",
     link: "https://maps.app.goo.gl/cWVq1S6euoYtkfw99"
   }
-]; 
+];

@@ -64,6 +64,12 @@ export const articles: Article[] = [
     url: 'https://www.linkedin.com/pulse/mastering-solid-principles-javascript-beginners-guide-sadhukhan-nv7lf',
   },
   {
+    "title": "Master DRY, YAGNI & KISS: Frontend Code Principles Made Simple 🎭",
+    "description": "Discover how DRY, YAGNI, and KISS principles simplify frontend development. Learn to write clean, maintainable JavaScript code while avoiding common pitfalls!",
+    "image": "https://media.licdn.com/dms/image/v2/D4D12AQF4gTcfvFdn4g/article-cover_image-shrink_720_1280/article-cover_image-shrink_720_1280/0/1737751174713?e=2147483647&v=beta&t=pbREWbT8aZvuNybxXoRm6ORZzWVyEgvhTfCuWbQ9LqI",
+    "url": "https://www.linkedin.com/pulse/master-dry-yagni-kiss-frontend-code-principles-made-simple-sadhukhan-buokf/?trackingId=/8sh8PO+f5vZ7I8WSTC3Tg=="
+  },
+  {
     title: 'Level up your dev workflow with these VS Code extensions!',
     description: 'Explore essential VS Code extensions like Prettier, GitHub Copilot, and more to enhance your coding efficiency and streamline your workflow.',
     image: 'https://media.licdn.com/dms/image/v2/D4D12AQEZE0d9TujfXQ/article-cover_image-shrink_720_1280/article-cover_image-shrink_720_1280/0/1711228332176?e=2147483647&v=beta&t=24QuKi_MLo0kD5qszxxfCGKHQKpgW9euKryF9yDeKFY',

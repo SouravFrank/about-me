@@ -1,5 +1,5 @@
 import React from 'react';
-import madeWithLoveImage from '/images/loveIndiaWeb.png'; // Adjust the path as necessary
+import madeWithLoveImage from '../../assets/images/loveIndiaWeb.png'; // Adjust the path as necessary
 import { FooterProps } from './types';
 import { SectionWrapper } from '../index';
 import { sectionData } from '../../data/sectionData'; // Import sectionData

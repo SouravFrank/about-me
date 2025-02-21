@@ -6,8 +6,8 @@ interface AchievementEntry {
   icon: string;
   type: 'achievement'; // Specify the type of entry
   highlights: string[];
-  image: string; // Path to the achievement image
-  companyImage: string; // Path to the company logo
+  image: string; // Image variable
+  companyImage: string; // Company logo variable
 }
 
 interface AchievementsSectionDetails {
@@ -22,6 +22,18 @@ export const achievementsSectionDetails: AchievementsSectionDetails = {
   description: 'A journey marked by significant achievements and remarkable accomplishments.',
 };
 
+// Import images
+import employeeAward from '../assets/images/employee-of-the-year2024-.jpg';
+import ownershipAward from '../assets/images/ownership-accountability-award.jpg';
+import fareportalLogo from '../assets/images/FareportalLogo.webp';
+import fastExecutionAward2023 from '../assets/images/fast-execution-award-2023.jpg';
+import fastExecutionAward2022 from '../assets/images/fast-execution-award-2022.jpg';
+import passionForCustomersAward from '../assets/images/passion-for-customers-award.jpg';
+import technicalExcellenceAward from '../assets/images/technical-excellence-award.jpg';
+import technicalFinesseAward from '../assets/images/technical-finesse-award.jpg';
+import tcsLogo from '../assets/images/Tata-Consultancy-Services-TCS.png';
+import nitLogo from '../assets/images/Narula_Institute_of_Technology_logo.png';
+
 export const timelineAchievements: AchievementEntry[] = [
   {
     title: 'Employee of the Year Award',
@@ -31,8 +43,8 @@ export const timelineAchievements: AchievementEntry[] = [
     icon: 'award',
     type: 'achievement',
     highlights: ['Awarded for pioneering Mobile App development with unparalleled dedication.'],
-    image: './images/employee-of-the-year2024-.jpg',
-    companyImage: './images/FareportalLogo.webp',
+    image: employeeAward,
+    companyImage: fareportalLogo,
   },
   {
     title: 'Ownership and Accountability Award',
@@ -42,8 +54,8 @@ export const timelineAchievements: AchievementEntry[] = [
     icon: 'award',
     type: 'achievement',
     highlights: ['Recognized for showcasing exceptional accountability and dedication to success.'],
-    image: './images/ownership-accountability-award.jpg',
-    companyImage: './images/FareportalLogo.webp',
+    image: ownershipAward,
+    companyImage: fareportalLogo,
   },
   {
     title: 'Fast Execution Award',
@@ -53,8 +65,8 @@ export const timelineAchievements: AchievementEntry[] = [
     icon: 'award',
     type: 'achievement',
     highlights: ['Recognized for timely delivery of critical projects under tight deadlines.'],
-    image: './images/fast-execution-award-2023.jpg',
-    companyImage: './images/FareportalLogo.webp',
+    image: fastExecutionAward2023,
+    companyImage: fareportalLogo,
   },
   {
     title: 'Fast Execution Award',
@@ -64,8 +76,8 @@ export const timelineAchievements: AchievementEntry[] = [
     icon: 'award',
     type: 'achievement',
     highlights: ['Recognized for timely delivery of critical projects under tight deadlines.'],
-    image: './images/fast-execution-award-2022.jpg',
-    companyImage: './images/FareportalLogo.webp',
+    image: fastExecutionAward2022,
+    companyImage: fareportalLogo,
   },
   {
     title: 'Passion For Customers Award',
@@ -75,8 +87,8 @@ export const timelineAchievements: AchievementEntry[] = [
     icon: 'award',
     type: 'achievement',
     highlights: ['Awarded for delivering bug-free, efficient code enhancing user satisfaction.'],
-    image: './images/passion-for-customers-award.jpg',
-    companyImage: './images/FareportalLogo.webp',
+    image: passionForCustomersAward,
+    companyImage: fareportalLogo,
   },
   {
     title: 'Technical Excellence Award',
@@ -86,8 +98,8 @@ export const timelineAchievements: AchievementEntry[] = [
     icon: 'award',
     type: 'achievement',
     highlights: ['For rapid learning and efficient delivery of high-impact coding projects.'],
-    image: './images/technical-excellence-award.jpg',
-    companyImage: './images/Tata-Consultancy-Services-TCS.png',
+    image: technicalExcellenceAward,
+    companyImage: tcsLogo,
   },
   {
     title: 'Technical Finesse Award',
@@ -97,7 +109,7 @@ export const timelineAchievements: AchievementEntry[] = [
     icon: 'award',
     type: 'achievement',
     highlights: ['For outstanding technical and graphical support during college fests.'],
-    image: './images/technical-finesse-award.jpg',
-    companyImage: './images/Narula_Institute_of_Technology_logo.png',
+    image: technicalFinesseAward,
+    companyImage: nitLogo,
   },
 ];
