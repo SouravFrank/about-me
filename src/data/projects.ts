@@ -1,3 +1,5 @@
+import heartStringsThumbnail from '../assets/images/preview--heartstrings-timeline.lovable.app_.png';
+
 export const projects = [
   {
     title: 'FrankChatOn',
@@ -28,6 +30,13 @@ export const projects = [
     "technologies": ["React", "JavaScript (ES6+)", "CSS3", "GitHub Pages"],
     liveDemoLink: "https://souravfrank.github.io/about-me-2021/"
   },
+  {
+    title: 'Heartstrings Timeline',
+    description: 'A heartfelt digital love diary crafted with React and TypeScript, celebrating cherished moments with my soulmate. This interactive timeline showcases our journey through photos, music, and personal messages - a testament to our beautiful relationship.',
+    thumbnail: heartStringsThumbnail,
+    technologies: ['Tailwind CSS', 'shadcn-ui', 'Vite', 'lovable.app AI'],
+    liveDemoLink: 'https://preview--heartstrings-timeline.lovable.app/'
+},
   {
     title: 'AudioGrabber',
     description: 'Welcome to the MP3 Downloader Extravaganza! 🚀 – your one-stop solution for downloading MP3s of pronunciations and more from the web, now with a side of humor and a sprinkle of modern pizzazz!',
