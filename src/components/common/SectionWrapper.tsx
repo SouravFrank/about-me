@@ -2,7 +2,7 @@ import React, { useRef } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { SectionWrapperProps } from './types';
 
-const SectionWrapper: React.FC<SectionWrapperProps> = ({ titleBold, titleLight, description, children, isDark, opacityPosition }) => {
+const SectionWrapper: React.FC<SectionWrapperProps> = ({ titleBold, titleLight, description, children, isDark }) => {
   const sectionRef = useRef<HTMLDivElement>(null);
   const contentRef = useRef<HTMLDivElement>(null);
 

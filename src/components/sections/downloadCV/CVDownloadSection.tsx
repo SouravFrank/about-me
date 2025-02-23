@@ -40,7 +40,7 @@ export const CVDownloadSection: React.FC<CVDownloadSectionProps> = ({ isDark }) 
   };
 
   return (
-    <div className="max-w-4xl mx-auto py-12">
+    <div className="max-w-4xl mx-auto py-12 my-12">
       <motion.div whileHover={{ scale: 1.02 }} transition={{ duration: 0.3 }}>
         <CVCard isDark={isDark} title={`${sectionData.cvDownload.titleBold} ${sectionData.cvDownload.titleLight}`} description={sectionData.cvDownload.description} onPreview={handleShow} onDownload={handleDownload} downloadClicked={downloadClicked} isButtonDisabled={isButtonDisabled} />
       </motion.div>
