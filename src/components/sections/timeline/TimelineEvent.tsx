@@ -118,7 +118,7 @@ export default function TimelineEvent({
             {type === 'certification' && credLink && (
               <div className="mt-2">
                 <a href={credLink} target="_blank" rel="noopener noreferrer" className="text-blue-500 hover:text-blue-600">
-                  Show Credentials <ExternalLink className="h-3 w-3 inline" />
+                  Show Certifficate <ExternalLink className="h-3 w-3 inline" />
                 </a>
               </div>
             )}

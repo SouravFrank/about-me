@@ -58,6 +58,7 @@ export const timelineData: TimelineItem[] = [
   {
     title: 'B.Tech',
     company: 'Narula Institute of Technology',
+    companyUrl: 'https://www.nit.ac.in/about-us.php',
     specialization: 'Electronics and Communication Engineering',
     location: 'Kolkata, West Bengal, India',
     date: 'August 2015 - June 2019',

@@ -26,7 +26,7 @@ export default function IntroAnimation({ setShowDetailed }: IntroAnimationProps)
   }, []);
 
   return (
-    <div className="transition-all duration-500 ease-in-out">
+    <div className="transition-all duration-500 ease-in-out cursor-link">
       <AnimatePresence mode="wait">
           <motion.div
             key="intro"
@@ -34,7 +34,7 @@ export default function IntroAnimation({ setShowDetailed }: IntroAnimationProps)
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             onClick={() => setShowDetailed(true)}
-            className="cursor-pointer"
+            className="cursor-link"
           >
             <motion.p
               key={currentIndex}

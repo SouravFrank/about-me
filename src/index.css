@@ -15,7 +15,8 @@ body,
 a,
 button,
 [role='button'],
-.cursor-link {
+.cursor-link
+.cursor-pointer {
   cursor: url('/cursors/cursor-link.png'), pointer !important;
   /* Cursor for links and buttons */
 }
@@ -51,147 +52,6 @@ select,
   /* Cursor for draggable elements */
 }
 
-@layer utilities {
-  .shadow-neumorph {
-    @apply transition-all duration-300;
-  }
-
-  .dark .shadow-neumorph {
-    background: #1f2937;
-    box-shadow: 5px 5px 10px #151b24, -5px -5px 10px #293548;
-  }
-
-  .shadow-neumorph {
-    background: #ffffff;
-    box-shadow: 5px 5px 10px #e2e8f0, -5px -5px 10px #ffffff;
-  }
-
-  .dark .shadow-neumorph:hover {
-    box-shadow: 8px 8px 16px #151b24, -8px -8px 16px #293548;
-  }
-
-  .shadow-neumorph:hover {
-    box-shadow: 8px 8px 16px #e2e8f0, -8px -8px 16px #ffffff;
-  }
-}
-
-.scrollbar-hide {
-  -ms-overflow-style: none;
-  /* IE and Edge */
-  scrollbar-width: none;
-  /* Firefox */
-}
-
-.scrollbar-hide::-webkit-scrollbar {
-  display: none;
-  /* Safari and Chrome */
-}
-
-/* Optional: Add some responsive styles */
-@media (max-width: 768px) {
-  .project-card {
-    width: 100%;
-    /* Full width on smaller screens */
-  }
-}
-
-.project-card {
-  width: 250px;
-  /* Fixed width for desktop */
-}
-
-@media (max-width: 768px) {
-  .project-card {
-    width: 200px;
-    /* Fixed width for mobile */
-  }
-}
-
-@keyframes gradientAnimation {
-  0% {
-    background-position: 0% 50%;
-  }
-
-  50% {
-    background-position: 100% 50%;
-  }
-
-  100% {
-    background-position: 0% 50%;
-  }
-}
-
-@keyframes glowAnimation {
-  0% {
-    box-shadow: 0 0 5px rgba(0, 0, 255, 0.5);
-  }
-
-  50% {
-    box-shadow: 0 0 15px rgba(0, 0, 255, 0.7);
-  }
-
-  100% {
-    box-shadow: 0 0 5px rgba(0, 0, 255, 0.5);
-  }
-}
-
-.glow-border {
-  position: absolute;
-  top: -4px;
-  /* Adjust to control the distance of the glow */
-  left: -4px;
-  /* Adjust to control the distance of the glow */
-  right: -4px;
-  /* Adjust to control the distance of the glow */
-  bottom: -4px;
-  /* Adjust to control the distance of the glow */
-  border-radius: 8px;
-  /* Match the card's border radius */
-  border: 2px solid transparent;
-  /* Transparent border */
-  animation: glowAnimation 1.5s infinite;
-  /* Apply glow animation */
-  pointer-events: none;
-  /* Prevent interaction */
-}
-
-.magicpattern3 {
-  width: 100%;
-  height: 100%;
-  background-size: cover;
-  background-position: center center;
-  background-repeat: repeat;
-  background-image: url('data:image/svg+xml;utf8,%3Csvg viewBox=%220 0 1000 1000%22 xmlns=%22http:%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%3Cdefs%3E%3ClinearGradient id=%22b%22 gradientTransform=%22rotate(-45 .5 .5)%22%3E%3Cstop offset=%220%25%22 stop-color=%22%23FFDEE9%22%2F%3E%3Cstop offset=%22100%25%22 stop-color=%22%23B5FFFC%22%2F%3E%3C%2FlinearGradient%3E%3CclipPath id=%22a%22%3E%3Cpath fill=%22currentColor%22 d=%22M771 629.5Q707 759 567 790t-297-36.5Q113 686 101 494t156.5-255.5Q426 175 579 192t204.5 162.5Q835 500 771 629.5Z%22%2F%3E%3C%2FclipPath%3E%3C%2Fdefs%3E%3Cg clip-path=%22url(%23a)%22%3E%3Cpath fill=%22url(%23b)%22 d=%22M771 629.5Q707 759 567 790t-297-36.5Q113 686 101 494t156.5-255.5Q426 175 579 192t204.5 162.5Q835 500 771 629.5Z%22%2F%3E%3C%2Fg%3E%3C%2Fsvg%3E');
-}
-
-.magicpattern2 {
-  width: 100%;
-  height: 100%;
-  background-size: cover;
-  background-position: center center;
-  background-repeat: repeat;
-  background-image: url('data:image/svg+xml;utf8,%3Csvg viewBox=%220 0 1000 1000%22 xmlns=%22http:%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%3Cdefs%3E%3ClinearGradient id=%22b%22 gradientTransform=%22rotate(-45 .5 .5)%22%3E%3Cstop offset=%220%25%22 stop-color=%22%238EC5FC%22%2F%3E%3Cstop offset=%22100%25%22 stop-color=%22%23E0C3FC%22%2F%3E%3C%2FlinearGradient%3E%3CclipPath id=%22a%22%3E%3Cpath fill=%22currentColor%22 d=%22M782.5 639q-61.5 139-213 180T322 746q-96-114-146.5-270.5t97-242Q420 148 607 139.5t212 176Q844 500 782.5 639Z%22%2F%3E%3C%2FclipPath%3E%3C%2Fdefs%3E%3Cg clip-path=%22url(%23a)%22%3E%3Cpath fill=%22url(%23b)%22 d=%22M782.5 639q-61.5 139-213 180T322 746q-96-114-146.5-270.5t97-242Q420 148 607 139.5t212 176Q844 500 782.5 639Z%22%2F%3E%3C%2Fg%3E%3C%2Fsvg%3E');
-}
-
-.magicpattern1 {
-  width: 100%;
-  height: 100%;
-  background-size: cover;
-  background-position: center center;
-  background-repeat: repeat;
-  background-image: url('data:image/svg+xml;utf8,%3Csvg viewBox=%220 0 1000 1000%22 xmlns=%22http:%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%3Cdefs%3E%3ClinearGradient id=%22b%22 gradientTransform=%22rotate(-45 .5 .5)%22%3E%3Cstop offset=%220%25%22 stop-color=%22%23FFDEE9%22%2F%3E%3Cstop offset=%22100%25%22 stop-color=%22%23B5FFFC%22%2F%3E%3C%2FlinearGradient%3E%3CclipPath id=%22a%22%3E%3Cpath fill=%22currentColor%22 d=%22M826.5 684.5Q794 869 601.5 885T247 800.5Q85 700 138 525.5t167.5-275Q420 150 573.5 183T793 358q66 142 33.5 326.5Z%22%2F%3E%3C%2FclipPath%3E%3C%2Fdefs%3E%3Cg clip-path=%22url(%23a)%22%3E%3Cpath fill=%22url(%23b)%22 d=%22M826.5 684.5Q794 869 601.5 885T247 800.5Q85 700 138 525.5t167.5-275Q420 150 573.5 183T793 358q66 142 33.5 326.5Z%22%2F%3E%3C%2Fg%3E%3C%2Fsvg%3E');
-}
-
-@keyframes shimmer {
-  0% {
-    transform: translateX(-100%);
-  }
-
-  100% {
-    transform: translateX(100%);
-  }
-}
-
 /* Scrollbar Track */
 ::-webkit-scrollbar {
   width: 12px;
@@ -214,9 +74,6 @@ select,
 /* Scrollbar Track (the background) */
 ::-webkit-scrollbar-track {
   background: #f1f1f1;
-  /* Light gray background */
-  border-radius: 6px;
-  /* Rounded corners */
 }
 
 /* Scrollbar Corner (optional) */

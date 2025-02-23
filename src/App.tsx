@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { ThemeToggle, GoToTop, ArticlesSection, Footer, HorizontalScroll, GradientBlobCursor, RewardsRecognition, ProjectSection, SectionWrapper, IntroSection, TimelineSection, SkillsSection, ContactSection, CVDownloadSection, HexagonPreloader } from './components';
 import { sectionData } from './data/sectionData';
+import './styles/custom.css';
 // import { fetchMetadata } from './utils/fetchMetadata';
 
 function App() {
