@@ -3,6 +3,8 @@
 > "Where creativity meets innovation in a seamless digital journey"  
 > *Crafted with passion & precision.*
 
+![Website Preview](./preview.gif)
+
 ---
 
 ## 🚀 Overview
@@ -85,7 +87,7 @@ Contributions, feedback, and collaborative ideas are always welcome. Feel free t
 ## 📫 Get in Touch
 
 - **Email:** [ssadhukhan990@gmail.com](mailto:ssadhukhan990@gmail.com)
-- **LinkedIn:** [Sourav Sadukhan](www.linkedin.com/in/souravsadhukhan)
+- **LinkedIn:** [Sourav Sadukhan](https://www.linkedin.com/in/souravsadhukhan)
 - **GitHub:** [SouravFrank](https://github.com/SouravFrank)
 
 ---
