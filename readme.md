@@ -1,4 +1,4 @@
-# **Sourav Sadukhan's Portfolio**
+# **Sourav Sadhukhan's Portfolio**
 
 > "Where creativity meets innovation in a seamless digital journey"  
 > *Crafted with passion & precision.*
@@ -87,10 +87,10 @@ Contributions, feedback, and collaborative ideas are always welcome. Feel free t
 ## 📫 Get in Touch
 
 - **Email:** [ssadhukhan990@gmail.com](mailto:ssadhukhan990@gmail.com)
-- **LinkedIn:** [Sourav Sadukhan](https://www.linkedin.com/in/souravsadhukhan)
+- **LinkedIn:** [Sourav Sadhukhan](https://www.linkedin.com/in/souravsadhukhan)
 - **GitHub:** [SouravFrank](https://github.com/SouravFrank)
 
 ---
 
 > "The future is coded in creativity."  
-> — *Sourav Sadukhan*
+> — *Sourav Sadhukhan*
