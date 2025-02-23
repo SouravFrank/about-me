@@ -13,6 +13,7 @@ export interface ProjectCardProps {
   technologies: string[];
   index: number;
   isLastCard: boolean;
+  liveDemoLink?: string;
 }
 
 export interface ProjectSectionProps {}

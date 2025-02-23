@@ -7,6 +7,13 @@ export const projects = [
     technologies: ['Node.js', 'Express', 'Socket.IO', 'HTML/CSS']
   },
   {
+    title: 'SpotlightProject',
+    description: 'Welcome to the Spotlight Image Copy Tool, where we take the hassle out of hunting down those stunning Windows Spotlight images. Whether you’re obsessed with lock screen beauty or have a secret passion for desktop wallpapers, this tool’s got you covered. It’s like your personal assistant, but with fewer coffee breaks and more pixels.',
+    thumbnail: 'https://github.com/SouravFrank/SpotlightProject/blob/main/Screenshot.png?raw=true',
+    githubLink: 'https://github.com/SouravFrank/SpotlightProject',
+    technologies: ['Python', 'Tkinter', 'Pillow']
+  },
+  {
     title: 'Wishnet Usage Tracker',
     description: 'Wishnet Usage Tracker is a powerful web application designed to help users efficiently track their data usage. With a user-friendly interface and insightful visualizations, you can monitor your download and upload activities over time, making it easier to manage your data consumption.',
     thumbnail: 'https://github.com/SouravFrank/Wishnet-Usage-Tracker/blob/main/localhost_3000_.png?raw=true',
@@ -14,11 +21,12 @@ export const projects = [
     technologies: ['React', 'TypeScript', 'Chart.js', 'Tailwind CSS']
   },
   {
-    title: 'SpotlightProject',
-    description: 'Welcome to the Spotlight Image Copy Tool, where we take the hassle out of hunting down those stunning Windows Spotlight images. Whether you’re obsessed with lock screen beauty or have a secret passion for desktop wallpapers, this tool’s got you covered. It’s like your personal assistant, but with fewer coffee breaks and more pixels.',
-    thumbnail: 'https://github.com/SouravFrank/SpotlightProject/blob/main/Screenshot.png?raw=true',
-    githubLink: 'https://github.com/SouravFrank/SpotlightProject',
-    technologies: ['Python', 'Tkinter', 'Pillow']
+    "title": "Legacy Portfolio Webpage",
+    "description": "A dynamic and interactive personal portfolio showcasing my skills, projects, and passion for software development. Explore a curated collection of coding adventures, from elegant front-end designs to robust back-end solutions. This is more than just an 'about me' – it's an evolving narrative told through code.",
+    "thumbnail": "https://github.com/SouravFrank/about-me-2021/raw/main/souravfrank.github.io_about-me-2021_.png",
+    "githubLink": "https://github.com/SouravFrank/about-me-2021",
+    "technologies": ["React", "JavaScript (ES6+)", "CSS3", "GitHub Pages"],
+    liveDemoLink: "https://souravfrank.github.io/about-me-2021/"
   },
   {
     title: 'AudioGrabber',

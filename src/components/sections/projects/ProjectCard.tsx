@@ -14,9 +14,8 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
 }) => {
   return (
     <article
-      className={`mb-12 w-[30vw] h-[400px] mx-0 bg-white dark:bg-gray-900/80 rounded-2xl shadow-lg dark:shadow-[0_0_20px_rgba(0,255,255,0.1)] overflow-hidden group hover:shadow-xl dark:hover:shadow-[0_0_40px_rgba(0,255,255,0.3)] transition-all duration-300 hover:-translate-y-2 mt-2 border border-gray-200 dark:border-gray-700/50 hover:border-blue-300/50 dark:hover:border-purple-300/50 ${
-        isLastCard ? 'mr-6' : ''
-      } ${index === 0 ? 'ml-6' : ''}`}
+      className={`mb-12 w-[30vw] h-[400px] mx-0 bg-white dark:bg-gray-900/80 rounded-2xl shadow-lg dark:shadow-[0_0_20px_rgba(0,255,255,0.1)] overflow-hidden group hover:shadow-xl dark:hover:shadow-[0_0_40px_rgba(0,255,255,0.3)] transition-all duration-300 hover:-translate-y-2 mt-2 border border-gray-200 dark:border-gray-700/50 hover:border-blue-300/50 dark:hover:border-purple-300/50 ${isLastCard ? 'mr-6' : ''
+        } ${index === 0 ? 'ml-6' : ''}`}
     >
       {/* Thumbnail Section */}
       <div className="relative h-48 overflow-hidden duration-300 group-hover:h-28">
@@ -59,7 +58,7 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
         {/* Links Section */}
         <div className="flex items-center space-x-4">
           {/* GitHub Link */}
-          <a
+          {githubLink && <a
             href={githubLink}
             target="_blank"
             rel="noopener noreferrer"
@@ -71,10 +70,10 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
               aria-hidden="true"
             />
             <span className="group-hover:underline">View on GitHub</span>
-          </a>
+          </a>}
 
           {/* Live Demo Link */}
-          <a
+          {liveDemoLink && <a
             href={liveDemoLink}
             target="_blank"
             rel="noopener noreferrer"
@@ -86,7 +85,7 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
               aria-hidden="true"
             />
             <span className="group-hover:underline">Live Demo</span>
-          </a>
+          </a>}
         </div>
       </div>
 
