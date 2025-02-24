@@ -13,7 +13,7 @@ interface RewardCardProps {
     index: number;
 }
 
-const RewardCard: React.FC<RewardCardProps> = ({ title, date, companyImage, image, highlights, isDark, company, }) => (
+const RewardCard: React.FC<RewardCardProps> = ({ title, date, companyImage, image, highlights, isDark, company }) => (
     <motion.div
         className="relative group flex-shrink-0"
         style={{ aspectRatio: '379 / 210' }}
@@ -45,11 +45,11 @@ const RewardCard: React.FC<RewardCardProps> = ({ title, date, companyImage, imag
                 </div>
             </div>
 
-            <div className={`absolute inset-0 flex items-center justify-center bg-opacity-0 group-hover:bg-opacity-95 transition duration-300 rounded-lg ${isDark ? 'bg-gray-800' : 'bg-white'}`}>
+            <div className={`absolute inset-0 flex flex-col md:flex-row items-center justify-center bg-opacity-0 group-hover:bg-opacity-95 transition duration-300 rounded-lg ${isDark ? 'bg-gray-800' : 'bg-white'}`}>
                 <motion.img
                     src={image}
                     alt={title}
-                    className="w-full h-32 object-cover transition-opacity duration-300 opacity-0 group-hover:opacity-100 mx-2"
+                    className="w-1/1.5 md:w-full h-32 object-cover transition-opacity duration-300 opacity-0 group-hover:opacity-100 mx-2"
                 />
                 <div className={`p-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300 ${isDark ? 'text-gray-300' : 'text-neutral-700'}`}>
                     <p>{highlights[0]}</p>
