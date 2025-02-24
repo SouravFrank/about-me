@@ -1,52 +1,66 @@
 import { motion, AnimatePresence } from 'framer-motion';
 import { useState, useEffect } from 'react';
+import { introTexts } from '../../../data/introTexts';
 
 interface IntroAnimationProps {
   showDetailed: boolean;
   setShowDetailed: (show: boolean) => void;
 }
 
-const introTexts = [
-  "Crafting innovative mobile experiences with React Native",
-  "Building robust cross-platform solutions that delight users",
-  "Transforming ideas into scalable applications with Node.js",
-  "Expert in integrating seamless payment solutions for modern apps",
-  "Passionate about delivering high-quality code and user-centric designs",
-  "Navigating the complexities of Agile project management with ease"
-];
-
 export default function IntroAnimation({ setShowDetailed }: IntroAnimationProps) {
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [isMobile, setIsMobile] = useState(false);
 
+  // Detect mobile screen size
   useEffect(() => {
-      const timer = setInterval(() => {
-        setCurrentIndex((prev) => (prev + 1) % introTexts.length);
-      }, 1800);
-      return () => clearInterval(timer);
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768); // 768px is common mobile breakpoint
+    };
+
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    
+    return () => window.removeEventListener('resize', checkMobile);
   }, []);
 
+  // Animation timer
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setCurrentIndex((prev) => (prev + 1) % introTexts.length);
+    }, isMobile ? 1500 : 1800); // Slightly faster on mobile for better UX
+    return () => clearInterval(timer);
+  }, [isMobile]);
+
   return (
-    <div className="transition-all duration-500 ease-in-out cursor-link">
+    <div 
+      className={`transition-all duration-500 ease-in-out cursor-pointer ${
+        isMobile ? 'px-2 py-1' : 'px-4 py-2'
+      }`}
+    >
       <AnimatePresence mode="wait">
-          <motion.div
-            key="intro"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            onClick={() => setShowDetailed(true)}
-            className="cursor-link"
+        <motion.div
+          key="intro"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          onClick={() => setShowDetailed(true)}
+          className="cursor-pointer"
+        >
+          <motion.p
+            key={currentIndex}
+            initial={{ y: isMobile ? 15 : 20, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            exit={{ y: isMobile ? -15 : -20, opacity: 0 }}
+            transition={{ duration: isMobile ? 0.25 : 0.3 }}
+            className={`${
+              isMobile 
+                ? 'text-sm px-1 whitespace-normal' 
+                : 'text-base md:text-xl px-2 md:px-4 whitespace-nowrap'
+            } text-blue-600 dark:text-blue-400 text-center`}
           >
-            <motion.p
-              key={currentIndex}
-              initial={{ y: 20, opacity: 0 }}
-              animate={{ y: 0, opacity: 1 }}
-              exit={{ y: -20, opacity: 0 }}
-              transition={{ duration: 0.3 }}
-              className="text-xl text-blue-600 dark:text-blue-400 px-4 whitespace-nowrap text-center"
-            >
-              {introTexts[currentIndex]}
-            </motion.p>
-          </motion.div>
+            {introTexts[currentIndex]}
+          </motion.p>
+        </motion.div>
       </AnimatePresence>
     </div>
   );
