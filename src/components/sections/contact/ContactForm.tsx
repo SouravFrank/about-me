@@ -10,9 +10,9 @@ interface FormData {
   contact: string;
   message: string;
 }
-let callCount = 0; // Track the number of calls to the dummy function
+let callCount = 0;
 
-const useDummyEmail = false; // Flag to toggle between dummy and actual email sending
+const useDummyEmail = false;
 
 export default function ContactForm() {
   const [formData, setFormData] = useState<FormData>({
@@ -21,27 +21,26 @@ export default function ContactForm() {
     message: '',
   });
   const [status, setStatus] = useState<'idle' | 'sending' | 'success' | 'error'>('idle');
-  const [errors, setErrors] = useState<string[]>([]); // State to hold error messages
+  const [errors, setErrors] = useState<string[]>([]);
 
   const dummyEmailSend = () => {
     return new Promise((resolve, reject) => {
       setTimeout(() => {
         callCount++;
         if (callCount === 1) {
-          reject(new Error('Simulated error')); // First call returns an error
+          reject(new Error('Simulated error'));
         } else {
-          resolve('Message sent successfully!'); // Second call returns success
+          resolve('Message sent successfully!');
         }
-      }, 1000); // 1 second delay
+      }, 1000);
     });
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setStatus('sending');
-    setErrors([]); // Reset errors on each submission attempt
+    setErrors([]);
 
-    // Form validation
     const validationErrors: string[] = [];
     if (!formData.name) {
       validationErrors.push('Your name is required.');
@@ -54,15 +53,15 @@ export default function ContactForm() {
     }
 
     if (validationErrors.length > 0) {
-      setErrors(validationErrors); // Set the errors state
+      setErrors(validationErrors);
       setStatus('error');
-      setTimeout(() => setStatus('idle'), 3000); // Reset status after 3 seconds
-      return; // Prevent submission if validation fails
+      setTimeout(() => setStatus('idle'), 3000);
+      return;
     }
 
     try {
       if (useDummyEmail) {
-        await dummyEmailSend(); // Use the dummy function for testing
+        await dummyEmailSend();
       } else {
         await emailjs.send(
           emailServices.YOUR_SERVICE_ID,
@@ -81,9 +80,9 @@ export default function ContactForm() {
       setFormData({ name: '', contact: '', message: '' });
     } catch (error) {
       setStatus('error');
-      setErrors([error.message]); // Set error message from the dummy function or emailjs
+      setErrors([error.message]);
     } finally {
-      setTimeout(() => setStatus('idle'), 3000); // Reset status after 3 seconds
+      setTimeout(() => setStatus('idle'), 3000);
     }
   };
 
@@ -95,7 +94,6 @@ export default function ContactForm() {
       </div>
 
       <motion.form onSubmit={()=>{}} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="grid grid-cols-1 md:grid-cols-2 gap-6">
-        {/* Left Column */}
         <div className="space-y-6">
           <div className="relative">
             <label htmlFor="name" className="block text-sm font-medium mb-2 text-gray-700 cursor-normal dark:text-gray-300">
@@ -118,7 +116,6 @@ export default function ContactForm() {
           </div>
         </div>
 
-        {/* Right Column */}
         <div className="relative">
           <label htmlFor="message" className="block text-sm font-medium mb-2 text-gray-700 cursor-normal dark:text-gray-300">
             Your Message
@@ -129,11 +126,9 @@ export default function ContactForm() {
           </div>
         </div>
 
-        {/* Updated CTA Section with cleaner effects */}
-        <div className="md:col-span-2 space-y-4 flex flex-col items-end">
+        <div className="md:col-span-2 space-y-4 flex flex-col items-center md:items-end">
           <CTAButton label={status === 'sending' ? 'Sending...' : 'Send Message'} onClick={handleSubmit} variant="colored" Icon={Send} downloadClicked={status === 'success'} />
 
-          {/* Status messages with futuristic animations */}
           {status === 'success' && (
             <motion.div
               className="text-green-500 py-2 px-4 rounded-lg bg-green-50/10 backdrop-blur-sm 
@@ -162,7 +157,7 @@ export default function ContactForm() {
               <motion.div animate={{ scale: [1, 1.2, 1] }} transition={{ duration: 0.3, repeat: 2 }}>
                 ⚠️
               </motion.div>
-              {errors.join(' ')} {/* Display all error messages */}
+              {errors.join(' ')}
             </motion.div>
           )}
         </div>
