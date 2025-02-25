@@ -44,10 +44,10 @@ function App() {
             </SectionWrapper>
 
             <SectionWrapper isDark={isDark} titleBold={sectionData.articles.titleBold} titleLight={sectionData.articles.titleLight} description={sectionData.articles.description}>
-              <HorizontalScroll>
-                <ArticlesSection />
-              </HorizontalScroll>
             </SectionWrapper>
+            <HorizontalScroll>
+              <ArticlesSection />
+            </HorizontalScroll>
 
             <RewardsRecognition isDark={isDark} />
             <ContactSection isDark={isDark} />

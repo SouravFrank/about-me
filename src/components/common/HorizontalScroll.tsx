@@ -1,10 +1,11 @@
 import React, { useRef, useState, useEffect, TouchEvent, MouseEvent, useCallback } from 'react';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 import { HorizontalScrollProps } from './types';
+import useIsMobile from '../../hooks/isMobile';
 
-const throttle = (func, limit) => {
-  let inThrottle;
-  return function(...args) {
+const throttle = (func: { (clientX: number): void; apply?: any; }, limit: number | undefined) => {
+  let inThrottle: boolean;
+  return function(...args: any) {
     if (!inThrottle) {
       func.apply(this, args);
       inThrottle = true;
@@ -17,6 +18,7 @@ const HorizontalScroll: React.FC<HorizontalScrollProps> = ({ children }) => {
   const containerRef = useRef<HTMLDivElement>(null);
   const [isDragging, setIsDragging] = useState(false);
   const dragStartRef = useRef<{ x: number; scrollLeft: number }>({ x: 0, scrollLeft: 0 });
+  const isMobile = useIsMobile();
 
   const adjustScrollPosition = useCallback(() => {
     const container = containerRef.current;
@@ -112,8 +114,10 @@ const HorizontalScroll: React.FC<HorizontalScrollProps> = ({ children }) => {
   };
 
   const handleTouchMove = (e: TouchEvent<HTMLDivElement>) => {
-    e.preventDefault();
-    throttledDrag(e.touches[0].clientX);
+    if (isDragging) {
+      // e.preventDefault();
+      throttledDrag(e.touches[0].clientX);
+    }
   };
 
   useEffect(() => {
@@ -139,13 +143,15 @@ const HorizontalScroll: React.FC<HorizontalScrollProps> = ({ children }) => {
   );
 
   return (
-    <div className="relative px-4 md:px-12 py-6">
-      <button
-        onClick={() => smoothScroll('left')}
-        className="absolute left-0 top-1/2 -translate-y-1/2 bg-white dark:bg-gray-700 rounded-full p-4 md:p-2 shadow-lg transition-all duration-200 z-10 hover:scale-110 hover:bg-gray-100 dark:hover:bg-gray-600"
-      >
-        <ChevronLeft className="w-6 h-6" />
-      </button>
+    <div className="relative md:px-12 py-4 md:py-6">
+      {!isMobile && (
+        <button
+          onClick={() => smoothScroll('left')}
+          className="absolute left-6 top-1/2 -translate-y-1/2 bg-white dark:bg-gray-700 rounded-full p-2 shadow-lg transition-all duration-200 z-[100] hover:scale-110 hover:bg-gray-100 dark:hover:bg-gray-600"
+        >
+          <ChevronLeft className="w-6 h-6" />
+        </button>
+      )}
 
       <div
         ref={containerRef}
@@ -153,17 +159,41 @@ const HorizontalScroll: React.FC<HorizontalScrollProps> = ({ children }) => {
         onMouseMove={handleMouseMove}
         onTouchStart={handleTouchStart}
         onTouchMove={handleTouchMove}
-        className="flex gap-4 overflow-x-auto scrollbar-hide cursor-grab select-none"
+        className="flex gap-2 md:gap-4 overflow-x-auto scrollbar-hide cursor-grab select-none pb-4 md:pb-0"
+        style={{
+          scrollbarWidth: 'none',
+          msOverflowStyle: 'none',
+          WebkitOverflowScrolling: 'touch'
+        }}
       >
         {allChildren}
       </div>
 
-      <button
-        onClick={() => smoothScroll('right')}
-        className="absolute right-0 top-1/2 -translate-y-1/2 bg-white dark:bg-gray-700 rounded-full p-4 md:p-2 shadow-lg transition-all duration-200 z-10 hover:scale-110 hover:bg-gray-100 dark:hover:bg-gray-600"
-      >
-        <ChevronRight className="w-6 h-6" />
-      </button>
+      {isMobile && (
+        <div className="flex justify-center gap-4 mt-2">
+          <button
+            onClick={() => smoothScroll('left')}
+            className="bg-white dark:bg-gray-700 rounded-full p-2 shadow-md transition-all duration-200 hover:bg-gray-100 dark:hover:bg-gray-600"
+          >
+            <ChevronLeft className="w-5 h-5" />
+          </button>
+          <button
+            onClick={() => smoothScroll('right')}
+            className="bg-white dark:bg-gray-700 rounded-full p-2 shadow-md transition-all duration-200 hover:bg-gray-100 dark:hover:bg-gray-600"
+          >
+            <ChevronRight className="w-5 h-5" />
+          </button>
+        </div>
+      )}
+
+      {!isMobile && (
+        <button
+          onClick={() => smoothScroll('right')}
+          className="absolute right-6 top-1/2 -translate-y-1/2 bg-white dark:bg-gray-700 rounded-full p-2 shadow-lg transition-all duration-200 z-[100] hover:scale-110 hover:bg-gray-100 dark:hover:bg-gray-600"
+        >
+          <ChevronRight className="w-6 h-6" />
+        </button>
+      )}
     </div>
   );
 };

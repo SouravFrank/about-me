@@ -1,5 +1,5 @@
 export interface SectionWrapperProps {
-  children: React.ReactNode;
+  children?: React.ReactNode;
   isDark: boolean;
   titleBold: string;
   titleLight: string;

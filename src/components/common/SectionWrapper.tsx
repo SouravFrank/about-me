@@ -22,7 +22,7 @@ const SectionWrapper: React.FC<SectionWrapperProps> = ({ titleBold, titleLight, 
       style={{ opacity, y: yTranslate }}
       className={`py-5 px-4 md:px-8 w-full ${isDark ? 'bg-gray-900 text-white' : 'text-black'}`}
     >
-      <div className={`text-center mb-8 md:mb-16 dark:text-gray-300 light:text-gray-600`}>
+      <div className={`text-center ${children && 'mb-8 md:mb-16'} dark:text-gray-300 light:text-gray-600`}>
         <h2 className={`text-3xl md:text-5xl font-thin tracking-wide mb-2 md:mb-4 ${isDark ? 'text-gray-400' : 'text-gray-600'}`}>
           {titleBold}
           <span className={`font-bold ${isDark ? 'text-gray-100' : 'text-gray-800'}`}>{titleLight}</span>
