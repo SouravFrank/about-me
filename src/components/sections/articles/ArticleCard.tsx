@@ -51,7 +51,9 @@ const ArticleCard: React.FC<ArticleCardProps> = ({ title, description, url, imag
         </p>
 
       </div>
-      {isMobile && <div className="absolute bottom-2 right-3 px-3 py-2 md:p-4 ">
+      {isMobile && <div className="absolute bottom-2 right-3 px-3 py-2 md:p-4 " onClick={() => {
+        window.open(url, '_blank');
+      }} >
         <span className="text-xs text-blue-500 font-medium flex items-center">
           Read more
           <ExternalLink className="w-3 h-3 ml-1" />
