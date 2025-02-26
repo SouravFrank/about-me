@@ -1,7 +1,8 @@
 // src/components/VisitorCounter.tsx
 import React, { useState, useEffect } from 'react';
 import { ref, onValue, set, get, DatabaseReference } from 'firebase/database';
-import { db } from '../../../firebase';
+import { logEvent } from 'firebase/analytics';
+import { db, analytics } from '../../../firebase';
 import { VisitorCounterProps, VisitorsData } from './types';
 import { Users } from 'lucide-react';
 
@@ -26,6 +27,17 @@ function generateFingerprint(ip: string): string {
 const VisitorCounter: React.FC<VisitorCounterProps> = ({ appId }) => {
   const [visitorCount, setVisitorCount] = useState<number>(0);
   const visitorsRef: DatabaseReference = ref(db, `visitors/${appId}`);
+
+  useEffect(() => {
+    const startTime = Date.now();
+    return () => {
+      const timeSpent = Math.round((Date.now() - startTime) / 1000); // Seconds
+      logEvent(analytics, 'time_spent', {
+        app_id: appId,
+        duration: timeSpent,
+      });
+    };
+  }, [appId]);
 
   useEffect(() => {
     const fetchIpAndUpdateCount = async () => {
@@ -74,7 +86,7 @@ const VisitorCounter: React.FC<VisitorCounterProps> = ({ appId }) => {
     });
 
     return () => unsubscribe();
-  }, [visitorsRef]);
+  }, []);
 
   return (
     <div className="fixed bottom-5 left-5 z-50 flex items-center space-x-3 
