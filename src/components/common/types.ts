@@ -13,3 +13,11 @@ export interface HorizontalScrollProps {
   className?: string;
   scrollSpeed?: number;
 }
+
+export interface VisitorCounterProps {
+  appId: string;
+}
+
+export interface VisitorsData {
+  [ip: string]: boolean;
+}

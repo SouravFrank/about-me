@@ -30,7 +30,7 @@ const GoToTop: React.FC = () => {
       {isVisible && (
         <motion.button
           onClick={scrollToTop}
-          className="fixed bottom-8 right-8 p-3 rounded-full shadow-neumorph z-50"
+          className="fixed bottom-5 right-5 p-3 rounded-full shadow-neumorph z-50"
           initial={{ opacity: 0, scale: 0 }}
           animate={{ opacity: 1, scale: 1 }}
           exit={{ opacity: 0, scale: 0 }}

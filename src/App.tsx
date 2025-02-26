@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { ThemeToggle, GoToTop, ArticlesSection, Footer, TechStack, HorizontalScroll, GradientBlobCursor, RewardsRecognition, ProjectSection, SectionWrapper, IntroSection, TimelineSection, SkillsSection, ContactSection, CVDownloadSection, HexagonPreloader } from './components';
+import { ThemeToggle, GoToTop, ArticlesSection, Footer, TechStack, HorizontalScroll, GradientBlobCursor, RewardsRecognition, ProjectSection, SectionWrapper, IntroSection, TimelineSection, SkillsSection, ContactSection, CVDownloadSection, HexagonPreloader, VisitorCounter } from './components';
 import { sectionData } from './data/sectionData';
 import './styles/custom.css';
 // import { fetchMetadata } from './utils/fetchMetadata';
@@ -55,7 +55,7 @@ function App() {
             <CVDownloadSection isDark={isDark} />
 
             <TechStack isDark={isDark} />
-
+            <VisitorCounter appId="portfolio-2025" />
             <Footer isDark={isDark} />
           </div>
         </GradientBlobCursor>
