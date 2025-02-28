@@ -22,10 +22,7 @@ export default function ContactInfo({ }: ContactInfoProps) {
     <>
       <h3 className="text-2xl font-bold mb-6 md:mb-8">Contact Information</h3>
 
-      <div className="space-y-4 md:space-y-6 mb-8 md:mb-12" style={{
-        marginLeft: '-10px',
-        marginRight: '-10px'
-      }} >
+      <div className="space-y-4 md:space-y-6 mb-8 md:mb-12">
         {contactInfo.map((info, index) => {
           const Icon = getIcon(info.title);
           return (

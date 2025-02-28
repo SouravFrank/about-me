@@ -15,6 +15,12 @@ export const articles: Article[] = [
     url: 'https://www.linkedin.com/pulse/building-blocks-scalable-apps-react-meets-spring-boot-sadhukhan-1ag6f',
   },
   {
+    "title": "Why Next.js 14 + .NET 8 Crush Microservices in 2025!",
+    "description": "Build scalable microservices with Next.js 14 & .NET 8! Learn gRPC, RSCs, and K8s for top performance in 2025. Code-along guide for senior devs.",
+    "image": "https://media.licdn.com/dms/image/v2/D4D12AQEouxX86Wlfbw/article-cover_image-shrink_720_1280/B4DZVJL50cGcAM-/0/1740689617547?e=2147483647&v=beta&t=cKdaOCrxilVLFPjwM-DQ1ruUmqvIFBRMQOGh_TgneWM",
+    "url": "https://www.linkedin.com/pulse/why-nextjs-14-net-8-crush-microservices-2025-sourav-sadhukhan-bqzaf/?trackingId=7/+vU5VdSDuIUYbd2VpyrQ=="
+  },
+  {
     title: 'React 19 Unboxed ⚛️',
     description: "Discover React 19's groundbreaking features: React Compiler, Server Components, streamlined form handling, web component integration, and more! #React19 #WebDev",
     image: 'https://media.licdn.com/dms/image/v2/D4D12AQFIC2riA3tsCA/article-cover_image-shrink_720_1280/article-cover_image-shrink_720_1280/0/1713609088007?e=2147483647&v=beta&t=1OxjvwMv8vvBYxCy1KHfNW0VI_-NLeha5guWj2_xPHg',
