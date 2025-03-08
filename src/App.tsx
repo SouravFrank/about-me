@@ -3,6 +3,7 @@ import { ThemeToggle, GoToTop, ArticlesSection, Footer, TechStack, HorizontalScr
 import { sectionData } from './data/sectionData';
 import './styles/custom.css';
 // import { fetchMetadata } from './utils/fetchMetadata';
+import { trackEvent } from './utils/analytics';
 
 function App() {
   const [isDark, setIsDark] = useState<boolean>(false);
@@ -18,6 +19,16 @@ function App() {
   // useEffect(() => {
   //   fetchMetadata('https://www.linkedin.com/pulse/why-nextjs-14-net-8-crush-microservices-2025-sourav-sadhukhan-bqzaf/?trackingId=7%2F%2BvU5VdSDuIUYbd2VpyrQ%3D%3D')
   // }, []);
+
+  useEffect(() => {
+    // Track page view when the app loads
+    trackEvent('page_view', {
+      page_title: document.title,
+      page_location: window.location.href,
+      page_path: window.location.pathname,
+      dark_mode: isDark
+    });
+  }, []);
 
   return (
     <>

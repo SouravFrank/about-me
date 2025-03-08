@@ -2,10 +2,11 @@ import React, { useRef, useState, useEffect, TouchEvent, MouseEvent, useCallback
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 import { HorizontalScrollProps } from './types';
 import useIsMobile from '../../hooks/isMobile';
+import { trackEvent, ANALYTICS_CATEGORIES } from '../../utils/analytics';
 
 const throttle = (func: { (clientX: number): void; apply?: any; }, limit: number | undefined) => {
   let inThrottle: boolean;
-  return function(...args: any) {
+  return function (...args: any) {
     if (!inThrottle) {
       func.apply(this, args);
       inThrottle = true;
@@ -52,6 +53,12 @@ const HorizontalScroll: React.FC<HorizontalScrollProps> = ({ children }) => {
   const smoothScroll = (direction: 'left' | 'right') => {
     const container = containerRef.current;
     if (!container) return;
+
+    trackEvent('horizontal_scroll', {
+      category: ANALYTICS_CATEGORIES.INTERACTION,
+      direction: direction,
+      container_width: container.clientWidth
+    });
 
     const scrollAmount = container.clientWidth * 0.8;
     const currentScroll = container.scrollLeft;

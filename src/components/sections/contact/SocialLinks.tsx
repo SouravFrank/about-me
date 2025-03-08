@@ -2,8 +2,17 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { socialIcons } from './socialIcons.tsx';
 import { SocialIcon } from './types';
+import { trackEvent, ANALYTICS_CATEGORIES } from '../../../utils/analytics';
 
 const SocialLinks: React.FC = () => {
+  const handleSocialClick = (name: string, href: string) => {
+    trackEvent('social_click', {
+      category: ANALYTICS_CATEGORIES.SOCIAL,
+      platform: name,
+      url: href
+    });
+  };
+
   return (
     <motion.div
       className="h-[60px] "
@@ -18,6 +27,7 @@ const SocialLinks: React.FC = () => {
             href={href}
             target="_blank"
             rel="noopener noreferrer"
+            onClick={() => handleSocialClick(name, href)}
             className={"relative inline-block w-[60px] h-[60px] text-center overflow-hidden rounded-[28%] shadow-[0_5px_15px_-5px_rgba(0,0,0,0.3)] opacity-[0.99] group dark:bg-gray-700"}
             whileHover={{ scale: 1.18 }}
           >

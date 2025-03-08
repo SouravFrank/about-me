@@ -7,7 +7,7 @@ export interface TimelineItem {
   location?: string;
   date: string;
   icon: string;
-  type: 'work' | 'education' | 'personal';
+  type: TimelineItemType;
   highlights: string[];
   technologies?: string[];
   links?: {

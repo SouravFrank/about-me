@@ -1,14 +1,8 @@
+import React from 'react';
 import { motion } from 'framer-motion';
 import { Check, Loader } from 'lucide-react';
-
-interface CTAButtonProps {
-  label: string;
-  onClick?: () => void;
-  variant?: 'colored' | 'white';
-  Icon?: React.ElementType;
-  downloadClicked?: boolean;
-  disabled?: boolean;
-}
+import { CTAButtonProps } from './types';
+import { trackEvent, ANALYTICS_CATEGORIES } from '../../utils/analytics';
 
 const CTAButton: React.FC<CTAButtonProps> = ({ label, onClick, variant = 'colored', Icon, downloadClicked, disabled }) => {
   const buttonStyles =
@@ -16,9 +10,24 @@ const CTAButton: React.FC<CTAButtonProps> = ({ label, onClick, variant = 'colore
       ? 'bg-gradient-to-r from-blue-500 via-indigo-500 to-purple-500 text-white'
       : 'bg-white border-2 border-gray-200 text-gray-700 dark:bg-gray-800 dark:border-gray-600 dark:text-white';
 
+  const handleClick = (e: React.MouseEvent) => {
+    // Track the button click event
+    trackEvent('button_click', {
+      category: ANALYTICS_CATEGORIES.INTERACTION,
+      button_label: label,
+      button_variant: variant,
+      is_download: !!downloadClicked,
+    });
+
+    // Call the original onClick handler
+    if (!disabled && onClick) {
+      onClick(e);
+    }
+  };
+
   return (
     <motion.button
-      onClick={disabled ? undefined : onClick}
+      onClick={handleClick}
       className={`relative overflow-hidden px-10 py-4 rounded-full font-medium shadow-xl 
         ${downloadClicked ? 'bg-green-500' : buttonStyles} 
         ${disabled ? 'opacity-50 cursor-not-allowed' : ''}
@@ -26,6 +35,7 @@ const CTAButton: React.FC<CTAButtonProps> = ({ label, onClick, variant = 'colore
       whileHover={{ scale: disabled ? 1 : 1.05, boxShadow: '0 20px 40px rgba(0,0,0,0.1)' }}
       whileTap={{ scale: disabled ? 1 : 0.95 }}
     >
+      {/* Rest of your component remains unchanged */}
       <motion.span
         initial={false}
         animate={{

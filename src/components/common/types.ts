@@ -8,6 +8,15 @@ export interface SectionWrapperProps {
   opacityPosition?: number;
 }
 
+export interface CTAButtonProps {
+  label: string;
+  onClick?: (e: Object) => void;
+  variant?: 'colored' | 'white';
+  Icon?: React.ElementType;
+  downloadClicked?: boolean;
+  disabled?: boolean;
+}
+
 export interface HorizontalScrollProps {
   children: React.ReactNode;
   className?: string;

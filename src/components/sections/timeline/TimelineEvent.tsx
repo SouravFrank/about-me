@@ -1,32 +1,11 @@
 import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { 
-  Briefcase, 
-  GraduationCap, 
-  Cake, 
-  ChevronDown, 
-  ChevronUp, 
-  ExternalLink, 
-  Award 
-} from 'lucide-react';
+import { Briefcase, GraduationCap, Cake, ChevronDown, ChevronUp, ExternalLink, Award } from 'lucide-react';
 import { TimelineItem } from './types';
+import { trackEvent, ANALYTICS_CATEGORIES } from '../../../utils/analytics';
 
 const TimelineEvent: React.FC<TimelineItem> = ({
-  title,
-  company,
-  companyUrl,
-  location,
-  specialization,
-  date,
-  type,
-  highlights,
-  description,
-  responsibilities,
-  technologies,
-  links,
-  credLink,
-  isMobile,
-}) => {
+  title, company, companyUrl, location, specialization, date, type, highlights, description, responsibilities, technologies, links, credLink, isMobile, }) => {
   const [isExpanded, setIsExpanded] = useState(false);
 
 
@@ -208,14 +187,14 @@ const TimelineEvent: React.FC<TimelineItem> = ({
                       <div className="flex flex-wrap gap-3">
                         <span className={`text-gray-500 dark:text-gray-400 ${isMobile ? 'text-xs' : 'text-sm'}`}>CheapOair:</span>
                         {links.playStore && (
-                          <a href={links.playStore} target="_blank" rel="noopener noreferrer" 
-                             className={`text-blue-500 hover:text-blue-600 flex items-center gap-1 ${isMobile ? 'text-xs' : 'text-sm'}`}>
+                          <a href={links.playStore} target="_blank" rel="noopener noreferrer"
+                            className={`text-blue-500 hover:text-blue-600 flex items-center gap-1 ${isMobile ? 'text-xs' : 'text-sm'}`}>
                             Play Store <ExternalLink className="h-3 w-3" />
                           </a>
                         )}
                         {links.appStore && (
                           <a href={links.appStore} target="_blank" rel="noopener noreferrer"
-                             className={`text-blue-500 hover:text-blue-600 flex items-center gap-1 ${isMobile ? 'text-xs' : 'text-sm'}`}>
+                            className={`text-blue-500 hover:text-blue-600 flex items-center gap-1 ${isMobile ? 'text-xs' : 'text-sm'}`}>
                             App Store <ExternalLink className="h-3 w-3" />
                           </a>
                         )}
@@ -224,14 +203,14 @@ const TimelineEvent: React.FC<TimelineItem> = ({
                         <div className="flex flex-wrap gap-3">
                           <span className={`text-gray-500 dark:text-gray-400 ${isMobile ? 'text-xs' : 'text-sm'}`}>OneTravel:</span>
                           {links.oneTravel.playStore && (
-                            <a href={links.oneTravel.playStore} target="_blank" rel="noopener noreferrer" 
-                               className={`text-blue-500 hover:text-blue-600 flex items-center gap-1 ${isMobile ? 'text-xs' : 'text-sm'}`}>
+                            <a href={links.oneTravel.playStore} target="_blank" rel="noopener noreferrer"
+                              className={`text-blue-500 hover:text-blue-600 flex items-center gap-1 ${isMobile ? 'text-xs' : 'text-sm'}`}>
                               Play Store <ExternalLink className="h-3 w-3" />
                             </a>
                           )}
                           {links.oneTravel.appStore && (
                             <a href={links.oneTravel.appStore} target="_blank" rel="noopener noreferrer"
-                               className={`text-blue-500 hover:text-blue-600 flex items-center gap-1 ${isMobile ? 'text-xs' : 'text-sm'}`}>
+                              className={`text-blue-500 hover:text-blue-600 flex items-center gap-1 ${isMobile ? 'text-xs' : 'text-sm'}`}>
                               App Store <ExternalLink className="h-3 w-3" />
                             </a>
                           )}
@@ -260,7 +239,15 @@ const TimelineEvent: React.FC<TimelineItem> = ({
             {/* Expand/Collapse Button */}
             {type !== 'personal' && (description || responsibilities || highlights.length > 0) && (
               <button
-                onClick={() => setIsExpanded(!isExpanded)}
+                onClick={() => {
+                  setIsExpanded(!isExpanded);
+                  trackEvent('timeline_toggle', {
+                    category: ANALYTICS_CATEGORIES.TIMELINE,
+                    action: isExpanded ? 'collapse' : 'expand',
+                    item_title: title,
+                    item_type: type
+                  });
+                }}
                 className={`w-full mt-3 flex items-center justify-center gap-1 text-sm font-medium text-blue-500 hover:text-blue-600 py-2 ${isMobile ? 'bg-gray-100 dark:bg-gray-800 rounded-b-xl' : ''}`}
               >
                 {isExpanded ? (
