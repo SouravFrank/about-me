@@ -1,5 +1,22 @@
-import { logEvent, Analytics } from 'firebase/analytics';
-import { analytics } from '../../firebase';
+import { logEvent, Analytics, getAnalytics } from 'firebase/analytics';
+import { app } from '../../firebase';
+
+// Initialize analytics with a lazy getter to ensure it only runs in browser environment
+let analyticsInstance: Analytics | null = null;
+
+const getAnalyticsInstance = (): Analytics | null => {
+    if (typeof window === 'undefined') return null;
+    
+    if (!analyticsInstance) {
+        try {
+            analyticsInstance = getAnalytics(app);
+        } catch (error) {
+            console.error('Failed to initialize analytics:', error);
+            return null;
+        }
+    }
+    return analyticsInstance;
+};
 
 // Event categories
 export const ANALYTICS_CATEGORIES = {
@@ -40,8 +57,9 @@ export const trackEvent = (eventName: string, eventParams: Record<string, any>) 
         }
 
         // If you're using Firebase Analytics
-        if (analytics) {
-            logEvent(analytics, eventName, params);
+        const analyticsInstance = getAnalyticsInstance();
+        if (analyticsInstance) {
+            logEvent(analyticsInstance, eventName, params);
         }
     } catch (error) {
         console.error('Error tracking event:', error);

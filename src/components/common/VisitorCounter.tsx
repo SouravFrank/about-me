@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { ref, onValue, set, get, DatabaseReference } from 'firebase/database';
-import { logEvent } from 'firebase/analytics';
-import { db, analytics } from '../../../firebase';
+import { db } from '../../../firebase';
 import { VisitorCounterProps, VisitorsData } from './types';
 import { Users } from 'lucide-react';
 import { trackEvent } from '../../utils/analytics';
@@ -32,9 +31,9 @@ const VisitorCounter: React.FC<VisitorCounterProps> = ({ appId }) => {
     const startTime = Date.now();
     return () => {
       const timeSpent = Math.round((Date.now() - startTime) / 1000); // Seconds
-      logEvent(analytics, 'time_spent', {
+      trackEvent('time_spent', {
         app_id: appId,
-        duration: timeSpent,
+        duration: timeSpent
       });
     };
   }, [appId]);
