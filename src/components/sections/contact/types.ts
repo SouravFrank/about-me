@@ -23,24 +23,10 @@ export interface WhatsAppIconProps {
 
 export interface SocialIcon {
   name: 'facebook' | 'instagram' | 'github' | 'linkedin' | 'whatsapp';
-  icon: LucideIcon;
+  icon: LucideIcon | ((props: WhatsAppIconProps) => JSX.Element);
   href: string;
   color: string;
   background: string;
-}
-
-export interface ContactInfoProps {}
-
-export interface ContactFormProps {
-  onSubmit?: (data: any) => void;
-}
-
-export interface ContactSectionProps {
-  isDark: boolean;
-}
-
-export interface LocationMapProps {
-  isDark: boolean;
 }
 
 export interface SocialLinksProps {}
