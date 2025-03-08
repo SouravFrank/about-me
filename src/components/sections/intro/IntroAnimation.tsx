@@ -1,6 +1,7 @@
 import { motion, AnimatePresence } from 'framer-motion';
 import { useState, useEffect } from 'react';
 import { introTexts } from '../../../data/introTexts';
+import { trackEvent, ANALYTICS_CATEGORIES } from '../../../utils/analytics';
 
 interface IntroAnimationProps {
   showDetailed: boolean;
@@ -16,13 +17,13 @@ export default function IntroAnimation({ setShowDetailed }: IntroAnimationProps)
     const checkMobile = () => {
       setIsMobile(window.innerWidth < 768); // 768px is common mobile breakpoint
     };
-
+  
     checkMobile();
     window.addEventListener('resize', checkMobile);
     
     return () => window.removeEventListener('resize', checkMobile);
   }, []);
-
+  
   // Animation timer
   useEffect(() => {
     const timer = setInterval(() => {
@@ -30,7 +31,16 @@ export default function IntroAnimation({ setShowDetailed }: IntroAnimationProps)
     }, isMobile ? 1500 : 1800); // Slightly faster on mobile for better UX
     return () => clearInterval(timer);
   }, [isMobile]);
-
+  
+  const handleIntroClick = () => {
+    trackEvent('intro_text_click', {
+      category: ANALYTICS_CATEGORIES.INTERACTION,
+      text_index: currentIndex,
+      text_content: introTexts[currentIndex]
+    });
+    setShowDetailed(true);
+  };
+  
   return (
     <div 
       className={`transition-all duration-500 ease-in-out cursor-pointer ${
@@ -43,7 +53,7 @@ export default function IntroAnimation({ setShowDetailed }: IntroAnimationProps)
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
-          onClick={() => setShowDetailed(true)}
+          onClick={handleIntroClick}
           className="cursor-pointer"
         >
           <motion.p

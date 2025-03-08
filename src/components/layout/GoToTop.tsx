@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ArrowUp } from 'lucide-react';
+import { trackEvent, ANALYTICS_CATEGORIES } from '../../utils/analytics';
 
 const GoToTop: React.FC = () => {
   const [isVisible, setIsVisible] = useState<boolean>(false);
@@ -19,6 +20,12 @@ const GoToTop: React.FC = () => {
   }, []);
 
   const scrollToTop = () => {
+    // Track the scroll to top action
+    trackEvent('scroll_to_top', {
+      category: ANALYTICS_CATEGORIES.NAVIGATION,
+      scroll_position: window.pageYOffset
+    });
+    
     window.scrollTo({
       top: 0,
       behavior: 'smooth'

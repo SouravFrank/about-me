@@ -1,5 +1,6 @@
 import React, { useState, useRef, useCallback } from 'react';
 import { useTrail, animated } from '@react-spring/web';
+import { ANALYTICS_CATEGORIES, trackEvent } from '../../utils/analytics';
 
 const TRAIL_COUNT = Math.floor(Math.random() * 5) + 4; // Random number of blobs (4-8)
 const MIN_SIZE = 40;
@@ -35,7 +36,7 @@ const GradientBlobCursor: React.FC<{ isDarkMode: boolean; children: React.ReactN
   const [hue, setHue] = useState(MIN_HUE); // Initialize with MIN_HUE
   const ref = useRef<HTMLDivElement>(null);
   const rafRef = useRef<number>();
-
+  
   const handleMove = useCallback((e: React.MouseEvent | React.TouchEvent) => {
     if (rafRef.current) {
       cancelAnimationFrame(rafRef.current);

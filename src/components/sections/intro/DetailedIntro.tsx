@@ -1,5 +1,6 @@
 import { motion } from 'framer-motion';
 import { useState, useEffect } from 'react';
+import { trackEvent, ANALYTICS_CATEGORIES } from '../../../utils/analytics';
 
 interface DetailedIntroProps {
   onClose: () => void;
@@ -8,6 +9,19 @@ interface DetailedIntroProps {
 export default function DetailedIntro({ onClose }: DetailedIntroProps) {
   const [isHovered, setIsHovered] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
+
+  const handleHover = (isHovering: boolean) => {
+    setIsHovered(isHovering);
+  };
+
+  // Track close button click
+  const handleClose = () => {
+    trackEvent('detailed_intro_close', {
+      category: ANALYTICS_CATEGORIES.INTERACTION,
+      device_type: isMobile ? 'mobile' : 'desktop'
+    });
+    onClose();
+  };
 
   useEffect(() => {
     const checkMobile = () => setIsMobile(window.innerWidth < 768);
@@ -19,8 +33,8 @@ export default function DetailedIntro({ onClose }: DetailedIntroProps) {
   return (
     <motion.div
       className={`relative w-full ${isMobile ? 'max-w-full mx-2 mt-4' : 'max-w-4xl mx-auto mt-8'}`}
-      onHoverStart={() => setIsHovered(true)}
-      onHoverEnd={() => setIsHovered(false)}
+      onHoverStart={() => handleHover(true)}
+      onHoverEnd={() => handleHover(false)}
     >
       <div className="absolute inset-0 -z-10 opacity-70">
         {[1, 2].map((index) => (
@@ -49,7 +63,7 @@ export default function DetailedIntro({ onClose }: DetailedIntroProps) {
         transition={{ duration: 0.3 }}
       >
         <button
-          onClick={onClose}
+          onClick={handleClose}
           className={`absolute ${isMobile ? '-top-3 -right-3 w-6 h-6' : '-top-4 -right-4 w-8 h-8'} rounded-full bg-blue-500 hover:bg-blue-600 text-white flex items-center justify-center shadow-lg transition-colors duration-200`}
         >
           ↑

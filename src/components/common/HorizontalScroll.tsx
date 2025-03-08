@@ -6,7 +6,7 @@ import { trackEvent, ANALYTICS_CATEGORIES } from '../../utils/analytics';
 
 const throttle = (func: { (clientX: number): void; apply?: any; }, limit: number | undefined) => {
   let inThrottle: boolean;
-  return function (...args: any) {
+  return function (this: unknown, ...args: any) {
     if (!inThrottle) {
       func.apply(this, args);
       inThrottle = true;

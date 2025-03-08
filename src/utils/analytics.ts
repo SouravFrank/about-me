@@ -11,6 +11,8 @@ export const ANALYTICS_CATEGORIES = {
     PROJECTS: 'projects',
     TIMELINE: 'timeline',
     SKILLS: 'skills',
+    CONTENT:'content',
+    EXTERNAL_LINK:'external_link',
 };
 
 /**
@@ -18,23 +20,30 @@ export const ANALYTICS_CATEGORIES = {
  * @param eventName The name of the event
  * @param eventParams Additional parameters to track
  */
-export const trackEvent = (
-    eventName: string,
-    eventParams?: Record<string, any>
-) => {
+export const trackEvent = (eventName: string, eventParams: Record<string, any>) => {
+    // Add timestamp to all events
+    const params = {
+        ...eventParams,
+        timestamp: new Date().toISOString(),
+    };
+
+    // Log to console in development
+    if (process.env.NODE_ENV === 'development') {
+        console.log(`[Analytics] ${eventName}:`, params);
+    }
+
+    // Send to your analytics service
     try {
-        if (!analytics) {
-            console.warn('Analytics not initialized');
-            return;
+        // If you're using Google Analytics
+        if (typeof window !== 'undefined' && (window as any).gtag) {
+            (window as any).gtag('event', eventName, params);
         }
 
-        logEvent(analytics as Analytics, eventName, {
-            timestamp: new Date().toISOString(),
-            ...eventParams,
-        });
-
-        console.debug(`Analytics event tracked: ${eventName}`, eventParams);
+        // If you're using Firebase Analytics
+        if (analytics) {
+            logEvent(analytics, eventName, params);
+        }
     } catch (error) {
-        console.error('Error tracking analytics event:', error);
+        console.error('Error tracking event:', error);
     }
 };

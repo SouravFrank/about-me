@@ -2,6 +2,7 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { SectionWrapper } from '../common';
 import { Github } from 'lucide-react';
+import { ANALYTICS_CATEGORIES, trackEvent } from '../../utils/analytics';
 
 interface TechStackProps {
     isDark: boolean;
@@ -62,12 +63,20 @@ const githubCardVariants = {
 };
 
 const TechStack: React.FC<TechStackProps> = ({ isDark }) => {
+    const handleGitHubClick = () => {
+        trackEvent('github_source_click', {
+            category: ANALYTICS_CATEGORIES.SOCIAL,
+            destination: 'github',
+            repo: 'about-me'
+        });
+    };
+
     return (
         <SectionWrapper
             isDark={isDark}
             titleBold="Tech Spell: "
             titleLight="Our Secret Ingredients"
-            description="Behold the chaotic cauldron of code that birthed this digital monstrosity! We tossed in a pinch of wizardry, a dash of stubborn frameworks, and a whole lot of caffeinated sarcasm—stirred with tools so trendy they’d make a hipster blush. This site? It’s the Frankenstein of tech, stitched together with these cursed ingredients."
+            description="Behold the chaotic cauldron of code that birthed this digital monstrosity! We tossed in a pinch of wizardry, a dash of stubborn frameworks, and a whole lot of caffeinated sarcasm—stirred with tools so trendy they'd make a hipster blush. This site? It's the Frankenstein of tech, stitched together with these cursed ingredients."
         >
             <motion.div
                 className="flex flex-wrap justify-center items-center gap-8"
@@ -101,6 +110,7 @@ const TechStack: React.FC<TechStackProps> = ({ isDark }) => {
                 href="https://github.com/SouravFrank/about-me"
                 target="_blank"
                 rel="noopener noreferrer"
+                onClick={handleGitHubClick}
                 className="flex items-center justify-center gap-2 p-4 mt-12 mb-16 mx-auto w-full max-w-xs bg-white dark:bg-gray-800 rounded-lg shadow-md text-gray-700 dark:text-gray-300 hover:text-blue-500 dark:hover:text-purple-400 transition-colors duration-300"
                 variants={githubCardVariants}
                 whileHover="hover"

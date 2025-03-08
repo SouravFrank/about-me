@@ -5,6 +5,7 @@ import { personalInfo } from '../../../data';
 import DetailedIntro from './DetailedIntro';
 import ThanosSnap from './ThanosSnap';
 import '../../../styles/gradienttext.css';
+import { trackEvent, ANALYTICS_CATEGORIES } from '../../../utils/analytics';
 
 const IntroSection: React.FC = () => {
   const [imageError, setImageError] = useState(false);
@@ -40,8 +41,30 @@ const IntroSection: React.FC = () => {
     }
   }, [isTransitioning, nextImageIndex]);
 
+  // Track profile image hover
+  const handleProfileHover = (isHovering: boolean) => {
+    setIsHovered(isHovering);
+  };
+
+  // Track detailed view toggle
+  const handleShowDetailed = () => {
+    trackEvent('show_detailed_intro', {
+      category: ANALYTICS_CATEGORIES.INTERACTION,
+      action: 'open',
+    });
+    setShowDetailed(true);
+  };
+
+  const handleHideDetailed = () => {
+    trackEvent('hide_detailed_intro', {
+      category: ANALYTICS_CATEGORIES.INTERACTION,
+      action: 'close',
+    });
+    setShowDetailed(false);
+  };
+
   return (
-    <section className="min-h-screen flex items-center justify-center p-8">
+    <section className="min-h-screen flex items-center justify-center p-8" data-section="intro">
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
@@ -88,8 +111,8 @@ const IntroSection: React.FC = () => {
           {/* Profile Images with Overlapping Transition */}
           <motion.div
             className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-10"
-            onHoverStart={() => setIsHovered(true)}
-            onHoverEnd={() => setIsHovered(false)}
+            onHoverStart={() => handleProfileHover(true)}
+            onHoverEnd={() => handleProfileHover(false)}
           >
             {/* Current Image */}
             <motion.img
@@ -145,13 +168,13 @@ const IntroSection: React.FC = () => {
           <>
             <motion.h1
               className="text-4xl font-bold mb-4 relative z-10 cursor-link gradient-text"
-              onClick={() => setShowDetailed(true)}
+              onClick={handleShowDetailed}
               whileHover={{ scale: 1.05 }}
               transition={{ duration: 0.2 }}
             >
               {personalInfo.name}
             </motion.h1>
-            <IntroAnimation showDetailed={showDetailed} setShowDetailed={setShowDetailed} />
+            <IntroAnimation showDetailed={showDetailed} setShowDetailed={handleShowDetailed} />
           </>
         ) : (
           <motion.div
@@ -159,7 +182,7 @@ const IntroSection: React.FC = () => {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
           >
-            <DetailedIntro onClose={() => setShowDetailed(false)} />
+            <DetailedIntro onClose={handleHideDetailed} />
             <ThanosSnap onComplete={() => { }} />
           </motion.div>
         )}

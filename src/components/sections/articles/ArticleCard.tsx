@@ -2,9 +2,40 @@ import { motion } from 'framer-motion';
 import { ExternalLink } from 'lucide-react';
 import { ArticleCardProps } from './types';
 import useIsMobile from '../../../hooks/isMobile';
+import { trackEvent, ANALYTICS_CATEGORIES } from '../../../utils/analytics';
 
-const ArticleCard: React.FC<ArticleCardProps> = ({ title, description, url, image }) => {
+const ArticleCard: React.FC<ArticleCardProps> = ({ title, description, url, image, index }) => {
   const isMobile = useIsMobile();
+
+  const handleArticleClick = (e: React.MouseEvent, clickArea: string) => {
+    // Prevent default behavior if it's not a direct link click
+    if (clickArea !== 'link') {
+      e.stopPropagation();
+    }
+
+    trackEvent('article_interaction', {
+      category: ANALYTICS_CATEGORIES.CONTENT,
+      action: 'click',
+      article_title: title,
+      article_index: index,
+      click_area: clickArea,
+      device_type: isMobile ? 'mobile' : 'desktop'
+    });
+    
+    if (clickArea === 'read_more' || clickArea === 'card') {
+      window.open(url, '_blank');
+    }
+  };
+
+  const handleArticleHover = () => {
+    if (!isMobile) {
+      trackEvent('article_hover', {
+        category: ANALYTICS_CATEGORIES.INTERACTION,
+        article_title: title,
+        article_index: index
+      });
+    }
+  };
 
   return (
     <motion.div
@@ -20,8 +51,9 @@ const ArticleCard: React.FC<ArticleCardProps> = ({ title, description, url, imag
       whileInView={undefined}
       viewport={{ once: true }}
       initial={undefined}
-      // Only apply hover/tap animations on desktop
       data-no-animation-mobile
+      onClick={(e) => handleArticleClick(e, 'card')}
+      onHoverStart={handleArticleHover}
     >
       <div className="relative aspect-w-16 aspect-h-9">
         <img
@@ -35,7 +67,7 @@ const ArticleCard: React.FC<ArticleCardProps> = ({ title, description, url, imag
             target="_blank"
             rel="noopener noreferrer"
             className="p-3 md:p-4 bg-white/10 hover:bg-white/20 rounded-full transition-colors duration-200"
-            onClick={(e) => e.stopPropagation()}
+            onClick={(e) => handleArticleClick(e, 'link')}
             aria-label="Visit article"
           >
             <ExternalLink className="w-5 h-5 md:w-6 md:h-6 text-white" />
@@ -51,9 +83,10 @@ const ArticleCard: React.FC<ArticleCardProps> = ({ title, description, url, imag
         </p>
 
       </div>
-      {isMobile && <div className="absolute bottom-2 right-3 px-3 py-2 md:p-4 " onClick={() => {
-        window.open(url, '_blank');
-      }} >
+      {isMobile && <div 
+        className="absolute bottom-2 right-3 px-3 py-2 md:p-4" 
+        onClick={(e) => handleArticleClick(e, 'read_more')}
+      >
         <span className="text-xs text-blue-500 font-medium flex items-center">
           Read more
           <ExternalLink className="w-3 h-3 ml-1" />
