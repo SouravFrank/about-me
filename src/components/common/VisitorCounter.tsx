@@ -1,10 +1,10 @@
-// src/components/VisitorCounter.tsx
 import React, { useState, useEffect } from 'react';
 import { ref, onValue, set, get, DatabaseReference } from 'firebase/database';
 import { logEvent } from 'firebase/analytics';
 import { db, analytics } from '../../../firebase';
 import { VisitorCounterProps, VisitorsData } from './types';
 import { Users } from 'lucide-react';
+import { trackEvent } from '../../utils/analytics';
 
 // Simple hash function that converts a string into a short base36 hash.
 function hashString(str: string): string {
@@ -40,6 +40,7 @@ const VisitorCounter: React.FC<VisitorCounterProps> = ({ appId }) => {
   }, [appId]);
 
   useEffect(() => {
+    // Update the fetchIpAndUpdateCount function
     const fetchIpAndUpdateCount = async () => {
       try {
         // Retrieve the visitor id from localStorage or generate one.
@@ -48,10 +49,9 @@ const VisitorCounter: React.FC<VisitorCounterProps> = ({ appId }) => {
           const response = await fetch('https://api.ipify.org?format=json');
           const data: { ip: string } = await response.json();
           visitorFingerprint = generateFingerprint(data.ip);
-
           localStorage.setItem('visitorFingerprint', visitorFingerprint);
         }
-
+    
         // Get current visitors and update if new
         const snapshot = await get(visitorsRef);
         const visitors: VisitorsData = snapshot.val() || {};

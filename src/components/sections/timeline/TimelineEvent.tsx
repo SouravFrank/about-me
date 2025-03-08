@@ -8,8 +8,6 @@ const TimelineEvent: React.FC<TimelineItem> = ({
   title, company, companyUrl, location, specialization, date, type, highlights, description, responsibilities, technologies, links, credLink, isMobile, }) => {
   const [isExpanded, setIsExpanded] = useState(false);
 
-
-
   const getIcon = () => {
     switch (type) {
       case 'personal': return Cake;

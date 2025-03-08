@@ -43,3 +43,13 @@ export interface PersonalInfo {
   };
   summary: string;
 }
+
+// Re-export types from component-specific type files for convenience
+export * from '../components/sections/timeline/types';
+export * from '../components/sections/contact/types';
+export * from '../components/sections/skills/types';
+export * from '../components/sections/projects/types';
+export * from '../components/sections/articles/types';
+export * from '../components/sections/intro/types';
+export * from '../components/common/types';
+export * from '../components/layout/types';

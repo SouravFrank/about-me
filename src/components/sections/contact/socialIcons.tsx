@@ -35,8 +35,8 @@ export const socialIcons: SocialIcon[] = [
     name: 'linkedin',
     icon: Linkedin,
     href: socialMediaLinks.linkedin,
-    color: '#0e76a8',
-    background: '#0e76a8',
+    color: '#0077b5',
+    background: '#0077b5',
   },
   {
     name: 'whatsapp',

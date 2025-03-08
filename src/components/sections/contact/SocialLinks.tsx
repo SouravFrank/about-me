@@ -1,15 +1,14 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { socialIcons } from './socialIcons.tsx';
-import { SocialIcon } from './types';
+import { SocialIcon, SocialLinksProps } from './types';
 import { trackEvent, ANALYTICS_CATEGORIES } from '../../../utils/analytics';
 
-const SocialLinks: React.FC = () => {
+const SocialLinks: React.FC<SocialLinksProps> = () => {
   const handleSocialClick = (name: string, href: string) => {
     trackEvent('social_click', {
       category: ANALYTICS_CATEGORIES.SOCIAL,
       platform: name,
-      url: href
     });
   };
 

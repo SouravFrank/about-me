@@ -18,11 +18,12 @@ export interface WhatsAppIconProps {
   className?: string;
   size?: number | string;
   style?: React.CSSProperties;
+  strokeWidth?: number;
 }
 
 export interface SocialIcon {
   name: 'facebook' | 'instagram' | 'github' | 'linkedin' | 'whatsapp';
-  icon: LucideIcon | (({ className, size, style }: WhatsAppIconProps) => JSX.Element);
+  icon: LucideIcon;
   href: string;
   color: string;
   background: string;
@@ -38,7 +39,8 @@ export interface ContactSectionProps {
   isDark: boolean;
 }
 
-// New interface for LocationMap props
 export interface LocationMapProps {
-  isDark: boolean; // Add any props that LocationMap might need
+  isDark: boolean;
 }
+
+export interface SocialLinksProps {}
