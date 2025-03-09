@@ -23,13 +23,15 @@ function App() {
 
   useEffect(() => {
     // Track page view when the app loads
-    trackEvent('page_view', {
+    trackEvent('page_view_custom', {
       page_title: document.title,
       page_location: window.location.href,
       page_path: window.location.pathname,
       dark_mode: isDark
     });
   }, []);
+
+
 
   const toggleTheme = () => {
     const newTheme = !isDark;

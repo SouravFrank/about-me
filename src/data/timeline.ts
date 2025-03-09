@@ -1,29 +1,4 @@
-// Type definitions for better TypeScript support
-export type TimelineItemType = 'work' | 'education' | 'personal' | 'certification';
-
-export interface TimelineItem {
-  title: string;
-  company?: string;
-  companyUrl?: string;
-  specialization?: string;
-  location?: string;
-  date: string;
-  icon: string;
-  type: TimelineItemType;
-  highlights: string[];
-  description?: string;
-  responsibilities?: string[];
-  technologies?: string[];
-  links?: {
-    playStore?: string;
-    appStore?: string;
-    oneTravel?: {
-      playStore?: string;
-      appStore?: string;
-    };
-  };
-  credLink?: string;
-}
+import { TimelineItem } from '../components/sections/timeline/types';
 
 export const timelineData: TimelineItem[] = [
   {
@@ -75,11 +50,18 @@ export const timelineData: TimelineItem[] = [
     icon: 'work',
     type: 'work',
     description: 'Kickstarted my professional journey with React Native development and DevOps practices.',
-    highlights: ['Optimized log management and load balancing in the API service layer using PM2’s advanced process management features, including log rotation.', 'Proactively notified teams of potential outages by creating precise failure alerts using Splunk and Dynatrace.', 'Streamlined deployment processes using Fastlane, reducing manual errors and deployment time.', 'Deployed the Scan & Go React Native shopping app to Google Play Store and Apple App Store, achieving over 1 million downloads with bug-free functionality.'],
+    highlights: [
+      'Optimized log management and load balancing in the API service layer using PM2’s advanced process management features, including log rotation.',
+      'Proactively notified teams of potential outages by creating precise failure alerts using Splunk and Dynatrace.',
+      'Streamlined deployment processes using Fastlane, reducing manual errors and deployment time.',
+      'Deployed the Scan & Go React Native shopping app to Google Play Store and Apple App Store, achieving over 1 million downloads with bug-free functionality.'
+    ],
     technologies: ['React Native', 'Node.js', 'PM2', 'Jenkins', 'Splunk', 'Dynatrace', 'Fastlane', 'Airwatch'],
     links: {
-      playStore: 'https://play.google.com/store/apps/details?id=com.asda.ScanandGoMobile&pcampaignid=web_share',
-      appStore: 'https://apps.apple.com/gb/app/asda-scan-go/id1413258515',
+      "ASDA Scan & Go": {
+        playStore: 'https://play.google.com/store/apps/details?id=com.asda.ScanandGoMobile&pcampaignid=web_share',
+        appStore: 'https://apps.apple.com/gb/app/asda-scan-go/id1413258515',
+      }
     },
   },
   {
@@ -165,9 +147,11 @@ export const timelineData: TimelineItem[] = [
     ],
     technologies: ['React Native', 'JavaScript', 'Apple Pay', 'Venmo', 'Lottie', 'Firebase Crashlytics', 'CodePush'],
     links: {
-      playStore: 'https://play.google.com/store/apps/details?id=com.fp.cheapoair',
-      appStore: 'https://apps.apple.com/us/app/cheapoair-cheap-flight-deals/id436858222',
-      oneTravel: {
+      CheapOair: {
+        playStore: 'https://play.google.com/store/apps/details?id=com.fp.cheapoair',
+        appStore: 'https://apps.apple.com/us/app/cheapoair-cheap-flight-deals/id436858222',
+      },
+      OneTravel: {
         playStore: 'https://play.google.com/store/apps/details?id=com.wkt.onetravel.android',
         appStore: 'https://apps.apple.com/in/app/onetravel-flight-hotel-deals/id680520990',
       },
@@ -194,9 +178,11 @@ export const timelineData: TimelineItem[] = [
     ],
     technologies: ['React Native', 'A/B Testing', 'Microfrontend', 'Firebase Crashlytics', 'Azure Pipelines', 'Objective-C', 'Java', 'Firebase Performance Monitoring'],
     links: {
-      playStore: 'https://play.google.com/store/apps/details?id=com.fp.cheapoair',
-      appStore: 'https://apps.apple.com/us/app/cheapoair-cheap-flight-deals/id436858222',
-      oneTravel: {
+      CheapOair: {
+        playStore: 'https://play.google.com/store/apps/details?id=com.fp.cheapoair',
+        appStore: 'https://apps.apple.com/us/app/cheapoair-cheap-flight-deals/id436858222',
+      },
+      OneTravel: {
         playStore: 'https://play.google.com/store/apps/details?id=com.wkt.onetravel.android',
         appStore: 'https://apps.apple.com/in/app/onetravel-flight-hotel-deals/id680520990',
       },

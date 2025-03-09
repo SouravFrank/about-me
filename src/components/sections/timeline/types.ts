@@ -7,19 +7,13 @@ export interface TimelineItem {
   specialization?: string;
   location?: string;
   date: string;
+  icon: string;
   type: TimelineItemType;
   highlights: string[];
   description?: string;
   responsibilities?: string[];
   technologies?: string[];
-  links?: {
-    playStore?: string;
-    appStore?: string;
-    oneTravel?: {
-      playStore?: string;
-      appStore?: string;
-    };
-  };
+  links?: Record<string, { playStore?: string; appStore?: string }>;
   credLink?: string;
   isMobile?: boolean;
 }

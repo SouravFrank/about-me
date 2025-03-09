@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Briefcase, GraduationCap, Cake, ChevronDown, ChevronUp, ExternalLink, Award } from 'lucide-react';
 import { TimelineItem } from './types';
@@ -182,38 +182,23 @@ const TimelineEvent: React.FC<TimelineItem> = ({
                   <div className={isMobile ? 'mb-4' : 'mt-4'}>
                     <h4 className="font-medium text-gray-900 dark:text-white text-sm">Available On</h4>
                     <div className={`mt-2 ${isMobile ? 'space-y-2' : 'space-y-2'}`}>
-                      <div className="flex flex-wrap gap-3">
-                        <span className={`text-gray-500 dark:text-gray-400 ${isMobile ? 'text-xs' : 'text-sm'}`}>CheapOair:</span>
-                        {links.playStore && (
-                          <a href={links.playStore} target="_blank" rel="noopener noreferrer"
-                            className={`text-blue-500 hover:text-blue-600 flex items-center gap-1 ${isMobile ? 'text-xs' : 'text-sm'}`}>
-                            Play Store <ExternalLink className="h-3 w-3" />
-                          </a>
-                        )}
-                        {links.appStore && (
-                          <a href={links.appStore} target="_blank" rel="noopener noreferrer"
-                            className={`text-blue-500 hover:text-blue-600 flex items-center gap-1 ${isMobile ? 'text-xs' : 'text-sm'}`}>
-                            App Store <ExternalLink className="h-3 w-3" />
-                          </a>
-                        )}
-                      </div>
-                      {links.oneTravel && (
-                        <div className="flex flex-wrap gap-3">
-                          <span className={`text-gray-500 dark:text-gray-400 ${isMobile ? 'text-xs' : 'text-sm'}`}>OneTravel:</span>
-                          {links.oneTravel.playStore && (
-                            <a href={links.oneTravel.playStore} target="_blank" rel="noopener noreferrer"
+                      {Object.entries(links).map(([appName, appLinks]) => (
+                        <div key={appName} className="flex flex-wrap gap-3">
+                          <span className={`text-gray-500 dark:text-gray-400 ${isMobile ? 'text-xs' : 'text-sm'}`}>{appName}:</span>
+                          {appLinks.playStore && (
+                            <a href={appLinks.playStore} target="_blank" rel="noopener noreferrer"
                               className={`text-blue-500 hover:text-blue-600 flex items-center gap-1 ${isMobile ? 'text-xs' : 'text-sm'}`}>
                               Play Store <ExternalLink className="h-3 w-3" />
                             </a>
                           )}
-                          {links.oneTravel.appStore && (
-                            <a href={links.oneTravel.appStore} target="_blank" rel="noopener noreferrer"
+                          {appLinks.appStore && (
+                            <a href={appLinks.appStore} target="_blank" rel="noopener noreferrer"
                               className={`text-blue-500 hover:text-blue-600 flex items-center gap-1 ${isMobile ? 'text-xs' : 'text-sm'}`}>
                               App Store <ExternalLink className="h-3 w-3" />
                             </a>
                           )}
                         </div>
-                      )}
+                      ))}
                     </div>
                   </div>
                 )}
