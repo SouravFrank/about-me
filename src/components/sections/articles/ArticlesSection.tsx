@@ -7,7 +7,7 @@ import { useInView } from 'framer-motion';
 const ArticlesSection = () => {
   const sectionRef = useRef<HTMLDivElement>(null);
   const isInView = useInView(sectionRef, { once: true, amount: 0.3 });
-  
+
   // Track when articles section comes into view
   useEffect(() => {
     if (isInView) {
@@ -49,9 +49,8 @@ const ArticlesSection = () => {
   }, []);
 
   return (
-    <div 
+    <div className="flex flex-row mt-4 mb-4 gap-4 "
       ref={sectionRef}
-      className="flex flex-row mt-4 mb-4 gap-4 overflow-x-auto snap-x"
       data-section="articles"
     >
       {articles.map((article, index) => (
