@@ -1,4 +1,8 @@
 import { TimelineItem } from '../components/sections/timeline/types';
+import linkdInReactCert from "../assets/images/Become a React Native Developer.png"
+import completeReactNativeHooks from '../assets/images/The Complete React Native + Hooks Course.png'
+import reactNativePracticalGuide from '../assets/images/React Native - The Practical Guide.png'
+import acceleratedES6 from '../assets/images/Accelerated ES6 JavaScript Training.png'
 
 export const timelineData: TimelineItem[] = [
   {
@@ -84,6 +88,23 @@ export const timelineData: TimelineItem[] = [
     technologies: ['React Native', 'React Web', 'Express.js', 'Redux', 'Redux Saga', 'JavaScript', 'Node.js', 'Material UI', 'HTML', 'CSS', 'Axios'],
   },
   {
+    title: 'Accelerated ES6 JavaScript Training',
+    company: 'Udemy',
+    companyUrl: 'https://www.udemy.com/',
+    location: 'Online',
+    date: 'September 2020',
+    icon: 'certificate',
+    type: 'certification',
+    credLink: acceleratedES6,
+    highlights: [
+      'Mastered modern JavaScript features like arrow functions, destructuring, and template literals.',
+      'Built interactive web applications using ES6 modules and classes.',
+      'Enhanced code readability and maintainability with ES6 syntax improvements.',
+      'Gained proficiency in asynchronous programming with Promises and async/await.',
+      'Applied ES6 features to refactor legacy codebases, improving performance and scalability.'
+    ],
+  },
+  {
     title: 'Become a React Native Developer',
     company: 'LinkedIn',
     companyUrl: 'https://www.linkedin.com/',
@@ -91,7 +112,7 @@ export const timelineData: TimelineItem[] = [
     date: 'September 2020',
     icon: 'certificate',
     type: 'certification',
-    credLink: 'https://media.licdn.com/dms/image/v2/D4D2DAQHmqQkVlCcENg/profile-treasury-document-images_800/profile-treasury-document-images_800/1/1719346344531?e=1738195200&v=beta&t=rGE-fCs9UH9RosDScDb390UXXSNt02cFov-USpyPCkE',
+    credLink: linkdInReactCert,
     highlights: ["Mastered cross-platform development while discovering why 'it works on my machine' isn't a valid excuse", 'Built production-ready features including smooth animations that even Android and iOS could agree on', 'Learned to debug layout issues without throwing my phone out the window (most days)'],
   },
   {
@@ -102,7 +123,7 @@ export const timelineData: TimelineItem[] = [
     date: 'September 2020',
     icon: 'certificate',
     type: 'certification',
-    credLink: 'https://media.licdn.com/dms/image/v2/D4D2DAQGt2MBGauaKqg/profile-treasury-document-images_800/profile-treasury-document-images_800/1/1719346545892?e=1738195200&v=beta&t=L5lKnHxpee-4263ErFRPIS2cFXiyPc35S7KK_QsquF4',
+    credLink: reactNativePracticalGuide,
     highlights: ['Shipped 5 practice apps while finally understanding Flexbox layouts (column vs row: 1, Me: 0)', 'Became best friends with the React Native debugger - our relationship is complicated but productive', 'Discovered 37 ways to center a div... and then learned proper mobile UI/UX practices'],
   },
   {
@@ -113,7 +134,7 @@ export const timelineData: TimelineItem[] = [
     date: 'October 2020',
     icon: 'certificate',
     type: 'certification',
-    credLink: 'https://media.licdn.com/dms/image/v2/D4D2DAQFD-B2MvvMOwQ/profile-treasury-document-images_800/profile-treasury-document-images_800/1/1719346056813?e=1738195200&v=beta&t=oxPUINBQ1gnTXArT1NL7Wy1i13zSPuAEf_kTJkfalNg',
+    credLink: completeReactNativeHooks,
     highlights: ['Tamed state management with Hooks after initial attempts that resembled spaghetti code', 'Built async storage solutions that actually persisted data (most of the time)', "Reduced 'prop drilling' anxiety through proper context API implementation", 'Coffee consumption remained stable at 3 cups/hour during Redux integration modules'],
   },
   {
