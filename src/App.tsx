@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { ThemeToggle, GoToTop, ArticlesSection, Footer, TechStack, HorizontalScroll, GradientBlobCursor, RewardsRecognition, ProjectSection, SectionWrapper, IntroSection, TimelineSection, SkillsSection, ContactSection, CVDownloadSection, HexagonPreloader, VisitorCounter } from './components';
 import { sectionData } from './data/sectionData';
 import './styles/custom.css';
-import { fetchMetadata } from './utils/fetchMetadata';
+// import { fetchMetadata } from './utils/fetchMetadata';
 import { ANALYTICS_CATEGORIES, trackEvent } from './utils/analytics';
 import { TrackLinks } from './utils/trackLinks';
 
