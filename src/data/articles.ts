@@ -15,10 +15,22 @@ export const articles: Article[] = [
     url: 'https://www.linkedin.com/pulse/building-blocks-scalable-apps-react-meets-spring-boot-sadhukhan-1ag6f',
   },
   {
-    "title": "Why Next.js 14 + .NET 8 Crush Microservices in 2025!",
-    "description": "Build scalable microservices with Next.js 14 & .NET 8! Learn gRPC, RSCs, and K8s for top performance in 2025. Code-along guide for senior devs.",
-    "image": "https://media.licdn.com/dms/image/v2/D4D12AQEouxX86Wlfbw/article-cover_image-shrink_720_1280/B4DZVJL50cGcAM-/0/1740689617547?e=2147483647&v=beta&t=cKdaOCrxilVLFPjwM-DQ1ruUmqvIFBRMQOGh_TgneWM",
-    "url": "https://www.linkedin.com/pulse/why-nextjs-14-net-8-crush-microservices-2025-sourav-sadhukhan-bqzaf/?trackingId=7/+vU5VdSDuIUYbd2VpyrQ=="
+    title: 'Why Next.js 14 + .NET 8 Crush Microservices in 2025!',
+    description: 'Build scalable microservices with Next.js 14 & .NET 8! Learn gRPC, RSCs, and K8s for top performance in 2025. Code-along guide for senior devs.',
+    image: 'https://media.licdn.com/dms/image/v2/D4D12AQEouxX86Wlfbw/article-cover_image-shrink_720_1280/B4DZVJL50cGcAM-/0/1740689617547?e=2147483647&v=beta&t=cKdaOCrxilVLFPjwM-DQ1ruUmqvIFBRMQOGh_TgneWM',
+    url: 'https://www.linkedin.com/pulse/why-nextjs-14-net-8-crush-microservices-2025-sourav-sadhukhan-bqzaf/?trackingId=7/+vU5VdSDuIUYbd2VpyrQ==',
+  },
+  {
+    title: 'LYNX vs. Flutter vs. React Native: The Cross-Platform War Just Got Personal! ⚔️🚀',
+    description: 'Is LYNX the future of cross-platform development? See how it stacks up against Flutter & React Native with real-world benchmarks, code, and expert insights.',
+    image: 'https://media.licdn.com/dms/image/v2/D4D12AQFYlBJ0MXd4NQ/article-cover_image-shrink_720_1280/B4DZWgxO6tG4AI-/0/1742159018873?e=1749081600&v=beta&t=wM2hqaLDxtiIwkM15H387ex5VdFNjRkz7zQBQrYX6CU',
+    url: 'https://www.linkedin.com/pulse/lynx-vs-flutter-react-native-cross-platform-war-just-got-sadhukhan-zeswf',
+  },
+  {
+    title: 'Vibe Coding: The Future of Chill Programming',
+    description: 'Explore Vibe Coding: AI tools like Cursor & Replit make coding chill for Gen Z devs in 2025. Get the hip-hop vibe, top resources, and start building!',
+    image: 'https://media.licdn.com/dms/image/v2/D4D12AQHpaiJqnORUrw/article-cover_image-shrink_600_2000/B4DZW1JXsdHkAQ-/0/1742500891215?e=1749081600&v=beta&t=mCMY3ZgN4J6S3AxI4yYzPyWsqwRpWaA_IUnBLJMguS4',
+    url: 'https://www.linkedin.com/pulse/vibe-coding-future-chill-programming-sourav-sadhukhan-lglrf/?trackingId=UjEHiundQ9+jUjL7+Uk2gQ==',
   },
   {
     title: 'React 19 Unboxed ⚛️',
@@ -70,10 +82,10 @@ export const articles: Article[] = [
     url: 'https://www.linkedin.com/pulse/mastering-solid-principles-javascript-beginners-guide-sadhukhan-nv7lf',
   },
   {
-    "title": "Master DRY, YAGNI & KISS: Frontend Code Principles Made Simple 🎭",
-    "description": "Discover how DRY, YAGNI, and KISS principles simplify frontend development. Learn to write clean, maintainable JavaScript code while avoiding common pitfalls!",
-    "image": "https://media.licdn.com/dms/image/v2/D4D12AQF4gTcfvFdn4g/article-cover_image-shrink_720_1280/article-cover_image-shrink_720_1280/0/1737751174713?e=2147483647&v=beta&t=pbREWbT8aZvuNybxXoRm6ORZzWVyEgvhTfCuWbQ9LqI",
-    "url": "https://www.linkedin.com/pulse/master-dry-yagni-kiss-frontend-code-principles-made-simple-sadhukhan-buokf/?trackingId=/8sh8PO+f5vZ7I8WSTC3Tg=="
+    title: 'Master DRY, YAGNI & KISS: Frontend Code Principles Made Simple 🎭',
+    description: 'Discover how DRY, YAGNI, and KISS principles simplify frontend development. Learn to write clean, maintainable JavaScript code while avoiding common pitfalls!',
+    image: 'https://media.licdn.com/dms/image/v2/D4D12AQF4gTcfvFdn4g/article-cover_image-shrink_720_1280/article-cover_image-shrink_720_1280/0/1737751174713?e=2147483647&v=beta&t=pbREWbT8aZvuNybxXoRm6ORZzWVyEgvhTfCuWbQ9LqI',
+    url: 'https://www.linkedin.com/pulse/master-dry-yagni-kiss-frontend-code-principles-made-simple-sadhukhan-buokf/?trackingId=/8sh8PO+f5vZ7I8WSTC3Tg==',
   },
   {
     title: 'Level up your dev workflow with these VS Code extensions!',

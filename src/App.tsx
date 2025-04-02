@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { ThemeToggle, GoToTop, ArticlesSection, Footer, TechStack, HorizontalScroll, GradientBlobCursor, RewardsRecognition, ProjectSection, SectionWrapper, IntroSection, TimelineSection, SkillsSection, ContactSection, CVDownloadSection, HexagonPreloader, VisitorCounter } from './components';
 import { sectionData } from './data/sectionData';
 import './styles/custom.css';
-// import { fetchMetadata } from './utils/fetchMetadata';
+import { fetchMetadata } from './utils/fetchMetadata';
 import { ANALYTICS_CATEGORIES, trackEvent } from './utils/analytics';
 import { TrackLinks } from './utils/trackLinks';
 
@@ -18,7 +18,7 @@ function App() {
 
   // // only one time fetching data
   // useEffect(() => {
-  //   fetchMetadata('https://www.linkedin.com/pulse/why-nextjs-14-net-8-crush-microservices-2025-sourav-sadhukhan-bqzaf/?trackingId=7%2F%2BvU5VdSDuIUYbd2VpyrQ%3D%3D')
+  //   fetchMetadata('https://www.linkedin.com/pulse/lynx-vs-flutter-react-native-cross-platform-war-just-got-sadhukhan-zeswf')
   // }, []);
 
   useEffect(() => {
@@ -27,11 +27,9 @@ function App() {
       page_title: document.title,
       page_location: window.location.href,
       page_path: window.location.pathname,
-      dark_mode: isDark
+      dark_mode: isDark,
     });
   }, []);
-
-
 
   const toggleTheme = () => {
     const newTheme = !isDark;
@@ -39,7 +37,7 @@ function App() {
 
     trackEvent('theme_change', {
       category: ANALYTICS_CATEGORIES.INTERACTION,
-      new_theme: newTheme ? 'dark' : 'light'
+      new_theme: newTheme ? 'dark' : 'light',
     });
   };
 
@@ -55,30 +53,46 @@ function App() {
               <ThemeToggle isDark={isDark} toggle={toggleTheme} />
               <GoToTop />
 
+              <section id="about">
+                <IntroSection />
+              </section>
 
-              <IntroSection />
-              <SectionWrapper isDark={isDark} titleBold={sectionData.timeline.titleBold} titleLight={sectionData.timeline.titleLight} description={sectionData.timeline.description}>
-                <TimelineSection />
-              </SectionWrapper>
+              <section id="timeline">
+                <SectionWrapper isDark={isDark} titleBold={sectionData.timeline.titleBold} titleLight={sectionData.timeline.titleLight} description={sectionData.timeline.description}>
+                  <TimelineSection />
+                </SectionWrapper>
+              </section>
 
-              <SkillsSection isDark={isDark} />
+              <section id="skills">
+                <SkillsSection isDark={isDark} />
+              </section>
 
-              <SectionWrapper isDark={isDark} titleBold={sectionData.projects.titleBold} titleLight={sectionData.projects.titleLight} description={sectionData.projects.description}>
+              <section id="projects">
+                <SectionWrapper isDark={isDark} titleBold={sectionData.projects.titleBold} titleLight={sectionData.projects.titleLight} description={sectionData.projects.description}>
+                  <HorizontalScroll>
+                    <ProjectSection />
+                  </HorizontalScroll>
+                </SectionWrapper>
+              </section>
+
+              <section id="articles">
+                <SectionWrapper isDark={isDark} titleBold={sectionData.articles.titleBold} titleLight={sectionData.articles.titleLight} description={sectionData.articles.description}></SectionWrapper>
                 <HorizontalScroll>
-                  <ProjectSection />
+                  <ArticlesSection />
                 </HorizontalScroll>
-              </SectionWrapper>
+              </section>
 
-              <SectionWrapper isDark={isDark} titleBold={sectionData.articles.titleBold} titleLight={sectionData.articles.titleLight} description={sectionData.articles.description}>
-              </SectionWrapper>
-              <HorizontalScroll>
-                <ArticlesSection />
-              </HorizontalScroll>
+              <section id="rewards">
+                <RewardsRecognition isDark={isDark} />
+              </section>
 
-              <RewardsRecognition isDark={isDark} />
-              <ContactSection isDark={isDark} />
+              <section id="contact">
+                <ContactSection isDark={isDark} />
+              </section>
 
-              <CVDownloadSection isDark={isDark} />
+              <section id="cv">
+                <CVDownloadSection isDark={isDark} />
+              </section>
 
               <TechStack isDark={isDark} />
               <VisitorCounter appId="portfolio-2025" />
