@@ -183,7 +183,7 @@ export const timelineData: TimelineItem[] = [
     company: 'Fareportal',
     companyUrl: 'https://www.fareportal.com/',
     location: 'Remote',
-    date: 'April 2023 - Present',
+    date: 'April 2023 - June 2025',
     icon: 'work',
     type: 'work',
     description: 'Leading mobile app development initiatives across multiple travel brands (CheapOair and OneTravel) while mentoring junior developers and implementing innovative solutions.',
@@ -219,5 +219,18 @@ export const timelineData: TimelineItem[] = [
     type: 'certification',
     credLink: 'https://www.coursera.org/account/accomplishments/verify/APX8AEZUPQTF',
     highlights: ['Learned to talk to AI like a pro (without accidentally triggering robot uprising scenarios)', "Discovered that 'be creative' means very different things to humans vs. LLMs - mastered the middle ground", 'Built prompt chains that make ChatGPT work smarter, not harder - 10x efficiency, 0x existential dread', "Turned 'vague idea' → 'precise output' faster than you can say 'hallucinated response'", 'Now certified in making AI do useful work while keeping my prompts more organized than my browser tabs'],
+  },
+    {
+    title: 'Senior Associate Mobile Application Developer',
+    company: 'PwC',
+    companyUrl: 'https://www.pwc.com/gx/en.html',
+    location: 'Kolkata, West Bengal, India',
+    date: 'July 2025 - Present',
+    icon: 'work',
+    type: 'work',
+    description: '',
+    highlights: [
+    ],
+    technologies: ['React Native', 'Salesforce', 'JavaScript', 'TypeScript'],
   },
 ];
