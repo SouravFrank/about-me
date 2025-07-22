@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { ThemeToggle, GoToTop, ArticlesSection, Footer, TechStack, HorizontalScroll, GradientBlobCursor, RewardsRecognition, ProjectSection, SectionWrapper, IntroSection, TimelineSection, SkillsSection, ContactSection, CVDownloadSection, HexagonPreloader, VisitorCounter } from './components';
 import { sectionData } from './data/sectionData';
 import './styles/custom.css';
-// import { fetchMetadata } from './utils/fetchMetadata';
+// import { fetchMetadata, fetchMultipleMetadata } from './utils/fetchMetadata';
 import { ANALYTICS_CATEGORIES, trackEvent } from './utils/analytics';
 import { TrackLinks } from './utils/trackLinks';
 
@@ -16,10 +16,21 @@ function App() {
     return () => clearTimeout(timer);
   }, [isDark]);
 
-  // // only one time fetching data
+  // only one time fetching data
   // useEffect(() => {
-  //   fetchMetadata('https://www.linkedin.com/pulse/lynx-vs-flutter-react-native-cross-platform-war-just-got-sadhukhan-zeswf')
+    // fetchMetadata('https://www.linkedin.com/pulse/lynx-vs-flutter-react-native-cross-platform-war-just-got-sadhukhan-zeswf')
   // }, []);
+
+  // For testing multiple URLs
+  // const urls = [
+  //   'https://www.linkedin.com/pulse/lynx-vs-flutter-react-native-cross-platform-war-just-got-sadhukhan-zeswf',
+  //   'https://www.linkedin.com/pulse/vibe-coding-future-chill-programming-sourav-sadhukhan-lglrf',
+  // ];
+
+  // useEffect(() => {
+  //   // Fetch metadata for multiple URLs
+  //   fetchMultipleMetadata(urls);
+  // }, [urls]);
 
   useEffect(() => {
     // Track page view when the app loads
