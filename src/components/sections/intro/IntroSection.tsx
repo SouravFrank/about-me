@@ -10,24 +10,26 @@ import { trackEvent, ANALYTICS_CATEGORIES } from '../../../utils/analytics';
 const IntroSection: React.FC = () => {
   const [imageError, setImageError] = useState(false);
   const [isHovered, setIsHovered] = useState(false);
-  const [currentImageIndex, setCurrentImageIndex] = useState(0);
-  const [nextImageIndex, setNextImageIndex] = useState(1);
+  const [currentImageIndex, setCurrentImageIndex] = useState(personalInfo.profileImages.length - 1);
+  const [nextImageIndex, setNextImageIndex] = useState(personalInfo.profileImages.length - 2);
   const [isTransitioning, setIsTransitioning] = useState(false);
   const [showDetailed, setShowDetailed] = useState(false);
 
   // Auto-advance images
   useEffect(() => {
     const timer = setInterval(() => {
-      if (!isHovered) {  // Only advance if not hovered
-        setIsTransitioning(true); // Start transition
-        setNextImageIndex((prev) =>
-          (prev + 1) % personalInfo.profileImages.length
-        );
+      if (!isHovered && personalInfo.profileImages.length > 1) {
+        setIsTransitioning(true);
+        let newIndex;
+        do {
+          newIndex = Math.floor(Math.random() * personalInfo.profileImages.length);
+        } while (newIndex === currentImageIndex);
+        setNextImageIndex(newIndex);
       }
-    }, 2000);  // Change image every 3 seconds
+    }, 2000);
 
     return () => clearInterval(timer);
-  }, [isHovered]);
+  }, [isHovered, currentImageIndex]);
 
   // Handle transition end
   useEffect(() => {
