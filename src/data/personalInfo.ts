@@ -29,8 +29,8 @@ export const personalInfo: PersonalInfo = {
   email: "ssadhukhan990@gmail.com",
   phone: "+91 9038516950",
   profileImages: [profileImage1, profileImage2, profileImage3, profileImage4],
-  viewResumeLink: 'https://drive.google.com/file/d/15riHzaF_7Ogd_XDQtSEt1OM1L96qh4ta/preview',
-  downLoadResumeLink: 'https://drive.google.com/uc?export=download&id=15riHzaF_7Ogd_XDQtSEt1OM1L96qh4ta'
+  viewResumeLink: 'https://drive.google.com/file/d/1Lzqp5ojWS3CKBkkfRrWacKBGdazQ9Pci/preview',
+  downLoadResumeLink: 'https://drive.google.com/uc?export=download&id=1Lzqp5ojWS3CKBkkfRrWacKBGdazQ9Pci'
 };
 
 // Export the contact information array

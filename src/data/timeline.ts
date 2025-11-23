@@ -1,8 +1,8 @@
 import { TimelineItem } from '../components/sections/timeline/types';
-import linkdInReactCert from "../assets/images/Become a React Native Developer.png"
-import completeReactNativeHooks from '../assets/images/The Complete React Native + Hooks Course.png'
-import reactNativePracticalGuide from '../assets/images/React Native - The Practical Guide.png'
-import acceleratedES6 from '../assets/images/Accelerated ES6 JavaScript Training.png'
+import linkdInReactCert from '../assets/images/Become a React Native Developer.png';
+import completeReactNativeHooks from '../assets/images/The Complete React Native + Hooks Course.png';
+import reactNativePracticalGuide from '../assets/images/React Native - The Practical Guide.png';
+import acceleratedES6 from '../assets/images/Accelerated ES6 JavaScript Training.png';
 
 export const timelineData: TimelineItem[] = [
   {
@@ -54,18 +54,13 @@ export const timelineData: TimelineItem[] = [
     icon: 'work',
     type: 'work',
     description: 'Kickstarted my professional journey with React Native development and DevOps practices.',
-    highlights: [
-      'Optimized log management and load balancing in the API service layer using PM2’s advanced process management features, including log rotation.',
-      'Proactively notified teams of potential outages by creating precise failure alerts using Splunk and Dynatrace.',
-      'Streamlined deployment processes using Fastlane, reducing manual errors and deployment time.',
-      'Deployed the Scan & Go React Native shopping app to Google Play Store and Apple App Store, achieving over 1 million downloads with bug-free functionality.'
-    ],
+    highlights: ['Optimized log management and load balancing in the API service layer using PM2’s advanced process management features, including log rotation.', 'Proactively notified teams of potential outages by creating precise failure alerts using Splunk and Dynatrace.', 'Streamlined deployment processes using Fastlane, reducing manual errors and deployment time.', 'Deployed the Scan & Go React Native shopping app to Google Play Store and Apple App Store, achieving over 1 million downloads with bug-free functionality.'],
     technologies: ['React Native', 'Node.js', 'PM2', 'Jenkins', 'Splunk', 'Dynatrace', 'Fastlane', 'Airwatch'],
     links: {
-      "ASDA Scan & Go": {
+      'ASDA Scan & Go': {
         playStore: 'https://play.google.com/store/apps/details?id=com.asda.ScanandGoMobile&pcampaignid=web_share',
         appStore: 'https://apps.apple.com/gb/app/asda-scan-go/id1413258515',
-      }
+      },
     },
   },
   {
@@ -96,13 +91,7 @@ export const timelineData: TimelineItem[] = [
     icon: 'certificate',
     type: 'certification',
     credLink: acceleratedES6,
-    highlights: [
-      'Mastered modern JavaScript features like arrow functions, destructuring, and template literals.',
-      'Built interactive web applications using ES6 modules and classes.',
-      'Enhanced code readability and maintainability with ES6 syntax improvements.',
-      'Gained proficiency in asynchronous programming with Promises and async/await.',
-      'Applied ES6 features to refactor legacy codebases, improving performance and scalability.'
-    ],
+    highlights: ['Mastered modern JavaScript features like arrow functions, destructuring, and template literals.', 'Built interactive web applications using ES6 modules and classes.', 'Enhanced code readability and maintainability with ES6 syntax improvements.', 'Gained proficiency in asynchronous programming with Promises and async/await.', 'Applied ES6 features to refactor legacy codebases, improving performance and scalability.'],
   },
   {
     title: 'Become a React Native Developer',
@@ -220,7 +209,7 @@ export const timelineData: TimelineItem[] = [
     credLink: 'https://www.coursera.org/account/accomplishments/verify/APX8AEZUPQTF',
     highlights: ['Learned to talk to AI like a pro (without accidentally triggering robot uprising scenarios)', "Discovered that 'be creative' means very different things to humans vs. LLMs - mastered the middle ground", 'Built prompt chains that make ChatGPT work smarter, not harder - 10x efficiency, 0x existential dread', "Turned 'vague idea' → 'precise output' faster than you can say 'hallucinated response'", 'Now certified in making AI do useful work while keeping my prompts more organized than my browser tabs'],
   },
-    {
+  {
     title: 'Senior Associate Mobile Application Developer',
     company: 'PwC',
     companyUrl: 'https://www.pwc.com/gx/en.html',
@@ -228,9 +217,8 @@ export const timelineData: TimelineItem[] = [
     date: 'July 2025 - Present',
     icon: 'work',
     type: 'work',
-    description: '',
-    highlights: [
-    ],
+    description: 'Driving enterprise mobility modernization by building React Native + TypeScript POCs integrated with Salesforce Lightning, standardizing an internal component library, and mentoring teams to accelerate onboarding and deliver modular, scalable mobile solutions.',
+    highlights: ["Selected for upskilling into Salesforce Lightning Components under PwC's enterprise mobility transformation initiative.", 'Built internal POCs using React Native + TypeScript, focusing on modular architecture, reusable components, and enterprise-grade patterns.', 'Improved internal component library standardization and accelerated onboarding for mobile teams.'],
     technologies: ['React Native', 'Salesforce', 'JavaScript', 'TypeScript'],
   },
 ];
