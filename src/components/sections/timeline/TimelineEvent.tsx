@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
-import { Briefcase, GraduationCap, Cake, ChevronDown, ChevronUp, ExternalLink, Award } from 'lucide-react';
+import { Briefcase, GraduationCap, Cake, ChevronDown, ChevronUp, ExternalLink, Award, MapPin, Calendar } from 'lucide-react';
 import { TimelineItem } from './types';
 import { trackEvent, ANALYTICS_CATEGORIES } from '../../../utils/analytics';
 
@@ -19,228 +19,273 @@ const TimelineEvent: React.FC<TimelineItem> = ({
 
   const Icon = getIcon();
 
-  const getIconColor = () => {
+  const getGradientColors = () => {
     switch (type) {
-      case 'personal': return 'from-purple-500 to-pink-500';
-      case 'education': return 'from-blue-500 to-cyan-500';
-      case 'certification': return 'from-yellow-500 to-orange-500';
-      default: return 'from-emerald-500 to-teal-500';
+      case 'personal': return { from: 'from-purple-500', to: 'to-pink-500', text: 'text-purple-500', bg: 'bg-purple-500' };
+      case 'education': return { from: 'from-blue-500', to: 'to-cyan-500', text: 'text-blue-500', bg: 'bg-blue-500' };
+      case 'certification': return { from: 'from-yellow-500', to: 'to-orange-500', text: 'text-yellow-500', bg: 'bg-yellow-500' };
+      default: return { from: 'from-emerald-500', to: 'to-teal-500', text: 'text-emerald-500', bg: 'bg-emerald-500' };
     }
   };
 
+  const colors = getGradientColors();
+  const gradientClass = `bg-gradient-to-r ${colors.from} ${colors.to}`;
+
+  const hasExpandableContent = description || responsibilities || (highlights && highlights.length > 0);
+  const hasFooter = (technologies && technologies.length > 0) || hasExpandableContent;
+
   return (
     <motion.div
-      className={`relative ${isMobile ? 'mb-4' : 'flex gap-6 pb-8 last:pb-0'}`}
-      initial={{ opacity: 0, y: 50 }}
+      className={`relative ${isMobile ? 'mb-8' : 'flex items-start gap-8 pb-12 last:pb-0'}`}
+      initial={{ opacity: 0, y: 30 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-50px" }}
-      transition={{ duration: 0.5, ease: "easeOut" }}
+      transition={{ duration: 0.6, ease: "easeOut" }}
     >
-      {/* Desktop Timeline Line */}
+      {/* Timeline Line (Desktop) */}
       {!isMobile && (
-        <div className="absolute left-9 top-12 -bottom-3 w-px bg-gradient-to-b from-gray-200 to-transparent dark:from-gray-800 last:hidden" />
+        <div className="absolute left-[2.25rem] top-14 -bottom-4 w-0.5 bg-gradient-to-b from-gray-200 via-gray-200 to-transparent dark:from-gray-800 dark:via-gray-800 last:hidden" />
       )}
 
-      {/* Icon Column (Desktop) / Header Icon (Mobile) */}
-      {isMobile ? (
-        <div className="flex items-center gap-3 pt-4">
-          <div className={`flex h-8 w-8 items-center justify-center rounded-full bg-gradient-to-br ${getIconColor()} shadow-md`}>
-            <Icon className="h-4 w-4 text-white" />
+      {/* Icon Column */}
+      <div className={`flex-none ${isMobile ? 'mb-4 flex items-start gap-4' : 'pt-2'}`}>
+        <div className="relative flex h-14 w-14 items-center justify-center flex-none">
+          {/* Animated Glow Behind Icon */}
+          <div className={`absolute inset-0 rounded-2xl ${gradientClass} opacity-20 blur-xl animate-pulse`} />
+
+          {/* Icon Container */}
+          <div className={`relative flex h-14 w-14 items-center justify-center rounded-2xl bg-white dark:bg-gray-900 shadow-xl ring-1 ring-gray-100 dark:ring-gray-800 z-10 group overflow-hidden`}>
+            {/* Hover Gradient Effect */}
+            <div className={`absolute inset-0 ${gradientClass} opacity-0 group-hover:opacity-10 transition-opacity duration-300`} />
+            <Icon className={`h-6 w-6 ${colors.text} transition-transform duration-300 group-hover:scale-110`} />
           </div>
-          <h3 className="text-base font-semibold text-gray-900 dark:text-white truncate">
-            {title}
-          </h3>
         </div>
-      ) : (
-        <div className="flex-none pt-0.5">
-          <div className="relative flex h-10 w-10 items-center justify-center">
-            <div className={`absolute inset-0 rounded-xl bg-gradient-to-br ${getIconColor()} opacity-20 blur-xl`} />
-            <div className="absolute inset-0 rounded-xl bg-white/30 backdrop-blur-md dark:bg-gray-950/30" />
-            <div className={`relative flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-br ${getIconColor()} shadow-lg ring-1 ring-white/20`}>
-              <Icon className="h-5 w-5 text-white" />
+
+        {/* Mobile Title Layout */}
+        {isMobile && (
+          <div className="flex-1 min-w-0 pt-1">
+            <h3 className="text-lg font-bold text-gray-900 dark:text-white leading-tight mb-1">
+              {title}
+            </h3>
+            <div className="flex flex-col gap-0.5 text-sm text-gray-600 dark:text-gray-400">
+              <span className={`font-medium ${colors.text}`}>{company}</span>
+              {location && (
+                <span className="text-xs text-gray-500 dark:text-gray-500 flex items-center gap-1">
+                  <MapPin className="h-3 w-3" />
+                  {location}
+                </span>
+              )}
             </div>
           </div>
-        </div>
-      )}
+        )}
+      </div>
 
-      {/* Content */}
-      <div className={isMobile ? 'pb-4 w-full' : 'flex-1'}>
-        <div className={`relative rounded-xl bg-white dark:bg-gray-900 shadow-md overflow-hidden ${isMobile ? 'mt-2' : 'p-4 backdrop-blur-lg ring-1 ring-gray-200/50 dark:ring-gray-800/50 transition-all duration-200 hover:shadow-xl'}`}>
-          {/* Desktop Gradient Overlay */}
+      {/* Content Card */}
+      <div className={`flex-1 relative group`}>
+        {/* Animated Border Gradient */}
+        <div className={`absolute -inset-[1px] rounded-2xl ${gradientClass} opacity-30 blur-sm transition-opacity duration-500 group-hover:opacity-60 group-hover:blur-md`} />
+
+        <div className="relative rounded-2xl bg-white/80 dark:bg-gray-900/80 backdrop-blur-xl shadow-sm ring-1 ring-gray-200/50 dark:ring-gray-800/50 p-5 sm:p-6 transition-all duration-300 hover:shadow-lg hover:-translate-y-0.5">
+
+          {/* Desktop Header */}
           {!isMobile && (
-            <div className="absolute inset-0 rounded-xl bg-gradient-to-br from-white/50 to-transparent opacity-20 dark:from-gray-900/50" />
-          )}
-
-          <div className={isMobile ? 'p-3' : 'relative'}>
-            {/* Desktop Header */}
-            {!isMobile && (
-              <div className="flex items-start justify-between gap-4">
-                <div>
-                  <h3 className="font-semibold text-gray-900 dark:text-white">
-                    {title}
-                    {company && (
-                      <span className="text-gray-600 dark:text-gray-400">
-                        {' '}@ {companyUrl ? (
-                          <a href={companyUrl} target="_blank" rel="noopener noreferrer" className="hover:text-blue-500 inline-flex items-center">
-                            {company}
-                            <ExternalLink className="ml-1 h-3 w-3" />
-                          </a>
-                        ) : company}
-                      </span>
-                    )}
-                  </h3>
-                  {specialization && (
-                    <p className="mt-0.5 text-sm text-gray-600 dark:text-gray-400">
-                      {specialization}
-                    </p>
-                  )}
-                </div>
-                <time className="flex-none text-sm font-medium text-gray-500 dark:text-gray-400">
-                  {date}
-                </time>
-              </div>
-            )}
-
-            {/* Mobile Header Details */}
-            {isMobile && (
-              <div className="flex flex-col space-y-2">
-                <time className="text-sm font-medium text-gray-500 dark:text-gray-400">
-                  {date}
-                </time>
-                <div className="text-xs text-gray-600 dark:text-gray-400 flex flex-wrap gap-x-3 gap-y-1">
+            <div className={`flex flex-col sm:flex-row sm:items-start justify-between gap-4 ${description || specialization ? 'mb-4' : 'mb-2'}`}>
+              <div>
+                <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-1">
+                  {title}
+                </h3>
+                <div className="flex flex-wrap items-center gap-x-3 gap-y-1 text-sm">
                   {company && (
-                    <span>
+                    <div className="flex items-center gap-1.5 font-medium text-gray-700 dark:text-gray-300">
+                      <Briefcase className="h-3.5 w-3.5 text-gray-400" />
                       {companyUrl ? (
-                        <a href={companyUrl} target="_blank" rel="noopener noreferrer" className="hover:text-blue-500 flex items-center">
+                        <a href={companyUrl} target="_blank" rel="noopener noreferrer" className={`hover:${colors.text} transition-colors flex items-center gap-1`}>
                           {company}
-                          <ExternalLink className="ml-1 h-3 w-3" />
+                          <ExternalLink className="h-3 w-3" />
                         </a>
                       ) : company}
-                    </span>
+                    </div>
                   )}
-                  {specialization && <span>{specialization}</span>}
+                  {location && (
+                    <div className="flex items-center gap-1.5 text-gray-500 dark:text-gray-400">
+                      <MapPin className="h-3.5 w-3.5" />
+                      {location}
+                    </div>
+                  )}
+                  {type === 'certification' && credLink && (
+                    <a href={credLink} target="_blank" rel="noopener noreferrer" className={`flex items-center gap-1.5 font-medium ${colors.text} hover:underline`}>
+                      <Award className="h-3.5 w-3.5" />
+                      Show Certificate
+                    </a>
+                  )}
                 </div>
               </div>
-            )}
 
-            {/* Certification Link */}
-            {type === 'certification' && credLink && (
-              <div className={isMobile ? 'mt-3' : 'mt-2'}>
-                <a href={credLink} target="_blank" rel="noopener noreferrer" className="text-blue-500 hover:text-blue-600 text-sm">
-                  Show Certificate <ExternalLink className="inline h-3 w-3" />
+              <div className={`flex items-center gap-1.5 px-3 py-1 rounded-full bg-gray-50 dark:bg-gray-800/50 border border-gray-100 dark:border-gray-800 text-xs font-semibold whitespace-nowrap ${colors.text}`}>
+                <Calendar className="h-3.5 w-3.5" />
+                {date}
+              </div>
+            </div>
+          )}
+
+          {/* Mobile Date Badge */}
+          {isMobile && (
+            <div className="flex flex-wrap items-center gap-2 mb-4 text-xs">
+              <div className={`flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-gray-50 dark:bg-gray-800/50 border border-gray-100 dark:border-gray-800 font-medium ${colors.text}`}>
+                <Calendar className="h-3 w-3" />
+                {date}
+              </div>
+              {type === 'certification' && credLink && (
+                <a href={credLink} target="_blank" rel="noopener noreferrer" className="text-blue-500 flex items-center gap-1 ml-auto">
+                  Certificate <ExternalLink className="h-3 w-3" />
                 </a>
-              </div>
-            )}
+              )}
+            </div>
+          )}
 
-            {/* Collapsed Description */}
-            {!isExpanded && description && (
-              <p className={`mt-2 text-gray-600 dark:text-gray-400 ${isMobile ? 'text-sm' : 'text-sm'}`}>
-                {description}
-              </p>
-            )}
+          {/* Specialization / Subtitle */}
+          {specialization && (
+            <div className="mb-4 inline-block px-3 py-1 rounded-lg bg-gray-100/50 dark:bg-gray-800/50 text-sm font-medium text-gray-700 dark:text-gray-300">
+              {specialization}
+            </div>
+          )}
 
-            {/* Expanded Content */}
-            {isExpanded && (
-              <div className={isMobile ? 'mt-3' : ''}>
-                {responsibilities && (
-                  <div className={isMobile ? 'mb-4' : 'mt-4'}>
-                    <h4 className="font-medium text-gray-900 dark:text-white text-sm">Key Responsibilities</h4>
-                    <ul className="mt-2 space-y-2">
-                      {responsibilities.map((resp, idx) => (
-                        <li key={idx} className={`flex items-start gap-2 text-gray-700 dark:text-gray-300 ${isMobile ? 'text-xs' : 'text-sm'}`}>
-                          <span className={`mt-1 h-1 w-1 flex-none rounded-full bg-gradient-to-r ${getIconColor()}`} />
-                          {resp}
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                )}
+          {/* Description Preview */}
+          {!isExpanded && description && (
+            <p className="text-gray-600 dark:text-gray-400 text-sm leading-relaxed line-clamp-2">
+              {description}
+            </p>
+          )}
 
-                {type !== 'personal' && (
-                  <div className={isMobile ? 'mb-4' : 'mt-4'}>
-                    <h4 className="font-medium text-gray-900 dark:text-white text-sm">Highlights</h4>
-                    <ul className="mt-2 space-y-2">
-                      {highlights.map((highlight, idx) => (
-                        <li key={idx} className={`flex items-start gap-2 text-gray-700 dark:text-gray-300 ${isMobile ? 'text-xs' : 'text-sm'}`}>
-                          <span className={`mt-1 h-1 w-1 flex-none rounded-full bg-gradient-to-r ${getIconColor()}`} />
-                          {highlight}
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                )}
+          {/* Expanded Content */}
+          <motion.div
+            initial={false}
+            animate={{ height: isExpanded ? 'auto' : 0, opacity: isExpanded ? 1 : 0 }}
+            transition={{ duration: 0.3, ease: "easeInOut" }}
+            className="overflow-hidden"
+          >
+            <div className="pt-4 space-y-6">
+              {/* Full Description */}
+              {description && (
+                <p className="text-gray-600 dark:text-gray-400 text-sm leading-relaxed">
+                  {description}
+                </p>
+              )}
 
-                {type === 'personal' && (
-                  <div className={isMobile ? 'mb-4' : 'mt-4'}>
-                    <p className={`text-gray-700 dark:text-gray-300 ${isMobile ? 'text-xs' : 'text-sm'}`}>
-                      {highlights[0]}
-                    </p>
-                  </div>
-                )}
+              {/* Responsibilities */}
+              {responsibilities && (
+                <div>
+                  <h4 className="text-sm font-semibold text-gray-900 dark:text-white mb-3 flex items-center gap-2">
+                    <span className={`h-1.5 w-1.5 rounded-full ${gradientClass}`} />
+                    Key Responsibilities
+                  </h4>
+                  <ul className="grid gap-2">
+                    {responsibilities.map((resp, idx) => (
+                      <li key={idx} className="flex items-start gap-3 text-sm text-gray-600 dark:text-gray-400">
+                        <span className={`mt-1.5 h-1 w-1 flex-none rounded-full bg-gray-300 dark:bg-gray-600`} />
+                        {resp}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              )}
 
-                {links && (
-                  <div className={isMobile ? 'mb-4' : 'mt-4'}>
-                    <h4 className="font-medium text-gray-900 dark:text-white text-sm">Available On</h4>
-                    <div className={`mt-2 ${isMobile ? 'space-y-2' : 'space-y-2'}`}>
-                      {Object.entries(links).map(([appName, appLinks]) => (
-                        <div key={appName} className="flex flex-wrap gap-3">
-                          <span className={`text-gray-500 dark:text-gray-400 ${isMobile ? 'text-xs' : 'text-sm'}`}>{appName}:</span>
-                          {appLinks.playStore && (
-                            <a href={appLinks.playStore} target="_blank" rel="noopener noreferrer"
-                              className={`text-blue-500 hover:text-blue-600 flex items-center gap-1 ${isMobile ? 'text-xs' : 'text-sm'}`}>
-                              Play Store <ExternalLink className="h-3 w-3" />
-                            </a>
-                          )}
-                          {appLinks.appStore && (
-                            <a href={appLinks.appStore} target="_blank" rel="noopener noreferrer"
-                              className={`text-blue-500 hover:text-blue-600 flex items-center gap-1 ${isMobile ? 'text-xs' : 'text-sm'}`}>
-                              App Store <ExternalLink className="h-3 w-3" />
-                            </a>
-                          )}
-                        </div>
-                      ))}
+              {/* Highlights */}
+              {highlights && highlights.length > 0 && type !== 'personal' && (
+                <div>
+                  <h4 className="text-sm font-semibold text-gray-900 dark:text-white mb-3 flex items-center gap-2">
+                    <span className={`h-1.5 w-1.5 rounded-full ${gradientClass}`} />
+                    Key Achievements
+                  </h4>
+                  <ul className="grid gap-2">
+                    {highlights.map((highlight, idx) => (
+                      <li key={idx} className="flex items-start gap-3 text-sm text-gray-600 dark:text-gray-400">
+                        <span className={`mt-1.5 h-1 w-1 flex-none rounded-full bg-gray-300 dark:bg-gray-600`} />
+                        {highlight}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              )}
+
+              {/* Personal Highlights */}
+              {type === 'personal' && highlights && (
+                <div className="p-4 rounded-xl bg-gray-50 dark:bg-gray-800/50 border border-gray-100 dark:border-gray-800">
+                  <p className="text-sm text-gray-600 dark:text-gray-300 italic">
+                    "{highlights[0]}"
+                  </p>
+                </div>
+              )}
+
+              {/* Links */}
+              {links && (
+                <div className="flex flex-wrap gap-4 pt-2">
+                  {Object.entries(links).map(([appName, appLinks]) => (
+                    <div key={appName} className="flex items-center gap-2 text-sm">
+                      <span className="font-medium text-gray-700 dark:text-gray-300">{appName}:</span>
+                      {appLinks.playStore && (
+                        <a href={appLinks.playStore} target="_blank" rel="noopener noreferrer"
+                          className="text-xs px-2 py-1 rounded-md bg-green-50 text-green-600 hover:bg-green-100 border border-green-200 transition-colors">
+                          Play Store
+                        </a>
+                      )}
+                      {appLinks.appStore && (
+                        <a href={appLinks.appStore} target="_blank" rel="noopener noreferrer"
+                          className="text-xs px-2 py-1 rounded-md bg-blue-50 text-blue-600 hover:bg-blue-100 border border-blue-200 transition-colors">
+                          App Store
+                        </a>
+                      )}
                     </div>
-                  </div>
-                )}
-              </div>
-            )}
+                  ))}
+                </div>
+              )}
+            </div>
+          </motion.div>
 
-            {/* Technologies */}
-            {technologies && technologies.length > 0 && (
-              <div className={`mt-3 flex flex-wrap ${isMobile ? 'gap-1' : 'gap-2'}`}>
-                {technologies.map((tech, idx) => (
+          {/* Footer Actions & Tags */}
+          {hasFooter && (
+            <div className={`pt-4 border-t border-gray-100 dark:border-gray-800 flex flex-col sm:flex-row sm:items-center justify-between gap-4 ${isExpanded ? 'mt-5' : (description ? 'mt-4' : 'mt-2')}`}>
+              {/* Technologies */}
+              <div className="flex flex-wrap gap-1.5">
+                {technologies?.slice(0, isExpanded ? undefined : 4).map((tech, idx) => (
                   <span
                     key={idx}
-                    className={`inline-flex items-center rounded-full bg-gray-100 dark:bg-gray-800 ${isMobile ? 'px-2 py-0.5 text-xs' : 'px-3 py-1 text-xs'} font-medium text-gray-700 dark:text-gray-300`}
+                    className="px-2.5 py-1 text-xs font-medium rounded-md bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-400 border border-gray-200 dark:border-gray-700"
                   >
                     {tech}
                   </span>
                 ))}
-              </div>
-            )}
-
-            {/* Expand/Collapse Button */}
-            {type !== 'personal' && (description || responsibilities || highlights.length > 0) && (
-              <button
-                onClick={() => {
-                  setIsExpanded(!isExpanded);
-                  trackEvent('timeline_toggle', {
-                    category: ANALYTICS_CATEGORIES.TIMELINE,
-                    action: isExpanded ? 'collapse' : 'expand',
-                    item_title: title,
-                    item_type: type
-                  });
-                }}
-                className={`w-full mt-3 flex items-center justify-center gap-1 text-sm font-medium text-blue-500 hover:text-blue-600 py-2 ${isMobile ? 'bg-gray-100 dark:bg-gray-800 rounded-b-xl' : ''}`}
-              >
-                {isExpanded ? (
-                  <>Collapse <ChevronUp className="h-4 w-4" /></>
-                ) : (
-                  <>Expand <ChevronDown className="h-4 w-4" /></>
+                {!isExpanded && technologies && technologies.length > 4 && (
+                  <span className="px-2.5 py-1 text-xs font-medium rounded-md bg-gray-50 dark:bg-gray-800/50 text-gray-500 border border-gray-100 dark:border-gray-800">
+                    +{technologies.length - 4} more
+                  </span>
                 )}
-              </button>
-            )}
-          </div>
+              </div>
+
+              {/* Toggle Button */}
+              {hasExpandableContent && (
+                <button
+                  onClick={() => {
+                    setIsExpanded(!isExpanded);
+                    trackEvent('timeline_toggle', {
+                      category: ANALYTICS_CATEGORIES.TIMELINE,
+                      action: isExpanded ? 'collapse' : 'expand',
+                      item_title: title,
+                      item_type: type
+                    });
+                  }}
+                  className={`flex items-center gap-1.5 text-xs font-semibold uppercase tracking-wider ${colors.text} hover:opacity-80 transition-opacity ml-auto sm:ml-0`}
+                >
+                  {isExpanded ? (
+                    <>Show Less <ChevronUp className="h-3.5 w-3.5" /></>
+                  ) : (
+                    <>Read More <ChevronDown className="h-3.5 w-3.5" /></>
+                  )}
+                </button>
+              )}
+            </div>
+          )}
+
         </div>
       </div>
     </motion.div>
