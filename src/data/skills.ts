@@ -160,6 +160,11 @@ export const skills: SkillsData = {
       description: 'Skill in designing effective prompts for AI models',
     },
     {
+      name: 'Vibe Coding',
+      src: 'code',
+      description: 'Effective use of LLM to build industry grade app in less time',
+    },
+    {
       name: 'Adaptability',
       src: 'adapt',
       description: 'Quick to learn and adapt to new technologies and situations',
@@ -179,6 +184,6 @@ export const skills: SkillsData = {
       src: 'team',
       description: 'Experience in leading teams and collaborating effectively',
     },
-    
+
   ],
 };

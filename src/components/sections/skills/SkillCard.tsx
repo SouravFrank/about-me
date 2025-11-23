@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import { ExternalLink, Brain, BarChart2, Users, Workflow, Bot } from 'lucide-react';
+import { ExternalLink, Brain, BarChart2, Users, Workflow, Bot, MessageSquareCode } from 'lucide-react';
 import { SkillCardProps } from './types';
 
 const SkillCard: React.FC<SkillCardProps> = ({ name, src, description, expertise, index }) => {
@@ -10,6 +10,7 @@ const SkillCard: React.FC<SkillCardProps> = ({ name, src, description, expertise
       team: <Users className="w-10 h-10 text-purple-500 dark:text-purple-400" />,
       adapt: <Workflow className="w-10 h-10 text-orange-500 dark:text-orange-400" />,
       prompt: <Bot className="w-10 h-10 text-red-500 dark:text-red-400" />,
+      code: <MessageSquareCode className="w-10 h-10 text-blue-500 dark:text-blue-400" />,
     };
 
     return (
