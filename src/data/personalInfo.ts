@@ -3,6 +3,8 @@ import profileImage1 from '../assets/images/profile(1).jpg';
 import profileImage2 from '../assets/images/profile(2).jpg';
 import profileImage3 from '../assets/images/profile(3).png';
 import profileImage4 from '../assets/images/profile(4).jpg';
+import profileImage5 from '../assets/images/profile(5).jpg';
+import profileImage6 from '../assets/images/profile(6).jpg';
 
 // Define the interface for personal information
 export interface PersonalInfo {
@@ -28,7 +30,7 @@ export const personalInfo: PersonalInfo = {
   location: "Kolkata, India",
   email: "ssadhukhan990@gmail.com",
   phone: "+91 9038516950",
-  profileImages: [profileImage1, profileImage2, profileImage3, profileImage4],
+  profileImages: [profileImage1, profileImage2, profileImage3, profileImage4, profileImage5, profileImage6],
   viewResumeLink: 'https://drive.google.com/file/d/1Lzqp5ojWS3CKBkkfRrWacKBGdazQ9Pci/preview',
   downLoadResumeLink: 'https://drive.google.com/uc?export=download&id=1Lzqp5ojWS3CKBkkfRrWacKBGdazQ9Pci'
 };
