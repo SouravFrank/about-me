@@ -19,14 +19,14 @@ export const skills: SkillsData = {
     {
       name: 'React Native',
       src: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/react/react-original.svg',
-      description: 'Cross-platform mobile framework for building native apps',
-      expertise: 8,
+      description: 'Cross-platform product engineering spanning native modules, releases, performance tuning, and polished UI delivery.',
+      expertise: 9,
     },
     {
       name: 'React',
       src: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/react/react-original.svg',
-      description: 'Front-end library for building user interfaces',
-      expertise: 8,
+      description: 'Production React apps with responsive architecture, route systems, offline support, and reusable UI foundations.',
+      expertise: 9,
     },
     {
       name: 'Redux',
@@ -37,14 +37,14 @@ export const skills: SkillsData = {
     {
       name: 'Node.js',
       src: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/nodejs/nodejs-original.svg',
-      description: 'JavaScript runtime for server-side development',
-      expertise: 6,
+      description: 'Server-side JavaScript for REST APIs, automation, app support services, and product integrations.',
+      expertise: 7,
     },
     {
       name: 'Express.js',
       src: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/express/express-original.svg',
-      description: 'Web application framework for Node.js',
-      expertise: 5,
+      description: 'Lean API layers powering promotions, internal tools, and connected mobile-web user journeys.',
+      expertise: 7,
     },
     {
       name: 'JavaScript',
@@ -55,8 +55,8 @@ export const skills: SkillsData = {
     {
       name: 'TypeScript',
       src: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/typescript/typescript-original.svg',
-      description: 'Superset of JavaScript that adds static types',
-      expertise: 4,
+      description: 'Static typing and safer architecture across React, React Native, shared packages, and enterprise-scale features.',
+      expertise: 8,
     },
     {
       name: 'HTML5',
@@ -100,6 +100,24 @@ export const skills: SkillsData = {
       description: 'Library for rendering animations in web and mobile applications',
       expertise: 5,
     },
+    {
+      name: 'Expo',
+      src: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/react/react-original.svg',
+      description: 'Fast React Native iteration and tooling for prototyping, team enablement, and product delivery.',
+      expertise: 7,
+    },
+    {
+      name: 'IndexedDB',
+      src: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/chrome/chrome-original.svg',
+      description: 'Offline-first browser persistence and sync queue patterns for network-sensitive workflows.',
+      expertise: 7,
+    },
+    {
+      name: 'Storybook',
+      src: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/storybook/storybook-original.svg',
+      description: 'Component libraries and UI documentation systems shared across web and mobile teams.',
+      expertise: 7,
+    },
   ],
   tools: [
     {
@@ -113,14 +131,14 @@ export const skills: SkillsData = {
       description: 'IDE for Android app development',
     },
     {
-      name: 'Azure',
-      src: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/azure/azure-original.svg',
-      description: 'Cloud computing platform for deployment and CI/CD',
+      name: 'Azure DevOps',
+      src: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/azuredevops/azuredevops-original.svg',
+      description: 'Planning, sprint coordination, release management, and enterprise delivery workflows.',
     },
     {
       name: 'Firebase',
       src: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/firebase/firebase-plain.svg',
-      description: 'Platform for mobile and web application development',
+      description: 'Crashlytics, Analytics, Cloud Messaging, and performance monitoring for production-grade apps.',
     },
     {
       name: 'Swagger',
@@ -143,6 +161,11 @@ export const skills: SkillsData = {
       description: 'Project management tool for agile teams',
     },
     {
+      name: 'Figma',
+      src: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/figma/figma-original.svg',
+      description: 'Design-to-code handoff, spec alignment, and pixel-precise UI implementation.',
+    },
+    {
       name: 'npm',
       src: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/npm/npm-original-wordmark.svg',
       description: 'Package manager for JavaScript',
@@ -157,12 +180,12 @@ export const skills: SkillsData = {
     {
       name: 'Prompt Engineering',
       src: 'prompt',
-      description: 'Skill in designing effective prompts for AI models',
+      description: 'Certified prompt design for reliable AI-assisted engineering and content workflows.',
     },
     {
       name: 'Vibe Coding',
       src: 'code',
-      description: 'Effective use of LLM to build industry grade app in less time',
+      description: 'Fast, high-quality development using Cursor, Claude Code, GitHub Copilot, and OpenAI Codex.',
     },
     {
       name: 'Adaptability',
@@ -172,7 +195,7 @@ export const skills: SkillsData = {
     {
       name: 'Big Picture Thinking',
       src: 'strategy',
-      description: 'Ability to understand and plan for large-scale solutions',
+      description: 'Architecture-level thinking across product scope, team structure, and long-term maintainability.',
     },
     {
       name: 'Analytical & Problem Solving',
@@ -182,7 +205,7 @@ export const skills: SkillsData = {
     {
       name: 'Teamwork & Leadership',
       src: 'team',
-      description: 'Experience in leading teams and collaborating effectively',
+      description: 'Technical leadership, mentoring, PR approvals, stakeholder alignment, and release ownership.',
     },
 
   ],

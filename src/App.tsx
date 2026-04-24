@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { ThemeToggle, GoToTop, ArticlesSection, Footer, TechStack, HorizontalScroll, GradientBlobCursor, RewardsRecognition, ProjectSection, SectionWrapper, IntroSection, TimelineSection, SkillsSection, ContactSection, CVDownloadSection, HexagonPreloader, VisitorCounter } from './components';
+import { ThemeToggle, GoToTop, ArticlesSection, Footer, TechStack, HorizontalScroll, GradientBlobCursor, RewardsRecognition, ProjectSection, SectionWrapper, IntroSection, TimelineSection, SkillsSection, ContactSection, CVDownloadSection, HexagonPreloader, VisitorCounter, InteractiveBackground } from './components';
 import { sectionData } from './data/sectionData';
 import './styles/custom.css';
 // import { fetchMetadata, fetchMultipleMetadata } from './utils/fetchMetadata';
@@ -60,7 +60,9 @@ function App() {
         </div>
         <div className={`min-h-screen transition-opacity duration-700 delay-200 ${loading ? 'opacity-0' : 'opacity-100'}`}>
           <GradientBlobCursor isDarkMode={isDark}>
-            <div className={`transition-colors duration-300 ${isDark ? 'dark bg-gray-900 text-white' : 'bg-gray-100 text-gray-900'}`}>
+            <div className={`relative transition-colors duration-300 ${isDark ? 'dark bg-gray-900 text-white' : 'bg-gray-100 text-gray-900'}`}>
+              <InteractiveBackground isDark={isDark} />
+              <div className="relative z-10">
               <ThemeToggle isDark={isDark} toggle={toggleTheme} />
               <GoToTop />
 
@@ -108,6 +110,7 @@ function App() {
               <TechStack isDark={isDark} />
               <VisitorCounter appId="portfolio-2025" />
               <Footer isDark={isDark} />
+              </div>
             </div>
           </GradientBlobCursor>
         </div>

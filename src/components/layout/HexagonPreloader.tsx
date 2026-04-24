@@ -8,9 +8,13 @@ interface HexagonPreloaderProps {
 
 const HexagonPreloader: React.FC<HexagonPreloaderProps> = ({ isDark }) => {
   const { isLoading, progress } = useImagePreloader();
-  const startTimeRef = useRef<number>(Date.now());
+  const startTimeRef = useRef<number>(0);
   const [exit, setExit] = useState(false);
   const [visible, setVisible] = useState(true);
+
+  useEffect(() => {
+    startTimeRef.current = Date.now();
+  }, []);
 
   useEffect(() => {
     if (!isLoading) {

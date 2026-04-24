@@ -21,3 +21,5 @@ export interface TimelineItem {
 export interface TimelineSectionProps {
   isMobile?: boolean;
 }
+
+export interface TimelineEventProps extends TimelineItem {}

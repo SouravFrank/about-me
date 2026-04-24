@@ -32,9 +32,9 @@ const ArticlesSection = () => {
     };
 
     const sectionElement = sectionRef.current;
-    if (sectionElement) {
+      if (sectionElement) {
       // Use a debounced version to avoid too many events
-      let timeout: NodeJS.Timeout;
+      let timeout: ReturnType<typeof setTimeout>;
       const debouncedScroll = () => {
         clearTimeout(timeout);
         timeout = setTimeout(handleScroll, 300);

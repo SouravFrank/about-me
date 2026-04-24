@@ -9,7 +9,7 @@ let analyticsBlocked = false;
 const getAnalyticsInstance = (): Analytics | null => {
     if (typeof window === 'undefined') return null;
     if (analyticsBlocked) return null;
-    
+
     if (!analyticsInitialized) {
         analyticsInitialized = true;
         try {
@@ -39,8 +39,8 @@ export const ANALYTICS_CATEGORIES = {
     PROJECTS: 'projects',
     TIMELINE: 'timeline',
     SKILLS: 'skills',
-    CONTENT:'content',
-    EXTERNAL_LINK:'external_link',
+    CONTENT: 'content',
+    EXTERNAL_LINK: 'external_link',
 };
 
 /**
@@ -57,7 +57,7 @@ export const trackEvent = (eventName: string, eventParams: Record<string, any>) 
         };
 
         // Log to console in development
-        if (process.env.NODE_ENV === 'development') {
+        if (import.meta.env.DEV) {
             console.log(`[Analytics] ${eventName}:`, params);
         }
 
@@ -66,7 +66,7 @@ export const trackEvent = (eventName: string, eventParams: Record<string, any>) 
             try {
                 (window as any).gtag('event', eventName, params);
             } catch (gtagError) {
-                if (process.env.NODE_ENV === 'development') {
+                if (import.meta.env.DEV) {
                     console.warn('Google Analytics event failed:', gtagError);
                 }
             }
@@ -78,14 +78,14 @@ export const trackEvent = (eventName: string, eventParams: Record<string, any>) 
             try {
                 logEvent(analyticsInstance, eventName, params);
             } catch (firebaseError) {
-                if (process.env.NODE_ENV === 'development') {
+                if (import.meta.env.DEV) {
                     console.warn('Firebase Analytics event failed:', firebaseError);
                 }
             }
         }
     } catch (error) {
         // Silently fail in production, log in development
-        if (process.env.NODE_ENV === 'development') {
+        if (import.meta.env.DEV) {
             console.error('Error tracking event:', error);
         }
     }

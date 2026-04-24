@@ -4,14 +4,20 @@ import { HorizontalScrollProps } from './types';
 import useIsMobile from '../../hooks/isMobile';
 import { trackEvent, ANALYTICS_CATEGORIES } from '../../utils/analytics';
 
-const throttle = (func: { (clientX: number): void; apply?: any; }, limit: number | undefined) => {
-  let inThrottle: boolean;
-  return function (this: unknown, ...args: any) {
-    if (!inThrottle) {
-      func.apply(this, args);
-      inThrottle = true;
-      setTimeout(() => (inThrottle = false), limit);
-    }
+type DragHandler = (clientX: number) => void;
+
+const throttle = (func: DragHandler, limit = 16): DragHandler => {
+  let inThrottle = false;
+
+  return (clientX: number) => {
+    if (inThrottle) return;
+
+    func(clientX);
+    inThrottle = true;
+
+    window.setTimeout(() => {
+      inThrottle = false;
+    }, limit);
   };
 };
 
@@ -85,24 +91,23 @@ const HorizontalScroll: React.FC<HorizontalScrollProps> = ({ children }) => {
     container.style.cursor = 'grabbing';
   };
 
-  const throttledDrag = useCallback(
-    throttle((clientX: number) => {
+  const throttledDrag = useCallback((clientX: number) => {
+    throttle((nextClientX: number) => {
       if (!isDragging || !containerRef.current) return;
       const container = containerRef.current;
-      const walk = (dragStartRef.current.x - clientX) * 1.5;
+      const walk = (dragStartRef.current.x - nextClientX) * 1.5;
       container.scrollLeft = dragStartRef.current.scrollLeft + walk;
-    }, 16),
-    [isDragging]
-  );
+    }, 16)(clientX);
+  }, [isDragging]);
 
-  const stopDragging = () => {
+  const stopDragging = useCallback(() => {
     const container = containerRef.current;
     if (!container) return;
 
     setIsDragging(false);
     container.style.cursor = 'grab';
     adjustScrollPosition();
-  };
+  }, [adjustScrollPosition]);
 
   const handleMouseDown = (e: MouseEvent<HTMLDivElement>) => {
     e.preventDefault();
@@ -141,7 +146,7 @@ const HorizontalScroll: React.FC<HorizontalScrollProps> = ({ children }) => {
       document.removeEventListener('mouseleave', handleMouseLeave);
       document.removeEventListener('touchend', handleTouchEnd);
     };
-  }, [isDragging]);
+  }, [isDragging, stopDragging]);
 
   const allChildren = [0, 1, 2].flatMap((setIndex) =>
     React.Children.toArray(children).map((child, index) =>

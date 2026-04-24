@@ -9,6 +9,7 @@ const SocialLinks: React.FC<SocialLinksProps> = () => {
     trackEvent('social_click', {
       category: ANALYTICS_CATEGORIES.SOCIAL,
       platform: name,
+      destination: href,
     });
   };
 

@@ -1,10 +1,11 @@
+import type { ReactElement } from 'react';
 import { motion } from 'framer-motion';
 import { ExternalLink, Brain, BarChart2, Users, Workflow, Bot, MessageSquareCode } from 'lucide-react';
 import { SkillCardProps } from './types';
 
 const SkillCard: React.FC<SkillCardProps> = ({ name, src, description, expertise, index }) => {
-  const getIcon = (src: string): JSX.Element => {
-    const softSkillIcons: Record<string, JSX.Element> = {
+  const getIcon = (src: string): ReactElement => {
+    const softSkillIcons: Record<string, ReactElement> = {
       strategy: <Brain className="w-10 h-10 text-blue-500 dark:text-blue-400" />,
       analysis: <BarChart2 className="w-10 h-10 text-green-500 dark:text-green-400" />,
       team: <Users className="w-10 h-10 text-purple-500 dark:text-purple-400" />,

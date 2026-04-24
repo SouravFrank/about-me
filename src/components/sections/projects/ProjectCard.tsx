@@ -1,18 +1,6 @@
 import React from 'react';
-import { Github, ExternalLink } from 'lucide-react';
+import { FolderGit2, ExternalLink } from 'lucide-react';
 import { ProjectCardProps } from './types';
-
-// Define the props interface if not already in types.ts
-interface ProjectCardProps {
-  title: string;
-  description: string;
-  thumbnail: string;
-  githubLink?: string;
-  liveDemoLink?: string;
-  technologies: string[];
-  index: number;
-  isLastCard: boolean;
-}
 
 export const ProjectCard: React.FC<ProjectCardProps> = ({
   title,
@@ -99,7 +87,7 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
               className="inline-flex items-center text-blue-600 dark:text-blue-400 hover:text-blue-500 dark:hover:text-blue-300 transition-colors duration-300 group"
               aria-label={`View ${title} on GitHub`}
             >
-              <Github
+              <FolderGit2
                 className="w-6 h-6 sm:w-5 sm:h-5 mr-2 group-hover:scale-110 transition-transform duration-300"
                 aria-hidden="true"
               />

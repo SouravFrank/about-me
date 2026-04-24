@@ -80,7 +80,7 @@ export default function ContactForm() {
       setFormData({ name: '', contact: '', message: '' });
     } catch (error) {
       setStatus('error');
-      setErrors([error.message]);
+      setErrors([error instanceof Error ? error.message : 'Something went wrong. Please try again.']);
     } finally {
       setTimeout(() => setStatus('idle'), 3000);
     }
@@ -93,7 +93,7 @@ export default function ContactForm() {
         <p className="text-gray-600 dark:text-gray-400">I'll get back to you as soon as possible.</p>
       </div>
 
-      <motion.form onSubmit={()=>{}} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <motion.form onSubmit={handleSubmit} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="grid grid-cols-1 md:grid-cols-2 gap-6">
         <div className="space-y-6">
           <div className="relative">
             <label htmlFor="name" className="block text-sm font-medium mb-2 text-gray-700 cursor-normal dark:text-gray-300">
@@ -127,7 +127,7 @@ export default function ContactForm() {
         </div>
 
         <div className="md:col-span-2 space-y-4 flex flex-col items-center md:items-end">
-          <CTAButton label={status === 'sending' ? 'Sending...' : 'Send Message'} onClick={handleSubmit} variant="colored" Icon={Send} downloadClicked={status === 'success'} />
+          <CTAButton label={status === 'sending' ? 'Sending...' : 'Send Message'} variant="colored" Icon={Send} downloadClicked={status === 'success'} />
 
           {status === 'success' && (
             <motion.div

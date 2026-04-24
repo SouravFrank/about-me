@@ -1,8 +1,8 @@
 export const introTexts = [
-  "Crafting innovative mobile experiences with React Native",
-  "Building robust cross-platform solutions that delight users",
-  "Transforming ideas into scalable applications with Node.js",
-  "Expert in integrating seamless payment solutions for modern apps",
-  "Passionate about delivering high-quality code and user-centric designs",
-  "Navigating the complexities of Agile project management with ease"
+  'Senior Frontend Engineer building React and React Native products end to end',
+  'Go-to technical decision maker for enterprise logistics experiences',
+  'Shipping offline-first web and mobile flows that stay reliable under pressure',
+  'Blending AI-assisted development with clean architecture and release discipline',
+  'Turning Storybook systems, native modules, and secure APIs into polished products',
+  'Known for fast execution, ownership, and animation-rich user experiences'
 ];

@@ -1,8 +1,10 @@
-import { TimelineItem } from '../components/sections/timeline/types';
+import type { TimelineItem, TimelineItemType } from '../components/sections/timeline/types';
 import linkdInReactCert from '../assets/images/Become a React Native Developer.png';
 import completeReactNativeHooks from '../assets/images/The Complete React Native + Hooks Course.png';
 import reactNativePracticalGuide from '../assets/images/React Native - The Practical Guide.png';
 import acceleratedES6 from '../assets/images/Accelerated ES6 JavaScript Training.png';
+
+export type { TimelineItem, TimelineItemType };
 
 export const timelineData: TimelineItem[] = [
   {
@@ -145,17 +147,18 @@ export const timelineData: TimelineItem[] = [
     date: 'November 2021 - March 2023',
     icon: 'work',
     type: 'work',
-    description: 'Enhanced travel booking experience through innovative mobile solutions across multiple travel brands including CheapOair and OneTravel.',
+    description: 'Enhanced travel booking experience through mobile platform upgrades, payments, and growth-driving integrations across CheapOair and OneTravel.',
     highlights: [
-      'Designed smart native rating prompts boosting Apple App Store ratings to 4.8★ (iOS) and Google Play Store to 4.6★ (Android) across 200K+ user reviews',
-      'Engineered robust in-app update system that dramatically increased update adoption rates from 52% to 91% of users within a 5-day window',
-      'Engineered in-house Codepush-like dynamic javascript bundle update system slashing hotfix deployment time from 2 days → 30 minutes.',
-      'Achieved 99.95% (iOS) and 99.9% (Android) crash-free sessions via Firebase Crashlytics-driven error resolution',
-      'Boosted checkout conversion by 18% through modernized payment stack with Venmo and Apple Pay integration, adding support for 9 new currencies',
-      'Proposed and spearheaded adoption of Lottie animation framework, implementing UI components that reduced design-to-code time by 65% and enhanced user experience through fluid, complex animations',
-      'Led React Native migration from version 0.64 to 0.71, successfully resolving 120+ compatibility issues while achieving a 20% APK size reduction through dependency tree optimization.',
+      'Upgraded React Native from 0.64 to 0.71, resolving major library incompatibilities and improving memory footprint and startup time across both platforms.',
+      'Added in-app rating prompts that increased daily rating submissions by 4x, lifting App Store ratings to 4.8★ (iOS) and 4.6★ (Android) across 200K+ reviews.',
+      'Integrated Google Play In-App Updates, raising update adoption from 52% to 91% within a 5-day window.',
+      'Engineered an in-house CodePush-like dynamic JS bundle update system, cutting hotfix deployment time from 2 days to 30 minutes.',
+      'Integrated Apple Pay and Venmo across web and app, boosting checkout conversion by 18% and adding support for 9 new currencies.',
+      'Owned and maintained Express.js REST APIs for app promotions, coordinating backend ↔ mobile changes to launch campaigns on time.',
+      'Spearheaded Lottie adoption, reducing design-to-code time by 65% and modernizing high-traffic booking screens.',
+      'Achieved 99.95% (iOS) and 99.9% (Android) crash-free sessions via Firebase Crashlytics-driven resolution.',
     ],
-    technologies: ['React Native', 'JavaScript', 'Apple Pay', 'Venmo', 'Lottie', 'Firebase Crashlytics', 'CodePush'],
+    technologies: ['React Native', 'JavaScript', 'Apple Pay', 'Venmo', 'Lottie', 'Firebase Crashlytics', 'CodePush', 'Express.js'],
     links: {
       CheapOair: {
         playStore: 'https://play.google.com/store/apps/details?id=com.fp.cheapoair',
@@ -175,18 +178,28 @@ export const timelineData: TimelineItem[] = [
     date: 'April 2023 - June 2025',
     icon: 'work',
     type: 'work',
-    description: 'Leading mobile app development initiatives across multiple travel brands (CheapOair and OneTravel) while mentoring junior developers and implementing innovative solutions.',
+    description: 'Owned mobile release management and platform modernization across multiple travel brands (CheapOair and OneTravel) while mentoring developers and shipping high-impact stability and compliance work.',
     highlights: [
       'Introduced error boundary patterns to isolate component-level failures, reducing unhandled exceptions by 50% and improving app stability',
       'Led development of 5+ promotional mini-games (Football, Tennis, Olympic Archery, Hurdles Run, Disc Shooting, and Easter Egg Hunt) and two quizzes with reward-sharing features, resulting in an 18% increase in user retention through time-sensitive sports-themed campaigns.',
-      'Implemented Firebase Performance Monitoring to detect and resolve API latency issues below 800ms threshold.',
+      'Key owner of App Store and Play Store release management — pipelines, code signing, approvals, and cross-team release readiness end to end.',
       'Developed 8+ native modules bridging React Native with iOS/Android SDKs for payment processing, fraud detection, and GDPR cookie permission management',
       'Implemented A/B tests for UI components and features, increasing conversion rates and user engagement significantly.',
       'Adopted microfrontend architecture, breaking the app into modular, independently deployable chunks, enabling faster feature rollouts and reducing build times by 30%',
+      'Implemented Firebase Performance Monitoring to detect and resolve API latency issues below 800ms threshold.',
+      'Designed and launched a custom OTA mechanism using CodePush-style delta updates, cutting bug-fix adoption from 5 days to 24 hours with instant hotpatch deployments.',
       'Collaborated with cross-functional teams to deliver key features and approve release builds for Google Play and Apple App Store before every release',
       'Mentored 3 junior developers through bi-weekly code reviews and pair programming sessions, significantly accelerating feature delivery velocity',
+      'Upgraded React Native from 0.71 to 0.78, adopting Fabric architecture, Turbo Modules, and the Hermes engine — reducing JS thread load and improving app performance.',
+      'Raised crash-free sessions from 96.8% to 99.2% via Firebase Crashlytics-driven optimization and better error handling.',
+      'Set up and managed push notifications via Firebase Cloud Messaging for flight changes and promotions.',
+      'Implemented offline-first persistence using AsyncStorage to cache booking history and preferences for poor-network conditions.',
+      'Integrated OneTrust and Osano consent SDKs to meet GDPR and CCPA compliance across iOS and Android.',
+      'Built native modules in Objective-C and Java to access device-level APIs powering custom performance flows.',
+      'Led promotional feature deliveries contributing to a 10% increase in user engagement.',
     ],
     technologies: ['React Native', 'A/B Testing', 'Microfrontend', 'Firebase Crashlytics', 'Azure Pipelines', 'Objective-C', 'Java', 'Firebase Performance Monitoring'],
+    technologies: ['React Native', 'Fabric', 'Turbo Modules', 'Hermes', 'CodePush', 'Firebase Crashlytics', 'Firebase Cloud Messaging', 'OneTrust', 'Osano', 'Objective-C', 'Java', 'Azure DevOps'],
     links: {
       CheapOair: {
         playStore: 'https://play.google.com/store/apps/details?id=com.fp.cheapoair',
@@ -210,15 +223,24 @@ export const timelineData: TimelineItem[] = [
     highlights: ['Learned to talk to AI like a pro (without accidentally triggering robot uprising scenarios)', "Discovered that 'be creative' means very different things to humans vs. LLMs - mastered the middle ground", 'Built prompt chains that make ChatGPT work smarter, not harder - 10x efficiency, 0x existential dread', "Turned 'vague idea' → 'precise output' faster than you can say 'hallucinated response'", 'Now certified in making AI do useful work while keeping my prompts more organized than my browser tabs'],
   },
   {
-    title: 'Senior Associate Mobile Application Developer',
-    company: 'PwC',
+    title: 'Senior Frontend Engineer',
+    company: 'PwC India',
     companyUrl: 'https://www.pwc.com/gx/en.html',
     location: 'Kolkata, West Bengal, India',
     date: 'July 2025 - Present',
     icon: 'work',
     type: 'work',
-    description: 'Driving enterprise mobility modernization by building React Native + TypeScript POCs integrated with Salesforce Lightning, standardizing an internal component library, and mentoring teams to accelerate onboarding and deliver modular, scalable mobile solutions.',
-    highlights: ["Selected for upskilling into Salesforce Lightning Components under PwC's enterprise mobility transformation initiative.", 'Built internal POCs using React Native + TypeScript, focusing on modular architecture, reusable components, and enterprise-grade patterns.', 'Improved internal component library standardization and accelerated onboarding for mobile teams.'],
-    technologies: ['React Native', 'Salesforce', 'JavaScript', 'TypeScript'],
+    description: 'Primary technical decision maker on a US retail logistics portal serving web and mobile users, built with TypeScript, React, and React Native across 3 role-based personas with distinct feature sets and access flows.',
+    highlights: [
+      'Acting as primary technical decision maker within a mixed frontend team of 5, guiding approach, architecture, and code standards across web and React Native mobile in the same codebase.',
+      'Set up the full codebase skeleton including route configuration, folder architecture, naming conventions, and component patterns adopted by the entire team from day one.',
+      'Translated Figma designs into pixel-perfect, responsive screens across iOS, Android, and Web while maintaining consistency with designer specs.',
+      'Built and maintained reusable UI using an internal component library and Storybook, keeping screens consistent across platforms and easy to hand off.',
+      'Resolved multiple high-severity security vulnerabilities flagged by GitHub Advanced Security and SonarQube before production launch.',
+      'Final approver for all production pull requests and personally manage all production releases including feature flag rollouts.',
+      'Coordinate daily with an external backend API vendor and the onsite product owner to align on API contracts and unblock the team.',
+      'Implemented offline-first data handling using IndexedDB and sync queue strategies to keep the portal functional during network interruptions in warehouse environments.',
+    ],
+    technologies: ['React', 'React Native', 'TypeScript', 'IndexedDB', 'Storybook', 'GitHub Advanced Security', 'SonarQube'],
   },
 ];

@@ -1,7 +1,7 @@
 import React from 'react';
-import { motion } from 'framer-motion';
+import { motion, type Variants } from 'framer-motion';
 import { SectionWrapper } from '../common';
-import { Github } from 'lucide-react';
+import { FolderGit2 } from 'lucide-react';
 import { ANALYTICS_CATEGORIES, trackEvent } from '../../utils/analytics';
 
 interface TechStackProps {
@@ -31,7 +31,7 @@ const techStack = [
     },
 ];
 
-const containerVariants = {
+const containerVariants: Variants = {
     hidden: { opacity: 0 },
     visible: {
         opacity: 1,
@@ -39,7 +39,7 @@ const containerVariants = {
     },
 };
 
-const itemVariants = {
+const itemVariants: Variants = {
     hidden: { opacity: 0, y: 20 },
     visible: {
         opacity: 1,
@@ -53,7 +53,7 @@ const itemVariants = {
     }
 };
 
-const githubCardVariants = {
+const githubCardVariants: Variants = {
     rest: { scale: 1, boxShadow: '0px 4px 6px rgba(0, 0, 0, 0.1)' },
     hover: {
         scale: 1.05,
@@ -116,7 +116,7 @@ const TechStack: React.FC<TechStackProps> = ({ isDark }) => {
                 whileHover="hover"
             >
                 <span className="text-lg font-medium">View Source on GitHub</span>
-                <Github size={24} className="text-gray-700 dark:text-gray-300" />
+                <FolderGit2 size={24} className="text-gray-700 dark:text-gray-300" />
             </motion.a>
         </SectionWrapper>
     );

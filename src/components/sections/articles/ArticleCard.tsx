@@ -52,7 +52,7 @@ const ArticleCard: React.FC<ArticleCardProps> = ({ title, description, url, imag
       viewport={{ once: true }}
       initial={undefined}
       data-no-animation-mobile
-      onClick={(e) => handleArticleClick(e, 'card')}
+      onClick={(e: React.MouseEvent<HTMLDivElement>) => handleArticleClick(e, 'card')}
       onHoverStart={handleArticleHover}
     >
       <div className="relative aspect-w-16 aspect-h-9">
@@ -67,7 +67,7 @@ const ArticleCard: React.FC<ArticleCardProps> = ({ title, description, url, imag
             target="_blank"
             rel="noopener noreferrer"
             className="p-3 md:p-4 bg-white/10 hover:bg-white/20 rounded-full transition-colors duration-200"
-            onClick={(e) => handleArticleClick(e, 'link')}
+            onClick={(e: React.MouseEvent<HTMLAnchorElement>) => handleArticleClick(e, 'link')}
             aria-label="Visit article"
           >
             <ExternalLink className="w-5 h-5 md:w-6 md:h-6 text-white" />
@@ -85,7 +85,7 @@ const ArticleCard: React.FC<ArticleCardProps> = ({ title, description, url, imag
       </div>
       {isMobile && <div 
         className="absolute bottom-2 right-3 px-3 py-2 md:p-4" 
-        onClick={(e) => handleArticleClick(e, 'read_more')}
+        onClick={(e: React.MouseEvent<HTMLDivElement>) => handleArticleClick(e, 'read_more')}
       >
         <span className="text-xs text-blue-500 font-medium flex items-center">
           Read more

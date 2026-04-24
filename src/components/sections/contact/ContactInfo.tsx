@@ -4,7 +4,7 @@ import SocialLinks from './SocialLinks';
 import { ContactInfoProps } from './types';
 import { contactInfo } from '../../../data';
 
-export default function ContactInfo({ }: ContactInfoProps) {
+export default function ContactInfo(_: ContactInfoProps) {
   const getIcon = (title: string) => {
     switch (title.toLowerCase()) {
       case 'email':
