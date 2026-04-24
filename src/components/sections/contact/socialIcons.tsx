@@ -1,61 +1,164 @@
-import { Facebook, Instagram, Github, Linkedin } from 'lucide-react';
+import type { ReactElement } from 'react';
+import * as SimpleIcons from 'simple-icons';
 import { socialMediaLinks } from '../../../data';
-import { SocialIcon, WhatsAppIconProps } from './types';
+import { SocialIcon } from './types';
+
+// Theme-Aware Neumorphic Icon with Power-Packed Animations
+const IconComponent = (iconData: any, brandColor: string, isGradient: boolean = false, darkIconColor?: string): ReactElement => {
+  const safeName = iconData.title.replace(/\s+/g, '');
+  const containerClass = `extreme-icon-${safeName}`;
+  
+  // Inject CSS variables so the SVG can inherit colors dynamically based on theme
+  const modifiedSvg = iconData.svg.replace(
+    '<svg ',
+    `<svg fill="${isGradient ? `url(#ig-gradient-${safeName})` : 'var(--current-icon-color)'}" style="width: 100%; height: 100%; filter: drop-shadow(0px 3px 5px var(--current-shadow-color)); transition: all 0.2s ease;" `
+  );
+
+  return (
+    <div className={containerClass}>
+      <style>{`
+        .${containerClass} {
+          /* CSS Variables for dynamic theming */
+          --brand-color: ${brandColor};
+          --current-icon-color: ${brandColor};
+          --current-shadow-color: ${isGradient ? 'rgba(225, 48, 108, 0.4)' : `${brandColor}66`};
+          
+          position: relative;
+          display: inline-flex;
+          justify-content: center;
+          align-items: center;
+          width: 55px;
+          height: 55px;
+          padding: 14px;
+          margin: 8px;
+          border-radius: 25%;
+          cursor: pointer;
+          
+          /* LIGHT THEME BASE */
+          background: linear-gradient(135deg, #ffffff 0%, #e2e6eb 100%);
+          border: 1px solid rgba(255, 255, 255, 0.9);
+          box-shadow: 
+            -6px -6px 12px rgba(255, 255, 255, 1),
+            6px 6px 12px rgba(0, 0, 0, 0.08);
+            
+          transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+          animation: ambientFloat-${safeName} 4s ease-in-out infinite alternate;
+          z-index: 10;
+        }
+
+        /* DARK THEME BASE (Triggers when a parent has the 'dark' class) */
+        :global(.dark) .${containerClass}, .dark .${containerClass} {
+          background: linear-gradient(135deg, #2b303b 0%, #171920 100%);
+          border: 1px solid rgba(255, 255, 255, 0.05);
+          box-shadow: 
+            -5px -5px 12px rgba(255, 255, 255, 0.03),
+            6px 6px 15px rgba(0, 0, 0, 0.6);
+          ${darkIconColor ? `--current-icon-color: ${darkIconColor};` : ''}
+        }
+
+        /* 🚀 POWER-PACKED EXCESSIVE HOVER EFFECT */
+        .${containerClass}:hover {
+          /* Massive scale and dynamic 3D rotation */
+          transform: scale(1.35) translateY(-12px) rotateZ(8deg) rotateY(15deg);
+          z-index: 50;
+          
+          /* Intense Neon Explosion */
+          border-color: rgba(255,255,255,0.4);
+          box-shadow: 
+            0 0 10px var(--brand-color),
+            0 0 25px var(--brand-color),
+            0 0 50px var(--brand-color),
+            0 0 90px var(--brand-color),
+            inset 0 0 20px rgba(255,255,255,0.6);
+            
+          animation: none; /* Stop ambient float on hover */
+        }
+        
+        /* ⚡ INSANE SVG GLITCH/HEARTBEAT ON HOVER */
+        .${containerClass}:hover svg {
+          animation: hyperGlitch 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) infinite both alternate;
+        }
+
+        @keyframes ambientFloat-${safeName} {
+          0% { transform: translateY(0); }
+          100% { transform: translateY(-6px); }
+        }
+
+        @keyframes hyperGlitch {
+          0%   { transform: scale(1) rotate(0deg) skew(0deg); filter: brightness(1); }
+          20%  { transform: scale(1.25) rotate(-12deg) skew(-4deg); filter: brightness(1.5) drop-shadow(0 0 8px var(--brand-color)); }
+          40%  { transform: scale(0.85) rotate(10deg) skew(4deg); filter: brightness(0.7); }
+          60%  { transform: scale(1.3) rotate(-5deg) skew(-2deg); filter: brightness(2) drop-shadow(0 0 15px var(--brand-color)); }
+          80%  { transform: scale(0.9) rotate(15deg) skew(2deg); filter: brightness(0.6); }
+          100% { transform: scale(1.15) rotate(-8deg) skew(0deg); filter: brightness(1.3); }
+        }
+      `}</style>
+
+      {/* SVG Definitions for Instagram Original Gradient */}
+      {isGradient && (
+        <svg style={{ width: 0, height: 0, position: 'absolute' }} aria-hidden="true">
+          <defs>
+            <linearGradient id={`ig-gradient-${safeName}`} x1="0%" y1="100%" x2="100%" y2="0%">
+              <stop offset="0%" stopColor="#f09433" />
+              <stop offset="25%" stopColor="#e6683c" />
+              <stop offset="50%" stopColor="#dc2743" />
+              <stop offset="75%" stopColor="#cc2366" />
+              <stop offset="100%" stopColor="#bc1888" />
+            </linearGradient>
+          </defs>
+        </svg>
+      )}
+
+      <div dangerouslySetInnerHTML={{ __html: modifiedSvg }} style={{ display: 'contents' }} />
+    </div>
+  );
+};
+
+// LinkedIn icon from simple-icons CDN data
+const siLinkedin = {
+  title: 'LinkedIn',
+  hex: '0A66C2',
+  svg: '<svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><title>LinkedIn</title><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.225 0z"/></svg>',
+};
+
+// Get icon data from simple-icons
+const { siFacebook, siInstagram, siGithub, siWhatsapp } = SimpleIcons;
 
 export const socialIcons: SocialIcon[] = [
   {
     name: 'facebook',
-    icon: Facebook,
+    icon: () => IconComponent(siFacebook, `#${siFacebook.hex}`),
     href: socialMediaLinks.facebook,
-    color: '#4267b2',
-    background: '#4267b2',
+    color: `#${siFacebook.hex}`,
+    background: `#${siFacebook.hex}`,
   },
   {
     name: 'instagram',
-    icon: Instagram,
+    icon: () => IconComponent(siInstagram, `#E1306C`, true), 
     href: socialMediaLinks.instagram,
-    color: '#d9317a',
-    background: `radial-gradient(circle farthest-corner at 35% 90%, #fec564, transparent 50%),
-                radial-gradient(circle farthest-corner at 0 140%, #fec564, transparent 50%),
-                radial-gradient(ellipse farthest-corner at 0 -25%, #5258cf, transparent 50%),
-                radial-gradient(ellipse farthest-corner at 20% -50%, #5258cf, transparent 50%),
-                radial-gradient(ellipse farthest-corner at 100% 0, #893dc2, transparent 50%),
-                radial-gradient(ellipse farthest-corner at 60% -20%, #893dc2, transparent 50%),
-                radial-gradient(ellipse farthest-corner at 100% 100%, #d9317a, transparent),
-                linear-gradient(#6559ca, #bc318f 30%, #e33f5f 50%, #f77638 70%, #fec66d 100%)`,
+    color: `url(#ig-gradient-Instagram)`,
+    background: `linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%)`,
   },
   {
     name: 'github',
-    icon: Github,
+    // 4th parameter '#ffffff' ensures GitHub turns white in Dark Mode but stays dark in Light Mode!
+    icon: () => IconComponent(siGithub, `#181717`, false, `#ffffff`), 
     href: socialMediaLinks.github,
-    color: '#211f1f',
-    background: '#211f1f',
+    color: `#181717`, 
+    background: `#${siGithub.hex}`,
   },
   {
     name: 'linkedin',
-    icon: Linkedin,
+    icon: () => IconComponent(siLinkedin, `#${siLinkedin.hex}`),
     href: socialMediaLinks.linkedin,
-    color: '#0077b5',
-    background: '#0077b5',
+    color: `#${siLinkedin.hex}`,
+    background: `#${siLinkedin.hex}`,
   },
   {
     name: 'whatsapp',
+    icon: () => IconComponent(siWhatsapp, `#${siWhatsapp.hex}`),
     href: socialMediaLinks.whatsapp,
-    color: '#25d366',
-    background: '#25d366',
-    icon: (props: WhatsAppIconProps): JSX.Element => (
-      <svg 
-        xmlns="http://www.w3.org/2000/svg" 
-        width={props.size} 
-        height={props.size} 
-        viewBox="0 0 24 24" 
-        className={props.className} 
-        style={props.style} 
-        fill="currentColor" 
-        stroke="none"
-      >
-        <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z" />
-      </svg>
-    ),
+    color: `#${siWhatsapp.hex}`,
+    background: `#${siWhatsapp.hex}`,
   },
 ];

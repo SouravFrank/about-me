@@ -2,7 +2,7 @@ export const sectionData = {
   contact: {
     titleBold: "Let's ",
     titleLight: 'Connect',
-    description: "Need a senior React or React Native engineer who can lead architecture and still ship fast? Let’s talk.",
+    description: "Have a project in mind or just want to talk tech? I'm just a message away.",
   },
   footer: {
     titleBold: 'Stay Connected ',
@@ -12,31 +12,31 @@ export const sectionData = {
   cvDownload: {
     titleBold: 'Download ',
     titleLight: 'My Resume',
-    description: 'Browse the latest 2026 resume with updated leadership, delivery, and platform engineering work.',
+    description: 'Explore my professional journey and skills. Click below to view or download my CV.',
   },
   skills: {
     titleBold: 'Mastering ',
     titleLight: 'My Craft',
-    description: 'From cross-platform architecture to AI-assisted delivery, these are the tools and strengths behind my execution.',
+    description: 'A showcase of the technical skills and tools I use to turn ideas into reality.',
   },
   rewards: {
     titleBold: 'Milestones ',
     titleLight: '& Accolades',
-    description: 'Recognition earned through ownership, speed, product quality, and consistent delivery.',
+    description: 'A testament to my dedication and expertise, highlighted through awards and recognitions.',
   },
   timeline: {
     titleBold: 'Charting ',
     titleLight: 'My Path',
-    description: 'A living timeline of technical growth, product impact, awards, certifications, and leadership moments.',
+    description: 'Follow along my professional journey, marking every challenge and achievement.',
   },
   articles: {
     titleBold: 'Thoughts ',
     titleLight: 'and Ideas',
-    description: 'Deep dives on TypeScript, React, mobile engineering, architecture, Git, AI workflow, and scalable frontend practice.',
+    description: 'Dive into articles where I share my insights, experiences, and technical know-how.',
   },
   projects: {
     titleBold: 'Crafting ',
     titleLight: 'Innovative Solutions',
-    description: 'A mix of product experiments, utilities, personal builds, and shipped interfaces that reflect how I think and build.',
+    description: 'A portfolio of projects that demonstrate creativity, precision, and impact in action.',
   },
 };
