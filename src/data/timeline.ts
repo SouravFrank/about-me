@@ -198,8 +198,7 @@ export const timelineData: TimelineItem[] = [
       'Built native modules in Objective-C and Java to access device-level APIs powering custom performance flows.',
       'Led promotional feature deliveries contributing to a 10% increase in user engagement.',
     ],
-    technologies: ['React Native', 'A/B Testing', 'Microfrontend', 'Firebase Crashlytics', 'Azure Pipelines', 'Objective-C', 'Java', 'Firebase Performance Monitoring'],
-    technologies: ['React Native', 'Fabric', 'Turbo Modules', 'Hermes', 'CodePush', 'Firebase Crashlytics', 'Firebase Cloud Messaging', 'OneTrust', 'Osano', 'Objective-C', 'Java', 'Azure DevOps'],
+    technologies: ['React Native', 'Fabric', 'Turbo Modules', 'Hermes', 'CodePush', 'A/B Testing', 'Microfrontend', 'Firebase Crashlytics', 'Firebase Cloud Messaging', 'Firebase Performance Monitoring', 'OneTrust', 'Osano', 'Objective-C', 'Java', 'Azure DevOps', 'Azure Pipelines'],
     links: {
       CheapOair: {
         playStore: 'https://play.google.com/store/apps/details?id=com.fp.cheapoair',

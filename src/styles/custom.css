@@ -1,1 +1,19 @@
 /* All custom styles consolidated into src/index.css for Tailwind v4 compatibility. */
+
+/* Slim scrollbar for mobile skill card back face */
+.mobile-skill-scroll {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255, 255, 255, 0.45) transparent;
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior: contain;
+}
+.mobile-skill-scroll::-webkit-scrollbar {
+  width: 3px;
+}
+.mobile-skill-scroll::-webkit-scrollbar-track {
+  background: transparent;
+}
+.mobile-skill-scroll::-webkit-scrollbar-thumb {
+  background-color: rgba(255, 255, 255, 0.5);
+  border-radius: 9999px;
+}

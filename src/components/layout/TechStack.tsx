@@ -1,7 +1,7 @@
 import React from 'react';
 import { motion, type Variants } from 'framer-motion';
 import { SectionWrapper } from '../common';
-import { FolderGit2 } from 'lucide-react';
+import { siGithub } from 'simple-icons';
 import { ANALYTICS_CATEGORIES, trackEvent } from '../../utils/analytics';
 
 interface TechStackProps {
@@ -116,7 +116,11 @@ const TechStack: React.FC<TechStackProps> = ({ isDark }) => {
                 whileHover="hover"
             >
                 <span className="text-lg font-medium">View Source on GitHub</span>
-                <FolderGit2 size={24} className="text-gray-700 dark:text-gray-300" />
+                <span
+                    className="w-6 h-6 inline-block text-gray-700 dark:text-gray-300 [&>svg]:w-full [&>svg]:h-full [&>svg]:fill-current"
+                    dangerouslySetInnerHTML={{ __html: siGithub.svg }}
+                    aria-hidden="true"
+                />
             </motion.a>
         </SectionWrapper>
     );

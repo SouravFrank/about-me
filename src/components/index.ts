@@ -13,3 +13,4 @@ export * from './sections/projects';
 export * from './sections/rewards';
 export * from './sections/skills';
 export * from './sections/timeline';
+export * from './sections/aiArsenal';

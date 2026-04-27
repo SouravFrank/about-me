@@ -5,4 +5,5 @@ export { default as ThemeToggle } from './ThemeToggle';
 export { default as HexagonPreloader } from './HexagonPreloader';
 export { default as TechStack } from './TechStack';
 export { default as InteractiveBackground } from './InteractiveBackground';
+export { default as ThemeHint } from './ThemeHint';
 export type { FooterProps, GradientBlobCursorProps, GoToTopProps, ThemeToggleProps, PreloaderProps } from './types';
