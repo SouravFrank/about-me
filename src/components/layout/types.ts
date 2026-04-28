@@ -16,4 +16,4 @@ export interface ThemeToggleProps {
   toggle: () => void;
 }
 
-export interface PreloaderProps {}
+export type PreloaderProps = Record<string, never>;

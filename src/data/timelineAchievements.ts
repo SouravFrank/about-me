@@ -19,7 +19,7 @@ interface AchievementsSectionDetails {
 export const achievementsSectionDetails: AchievementsSectionDetails = {
   titleBold: 'Milestones of ',
   titleLight: 'Excellence',
-  description: 'A journey marked by significant achievements and remarkable accomplishments.',
+  description: 'Awards that reflect execution speed, ownership, customer impact, and technical excellence.',
 };
 
 // Import images
@@ -42,7 +42,7 @@ export const timelineAchievements: AchievementEntry[] = [
     date: '2024',
     icon: 'award',
     type: 'achievement',
-    highlights: ['Awarded for pioneering Mobile App development with unparalleled dedication.'],
+    highlights: ['Recognized as Employee of the Year 2024 for standout delivery, ownership, and high-impact mobile engineering leadership.'],
     image: employeeAward,
     companyImage: fareportalLogo,
   },
@@ -53,7 +53,7 @@ export const timelineAchievements: AchievementEntry[] = [
     date: 'Q1 2024',
     icon: 'award',
     type: 'achievement',
-    highlights: ['Recognized for showcasing exceptional accountability and dedication to success.'],
+    highlights: ['Recognized for exceptional accountability, release ownership, and dependable execution under pressure.'],
     image: ownershipAward,
     companyImage: fareportalLogo,
   },
@@ -64,7 +64,7 @@ export const timelineAchievements: AchievementEntry[] = [
     date: 'Q2 2023',
     icon: 'award',
     type: 'achievement',
-    highlights: ['Recognized for timely delivery of critical projects under tight deadlines.'],
+    highlights: ['Awarded for fast delivery of critical initiatives without sacrificing product quality.'],
     image: fastExecutionAward2023,
     companyImage: fareportalLogo,
   },
@@ -75,7 +75,7 @@ export const timelineAchievements: AchievementEntry[] = [
     date: 'Q2 2022',
     icon: 'award',
     type: 'achievement',
-    highlights: ['Recognized for timely delivery of critical projects under tight deadlines.'],
+    highlights: ['Awarded for rapid execution across business-critical deliverables and release cycles.'],
     image: fastExecutionAward2022,
     companyImage: fareportalLogo,
   },
@@ -86,7 +86,7 @@ export const timelineAchievements: AchievementEntry[] = [
     date: 'Q4 2021',
     icon: 'award',
     type: 'achievement',
-    highlights: ['Awarded for delivering bug-free, efficient code enhancing user satisfaction.'],
+    highlights: ['Recognized for customer-first thinking, stable delivery, and reliable user-facing quality.'],
     image: passionForCustomersAward,
     companyImage: fareportalLogo,
   },

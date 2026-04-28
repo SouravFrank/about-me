@@ -274,7 +274,7 @@ const TimelineEvent: React.FC<TimelineItem> = ({
                       item_type: type
                     });
                   }}
-                  className={`flex items-center gap-1.5 text-xs font-semibold uppercase tracking-wider ${colors.text} hover:opacity-80 transition-opacity ml-auto sm:ml-0`}
+                  className={`flex items-center gap-1.5 whitespace-nowrap shrink-0 text-xs font-semibold uppercase tracking-wider ${colors.text} hover:opacity-80 transition-opacity ml-auto sm:ml-0`}
                 >
                   {isExpanded ? (
                     <>Show Less <ChevronUp className="h-3.5 w-3.5" /></>

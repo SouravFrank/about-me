@@ -1,7 +1,7 @@
 import React from 'react';
-import { motion } from 'framer-motion';
+import { motion, type Variants } from 'framer-motion';
 import { SectionWrapper } from '../common';
-import { Github } from 'lucide-react';
+import { siGithub } from 'simple-icons';
 import { ANALYTICS_CATEGORIES, trackEvent } from '../../utils/analytics';
 
 interface TechStackProps {
@@ -28,10 +28,11 @@ const techStack = [
     {
         name: 'Framer Motion',
         icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/framermotion/framermotion-original.svg',
+        themeAware: true,
     },
 ];
 
-const containerVariants = {
+const containerVariants: Variants = {
     hidden: { opacity: 0 },
     visible: {
         opacity: 1,
@@ -39,7 +40,7 @@ const containerVariants = {
     },
 };
 
-const itemVariants = {
+const itemVariants: Variants = {
     hidden: { opacity: 0, y: 20 },
     visible: {
         opacity: 1,
@@ -53,7 +54,7 @@ const itemVariants = {
     }
 };
 
-const githubCardVariants = {
+const githubCardVariants: Variants = {
     rest: { scale: 1, boxShadow: '0px 4px 6px rgba(0, 0, 0, 0.1)' },
     hover: {
         scale: 1.05,
@@ -94,7 +95,7 @@ const TechStack: React.FC<TechStackProps> = ({ isDark }) => {
                         <motion.img
                             src={tech.icon}
                             alt={tech.name}
-                            className="w-16 h-16 md:w-20 md:h-20"
+                            className={`w-16 h-16 md:w-20 md:h-20 ${tech.themeAware ? (isDark ? 'invert-0 brightness-0 [filter:invert(1)]' : '') : ''}`}
                         />
                         <motion.span
                             className="mt-2 text-lg font-semibold bg-clip-text text-transparent bg-gradient-to-r from-blue-500 to-purple-500"
@@ -116,7 +117,11 @@ const TechStack: React.FC<TechStackProps> = ({ isDark }) => {
                 whileHover="hover"
             >
                 <span className="text-lg font-medium">View Source on GitHub</span>
-                <Github size={24} className="text-gray-700 dark:text-gray-300" />
+                <span
+                    className="w-6 h-6 inline-block text-gray-700 dark:text-gray-300 [&>svg]:w-full [&>svg]:h-full [&>svg]:fill-current"
+                    dangerouslySetInnerHTML={{ __html: siGithub.svg }}
+                    aria-hidden="true"
+                />
             </motion.a>
         </SectionWrapper>
     );

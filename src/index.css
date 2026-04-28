@@ -1,27 +1,30 @@
-@import url('https://fonts.googleapis.com/css2?family=Comfortaa&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Comfortaa:wght@300;400;500;600;700&family=Space+Grotesk:wght@300;400;500;600;700&display=swap');
+@import "tailwindcss";
+@config "../tailwind.config.js";
 
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+/* Tailwind v4: enable class-based dark mode */
+@custom-variant dark (&:where(.dark, .dark *));
 
+/* ======================================================
+   Cursors & Base Typography
+   ====================================================== */
 html,
 body,
 .cursor-normal {
-  font-family: 'Comfortaa', sans-serif;
-  /* Apply Comfortaa font */
+  font-family: 'Comfortaa', 'Space Grotesk', system-ui, -apple-system, sans-serif;
   cursor: url('/cursors/cursor-normal.png'), auto;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 a,
 button,
 [role='button'],
-.cursor-link
+.cursor-link,
 .cursor-pointer {
   cursor: url('/cursors/cursor-link.png'), pointer !important;
-  /* Cursor for links and buttons */
 }
 
-/* add cursor text for relevant */
 textarea,
 input[type='text'],
 input[type='password'],
@@ -43,50 +46,175 @@ input[type='radio'],
 select,
 .cursor-text {
   cursor: url('/cursors/cursor-text.png'), text !important;
-  /* Cursor for text input */
 }
-
 
 .cursor-grab {
   cursor: url('/cursors/cursor-drag.png'), move !important;
-  /* Cursor for draggable elements */
 }
 
-/* Scrollbar Track */
+/* ======================================================
+   Scrollbar
+   ====================================================== */
 ::-webkit-scrollbar {
-  width: 12px;
-  /* Width of the scrollbar */
+  width: 10px;
+  height: 10px;
 }
 
-/* Scrollbar Thumb (the draggable part) */
 ::-webkit-scrollbar-thumb {
-  background: linear-gradient(
-    45deg,
-    #7e22ce, /* Purple */
-    #c026d3, /* Magenta */
-    #ff17ff  /* Bright Pink */
-  );
-  border-radius: 6px; /* Rounded corners */
-  border: 3px solid transparent; /* Optional: Add a border */
-  background-clip: content-box; /* Ensure the gradient stays within the thumb */
+  background: linear-gradient(45deg, #7e22ce, #c026d3, #ff17ff);
+  border-radius: 8px;
+  border: 2px solid transparent;
+  background-clip: content-box;
 }
 
-/* Scrollbar Track (the background) */
 ::-webkit-scrollbar-track {
   background: #f1f1f1;
 }
 
-/* Scrollbar Corner (optional) */
 ::-webkit-scrollbar-corner {
   background: #f1f1f1;
-  /* Match the track color */
 }
 
 .dark ::-webkit-scrollbar-track {
-  background: #1f2937;
+  background: #111827;
 }
 
 .dark ::-webkit-scrollbar-corner {
-  background: #1f2937;
+  background: #111827;
 }
 
+/* ======================================================
+   Neumorphism (industry-grade, soft shadows)
+   ====================================================== */
+.shadow-neumorph {
+  background: #ffffff;
+  box-shadow:
+    8px 8px 20px rgba(174, 174, 192, 0.35),
+    -8px -8px 20px rgba(255, 255, 255, 0.95);
+  transition: all 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.shadow-neumorph:hover {
+  box-shadow:
+    12px 12px 28px rgba(174, 174, 192, 0.45),
+    -12px -12px 28px rgba(255, 255, 255, 1);
+  transform: translateY(-2px);
+}
+
+.dark .shadow-neumorph {
+  background: #1f2937;
+  box-shadow:
+    8px 8px 20px rgba(8, 12, 20, 0.7),
+    -8px -8px 20px rgba(46, 58, 78, 0.45);
+}
+
+.dark .shadow-neumorph:hover {
+  box-shadow:
+    12px 12px 28px rgba(8, 12, 20, 0.85),
+    -12px -12px 28px rgba(46, 58, 78, 0.55);
+}
+
+/* ======================================================
+   Utility helpers
+   ====================================================== */
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
+.project-card {
+  width: 250px;
+}
+
+@media (max-width: 768px) {
+  .project-card {
+    width: 200px;
+  }
+}
+
+/* ======================================================
+   Decorative animated gradient & glow
+   ====================================================== */
+@keyframes gradientAnimation {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+@keyframes glowAnimation {
+  0% { box-shadow: 0 0 5px rgba(124, 58, 237, 0.5); }
+  50% { box-shadow: 0 0 18px rgba(217, 70, 239, 0.8); }
+  100% { box-shadow: 0 0 5px rgba(124, 58, 237, 0.5); }
+}
+
+@keyframes shimmer {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(100%); }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-12px); }
+}
+
+.animate-float {
+  animation: float 6s ease-in-out infinite;
+}
+
+.glow-border {
+  position: absolute;
+  inset: -4px;
+  border-radius: 12px;
+  border: 2px solid transparent;
+  animation: glowAnimation 2s infinite;
+  pointer-events: none;
+}
+
+/* ======================================================
+   Magic patterns (background SVGs)
+   ====================================================== */
+.magicpattern1,
+.magicpattern2,
+.magicpattern3 {
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-position: center center;
+  background-repeat: repeat;
+}
+
+.magicpattern1 {
+  background-image: url("data:image/svg+xml;utf8,%3Csvg viewBox='0 0 1000 1000' xmlns='http://www.w3.org/2000/svg'%3E%3Cdefs%3E%3ClinearGradient id='b' gradientTransform='rotate(-45 .5 .5)'%3E%3Cstop offset='0%25' stop-color='%23FFDEE9'/%3E%3Cstop offset='100%25' stop-color='%23B5FFFC'/%3E%3C/linearGradient%3E%3CclipPath id='a'%3E%3Cpath fill='currentColor' d='M826.5 684.5Q794 869 601.5 885T247 800.5Q85 700 138 525.5t167.5-275Q420 150 573.5 183T793 358q66 142 33.5 326.5Z'/%3E%3C/clipPath%3E%3C/defs%3E%3Cg clip-path='url(%23a)'%3E%3Cpath fill='url(%23b)' d='M826.5 684.5Q794 869 601.5 885T247 800.5Q85 700 138 525.5t167.5-275Q420 150 573.5 183T793 358q66 142 33.5 326.5Z'/%3E%3C/g%3E%3C/svg%3E");
+}
+
+.magicpattern2 {
+  background-image: url("data:image/svg+xml;utf8,%3Csvg viewBox='0 0 1000 1000' xmlns='http://www.w3.org/2000/svg'%3E%3Cdefs%3E%3ClinearGradient id='b' gradientTransform='rotate(-45 .5 .5)'%3E%3Cstop offset='0%25' stop-color='%238EC5FC'/%3E%3Cstop offset='100%25' stop-color='%23E0C3FC'/%3E%3C/linearGradient%3E%3CclipPath id='a'%3E%3Cpath fill='currentColor' d='M782.5 639q-61.5 139-213 180T322 746q-96-114-146.5-270.5t97-242Q420 148 607 139.5t212 176Q844 500 782.5 639Z'/%3E%3C/clipPath%3E%3C/defs%3E%3Cg clip-path='url(%23a)'%3E%3Cpath fill='url(%23b)' d='M782.5 639q-61.5 139-213 180T322 746q-96-114-146.5-270.5t97-242Q420 148 607 139.5t212 176Q844 500 782.5 639Z'/%3E%3C/g%3E%3C/svg%3E");
+}
+
+.magicpattern3 {
+  background-image: url("data:image/svg+xml;utf8,%3Csvg viewBox='0 0 1000 1000' xmlns='http://www.w3.org/2000/svg'%3E%3Cdefs%3E%3ClinearGradient id='b' gradientTransform='rotate(-45 .5 .5)'%3E%3Cstop offset='0%25' stop-color='%23FFDEE9'/%3E%3Cstop offset='100%25' stop-color='%23B5FFFC'/%3E%3C/linearGradient%3E%3CclipPath id='a'%3E%3Cpath fill='currentColor' d='M771 629.5Q707 759 567 790t-297-36.5Q113 686 101 494t156.5-255.5Q426 175 579 192t204.5 162.5Q835 500 771 629.5Z'/%3E%3C/clipPath%3E%3C/defs%3E%3Cg clip-path='url(%23a)'%3E%3Cpath fill='url(%23b)' d='M771 629.5Q707 759 567 790t-297-36.5Q113 686 101 494t156.5-255.5Q426 175 579 192t204.5 162.5Q835 500 771 629.5Z'/%3E%3C/g%3E%3C/svg%3E");
+}
+
+/* ======================================================
+   Accessibility / reduced motion
+   ====================================================== */
+@media (max-width: 768px) {
+  [data-no-animation-mobile] {
+    transform: none !important;
+    transition: none !important;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

@@ -1,13 +1,20 @@
 import { useState, useEffect } from 'react';
-import { ThemeToggle, GoToTop, ArticlesSection, Footer, TechStack, HorizontalScroll, GradientBlobCursor, RewardsRecognition, ProjectSection, SectionWrapper, IntroSection, TimelineSection, SkillsSection, ContactSection, CVDownloadSection, HexagonPreloader, VisitorCounter } from './components';
+import { ThemeToggle, GoToTop, ArticlesSection, Footer, TechStack, HorizontalScroll, GradientBlobCursor, RewardsRecognition, ProjectSection, SectionWrapper, IntroSection, TimelineSection, SkillsSection, ContactSection, CVDownloadSection, HexagonPreloader, VisitorCounter, InteractiveBackground, ThemeHint, AIArsenalSection } from './components';
 import { sectionData } from './data/sectionData';
 import './styles/custom.css';
 // import { fetchMetadata, fetchMultipleMetadata } from './utils/fetchMetadata';
 import { ANALYTICS_CATEGORIES, trackEvent } from './utils/analytics';
 import { TrackLinks } from './utils/trackLinks';
 
+const THEME_HINT_KEY = 'theme-hint-dismissed-v1';
+
 function App() {
-  const [isDark, setIsDark] = useState<boolean>(false);
+  // Initialize from system preference (synchronously, before first paint)
+  const [isDark, setIsDark] = useState<boolean>(() => {
+    if (typeof window === 'undefined') return false;
+    return window.matchMedia?.('(prefers-color-scheme: dark)').matches ?? false;
+  });
+  const [themeSource, setThemeSource] = useState<'system' | 'user'>('system');
   const [loading, setLoading] = useState<boolean>(true);
 
   useEffect(() => {
@@ -15,6 +22,17 @@ function App() {
     const timer = setTimeout(() => setLoading(false), 2000);
     return () => clearTimeout(timer);
   }, [isDark]);
+
+  // Listen to system theme changes — only auto-update if user hasn't manually overridden
+  useEffect(() => {
+    if (typeof window === 'undefined') return;
+    const mq = window.matchMedia('(prefers-color-scheme: dark)');
+    const handler = (e: MediaQueryListEvent) => {
+      if (themeSource === 'system') setIsDark(e.matches);
+    };
+    mq.addEventListener?.('change', handler);
+    return () => mq.removeEventListener?.('change', handler);
+  }, [themeSource]);
 
   // only one time fetching data
   // useEffect(() => {
@@ -45,6 +63,12 @@ function App() {
   const toggleTheme = () => {
     const newTheme = !isDark;
     setIsDark(newTheme);
+    setThemeSource('user');
+    try {
+      localStorage.setItem(THEME_HINT_KEY, '1');
+    } catch {
+      /* ignore */
+    }
 
     trackEvent('theme_change', {
       category: ANALYTICS_CATEGORIES.INTERACTION,
@@ -60,8 +84,11 @@ function App() {
         </div>
         <div className={`min-h-screen transition-opacity duration-700 delay-200 ${loading ? 'opacity-0' : 'opacity-100'}`}>
           <GradientBlobCursor isDarkMode={isDark}>
-            <div className={`transition-colors duration-300 ${isDark ? 'dark bg-gray-900 text-white' : 'bg-gray-100 text-gray-900'}`}>
+            <div className={`relative transition-colors duration-300 ${isDark ? 'dark bg-gray-900 text-white' : 'bg-gray-100 text-gray-900'}`}>
+              <InteractiveBackground isDark={isDark} />
+              <div className="relative z-10">
               <ThemeToggle isDark={isDark} toggle={toggleTheme} />
+              <ThemeHint isDark={isDark} detectedSource={!loading ? themeSource : null} />
               <GoToTop />
 
               <section id="about">
@@ -93,6 +120,10 @@ function App() {
                 </HorizontalScroll>
               </section>
 
+              <section id="ai-arsenal">
+                <AIArsenalSection isDark={isDark} />
+              </section>
+
               <section id="rewards">
                 <RewardsRecognition isDark={isDark} />
               </section>
@@ -108,6 +139,7 @@ function App() {
               <TechStack isDark={isDark} />
               <VisitorCounter appId="portfolio-2025" />
               <Footer isDark={isDark} />
+              </div>
             </div>
           </GradientBlobCursor>
         </div>

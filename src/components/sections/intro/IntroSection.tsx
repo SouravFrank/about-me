@@ -3,7 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import IntroAnimation from './IntroAnimation';
 import { personalInfo } from '../../../data';
 import DetailedIntro from './DetailedIntro';
-import ThanosSnap from './ThanosSnap';
+
 import '../../../styles/gradienttext.css';
 import { trackEvent, ANALYTICS_CATEGORIES } from '../../../utils/analytics';
 
@@ -73,7 +73,7 @@ const IntroSection: React.FC = () => {
         className="text-center relative"
       >
         {/* Combined Blob and Profile Container */}
-        <div className="relative w-80 h-80 mx-auto mb-8">
+        <div className="relative w-101 h-110 mx-auto mb-8">
           {[1, 2, 3].map((index) => (
             <motion.div
               key={index}
@@ -112,7 +112,7 @@ const IntroSection: React.FC = () => {
 
           {/* Profile Images with Overlapping Transition */}
           <motion.div
-            className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-10"
+            className=" w-60 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-10"
             onHoverStart={() => handleProfileHover(true)}
             onHoverEnd={() => handleProfileHover(false)}
           >
@@ -124,7 +124,7 @@ const IntroSection: React.FC = () => {
                 : personalInfo.profileImages[currentImageIndex]
               }
               alt={`${personalInfo.name}'s Profile ${currentImageIndex + 1}`}
-              className="w-112 h-112 rounded-full object-cover bg-white dark:bg-gray-800"
+              className="aspect-square rounded-full object-cover bg-white dark:bg-gray-800 shadow-2xl ring-4 ring-white/40 dark:ring-white/10"
               initial={{ opacity: 1 }}
               animate={{ opacity: isTransitioning ? 0 : 1 }} // Fade out current image during transition
               transition={{ duration: 0.5 }}
@@ -147,7 +147,7 @@ const IntroSection: React.FC = () => {
                     : personalInfo.profileImages[nextImageIndex]
                   }
                   alt={`${personalInfo.name}'s Profile ${nextImageIndex + 1}`}
-                  className="w-112 h-112 rounded-full object-cover bg-white dark:bg-gray-800 absolute top-0 left-0"
+                  className="aspect-square rounded-full object-cover bg-white dark:bg-gray-800 absolute top-0 left-0 shadow-2xl ring-4 ring-white/40 dark:ring-white/10"
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }} // Fade in next image during transition
                   exit={{ opacity: 0 }}
@@ -166,28 +166,29 @@ const IntroSection: React.FC = () => {
         </div>
 
         {/* Name and Intro Animation */}
-        {!showDetailed ? (
-          <>
-            <motion.h1
-              className="text-4xl font-bold mb-4 relative z-10 cursor-link gradient-text"
-              onClick={handleShowDetailed}
-              whileHover={{ scale: 1.05 }}
-              transition={{ duration: 0.2 }}
+        <AnimatePresence mode="wait">
+          {!showDetailed ? (
+            <motion.div
+              key="compact"
+              initial={{ opacity: 0, y: 12 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -12, filter: 'blur(8px)' }}
+              transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
             >
-              {personalInfo.name}
-            </motion.h1>
-            <IntroAnimation showDetailed={showDetailed} setShowDetailed={handleShowDetailed} />
-          </>
-        ) : (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-          >
-            <DetailedIntro onClose={handleHideDetailed} />
-            <ThanosSnap onComplete={() => { }} />
-          </motion.div>
-        )}
+              <motion.h1
+                className="text-4xl font-bold mb-4 relative z-10 cursor-link gradient-text"
+                onClick={handleShowDetailed}
+                whileHover={{ scale: 1.05 }}
+                transition={{ duration: 0.2 }}
+              >
+                {personalInfo.name}
+              </motion.h1>
+              <IntroAnimation showDetailed={showDetailed} setShowDetailed={handleShowDetailed} />
+            </motion.div>
+          ) : (
+            <DetailedIntro key="detailed" onClose={handleHideDetailed} />
+          )}
+        </AnimatePresence>
       </motion.div>
     </section>
   );

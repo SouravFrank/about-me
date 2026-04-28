@@ -10,7 +10,7 @@ export interface SectionWrapperProps {
 
 export interface CTAButtonProps {
   label: string;
-  onClick?: (e: Object) => void;
+  onClick?: (e: React.MouseEvent<HTMLButtonElement> | React.FormEvent<Element>) => void | Promise<void>;
   variant?: 'colored' | 'white';
   Icon?: React.ElementType;
   downloadClicked?: boolean;
