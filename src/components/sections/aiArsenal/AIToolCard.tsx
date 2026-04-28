@@ -30,46 +30,47 @@ const AIToolCard: React.FC<Props> = ({ name, logo, story, badge, since, color, c
       />
 
       <div className="relative h-full rounded-2xl bg-white/90 dark:bg-gray-900/90 backdrop-blur-xl p-5 flex flex-col">
-        {/* Header */}
-        <div className="flex items-start justify-between gap-3 mb-3">
-          <div className="flex items-center gap-3 min-w-0">
-            <div className="relative w-12 h-12 rounded-xl bg-gradient-to-br from-white to-gray-100 dark:from-gray-800 dark:to-gray-700 flex items-center justify-center shadow-inner overflow-hidden shrink-0">
-              {imgErr ? (
-                <Sparkles className="w-6 h-6 text-gray-500" />
-              ) : (
-                <img
-                  src={logo}
-                  alt={`${name} logo`}
-                  className="w-8 h-8 object-contain"
-                  loading="lazy"
-                  onError={() => setImgErr(true)}
-                />
-              )}
-              <motion.div
-                aria-hidden
-                className={`absolute inset-0 bg-gradient-to-br ${color} mix-blend-overlay opacity-0 group-hover:opacity-30 transition-opacity`}
-              />
-            </div>
-            <div className="min-w-0">
-              <h3 className="text-base md:text-lg font-bold text-gray-900 dark:text-white truncate">{name}</h3>
-              <p className="text-[11px] uppercase tracking-wider text-gray-500 dark:text-gray-400 truncate">
-                {category}
-              </p>
-            </div>
-          </div>
+        {/* Badge — absolute so it doesn't squeeze the title */}
+        {badge && (
+          <motion.span
+            initial={{ scale: 0 }}
+            whileInView={{ scale: 1 }}
+            viewport={{ once: true }}
+            transition={{ type: 'spring', stiffness: 300, delay: 0.2 }}
+            className={`absolute top-3 right-3 z-10 inline-flex items-center gap-1 text-[10px] font-semibold px-2 py-1 rounded-full text-white bg-gradient-to-r ${color} shadow-md whitespace-nowrap`}
+          >
+            <Zap className="w-3 h-3" />
+            {badge}
+          </motion.span>
+        )}
 
-          {badge && (
-            <motion.span
-              initial={{ scale: 0 }}
-              whileInView={{ scale: 1 }}
-              viewport={{ once: true }}
-              transition={{ type: 'spring', stiffness: 300, delay: 0.2 }}
-              className={`shrink-0 inline-flex items-center gap-1 text-[10px] font-semibold px-2 py-1 rounded-full text-white bg-gradient-to-r ${color} shadow-md`}
-            >
-              <Zap className="w-3 h-3" />
-              {badge}
-            </motion.span>
-          )}
+        {/* Header */}
+        <div className={`flex items-center gap-3 mb-3 ${badge ? 'pr-2' : ''}`}>
+          <div className="relative w-12 h-12 rounded-xl bg-gradient-to-br from-white to-gray-100 dark:from-gray-800 dark:to-gray-700 flex items-center justify-center shadow-inner overflow-hidden shrink-0">
+            {imgErr ? (
+              <Sparkles className="w-6 h-6 text-gray-500" />
+            ) : (
+              <img
+                src={logo}
+                alt={`${name} logo`}
+                className="w-8 h-8 object-contain"
+                loading="lazy"
+                onError={() => setImgErr(true)}
+              />
+            )}
+            <motion.div
+              aria-hidden
+              className={`absolute inset-0 bg-gradient-to-br ${color} mix-blend-overlay opacity-0 group-hover:opacity-30 transition-opacity`}
+            />
+          </div>
+          <div className={`min-w-0 flex-1 ${badge ? 'mt-6' : ''}`}>
+            <h3 className="text-base md:text-lg font-bold text-gray-900 dark:text-white leading-tight break-words">
+              {name}
+            </h3>
+            <p className="text-[11px] uppercase tracking-wider text-gray-500 dark:text-gray-400 mt-0.5">
+              {category}
+            </p>
+          </div>
         </div>
 
         {/* Story */}

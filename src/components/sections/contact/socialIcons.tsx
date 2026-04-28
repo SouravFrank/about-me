@@ -21,8 +21,8 @@ const IconComponent = (iconData: any, brandColor: string, isGradient: boolean = 
           /* CSS Variables for dynamic theming */
           --brand-color: ${brandColor};
           --current-icon-color: ${brandColor};
-          --current-shadow-color: ${isGradient ? 'rgba(225, 48, 108, 0.4)' : `${brandColor}66`};
-          
+          --current-shadow-color: ${isGradient ? 'rgba(225, 48, 108, 0.35)' : `${brandColor}55`};
+
           position: relative;
           display: inline-flex;
           justify-content: center;
@@ -33,64 +33,69 @@ const IconComponent = (iconData: any, brandColor: string, isGradient: boolean = 
           margin: 8px;
           border-radius: 25%;
           cursor: pointer;
-          
-          /* LIGHT THEME BASE */
-          background: linear-gradient(135deg, #ffffff 0%, #e2e6eb 100%);
+          overflow: visible;
+
+          /* LIGHT THEME BASE — soft neumorphic */
+          background: linear-gradient(135deg, #ffffff 0%, #e6eaf0 100%);
           border: 1px solid rgba(255, 255, 255, 0.9);
-          box-shadow: 
+          box-shadow:
             -6px -6px 12px rgba(255, 255, 255, 1),
             6px 6px 12px rgba(0, 0, 0, 0.08);
-            
-          transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-          animation: ambientFloat-${safeName} 4s ease-in-out infinite alternate;
+
+          transition: transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1),
+                      box-shadow 0.5s ease,
+                      background 0.4s ease,
+                      border-color 0.4s ease;
+          animation: ambientFloat-${safeName} 5s ease-in-out infinite alternate;
           z-index: 10;
         }
 
-        /* DARK THEME BASE (Triggers when a parent has the 'dark' class) */
-        :global(.dark) .${containerClass}, .dark .${containerClass} {
+        /* DARK THEME BASE — works because 'dark' class lives on <html> */
+        html.dark .${containerClass} {
           background: linear-gradient(135deg, #2b303b 0%, #171920 100%);
-          border: 1px solid rgba(255, 255, 255, 0.05);
-          box-shadow: 
+          border: 1px solid rgba(255, 255, 255, 0.06);
+          box-shadow:
             -5px -5px 12px rgba(255, 255, 255, 0.03),
-            6px 6px 15px rgba(0, 0, 0, 0.6);
+            6px 6px 15px rgba(0, 0, 0, 0.55);
           ${darkIconColor ? `--current-icon-color: ${darkIconColor};` : ''}
         }
 
-        /* 🚀 POWER-PACKED EXCESSIVE HOVER EFFECT */
+        /* ✨ Smooth, classy hover — gentle lift + soft brand glow */
         .${containerClass}:hover {
-          /* Massive scale and dynamic 3D rotation */
-          transform: scale(1.35) translateY(-12px) rotateZ(8deg) rotateY(15deg);
+          transform: translateY(-8px) scale(1.12);
           z-index: 50;
-          
-          /* Intense Neon Explosion */
-          border-color: rgba(255,255,255,0.4);
-          box-shadow: 
-            0 0 10px var(--brand-color),
-            0 0 25px var(--brand-color),
-            0 0 50px var(--brand-color),
-            0 0 90px var(--brand-color),
-            inset 0 0 20px rgba(255,255,255,0.6);
-            
-          animation: none; /* Stop ambient float on hover */
+          border-color: color-mix(in srgb, var(--brand-color) 40%, transparent);
+          box-shadow:
+            0 8px 18px -6px color-mix(in srgb, var(--brand-color) 55%, transparent),
+            0 0 28px -4px color-mix(in srgb, var(--brand-color) 45%, transparent),
+            inset 0 1px 0 rgba(255,255,255,0.5);
+          animation: none;
         }
-        
-        /* ⚡ INSANE SVG GLITCH/HEARTBEAT ON HOVER */
+
+        html.dark .${containerClass}:hover {
+          box-shadow:
+            0 8px 22px -4px color-mix(in srgb, var(--brand-color) 65%, transparent),
+            0 0 36px -2px color-mix(in srgb, var(--brand-color) 55%, transparent),
+            inset 0 1px 0 rgba(255,255,255,0.08);
+        }
+
+        /* Gentle SVG breathe on hover — no flicker, no skew */
+        .${containerClass} svg {
+          transition: transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1), filter 0.4s ease;
+        }
         .${containerClass}:hover svg {
-          animation: hyperGlitch 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) infinite both alternate;
+          transform: scale(1.12) rotate(-6deg);
+          filter: drop-shadow(0 4px 8px color-mix(in srgb, var(--brand-color) 50%, transparent));
         }
 
         @keyframes ambientFloat-${safeName} {
-          0% { transform: translateY(0); }
-          100% { transform: translateY(-6px); }
+          0%   { transform: translateY(0); }
+          100% { transform: translateY(-4px); }
         }
 
-        @keyframes hyperGlitch {
-          0%   { transform: scale(1) rotate(0deg) skew(0deg); filter: brightness(1); }
-          20%  { transform: scale(1.25) rotate(-12deg) skew(-4deg); filter: brightness(1.5) drop-shadow(0 0 8px var(--brand-color)); }
-          40%  { transform: scale(0.85) rotate(10deg) skew(4deg); filter: brightness(0.7); }
-          60%  { transform: scale(1.3) rotate(-5deg) skew(-2deg); filter: brightness(2) drop-shadow(0 0 15px var(--brand-color)); }
-          80%  { transform: scale(0.9) rotate(15deg) skew(2deg); filter: brightness(0.6); }
-          100% { transform: scale(1.15) rotate(-8deg) skew(0deg); filter: brightness(1.3); }
+        @media (prefers-reduced-motion: reduce) {
+          .${containerClass}, .${containerClass} svg { animation: none !important; transition: none !important; }
+          .${containerClass}:hover { transform: none; }
         }
       `}</style>
 

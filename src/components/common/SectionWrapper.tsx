@@ -20,7 +20,7 @@ const SectionWrapper: React.FC<SectionWrapperProps> = ({ titleBold, titleLight, 
     <motion.div
       ref={sectionRef}
       style={{ opacity, y: yTranslate }}
-      className={`relative overflow-hidden py-8 px-4 md:px-8 w-full ${isDark ? 'bg-gray-900 text-white' : 'text-black'}`}
+      className={`relative overflow-hidden py-8 px-4 md:px-8 w-full bg-transparent`}
     >
       <motion.div
         aria-hidden="true"

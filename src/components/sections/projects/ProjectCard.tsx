@@ -1,6 +1,20 @@
 import React from 'react';
-import { FolderGit2, ExternalLink } from 'lucide-react';
+import { ExternalLink } from 'lucide-react';
+import * as SimpleIcons from 'simple-icons';
 import { ProjectCardProps } from './types';
+
+const { siGithub } = SimpleIcons as any;
+
+const GithubGlyph: React.FC<{ className?: string }> = ({ className = 'w-4 h-4' }) => (
+  <svg
+    role="img"
+    viewBox="0 0 24 24"
+    xmlns="http://www.w3.org/2000/svg"
+    className={className}
+    fill="currentColor"
+    dangerouslySetInnerHTML={{ __html: siGithub.svg.replace(/<svg[^>]*>|<\/svg>/g, '') }}
+  />
+);
 
 export const ProjectCard: React.FC<ProjectCardProps> = ({
   title,
@@ -13,11 +27,12 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
   return (
     <article
       className={`
+        relative
         mb-8 
         lg:w-[30vw] 
         h-auto 
         w-[90vw]
-        sm:h-[400px] 
+        sm:h-[420px] 
         bg-white 
         dark:bg-gray-900/80 
         rounded-2xl 
@@ -25,7 +40,7 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
         dark:shadow-[0_0_20px_rgba(0,255,255,0.1)] 
         overflow-hidden 
         group 
-        hover:shadow-xl 
+        hover:shadow-2xl 
         dark:hover:shadow-[0_0_40px_rgba(0,255,255,0.3)] 
         transition-all 
         duration-300 
@@ -38,86 +53,91 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
       `}
       data-no-animation-mobile
     >
-      {/* Thumbnail Section */}
-      <div className="relative h-48 sm:h-48 overflow-hidden duration-300 group-hover:h-28 sm:group-hover:h-28">
-        <img
-          src={thumbnail}
-          alt={`${title} project thumbnail`}
-          className="w-full h-full object-cover transform transition-transform duration-500 group-hover:scale-110"
-          loading="lazy"
-        />
-        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-blue-500/10 to-purple-500/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-        <div className="absolute inset-0 border-b border-blue-300/10 group-hover:border-purple-300/30 transition-all duration-500"></div>
-      </div>
+      {/* Animated gradient border halo */}
+      <div className="pointer-events-none absolute -inset-[1px] rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-0"
+        style={{
+          background: 'conic-gradient(from var(--ang,0deg), #3b82f6, #a855f7, #ec4899, #3b82f6)',
+          filter: 'blur(14px)',
+          animation: 'projectSpin 6s linear infinite',
+        }}
+      />
+      <style>{`
+        @keyframes projectSpin { to { --ang: 360deg; } }
+        @property --ang { syntax: '<angle>'; inherits: false; initial-value: 0deg; }
+      `}</style>
 
-      {/* Content Section */}
-      <div className="p-4 sm:p-6">
-        {/* Title */}
-        <h3 className="text-lg sm:text-xl font-bold mb-3 sm:mb-3 transform transition-all duration-300 group-hover:text-base sm:group-hover:text-sm group-hover:mb-2">
-          <span className="bg-gradient-to-r from-blue-600 to-purple-600 text-transparent bg-clip-text dark:from-blue-400 dark:to-purple-400">
-            {title}
-          </span>
-        </h3>
+      {/* Inner wrapper to sit above halo */}
+      <div className="relative z-10 bg-white dark:bg-gray-900/90 rounded-2xl h-full flex flex-col">
+        {/* Thumbnail Section */}
+        <div className="relative h-44 sm:h-44 overflow-hidden duration-300 group-hover:h-28 sm:group-hover:h-28 shrink-0">
+          <img
+            src={thumbnail}
+            alt={`${title} project thumbnail`}
+            className="w-full h-full object-cover transform transition-transform duration-500 group-hover:scale-110"
+            loading="lazy"
+          />
+          <div className="absolute inset-0 bg-gradient-to-b from-transparent via-blue-500/10 to-purple-500/30 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+          <div className="absolute inset-0 bg-gradient-to-tr from-blue-500/0 via-transparent to-purple-500/0 group-hover:from-blue-500/10 group-hover:to-purple-500/10 transition-all duration-700"></div>
+        </div>
 
-        {/* Description */}
-        <p className="text-base sm:text-base text-gray-700 dark:text-gray-300 mb-4 sm:mb-4 line-clamp-4 sm:line-clamp-2 transition-all duration-300 group-hover:line-clamp-5 sm:group-hover:line-clamp-none group-hover:text-sm">
-          {description}
-        </p>
-
-        {/* Technologies */}
-        <div className="mb-4 sm:mb-4 flex flex-wrap gap-2">
-          {technologies.map((tech, techIndex) => (
-            <span
-              key={techIndex}
-              className="px-2 py-1 text-xs font-medium bg-blue-100 text-blue-600 dark:bg-blue-900/30 dark:text-blue-300 border border-blue-200 dark:border-blue-500/20 rounded-full hover:bg-blue-200 dark:hover:bg-blue-800/50 hover:border-blue-300 dark:hover:border-blue-300/50 transition-all duration-200"
-            >
-              {tech}
+        {/* Content Section */}
+        <div className="p-4 sm:p-5 flex-1 flex flex-col min-h-0">
+          {/* Title */}
+          <h3 className="text-lg sm:text-xl font-bold mb-2 leading-tight">
+            <span className="bg-gradient-to-r from-blue-600 to-purple-600 text-transparent bg-clip-text dark:from-blue-400 dark:to-purple-400">
+              {title}
             </span>
-          ))}
+          </h3>
+
+          {/* Description */}
+          <p className="text-sm text-gray-700 dark:text-gray-300 mb-3 line-clamp-4 sm:line-clamp-3 group-hover:line-clamp-5 sm:group-hover:line-clamp-4 transition-all duration-300">
+            {description}
+          </p>
+
+          {/* Technologies */}
+          <div className="mb-4 flex flex-wrap gap-1.5">
+            {technologies.map((tech, techIndex) => (
+              <span
+                key={techIndex}
+                className="px-2 py-0.5 text-[11px] font-medium bg-blue-100 text-blue-600 dark:bg-blue-900/30 dark:text-blue-300 border border-blue-200 dark:border-blue-500/20 rounded-full hover:bg-blue-200 dark:hover:bg-blue-800/50 hover:border-blue-300 dark:hover:border-blue-300/50 transition-all duration-200"
+              >
+                {tech}
+              </span>
+            ))}
+          </div>
+
+          {/* Links Section - Fancy buttons */}
+          <div className="mt-auto flex flex-row items-center gap-3">
+            {githubLink && (
+              <a
+                href={githubLink}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="relative inline-flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-semibold text-gray-800 dark:text-white overflow-hidden group/btn border border-gray-300 dark:border-gray-700 bg-gradient-to-br from-gray-50 to-gray-200 dark:from-gray-800 dark:to-gray-900 hover:shadow-[0_8px_20px_-6px_rgba(0,0,0,0.4)] hover:-translate-y-0.5 transition-all duration-300"
+                aria-label={`View ${title} on GitHub`}
+              >
+                <span className="absolute inset-0 -translate-x-full group-hover/btn:translate-x-0 transition-transform duration-500 bg-gradient-to-r from-transparent via-white/40 dark:via-white/10 to-transparent" />
+                <GithubGlyph className="w-4 h-4 relative z-10 transition-transform duration-300 group-hover/btn:rotate-[360deg]" />
+                <span className="relative z-10">GitHub</span>
+              </a>
+            )}
+
+            {liveDemoLink && (
+              <a
+                href={liveDemoLink}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="relative inline-flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-semibold text-white overflow-hidden group/btn shadow-md hover:shadow-[0_8px_24px_-6px_rgba(168,85,247,0.6)] hover:-translate-y-0.5 transition-all duration-300"
+                style={{ background: 'linear-gradient(135deg, #3b82f6 0%, #a855f7 50%, #ec4899 100%)' }}
+                aria-label={`View live demo of ${title}`}
+              >
+                <span className="absolute inset-0 -translate-x-full group-hover/btn:translate-x-0 transition-transform duration-500 bg-gradient-to-r from-transparent via-white/30 to-transparent" />
+                <ExternalLink className="w-4 h-4 relative z-10 transition-transform duration-300 group-hover/btn:translate-x-0.5 group-hover/btn:-translate-y-0.5" />
+                <span className="relative z-10">Live Demo</span>
+              </a>
+            )}
+          </div>
         </div>
-
-        {/* Links Section */}
-        <div className="flex flex-row sm:flex-row items-start sm:items-center gap-4 sm:gap-4">
-          {/* GitHub Link */}
-          {githubLink && (
-            <a
-              href={githubLink}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center text-blue-600 dark:text-blue-400 hover:text-blue-500 dark:hover:text-blue-300 transition-colors duration-300 group"
-              aria-label={`View ${title} on GitHub`}
-            >
-              <FolderGit2
-                className="w-6 h-6 sm:w-5 sm:h-5 mr-2 group-hover:scale-110 transition-transform duration-300"
-                aria-hidden="true"
-              />
-              <span className="group-hover:underline text-sm sm:text-base">GitHub</span>
-            </a>
-          )}
-
-          {/* Live Demo Link */}
-          {liveDemoLink && (
-            <a
-              href={liveDemoLink}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center text-purple-600 dark:text-purple-400 hover:text-purple-500 dark:hover:text-purple-300 transition-colors duration-300 group"
-              aria-label={`View live demo of ${title}`}
-            >
-              <ExternalLink
-                className="w-6 h-6 sm:w-5 sm:h-5 mr-2 group-hover:scale-110 transition-transform duration-300"
-                aria-hidden="true"
-              />
-              <span className="group-hover:underline text-sm sm:text-base">Demo</span>
-            </a>
-          )}
-        </div>
-      </div>
-
-      {/* Hover Gradient Overlays */}
-      <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute -inset-1 bg-gradient-to-r from-blue-500/10 to-purple-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-        <div className="absolute -inset-1 bg-gradient-to-b from-transparent to-purple-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
       </div>
     </article>
   );

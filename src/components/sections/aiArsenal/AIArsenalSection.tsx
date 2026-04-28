@@ -12,7 +12,7 @@ const CATEGORIES: AITool['category'][] = [
   'Chat & Reasoning',
   'Coding',
   'IDE & Agents',
-  'Creative & Multimodal',
+  
 ];
 
 const AIArsenalSection: React.FC<Props> = ({ isDark }) => {

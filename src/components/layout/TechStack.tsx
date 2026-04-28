@@ -28,6 +28,7 @@ const techStack = [
     {
         name: 'Framer Motion',
         icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/framermotion/framermotion-original.svg',
+        themeAware: true,
     },
 ];
 
@@ -94,7 +95,7 @@ const TechStack: React.FC<TechStackProps> = ({ isDark }) => {
                         <motion.img
                             src={tech.icon}
                             alt={tech.name}
-                            className="w-16 h-16 md:w-20 md:h-20"
+                            className={`w-16 h-16 md:w-20 md:h-20 ${tech.themeAware ? (isDark ? 'invert-0 brightness-0 [filter:invert(1)]' : '') : ''}`}
                         />
                         <motion.span
                             className="mt-2 text-lg font-semibold bg-clip-text text-transparent bg-gradient-to-r from-blue-500 to-purple-500"

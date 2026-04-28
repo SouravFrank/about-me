@@ -115,49 +115,98 @@ const MobileSkillCard: React.FC<SkillCardProps> = ({ name, src, description, exp
           </motion.div>
         </div>
 
-        {/* BACK */}
-        <div className="absolute inset-0 [backface-visibility:hidden] [transform:rotateY(180deg)] rounded-2xl bg-gradient-to-br from-blue-600 to-purple-700 dark:from-blue-700 dark:to-purple-900 shadow-lg overflow-hidden p-2.5 flex flex-col">
+        {/* BACK — Futuristic HUD */}
+        <div className="absolute inset-0 [backface-visibility:hidden] [transform:rotateY(180deg)] rounded-2xl overflow-hidden flex flex-col bg-[radial-gradient(ellipse_at_top_left,#1e3a8a_0%,#4c1d95_55%,#0f172a_100%)] shadow-[0_8px_30px_rgba(76,29,149,0.4)]">
+          {/* HUD grid backdrop */}
+          <div
+            aria-hidden
+            className="absolute inset-0 opacity-[0.18] pointer-events-none"
+            style={{
+              backgroundImage:
+                'linear-gradient(rgba(255,255,255,0.4) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.4) 1px, transparent 1px)',
+              backgroundSize: '12px 12px',
+              maskImage: 'radial-gradient(ellipse at center, black 30%, transparent 80%)',
+              WebkitMaskImage: 'radial-gradient(ellipse at center, black 30%, transparent 80%)',
+            }}
+          />
+          {/* Corner brackets */}
+          {[
+            'top-1 left-1 border-t border-l',
+            'top-1 right-1 border-t border-r',
+            'bottom-1 left-1 border-b border-l',
+            'bottom-1 right-1 border-b border-r',
+          ].map((c, i) => (
+            <span key={i} className={`absolute w-2 h-2 ${c} border-cyan-300/80 pointer-events-none`} />
+          ))}
+
           <AnimatePresence>
             {flipped && (
               <motion.div
-                className="flex-1 flex flex-col min-h-0"
+                className="relative flex-1 flex flex-col min-h-0 p-2"
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
-                transition={{ delay: 0.2 }}
+                transition={{ delay: 0.18 }}
               >
-                <h4 className="text-[11px] font-bold text-white mb-1 line-clamp-1 shrink-0">{name}</h4>
+                {/* Header */}
+                <div className="shrink-0 flex items-center justify-between gap-1 mb-1.5">
+                  <h4 className="text-[10px] font-bold uppercase tracking-wider text-cyan-200 truncate">
+                    {name}
+                  </h4>
+                  {expertise !== undefined && (
+                    <span className="shrink-0 inline-flex items-center gap-0.5 text-[8px] font-mono font-bold text-cyan-100 bg-cyan-400/20 border border-cyan-300/40 rounded-sm px-1 py-[1px]">
+                      <span className="w-1 h-1 rounded-full bg-cyan-300 animate-pulse" />
+                      LV {expertise}
+                    </span>
+                  )}
+                </div>
+
+                {/* Scrollable body */}
                 <div
-                  className="flex-1 min-h-0 overflow-y-auto pr-1 -mr-1 mobile-skill-scroll"
+                  className="relative flex-1 min-h-0 overflow-y-auto pr-1 -mr-1 mobile-skill-scroll"
                   onClick={(e) => e.stopPropagation()}
                   onTouchStart={(e) => e.stopPropagation()}
                 >
-                  <p className="text-[10px] text-white/90 leading-snug">
-                    {description}{' '}
-                    <a
-                      href={`https://www.google.com/search?q=${encodeURIComponent(name)}`}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      onClick={(e) => e.stopPropagation()}
-                      className="inline-flex items-center gap-0.5 text-white font-semibold underline underline-offset-2 decoration-white/60 hover:decoration-white"
-                    >
-                      learn more<ExternalLink className="w-2.5 h-2.5" />
-                    </a>
-                  </p>
+                  <p className="text-[10px] text-white/95 leading-snug">{description}</p>
+                  <div className="h-2" />
                 </div>
-                <motion.div
-                  className="shrink-0 mt-1 h-3 -mx-2.5 bg-gradient-to-t from-purple-800/80 to-transparent pointer-events-none"
-                  animate={{ opacity: [0.4, 0.9, 0.4] }}
-                  transition={{ duration: 1.6, repeat: Infinity }}
+
+                {/* Fade hint above action */}
+                <div
+                  aria-hidden
+                  className="shrink-0 h-2 -mx-2 bg-gradient-to-t from-[#0f172a] to-transparent pointer-events-none"
                 />
+
+                {/* Pinned action button — always visible */}
+                <motion.a
+                  href={`https://www.google.com/search?q=${encodeURIComponent(name)}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  onClick={(e) => e.stopPropagation()}
+                  onTouchStart={(e) => e.stopPropagation()}
+                  initial={{ y: 8, opacity: 0 }}
+                  animate={{ y: 0, opacity: 1 }}
+                  transition={{ delay: 0.32 }}
+                  whileTap={{ scale: 0.94 }}
+                  className="shrink-0 mt-1 relative inline-flex items-center justify-center gap-1 text-[10px] font-bold uppercase tracking-wider text-white rounded-md py-1.5 px-2 bg-gradient-to-r from-cyan-500/90 via-blue-500/90 to-fuchsia-500/90 border border-white/30 shadow-[0_0_12px_rgba(34,211,238,0.5)] overflow-hidden"
+                >
+                  <span className="relative z-10">Learn More</span>
+                  <ExternalLink className="relative z-10 w-2.5 h-2.5" />
+                  <motion.span
+                    aria-hidden
+                    className="absolute inset-0 bg-gradient-to-r from-transparent via-white/40 to-transparent"
+                    animate={{ x: ['-100%', '200%'] }}
+                    transition={{ duration: 2, repeat: Infinity, ease: 'linear' }}
+                  />
+                </motion.a>
               </motion.div>
             )}
           </AnimatePresence>
 
-          {/* Decorative shimmer */}
+          {/* Decorative shimmer sweep */}
           <motion.div
-            className="absolute -inset-y-2 -left-1/2 w-1/2 bg-gradient-to-r from-transparent via-white/20 to-transparent skew-x-12 pointer-events-none"
+            className="absolute -inset-y-2 -left-1/2 w-1/2 bg-gradient-to-r from-transparent via-white/15 to-transparent skew-x-12 pointer-events-none"
             animate={{ x: ['0%', '300%'] }}
-            transition={{ duration: 2.5, repeat: Infinity, repeatDelay: 1.5, ease: 'easeInOut' }}
+            transition={{ duration: 2.8, repeat: Infinity, repeatDelay: 1.8, ease: 'easeInOut' }}
           />
         </div>
       </motion.div>

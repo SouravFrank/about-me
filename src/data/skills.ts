@@ -68,7 +68,7 @@ export const skills: SkillsData = {
       name: 'CSS3',
       src: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/css3/css3-original.svg',
       description: 'Style sheet language for web design',
-      expertise: 5,
+      expertise: 7,
     },
     {
       name: 'Material UI',
@@ -80,7 +80,7 @@ export const skills: SkillsData = {
       name: 'Axios',
       src: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/axios/axios-plain.svg',
       description: 'Promise-based HTTP client for the browser and Node.js',
-      expertise: 6,
+      expertise: 8,
     },
     {
       name: 'Socket.io',
@@ -98,13 +98,13 @@ export const skills: SkillsData = {
       name: 'Lottie',
       src: 'https://stp-v4-cdn.lottiefiles.com/Lottie_Creator_d015ee2074.svg',
       description: 'Library for rendering animations in web and mobile applications',
-      expertise: 5,
+      expertise: 7,
     },
     {
       name: 'Expo',
       src: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/react/react-original.svg',
       description: 'Fast React Native iteration and tooling for prototyping, team enablement, and product delivery.',
-      expertise: 7,
+      expertise: 8,
     },
     {
       name: 'IndexedDB',
