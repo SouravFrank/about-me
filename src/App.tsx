@@ -84,7 +84,7 @@ function App() {
         </div>
         <div className={`min-h-screen transition-opacity duration-700 delay-200 ${loading ? 'opacity-0' : 'opacity-100'}`}>
           <GradientBlobCursor isDarkMode={isDark}>
-            <div className={`relative transition-colors duration-300 ${isDark ? 'dark bg-gray-900 text-white' : 'bg-gray-100 text-gray-900'}`}>
+            <div className={`relative transition-colors duration-300 ${isDark ? 'dark bg-gray-900 text-white' : 'bg-gray-100 text-gray-900'}`} style={{ position: 'relative' }}>
               <InteractiveBackground isDark={isDark} />
               <div className="relative z-10">
               <ThemeToggle isDark={isDark} toggle={toggleTheme} />

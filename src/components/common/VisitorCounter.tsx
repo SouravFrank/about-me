@@ -47,7 +47,11 @@ const VisitorCounter: React.FC<VisitorCounterProps> = ({ appId }) => {
     const fetchIpAndUpdateCount = async () => {
       try {
         // Sign in anonymously before accessing the database
-        await signInAnonymously(auth);
+        try {
+          await signInAnonymously(auth);
+        } catch (authError) {
+          console.warn('Anonymous auth failed, continuing without auth:', authError);
+        }
         
         // Retrieve the visitor id from localStorage or generate one.
         let visitorFingerprint = localStorage.getItem('visitorFingerprint');

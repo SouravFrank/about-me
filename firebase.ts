@@ -25,11 +25,22 @@ export const db: Database = getDatabase(app);
 export let analytics: Analytics | null = null;
 
 // isSupported() checks if the browser environment allows Analytics to run smoothly
-isSupported().then((supported) => {
-  if (supported) {
-    analytics = getAnalytics(app);
-    console.log("Firebase Analytics initialized successfully.");
+let analyticsInitialized = false;
+const initializeAnalytics = async () => {
+  if (analyticsInitialized) return analytics;
+  
+  try {
+    const supported = await isSupported();
+    if (supported && !analytics) {
+      analytics = getAnalytics(app);
+      analyticsInitialized = true;
+      console.log("Firebase Analytics initialized successfully.");
+    }
+  } catch (err) {
+    console.warn("Firebase Analytics failed to initialize:", err);
   }
-}).catch((err) => {
-  console.warn("Firebase Analytics failed to initialize:", err);
-});
+  return analytics;
+};
+
+// Auto-initialize when module loads
+initializeAnalytics();
