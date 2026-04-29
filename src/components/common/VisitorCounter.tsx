@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { ref, onValue, set, get, DatabaseReference } from 'firebase/database';
-import { db } from '../../../firebase';
+import { getAuth, signInAnonymously } from 'firebase/auth';
+import { app, db } from '../../../firebase';
 import { VisitorCounterProps, VisitorsData } from './types';
 import { Users } from 'lucide-react';
 import { trackEvent } from '../../utils/analytics';
@@ -23,6 +24,9 @@ function generateFingerprint(ip: string): string {
   return hashString(rawFingerprint);
 }
 
+// Initialize Auth
+const auth = getAuth(app);
+
 const VisitorCounter: React.FC<VisitorCounterProps> = ({ appId }) => {
   const [visitorCount, setVisitorCount] = useState<number>(0);
   const visitorsRef: DatabaseReference = ref(db, `visitors/${appId}`);
@@ -42,6 +46,9 @@ const VisitorCounter: React.FC<VisitorCounterProps> = ({ appId }) => {
     // Update the fetchIpAndUpdateCount function
     const fetchIpAndUpdateCount = async () => {
       try {
+        // Sign in anonymously before accessing the database
+        await signInAnonymously(auth);
+        
         // Retrieve the visitor id from localStorage or generate one.
         let visitorFingerprint = localStorage.getItem('visitorFingerprint');
         if (!visitorFingerprint) {

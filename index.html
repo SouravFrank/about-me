@@ -4,23 +4,19 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Sourav Sadhukhan</title>
-    <link rel="icon" href="S-logo.png" type="image/png">
-    <meta name="description" content="A brief description of your webpage for SEO.">
-    <meta name="keywords" content="web development, React, Node.js, mobile development">
-    <meta name="author" content="Sourav Sadhukhan">
-    <!-- Content Security Policy to allow analytics services -->
-    <meta http-equiv="Content-Security-Policy" content="script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://www.google-analytics.com; connect-src 'self' https://www.google-analytics.com https://*.firebaseio.com https://firebaseinstallations.googleapis.com https://firebaseremoteconfig.googleapis.com;">
-    <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-JE6MNVN8K7"></script>
     <script>
       window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
+      function gtag() {
+        dataLayer.push(arguments);
+      }
       gtag('js', new Date());
       gtag('config', 'G-JE6MNVN8K7', {
-        'anonymize_ip': true,
-        'allow_google_signals': false
+        anonymize_ip: true,
+        allow_google_signals: false,
       });
     </script>
+  </head>
   <body>
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
