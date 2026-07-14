@@ -4,161 +4,189 @@
 
 ---
 
-## 1. Core Analytics Infrastructure
+## 1. Unified Analytics SDK (`src/utils/analytics.ts`)
 
-### Global script Injection (`index.html`)
-Google Analytics 4 is loaded via Google Tag Manager in the HTML `<head>`:
-```html
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-JE6MNVN8K7"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-  gtag('config', 'G-JE6MNVN8K7', {
-    'anonymize_ip': true,
-    'allow_google_signals': false
-  });
-</script>
+The project utilizes a client-side analytics SDK middleware that enriches all events with device and traffic metadata before transmitting them to **Google Analytics (gtag)** and **Firebase Analytics**.
+
+### Exported Categories
+```typescript
+export const ANALYTICS_CATEGORIES = {
+    NAVIGATION: 'navigation',
+    INTERACTION: 'interaction',
+    DOWNLOAD: 'download',
+    CONTACT: 'contact',
+    SOCIAL: 'social',
+    PROJECTS: 'projects',
+    TIMELINE: 'timeline',
+    SKILLS: 'skills',
+    CONTENT: 'content',
+    EXTERNAL_LINK: 'external_link',
+};
 ```
 
-### Firebase Analytics Bridge (`src/utils/analytics.ts`)
-The project utilizes a unified tracking helper that logs to both **Google Analytics (gtag)** and **Firebase Analytics** (if initialized and not blocked by adblockers).
+### SDK Event Families
+- `trackPage()`: Logs custom page view details.
+- `trackSection(sectionName, state, extraParams)`: Tracks entry and exit for viewport sections.
+- `trackCTA(ctaName, action, section, extraParams)`: Tracks general CTA impressions and clicks.
+- `trackJourney(step, sectionName, sectionOrder, timeToReach, scrollPercentage)`: Logs visitor funnel milestones.
+- `trackConversion(type, details)`: Tracks conversions like form success or resume download.
+- `trackPerformance(metricName, value, extraParams)`: Log web vitals and asset download speeds.
+- `trackError(errorType, message, stack, component, action)`: Reports runtime or network issues.
+- `trackAIProduct(productName, step, extraParams)`: Logs AI product funnel events.
+- `trackArticle(articleTitle, step, extraParams)`: Logs article reading funnel events.
 
-* **Exported Categories**:
-  ```typescript
-  export const ANALYTICS_CATEGORIES = {
-      NAVIGATION: 'navigation',
-      INTERACTION: 'interaction',
-      DOWNLOAD: 'download',
-      CONTACT: 'contact',
-      SOCIAL: 'social',
-      PROJECTS: 'projects',
-      TIMELINE: 'timeline',
-      SKILLS: 'skills',
-      CONTENT: 'content',
-      EXTERNAL_LINK: 'external_link',
-  };
-  ```
+### Auto-Enriched Metadata (Middleware Payload)
 
-* **Helper Function signature**:
-  `trackEvent(eventName: string, eventParams: Record<string, any>)`
-  * Developer console output is logged during development mode (`import.meta.env.DEV`).
-  * Safety guards: Silently fails on script blockers or non-browser environments.
+#### Device Intelligence
+Every event payload automatically embeds:
+* `device_type`: `'desktop' | 'mobile' | 'tablet'`
+* `browser`: Browser name (e.g. `'Chrome'`, `'Firefox'`, `'Safari'`, `'Edge'`)
+* `os`: Client operating system (e.g. `'Windows'`, `'macOS'`, `'iOS'`, `'Android'`, `'Linux'`)
+* `screen_resolution`: e.g. `'1920x1080'`
+* `viewport`: Current window viewport size (e.g. `'1280x720'`)
+* `theme`: `'dark' | 'light'`
+* `network_speed`: Connection effective type (e.g. `'4g'`, `'3g'`)
+* `touch_device`: Boolean (touch capacity)
+* `language`: Client language (e.g. `'en-US'`)
+* `timezone`: Client timezone string (e.g. `'Asia/Kolkata'`)
 
----
+#### Traffic Intelligence
+Extracted on session start, saved in `sessionStorage` and sent on every event:
+* `utm_source`: e.g. `'linkedin'`
+* `utm_medium`: e.g. `'social'`
+* `utm_campaign`: Campaign name
+* `utm_content`: Campaign content
+* `referrer`: Document referrer URL
+* `landing_page`: Landing path (e.g. `'/index.html#projects'`)
 
-## 2. Automated Event Listeners
-
-### Outbound & Navigational Link Interception (`src/utils/trackLinks.tsx`)
-The app is wrapped globally with a `<TrackLinks>` component in `main.tsx` / `App.tsx`. It intercepts all click events on `<a>` tags:
-* **Event**: `link_click`
-* **Parameters**:
-  * `category`: `'external_link'` (if link target is `_blank`) or `'navigation'` (if internal)
-  * `url`: Link target attribute value (`href`)
-  * `text`: Link description string (`textContent`)
-  * `is_external`: Boolean
-  * `section`: Identifies the parent section container via DOM lookup (`data-section` attribute)
-
----
-
-## 3. Pre-existing Codebase Events
-
-### Page View Custom
-Fires on App mounting.
-* **Event**: `page_view_custom`
-* **Parameters**:
-  * `page_title`: `document.title`
-  * `page_location`: `window.location.href`
-  * `page_path`: `window.location.pathname`
-  * `dark_mode`: Boolean
-
-### Theme Changes
-Fires when toggling between dark/light modes.
-* **Event**: `theme_change`
-* **Parameters**:
-  * `category`: `'interaction'`
-  * `new_theme`: `'dark' | 'light'`
-
-### Card Button Actions
-Fires when clicking standalone CTA buttons.
-* **Event**: `button_click`
-* **Parameters**:
-  * `category`: `'interaction'`
-  * `button_label`: String
-  * `button_variant`: String
-  * `is_download`: Boolean
-
-### Article Interactions
-Fired on the articles scroll cards.
-* **Event**: `article_hover` (tracks scroll views on desktop)
-  * `category`: `'interaction'`
-  * `article_title`: String
-  * `article_index`: Number
-* **Event**: `article_interaction` (tracks clicks)
-  * `category`: `'content'`
-  * `action`: `'click'`
-  * `article_title`: String
-  * `article_index`: Number
-  * `click_area`: `'card' | 'link' | 'read_more'`
-  * `device_type`: `'mobile' | 'desktop'`
-
-### Slider Scrolling
-Fired when dragging or clicking arrows on horizontal carousels.
-* **Event**: `horizontal_scroll`
-* **Parameters**:
-  * `category`: `'interaction'`
-  * `direction`: `'left' | 'right'`
-  * `container_width`: Number
+#### Custom User Properties (Session-level)
+Set once per session in Firebase:
+* `visitor_type`: Segmented value based on activity score:
+  * `Cold Visitor`: 0 - 30 score
+  * `Interested`: 30 - 80 score
+  * `Recruiter`: 80 - 150 score (or auto-detected recruiter intent)
+  * `Highly Interested`: 150+ score
+* `engagement_score`: Client-side accumulated activity score.
+* `country` & `city`: Resolved asynchronously via GeoIP query to `https://ipapi.co/json/`.
+* `first_visit` & `returning_user`: Derived from persistent localStorage.
 
 ---
 
-## 4. Phase 1 AI Products Section Events
-Fired from components inside `src/components/sections/aiProducts/`.
+## 2. Automated Behavioral Observers (`src/components/common/AnalyticsTracker.tsx`)
 
-### Product Card Click
-Logged when clicking the primary card CTA ("Explore Product").
-* **Event**: `product_card_click`
-* **Parameters**:
-  * `product_name`: String (e.g. `'🇮🇳 ITR Copilot'`)
-  * `product_version`: String (e.g. `'1.0'`)
+A global provider wrapping the application that tracks automated interactions.
 
-### Product Modal Open
-Fired when the modal mounts.
-* **Event**: `product_modal_open`
-* **Parameters**:
-  * `product_name`: String
-  * `source`: `'click'` (from card click) or `'deep_link'` (from URL loading `/#product=itr-copilot`)
+### Section View & Engagement
+* **Intersection Tracking**: Observes all sections (`#about`, `#timeline`, `#skills`, `#projects`, `#articles`, `#ai-arsenal`, `#ai-products`, `#rewards`, `#contact`, `#cv`).
+* **Event**: `section_view`
+  * Logs entry/exit state.
+* **Event**: `section_view_first`
+  * Fires exactly once per section during the session when first entering it.
+* **Event**: `section_engagement`
+  * Fires when leaving a section or tab unloads.
+  * Parameters:
+    * `section_name`: String
+    * `engagement_seconds`: Total seconds spent on section
+    * `active_time`: Seconds user was active (moved mouse, clicked, scrolled, touched screen)
+    * `inactive_time`: Seconds user was idle or tab was hidden
 
-### LinkedIn Article Open
-Fired when clicking "Read LinkedIn Article" on standard modal or the success screen.
-* **Event**: `product_article_click`
-* **Parameters**:
-  * `product_name`: String
+### Scroll Depth
+* **Event**: `scroll_depth`
+  * Fires exactly once per session when reaching: `25%`, `50%`, `75%`, `90%`, and `100%` of page height.
+  * Parameters:
+    * `scroll_percentage`: Number
+    * `time_to_reach`: Seconds from session start
+    * `landing_page`: Landing page path
 
-### Product Copy/Download Actions
-Tracks prompt acquisition rates.
-* **Event**: `product_copy_prompt` (Fired only when copying successfully completes)
-  * `product_name`: String
-* **Event**: `product_download` (Fired when user either copies or downloads the text file)
-  * `product_name`: String
-  * `download_method`: `'copy'` or `'download'`
+### Visitor Journey
+* **Event**: `visitor_journey`
+  * Tracks progress in the chronological visitor journey:
+    `Landing (0) -> Hero Viewed (1) -> About Viewed (2) -> Experience Viewed (3) -> Projects Viewed (4) -> AI Products Viewed (5) -> Articles Viewed (6) -> Contact Viewed (7) -> Resume Downloaded (8)`
+  * Parameters:
+    * `journey_step`: Step description (e.g. `'About Viewed'`)
+    * `section_name`: Mapped section identifier
+    * `section_order`: Numeric step index (0-8)
+    * `time_to_reach_section`: Seconds to reach
+    * `scroll_percentage`: Scroll depth at trigger
 
-### Product Modal Close
-Triggered when the modal unmounts.
-* **Event**: `product_modal_close`
-* **Parameters**:
-  * `product_name`: String
-  * `time_spent_seconds`: Number (Measures how long the user reviewed details in seconds)
+### Session End Summary
+* **Event**: `session_summary`
+  * Triggered using the Page Visibility API (`visibilityState === 'hidden'`) once per session.
+  * Parameters:
+    * `session_duration`: Total active session time (seconds)
+    * `pages`: Count of page views (`1` for single-page app)
+    * `sections_viewed`: Count of unique sections visited
+    * `deepest_scroll`: Maximum scroll percentage reached
+    * `resume_downloaded`: Boolean
+    * `products_opened`: Count of AI products opened
+    * `articles_clicked`: Count of articles clicked
+    * `contact_clicked`: Count of contact options clicked
+    * `engagement_score`: Cumulative score
+    * `visitor_segment`: Visitor classification
 
 ---
 
-## 5. Custom Dimensions Registry (Admin Setup Required)
-To extract parameters from custom events inside GA4's analytics console, create custom dimension mapping:
+## 3. Funnel & Interactive Event Schemas
 
-| Dimension Name | Scope | Description | Event Parameter |
-| :--- | :--- | :--- | :--- |
-| **Download Method** | Event | Differentiates file downloads from clipboard copies | `download_method` |
-| **Product Name** | Event | Identifies which copilot was selected | `product_name` |
-| **Product Version** | Event | Tracks version identifier | `product_version` |
-| **Source** | Event | Distinguishes normal clicks from URL deep links | `source` |
-| **Time Spent Seconds** | Event | Measures viewport interaction duration | `time_spent_seconds` |
+### A. Resume Funnel
+Tracks the visitor's interaction with professional credentials:
+1. `Resume Button Viewed`: CV Section enters viewport.
+2. `Resume Clicked`: Clicks 'Download CV' or 'Preview CV' (Parameters: `resume_source: 'download_button' | 'preview_button'`).
+3. `Resume Downloaded`: Tracks PDF generation and click download.
+4. `Resume Opened`: Document rendered in preview modal.
+5. `Returned to Website`: Fired when preview modal closes.
+
+### B. Contact Funnel
+Monitors preferred contact channels and communication intent:
+* `Contact Viewed`: Contact section enters viewport.
+* `Email Click` / `Phone Click` / `LinkedIn Click` / `GitHub Click`: Click on mailto/tel/external links.
+* `Email Copied` / `Phone Copied`: Intercepts copy actions (`Ctrl+C` or context menu copy) inside the contact card.
+* `Contact Form Submit`: Attempting form submit.
+* `conversion` (Type: `'contact_form_success'`): Successful EmailJS message dispatch.
+
+### C. AI Product Funnel (ITR Copilot)
+Monitors adoption flow of AI products:
+1. `Product Viewed`: Card enters viewport.
+2. `Card Hover`: Mouse hovers card.
+3. `Explore Click`: Click card primary button.
+4. `Modal Open`: Main product modal mounts.
+5. `features_tab` / `architecture_tab` / `audience_tab`: Swapping between product tabs.
+6. `prompt_viewed`: Activating the "Show Prompt Preview" block.
+7. `prompt_copied`: Triggering prompt clipboard copies.
+8. `downloaded`: Fetching prompt as txt download file.
+9. `linkedin_article_click`: Link click to read about product on LinkedIn.
+10. `returned_later`: Triggered if they reopen the product modal in a subsequent session.
+
+### D. Article Funnel
+Tracks reading actions on external articles:
+* `Article Card Visible`: Card enters viewport.
+* `Hovered`: Mouse over article thumbnail.
+* `Clicked`: Clicking card or "Read more".
+* `Reading Started`: Triggered immediately on clicking external link.
+
+### E. Project Funnel
+Tracks interest in portfolio code repositories:
+* `Project Viewed`: Card enters viewport.
+* `GitHub Click`: Source link click.
+* `Live Demo Click`: Live demo redirection.
+* `Tech Stack Expanded`: Click on individual technology badges.
+
+---
+
+## 4. Performance & Error Analytics
+
+### Web Vitals
+Logged via PerformanceObserver callbacks:
+* `first_contentful_paint` (FCP)
+* `largest_contentful_paint` (LCP)
+* `CLS` (Layout Shift)
+* `interaction_to_next_paint` (INP)
+* `TTFB` (Time to First Byte)
+* `page_load`: Navigation duration
+* `image_load_time`: Image load duration
+* `bundle_download`: Script download duration
+
+### Error Tracking
+* `React Error Boundary`: Catches UI render crashes, logs error message and component stack trace before fallback rendering.
+* `API Failure`: EmailJS dispatcher failures.
+* `Unhandled JavaScript Error` & `Unhandled Promise Rejection`: Captured globally on window and logged before dev silence.

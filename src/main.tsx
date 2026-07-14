@@ -2,6 +2,8 @@ import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
 import App from './App.tsx';
 import './index.css';
+import { ErrorBoundary } from './components';
+import { trackError } from './utils/analytics';
 
 /* ======================================================
    ASCII Art + Console Branding
@@ -42,8 +44,35 @@ if (isProd) {
   console.debug = noop;
   // eslint-disable-next-line no-console
   console.info = noop;
-  window.addEventListener('error', (e) => e.preventDefault());
-  window.addEventListener('unhandledrejection', (e) => e.preventDefault());
+  
+  window.addEventListener('error', (e) => {
+    try {
+      trackError(
+        'Unhandled JavaScript Error (Prod Suppressed)',
+        e.message,
+        e.error?.stack || 'none',
+        'window',
+        'runtime_execution'
+      );
+    } catch { /* ignore */ }
+    e.preventDefault();
+  });
+  
+  window.addEventListener('unhandledrejection', (e) => {
+    try {
+      const reason = e.reason;
+      const message = reason instanceof Error ? reason.message : String(reason);
+      const stack = reason instanceof Error ? reason.stack : undefined;
+      trackError(
+        'Unhandled Promise Rejection (Prod Suppressed)',
+        message,
+        stack,
+        'window',
+        'async_execution'
+      );
+    } catch { /* ignore */ }
+    e.preventDefault();
+  });
 }
 
 /* Block copy & context menu outside the #contact section */
@@ -58,6 +87,8 @@ const isInsideContact = (target: EventTarget | null) => {
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
-    <App />
+    <ErrorBoundary>
+      <App />
+    </ErrorBoundary>
   </StrictMode>
 );

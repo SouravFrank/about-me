@@ -1,9 +1,10 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import { ExternalLink } from 'lucide-react';
 import * as SimpleIcons from 'simple-icons';
 import { ProjectCardProps } from './types';
+import { trackEvent, trackSessionAction } from '../../../utils/analytics';
 
-const { siGithub } = SimpleIcons as any;
+const { siGithub } = SimpleIcons as unknown as { siGithub: { svg: string } };
 
 const GithubGlyph: React.FC<{ className?: string }> = ({ className = 'w-4 h-4' }) => (
   <svg
@@ -24,8 +25,61 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
   liveDemoLink,
   technologies,
 }) => {
+  const cardRef = useRef<HTMLDivElement>(null);
+  const viewTracked = useRef(false);
+
+  // Track: Project Viewed (when it enters viewport)
+  useEffect(() => {
+    const el = cardRef.current;
+    if (!el) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting && !viewTracked.current) {
+          viewTracked.current = true;
+          trackEvent('project_funnel', {
+            funnel_step: 'project_viewed',
+            project_title: title,
+          });
+          trackSessionAction('section', 'projects'); // Trigger projects in visited list
+          observer.disconnect();
+        }
+      },
+      { threshold: 0.25 }
+    );
+
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, [title]);
+
+  const handleGithubClick = () => {
+    trackEvent('project_funnel', {
+      funnel_step: 'github_clicked',
+      project_title: title,
+      destination: githubLink,
+    });
+    trackSessionAction('contact', 'github');
+  };
+
+  const handleLiveDemoClick = () => {
+    trackEvent('project_funnel', {
+      funnel_step: 'live_demo_clicked',
+      project_title: title,
+      destination: liveDemoLink,
+    });
+  };
+
+  const handleTechClick = (tech: string) => {
+    trackEvent('project_funnel', {
+      funnel_step: 'tech_stack_expanded',
+      project_title: title,
+      tech_name: tech,
+    });
+  };
+
   return (
     <article
+      ref={cardRef}
       className={`
         relative
         mb-8 
@@ -99,7 +153,8 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
             {technologies.map((tech, techIndex) => (
               <span
                 key={techIndex}
-                className="px-2 py-0.5 text-[11px] font-medium bg-blue-100 text-blue-600 dark:bg-blue-900/30 dark:text-blue-300 border border-blue-200 dark:border-blue-500/20 rounded-full hover:bg-blue-200 dark:hover:bg-blue-800/50 hover:border-blue-300 dark:hover:border-blue-300/50 transition-all duration-200"
+                onClick={() => handleTechClick(tech)}
+                className="px-2 py-0.5 text-[11px] font-medium bg-blue-100 text-blue-600 dark:bg-blue-900/30 dark:text-blue-300 border border-blue-200 dark:border-blue-500/20 rounded-full hover:bg-blue-200 dark:hover:bg-blue-800/50 hover:border-blue-300 dark:hover:border-blue-300/50 transition-all duration-200 cursor-pointer"
               >
                 {tech}
               </span>
@@ -113,6 +168,7 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
                 href={githubLink}
                 target="_blank"
                 rel="noopener noreferrer"
+                onClick={handleGithubClick}
                 className="relative inline-flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-semibold text-gray-800 dark:text-white overflow-hidden group/btn border border-gray-300 dark:border-gray-700 bg-gradient-to-br from-gray-50 to-gray-200 dark:from-gray-800 dark:to-gray-900 hover:shadow-[0_8px_20px_-6px_rgba(0,0,0,0.4)] hover:-translate-y-0.5 transition-all duration-300"
                 aria-label={`View ${title} on GitHub`}
               >
@@ -127,6 +183,7 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
                 href={liveDemoLink}
                 target="_blank"
                 rel="noopener noreferrer"
+                onClick={handleLiveDemoClick}
                 className="relative inline-flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-semibold text-white overflow-hidden group/btn shadow-md hover:shadow-[0_8px_24px_-6px_rgba(168,85,247,0.6)] hover:-translate-y-0.5 transition-all duration-300"
                 style={{ background: 'linear-gradient(135deg, #3b82f6 0%, #a855f7 50%, #ec4899 100%)' }}
                 aria-label={`View live demo of ${title}`}

@@ -1,8 +1,8 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Check, Clipboard, Download, ExternalLink, X } from 'lucide-react';
+import { Check, Clipboard, Download, ExternalLink, X, FileText, ChevronDown, ChevronUp } from 'lucide-react';
 import { ProductModalProps } from './types';
-import { trackEvent } from '../../../utils/analytics';
+import { trackAIProduct } from '../../../utils/analytics';
 import promptText from '../../../assets/prompts/itr-copilot-v1.0.0.txt?raw';
 
 export const ProductModal: React.FC<ProductModalProps> = ({
@@ -14,19 +14,37 @@ export const ProductModal: React.FC<ProductModalProps> = ({
 }) => {
   const modalRef = useRef<HTMLDivElement>(null);
   const closeButtonRef = useRef<HTMLButtonElement>(null);
+  
   const [copied, setCopied] = useState(false);
   const [showSuccessOverlay, setShowSuccessOverlay] = useState(false);
+  const [activeTab, setActiveTab] = useState<'features' | 'architecture' | 'audience'>('features');
+  const [showPromptPreview, setShowPromptPreview] = useState(false);
 
-  // Track modal open analytics
+  // Track modal open and Returned Later behavior
   useEffect(() => {
     if (isOpen) {
       setShowSuccessOverlay(false); // Reset to details view on open
-      trackEvent('product_modal_open', {
-        product_name: product.name,
-        source: initialSource,
-      });
+      setActiveTab('features');
+      setShowPromptPreview(false);
+
+      // Track general modal open
+      trackAIProduct(product.name, 'modal_open', { source: initialSource });
+
+      // Track: Returned Later
+      try {
+        const hasVisitedBefore = localStorage.getItem(`portfolio_ai_product_visited_${product.id}`);
+        const visitedThisSession = sessionStorage.getItem(`product_visited_session_${product.id}`);
+
+        if (hasVisitedBefore && !visitedThisSession) {
+          trackAIProduct(product.name, 'returned_later');
+        }
+
+        // Set flags
+        localStorage.setItem(`portfolio_ai_product_visited_${product.id}`, 'true');
+        sessionStorage.setItem(`product_visited_session_${product.id}`, 'true');
+      } catch (e) { /* ignore */ }
     }
-  }, [isOpen, product.name, initialSource]);
+  }, [isOpen, product.id, product.name, initialSource]);
 
   // Track modal duration on close
   useEffect(() => {
@@ -37,21 +55,18 @@ export const ProductModal: React.FC<ProductModalProps> = ({
     return () => {
       const endTime = Date.now();
       const timeSpentSeconds = Math.round((endTime - startTime) / 1000);
-      trackEvent('product_modal_close', {
-        product_name: product.name,
+      trackAIProduct(product.name, 'modal_close', {
         time_spent_seconds: timeSpentSeconds,
       });
     };
   }, [isOpen, product.name]);
 
-  // Accessibility: Focus trap & Escape key
+  // Focus trap & Escape key handler
   useEffect(() => {
     if (!isOpen) return;
 
-    // Save current active element to restore later
     const previousActiveElement = document.activeElement as HTMLElement;
 
-    // Shift focus into the modal
     const focusTimeout = setTimeout(() => {
       closeButtonRef.current?.focus();
     }, 100);
@@ -75,13 +90,11 @@ export const ProductModal: React.FC<ProductModalProps> = ({
         const lastElement = focusableElements[focusableElements.length - 1];
 
         if (e.shiftKey) {
-          // Shift + Tab -> loop to last
           if (document.activeElement === firstElement) {
             lastElement.focus();
             e.preventDefault();
           }
         } else {
-          // Tab -> loop to first
           if (document.activeElement === lastElement) {
             firstElement.focus();
             e.preventDefault();
@@ -95,7 +108,6 @@ export const ProductModal: React.FC<ProductModalProps> = ({
     return () => {
       clearTimeout(focusTimeout);
       window.removeEventListener('keydown', handleKeyDown);
-      // Restore focus to card trigger
       if (previousActiveElement && typeof previousActiveElement.focus === 'function') {
         previousActiveElement.focus();
       }
@@ -108,13 +120,9 @@ export const ProductModal: React.FC<ProductModalProps> = ({
       await navigator.clipboard.writeText(promptText);
 
       setCopied(true);
-      trackEvent('product_copy_prompt', { product_name: product.name });
-      trackEvent('product_download', {
-        product_name: product.name,
-        download_method: 'copy',
-      });
+      trackAIProduct(product.name, 'prompt_copied');
+      trackAIProduct(product.name, 'downloaded', { download_method: 'copy' });
 
-      // Brief delay so the checkmark animation is visible before the celebration overlay slides in
       setTimeout(() => {
         setCopied(false);
         setShowSuccessOverlay(true);
@@ -136,18 +144,29 @@ export const ProductModal: React.FC<ProductModalProps> = ({
     document.body.removeChild(link);
     URL.revokeObjectURL(url);
 
-    trackEvent('product_download', {
-      product_name: product.name,
-      download_method: 'download',
-    });
-
+    trackAIProduct(product.name, 'downloaded', { download_method: 'download' });
     setShowSuccessOverlay(true);
   };
 
   // LinkedIn article click handler
   const handleArticleClick = () => {
-    trackEvent('product_article_click', { product_name: product.name });
+    trackAIProduct(product.name, 'linkedin_article_click');
     window.open(product.articleUrl, '_blank', 'noopener,noreferrer');
+  };
+
+  // Tab switch handler
+  const handleTabChange = (tab: 'features' | 'architecture' | 'audience') => {
+    setActiveTab(tab);
+    trackAIProduct(product.name, `${tab}_tab`);
+  };
+
+  // Toggle Prompt preview handler
+  const togglePromptPreview = () => {
+    const nextState = !showPromptPreview;
+    setShowPromptPreview(nextState);
+    if (nextState) {
+      trackAIProduct(product.name, 'prompt_viewed');
+    }
   };
 
   return (
@@ -228,7 +247,6 @@ export const ProductModal: React.FC<ProductModalProps> = ({
                 </p>
               </div>
 
-              {/* Small Branding (Top Right, below close button) */}
               <div className="absolute top-[68px] right-6 hidden sm:flex flex-col items-end text-right">
                 <span className="text-[9px] uppercase tracking-wider text-gray-400 dark:text-gray-500 font-bold">Built by</span>
                 <span className="text-xs font-bold text-gray-700 dark:text-gray-300">Sourav Sadhukhan</span>
@@ -281,69 +299,207 @@ export const ProductModal: React.FC<ProductModalProps> = ({
               </div>
             ) : (
               <div className="p-6 md:p-8 overflow-y-auto space-y-6 flex-1 mobile-skill-scroll">
-                {/* Short Introduction */}
-                <div>
-                  <h4 className="text-xs font-bold tracking-widest text-purple-600 dark:text-purple-400 uppercase mb-2">
-                    Overview
-                  </h4>
-                  <p className="text-sm md:text-base text-gray-700 dark:text-gray-300 leading-relaxed font-light">
-                    {product.longDescription}
-                  </p>
+                
+                {/* Custom Tabs Navigation (Premium Glassmorphism Style) */}
+                <div className="flex border-b border-gray-200 dark:border-gray-800 gap-6 text-sm font-semibold mb-4">
+                  <button
+                    onClick={() => handleTabChange('features')}
+                    className={`pb-2.5 transition-all relative cursor-pointer ${
+                      activeTab === 'features' 
+                        ? 'text-blue-600 dark:text-blue-400' 
+                        : 'text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200'
+                    }`}
+                  >
+                    Features
+                    {activeTab === 'features' && (
+                      <motion.div layoutId="modal-active-tab" className="absolute bottom-0 left-0 right-0 h-0.5 bg-blue-600 dark:bg-blue-400" />
+                    )}
+                  </button>
+                  
+                  <button
+                    onClick={() => handleTabChange('architecture')}
+                    className={`pb-2.5 transition-all relative cursor-pointer ${
+                      activeTab === 'architecture' 
+                        ? 'text-blue-600 dark:text-blue-400' 
+                        : 'text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200'
+                    }`}
+                  >
+                    Architecture Flow
+                    {activeTab === 'architecture' && (
+                      <motion.div layoutId="modal-active-tab" className="absolute bottom-0 left-0 right-0 h-0.5 bg-blue-600 dark:bg-blue-400" />
+                    )}
+                  </button>
+                  
+                  <button
+                    onClick={() => handleTabChange('audience')}
+                    className={`pb-2.5 transition-all relative cursor-pointer ${
+                      activeTab === 'audience' 
+                        ? 'text-blue-600 dark:text-blue-400' 
+                        : 'text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200'
+                    }`}
+                  >
+                    Target Audience
+                    {activeTab === 'audience' && (
+                      <motion.div layoutId="modal-active-tab" className="absolute bottom-0 left-0 right-0 h-0.5 bg-blue-600 dark:bg-blue-400" />
+                    )}
+                  </button>
                 </div>
 
-                {/* How to execute tip box */}
-                <div className="p-4 rounded-xl border border-blue-100 dark:border-blue-900/40 bg-blue-50/20 dark:bg-blue-950/20 flex gap-3 items-start select-text">
-                  <span className="text-lg shrink-0 select-none">💡</span>
-                  <div className="space-y-1">
-                    <h5 className="text-xs font-bold text-blue-800 dark:text-blue-300 uppercase tracking-wider">
-                      How to execute this workflow
-                    </h5>
-                    <p className="text-xs text-gray-600 dark:text-gray-400 leading-relaxed font-light">
-                      Download or copy the workflow, then paste it directly into your preferred AI chat assistant (such as <strong className="text-gray-800 dark:text-gray-200">ChatGPT</strong>, <strong className="text-gray-800 dark:text-gray-200">Claude</strong>, or <strong className="text-gray-800 dark:text-gray-200">Gemini</strong>) to initiate the step-by-step guided filing session.
-                    </p>
-                  </div>
-                </div>
+                {/* Tab Content rendering */}
+                <AnimatePresence mode="wait">
+                  {activeTab === 'features' && (
+                    <motion.div
+                      key="features-tab"
+                      initial={{ opacity: 0, y: 5 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      exit={{ opacity: 0, y: -5 }}
+                      transition={{ duration: 0.2 }}
+                      className="space-y-6"
+                    >
+                      {/* Short Introduction */}
+                      <div>
+                        <h4 className="text-xs font-bold tracking-widest text-purple-600 dark:text-purple-400 uppercase mb-2">
+                          Overview
+                        </h4>
+                        <p className="text-sm md:text-base text-gray-700 dark:text-gray-300 leading-relaxed font-light">
+                          {product.longDescription}
+                        </p>
+                      </div>
 
-                {/* Features & Target Audience Grid */}
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6 pt-2">
-                  {/* Column 1: Workflow Features */}
-                  <div>
-                    <h4 className="text-xs font-bold tracking-widest text-purple-600 dark:text-purple-400 uppercase mb-3">
-                      Workflow Features
-                    </h4>
-                    <ul className="space-y-2.5">
-                      {product.features.map((feature, idx) => (
-                        <li key={idx} className="flex items-start gap-2.5">
-                          <div className="mt-0.5 rounded-full bg-blue-500/10 dark:bg-blue-500/20 p-0.5 text-blue-600 dark:text-blue-400 shrink-0">
-                            <Check className="w-3.5 h-3.5" />
+                      {/* How to execute tip box */}
+                      <div className="p-4 rounded-xl border border-blue-100 dark:border-blue-900/40 bg-blue-50/20 dark:bg-blue-950/20 flex gap-3 items-start select-text">
+                        <span className="text-lg shrink-0 select-none">💡</span>
+                        <div className="space-y-1">
+                          <h5 className="text-xs font-bold text-blue-800 dark:text-blue-300 uppercase tracking-wider">
+                            How to execute this workflow
+                          </h5>
+                          <p className="text-xs text-gray-600 dark:text-gray-400 leading-relaxed font-light">
+                            Download or copy the workflow, then paste it directly into your preferred AI chat assistant (such as <strong className="text-gray-800 dark:text-gray-200">ChatGPT</strong>, <strong className="text-gray-800 dark:text-gray-200">Claude</strong>, or <strong className="text-gray-800 dark:text-gray-200">Gemini</strong>) to initiate the step-by-step guided filing session.
+                          </p>
+                        </div>
+                      </div>
+
+                      {/* Workflow Features list */}
+                      <div>
+                        <h4 className="text-xs font-bold tracking-widest text-purple-600 dark:text-purple-400 uppercase mb-3">
+                          Workflow Features
+                        </h4>
+                        <ul className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
+                          {product.features.map((feature, idx) => (
+                            <li key={idx} className="flex items-start gap-2.5">
+                              <div className="mt-0.5 rounded-full bg-blue-500/10 dark:bg-blue-500/20 p-0.5 text-blue-600 dark:text-blue-400 shrink-0">
+                                <Check className="w-3.5 h-3.5" />
+                              </div>
+                              <span className="text-sm text-gray-700 dark:text-gray-300 leading-tight">
+                                {feature}
+                              </span>
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                    </motion.div>
+                  )}
+
+                  {activeTab === 'architecture' && (
+                    <motion.div
+                      key="arch-tab"
+                      initial={{ opacity: 0, y: 5 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      exit={{ opacity: 0, y: -5 }}
+                      transition={{ duration: 0.2 }}
+                      className="space-y-6"
+                    >
+                      <div>
+                        <h4 className="text-xs font-bold tracking-widest text-purple-600 dark:text-purple-400 uppercase mb-2">
+                          ITR Copilot Architecture
+                        </h4>
+                        <p className="text-sm text-gray-600 dark:text-gray-300 font-light leading-relaxed">
+                          This AI product follows a structured prompt architecture using a zero-assumption model. Here is the process flow for processing tax documents and returns.
+                        </p>
+                      </div>
+
+                      {/* Flow Diagram */}
+                      <div className="p-6 rounded-2xl bg-gray-50 dark:bg-gray-800/40 border border-gray-200 dark:border-gray-800 font-mono text-xs text-center space-y-4">
+                        <div className="flex flex-col items-center">
+                          <div className="px-4 py-2 bg-blue-600 text-white rounded-lg font-bold shadow-md">
+                            Taxpayer Documents & Query
                           </div>
-                          <span className="text-sm text-gray-700 dark:text-gray-300 leading-tight">
-                            {feature}
-                          </span>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-
-                  {/* Column 2: Perfect For */}
-                  <div>
-                    <h4 className="text-xs font-bold tracking-widest text-purple-600 dark:text-purple-400 uppercase mb-3">
-                      Perfect For
-                    </h4>
-                    <ul className="space-y-2.5">
-                      {product.perfectFor.map((audience, idx) => (
-                        <li key={idx} className="flex items-start gap-2.5">
-                          <div className="mt-0.5 rounded-full bg-emerald-500/10 dark:bg-emerald-500/20 p-0.5 text-emerald-600 dark:text-emerald-400 shrink-0">
-                            <Check className="w-3.5 h-3.5" />
+                          <div className="h-6 border-l-2 border-dashed border-gray-300 dark:border-gray-700" />
+                          <div className="px-4 py-2 bg-indigo-600 text-white rounded-lg font-bold shadow-md">
+                            Zero-Assumption ITR Classifier
                           </div>
-                          <span className="text-sm text-gray-700 dark:text-gray-300 leading-tight">
-                            {audience}
-                          </span>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
+                          <div className="h-6 border-l-2 border-dashed border-gray-300 dark:border-gray-700" />
+                          <div className="px-4 py-2 bg-purple-600 text-white rounded-lg font-bold shadow-md">
+                            RAG Check (Indian Tax Code database references)
+                          </div>
+                          <div className="h-6 border-l-2 border-dashed border-gray-300 dark:border-gray-700" />
+                          <div className="px-4 py-2 bg-emerald-600 text-white rounded-lg font-bold shadow-md">
+                            Structured Output Synthesis (AI Copilot response)
+                          </div>
+                        </div>
+                      </div>
+                    </motion.div>
+                  )}
+
+                  {activeTab === 'audience' && (
+                    <motion.div
+                      key="audience-tab"
+                      initial={{ opacity: 0, y: 5 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      exit={{ opacity: 0, y: -5 }}
+                      transition={{ duration: 0.2 }}
+                      className="space-y-4"
+                    >
+                      <div>
+                        <h4 className="text-xs font-bold tracking-widest text-purple-600 dark:text-purple-400 uppercase mb-3">
+                          Perfect For
+                        </h4>
+                        <ul className="space-y-2.5">
+                          {product.perfectFor.map((audience, idx) => (
+                            <li key={idx} className="flex items-start gap-2.5">
+                              <div className="mt-0.5 rounded-full bg-emerald-500/10 dark:bg-emerald-500/20 p-0.5 text-emerald-600 dark:text-emerald-400 shrink-0">
+                                <Check className="w-3.5 h-3.5" />
+                              </div>
+                              <span className="text-sm text-gray-700 dark:text-gray-300 leading-tight">
+                                {audience}
+                              </span>
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+
+                {/* Prompt Preview section (Requirement: Prompt Viewed / Prompt Copied) */}
+                <div className="mt-6 border-t border-gray-200 dark:border-gray-800 pt-6">
+                  <button
+                    onClick={togglePromptPreview}
+                    className="flex items-center justify-between w-full py-2.5 px-4 rounded-xl bg-gray-100 hover:bg-gray-200 dark:bg-gray-800/80 dark:hover:bg-gray-800 text-sm font-semibold transition-all cursor-pointer"
+                  >
+                    <span className="flex items-center gap-2">
+                      <FileText className="w-4 h-4 text-purple-500" />
+                      {showPromptPreview ? 'Hide Prompt Preview' : 'Show Prompt Preview'}
+                    </span>
+                    {showPromptPreview ? <ChevronUp className="w-4 h-4" /> : <ChevronDown className="w-4 h-4" />}
+                  </button>
+
+                  <AnimatePresence>
+                    {showPromptPreview && (
+                      <motion.div
+                        initial={{ height: 0, opacity: 0 }}
+                        animate={{ height: 'auto', opacity: 1 }}
+                        exit={{ height: 0, opacity: 0 }}
+                        className="overflow-hidden mt-3"
+                      >
+                        <div className="p-4 rounded-xl bg-gray-900 text-gray-100 font-mono text-xs max-h-[160px] overflow-y-auto leading-relaxed select-all">
+                          {promptText}
+                        </div>
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
                 </div>
+
               </div>
             )}
 

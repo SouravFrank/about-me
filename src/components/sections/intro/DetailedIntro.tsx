@@ -32,6 +32,7 @@ export default function DetailedIntro({ onClose }: DetailedIntroProps) {
 
   return (
     <motion.div
+      id="detailed-intro"
       className={`relative w-full ${isMobile ? 'max-w-full mx-2 mt-4' : 'max-w-4xl mx-auto mt-8'}`}
       onHoverStart={() => handleHover(true)}
       onHoverEnd={() => handleHover(false)}

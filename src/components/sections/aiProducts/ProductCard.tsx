@@ -1,7 +1,8 @@
-import React, { forwardRef, useImperativeHandle, useRef } from 'react';
+import React, { forwardRef, useImperativeHandle, useRef, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { ArrowRight, Sparkles } from 'lucide-react';
 import { ProductCardProps } from './types';
+import { trackAIProduct } from '../../../utils/analytics';
 
 export interface ProductCardRef {
   focus: () => void;
@@ -12,6 +13,7 @@ export const ProductCard = forwardRef<ProductCardRef, ProductCardProps>(
   ({ product, onLearnMore }, ref) => {
     const buttonRef = useRef<HTMLButtonElement>(null);
     const cardRef = useRef<HTMLDivElement>(null);
+    const viewTracked = useRef(false);
 
     useImperativeHandle(ref, () => ({
       focus: () => {
@@ -22,9 +24,39 @@ export const ProductCard = forwardRef<ProductCardRef, ProductCardProps>(
       },
     }));
 
+    // Track: Product Viewed (when it enters viewport)
+    useEffect(() => {
+      const el = cardRef.current;
+      if (!el) return;
+
+      const observer = new IntersectionObserver(
+        ([entry]) => {
+          if (entry.isIntersecting && !viewTracked.current) {
+            viewTracked.current = true;
+            trackAIProduct(product.name, 'product_viewed');
+            observer.disconnect();
+          }
+        },
+        { threshold: 0.25 }
+      );
+
+      observer.observe(el);
+      return () => observer.disconnect();
+    }, [product.name]);
+
+    const handleCardHover = () => {
+      trackAIProduct(product.name, 'card_hover');
+    };
+
+    const handleExploreClick = () => {
+      trackAIProduct(product.name, 'explore_click');
+      onLearnMore(product);
+    };
+
     return (
       <article
         ref={cardRef}
+        onMouseEnter={handleCardHover}
         className={`
           relative
           mx-auto
@@ -125,7 +157,7 @@ export const ProductCard = forwardRef<ProductCardRef, ProductCardProps>(
           {/* CTA: Explore Product */}
           <button
             ref={buttonRef}
-            onClick={() => onLearnMore(product)}
+            onClick={handleExploreClick}
             className="relative w-full inline-flex items-center justify-center gap-2 px-5 py-3 rounded-xl text-sm font-semibold text-white overflow-hidden group/btn shadow-md hover:shadow-[0_8px_24px_-6px_rgba(168,85,247,0.5)] transition-all duration-300 cursor-pointer"
             style={{
               background: 'linear-gradient(135deg, #3b82f6 0%, #a855f7 50%, #ec4899 100%)',
