@@ -45,6 +45,8 @@ const VisitorCounter: React.FC<VisitorCounterProps> = ({ appId }) => {
   useEffect(() => {
     // Update the fetchIpAndUpdateCount function
     const fetchIpAndUpdateCount = async () => {
+      const isLocalhost = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
+      
       try {
         // Sign in anonymously before accessing the database
         try {
@@ -53,37 +55,46 @@ const VisitorCounter: React.FC<VisitorCounterProps> = ({ appId }) => {
           console.warn('Anonymous auth failed, continuing without auth:', authError);
         }
         
-        // Retrieve the visitor id from localStorage or generate one.
-        let visitorFingerprint = localStorage.getItem('visitorFingerprint');
-        if (!visitorFingerprint) {
-          const response = await fetch('https://api.ipify.org?format=json');
-          const data: { ip: string } = await response.json();
-          visitorFingerprint = generateFingerprint(data.ip);
-          localStorage.setItem('visitorFingerprint', visitorFingerprint);
-        }
-    
-        // Get current visitors and update if new
+        // Get current visitors and update if new (only if not on localhost)
         const snapshot = await get(visitorsRef);
         const visitors: VisitorsData = snapshot.val() || {};
-        if (!visitors[visitorFingerprint]) {
-          visitors[visitorFingerprint] = true;
-          await set(visitorsRef, visitors);
+        
+        if (!isLocalhost) {
+          // Retrieve the visitor id from localStorage or generate one.
+          let visitorFingerprint = localStorage.getItem('visitorFingerprint');
+          if (!visitorFingerprint) {
+            const response = await fetch('https://api.ipify.org?format=json');
+            const data: { ip: string } = await response.json();
+            visitorFingerprint = generateFingerprint(data.ip);
+            localStorage.setItem('visitorFingerprint', visitorFingerprint);
+          }
+      
+          if (!visitors[visitorFingerprint]) {
+            visitors[visitorFingerprint] = true;
+            await set(visitorsRef, visitors);
+          }
         }
+        
         setVisitorCount(Object.keys(visitors).length);
       } catch (error) {
         console.error('Error fetching IP or updating visitors:', error);
-        // Fallback: generate a random fingerprint
-        let visitorFingerprint = localStorage.getItem('visitorFingerprint');
-        if (!visitorFingerprint) {
-          visitorFingerprint = Math.random().toString(36).substring(2, 10);
-          localStorage.setItem('visitorFingerprint', visitorFingerprint);
-        }
+        
+        // Fallback: only update visitor fingerprint in DB if not on localhost
         const snapshot = await get(visitorsRef);
         const visitors: VisitorsData = snapshot.val() || {};
-        if (!visitors[visitorFingerprint]) {
-          visitors[visitorFingerprint] = true;
-          await set(visitorsRef, visitors);
+        
+        if (!isLocalhost) {
+          let visitorFingerprint = localStorage.getItem('visitorFingerprint');
+          if (!visitorFingerprint) {
+            visitorFingerprint = Math.random().toString(36).substring(2, 10);
+            localStorage.setItem('visitorFingerprint', visitorFingerprint);
+          }
+          if (!visitors[visitorFingerprint]) {
+            visitors[visitorFingerprint] = true;
+            await set(visitorsRef, visitors);
+          }
         }
+        
         setVisitorCount(Object.keys(visitors).length);
       }
     };
