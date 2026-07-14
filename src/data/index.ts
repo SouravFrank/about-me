@@ -13,3 +13,5 @@ export { socialMediaLinks } from './social';
 export { timelineData } from './timeline';
 export { achievementsSectionDetails, timelineAchievements } from './timelineAchievements';
 export { projects } from './projects';
+export { aiProducts } from './aiProducts';
+export type { AIProduct } from './aiProducts';

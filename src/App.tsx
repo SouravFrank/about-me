@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { ThemeToggle, GoToTop, ArticlesSection, Footer, TechStack, HorizontalScroll, GradientBlobCursor, RewardsRecognition, ProjectSection, SectionWrapper, IntroSection, TimelineSection, SkillsSection, ContactSection, CVDownloadSection, HexagonPreloader, VisitorCounter, InteractiveBackground, ThemeHint, AIArsenalSection } from './components';
+import { ThemeToggle, GoToTop, ArticlesSection, Footer, TechStack, HorizontalScroll, GradientBlobCursor, RewardsRecognition, ProjectSection, SectionWrapper, IntroSection, TimelineSection, SkillsSection, ContactSection, CVDownloadSection, HexagonPreloader, VisitorCounter, InteractiveBackground, ThemeHint, AIArsenalSection, AIProductsSection } from './components';
 import { sectionData } from './data/sectionData';
 import './styles/custom.css';
 // import { fetchMetadata, fetchMultipleMetadata } from './utils/fetchMetadata';
@@ -122,6 +122,10 @@ function App() {
 
               <section id="ai-arsenal">
                 <AIArsenalSection isDark={isDark} />
+              </section>
+
+              <section id="ai-products">
+                <AIProductsSection isDark={isDark} isAppLoaded={!loading} />
               </section>
 
               <section id="rewards">
