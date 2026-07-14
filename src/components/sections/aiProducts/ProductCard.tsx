@@ -70,9 +70,14 @@ export const ProductCard = forwardRef<ProductCardRef, ProductCardProps>(
         <div className="relative z-10 bg-white/95 dark:bg-gray-900/90 rounded-2xl p-6 flex flex-col h-full select-text">
           {/* Header row: Status badges */}
           <div className="flex items-center justify-between mb-4">
-            <span className="px-2.5 py-1 text-[11px] font-semibold tracking-wide uppercase bg-emerald-100 text-emerald-800 dark:bg-emerald-950/40 dark:text-emerald-300 border border-emerald-200 dark:border-emerald-800/40 rounded-full">
-              {product.status}
-            </span>
+            <div className="flex gap-2">
+              <span className="px-2.5 py-1 text-[11px] font-semibold tracking-wide uppercase bg-emerald-100 text-emerald-800 dark:bg-emerald-950/40 dark:text-emerald-300 border border-emerald-200 dark:border-emerald-800/40 rounded-full">
+                {product.status}
+              </span>
+              <span className="px-2.5 py-1 text-[11px] font-bold tracking-wide uppercase bg-emerald-500 text-white rounded-full">
+                FREE
+              </span>
+            </div>
             <span className="text-xs font-medium text-gray-500 dark:text-gray-400">
               {product.edition}
             </span>
@@ -88,7 +93,27 @@ export const ProductCard = forwardRef<ProductCardRef, ProductCardProps>(
 
           {/* Version */}
           <div className="text-xs font-mono font-semibold text-purple-600 dark:text-purple-400 mb-3">
-            Version {product.version}
+            Version {product.version} · Released {product.releasedDate}
+          </div>
+
+          {/* Meta tags list for visual weight */}
+          <div className="grid grid-cols-2 gap-2 mb-4 text-xs font-medium text-gray-600 dark:text-gray-400 border-t border-b border-gray-100 dark:border-gray-800/60 py-3">
+            <div className="flex items-center gap-1.5">
+              <span>⭐⭐⭐⭐⭐</span>
+              <span className="truncate">Community Tool</span>
+            </div>
+            <div className="flex items-center gap-1.5">
+              <span>📅</span>
+              <span className="truncate">2026 Tax Season</span>
+            </div>
+            <div className="flex items-center gap-1.5">
+              <span>💼</span>
+              <span className="truncate">Finance Category</span>
+            </div>
+            <div className="flex items-center gap-1.5">
+              <span>🚀</span>
+              <span className="truncate">1 AI Product</span>
+            </div>
           </div>
 
           {/* Small description */}
@@ -96,7 +121,7 @@ export const ProductCard = forwardRef<ProductCardRef, ProductCardProps>(
             {product.description}
           </p>
 
-          {/* CTA: Learn More */}
+          {/* CTA: Explore Product */}
           <button
             ref={buttonRef}
             onClick={() => onLearnMore(product)}
@@ -107,7 +132,7 @@ export const ProductCard = forwardRef<ProductCardRef, ProductCardProps>(
           >
             <span className="absolute inset-0 -translate-x-full group-hover/btn:translate-x-0 transition-transform duration-500 bg-gradient-to-r from-transparent via-white/20 to-transparent" />
             <span className="relative z-10 flex items-center gap-2">
-              Learn More
+              Explore Product
               <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover/btn:translate-x-1" />
             </span>
           </button>
