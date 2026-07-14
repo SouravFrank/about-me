@@ -70,11 +70,11 @@ export const ProductCard = forwardRef<ProductCardRef, ProductCardProps>(
         <div className="relative z-10 bg-white/95 dark:bg-gray-900/90 rounded-2xl p-6 flex flex-col h-full select-text">
           {/* Header row: Status badges */}
           <div className="flex items-center justify-between mb-4">
-            <div className="flex gap-2">
-              <span className="px-2.5 py-1 text-[11px] font-semibold tracking-wide uppercase bg-emerald-100 text-emerald-800 dark:bg-emerald-950/40 dark:text-emerald-300 border border-emerald-200 dark:border-emerald-800/40 rounded-full">
+            <div className="flex gap-2 items-center">
+              <span className="inline-flex items-center justify-center h-6 px-2.5 py-1 text-[11px] font-semibold tracking-wide uppercase bg-emerald-100 text-emerald-800 dark:bg-emerald-950/40 dark:text-emerald-300 border border-emerald-200 dark:border-emerald-800/40 rounded-full leading-none">
                 {product.status}
               </span>
-              <span className="px-2.5 py-1 text-[11px] font-bold tracking-wide uppercase bg-emerald-500 text-white rounded-full">
+              <span className="inline-flex items-center justify-center h-6 px-2.5 py-1 text-[11px] font-semibold tracking-wide uppercase bg-blue-100 text-blue-800 dark:bg-blue-950/40 dark:text-blue-300 border border-blue-200 dark:border-blue-800/40 rounded-full leading-none">
                 FREE
               </span>
             </div>
@@ -84,9 +84,10 @@ export const ProductCard = forwardRef<ProductCardRef, ProductCardProps>(
           </div>
 
           {/* Product Title */}
-          <h3 className="text-2xl font-bold mb-1 leading-tight flex items-center gap-2">
+          <h3 className="text-2xl font-bold mb-1 leading-tight flex items-center gap-1.5">
+            <span className="shrink-0 text-xl" style={{ textShadow: 'none' }}>🇮🇳</span>
             <span className="bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 text-transparent bg-clip-text dark:from-blue-400 dark:to-purple-400">
-              {product.name}
+              {product.name.replace('🇮🇳 ', '')}
             </span>
             <Sparkles className="w-5 h-5 text-amber-500 animate-pulse shrink-0" />
           </h3>
@@ -112,7 +113,7 @@ export const ProductCard = forwardRef<ProductCardRef, ProductCardProps>(
             </div>
             <div className="flex items-center gap-1.5">
               <span>🚀</span>
-              <span className="truncate">1 AI Product</span>
+              <span className="truncate"> AI Product</span>
             </div>
           </div>
 

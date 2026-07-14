@@ -201,35 +201,37 @@ export const ProductModal: React.FC<ProductModalProps> = ({
                 flex 
                 justify-between 
                 items-start 
+                relative
                 ${isDark ? 'bg-gray-800/50' : 'bg-gradient-to-r from-blue-50 to-indigo-50'}
               `}
             >
-              <div className="flex justify-between items-start w-full pr-8">
-                <div className="min-w-0 pr-4">
-                  <div className="flex items-center gap-2 flex-wrap mb-1">
-                    <h3
-                      id="product-modal-title"
-                      className="text-2xl md:text-3xl font-bold bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 bg-clip-text text-transparent dark:from-blue-400 dark:to-purple-400"
-                    >
-                      {product.name}
-                    </h3>
-                    <span className="px-2 py-0.5 text-[10px] font-semibold bg-blue-100 text-blue-800 dark:bg-blue-900/40 dark:text-blue-300 rounded-md">
-                      {product.edition}
+              <div className="min-w-0 pr-8">
+                <div className="flex items-center gap-2 flex-wrap mb-1">
+                  <h3
+                    id="product-modal-title"
+                    className="text-2xl md:text-3xl font-bold flex items-center gap-1.5"
+                  >
+                    <span className="shrink-0 text-2xl" style={{ textShadow: 'none' }}>🇮🇳</span>
+                    <span className="bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 text-transparent bg-clip-text dark:from-blue-400 dark:to-purple-400">
+                      {product.name.replace('🇮🇳 ', '')}
                     </span>
-                  </div>
-                  <p className="text-sm font-semibold text-purple-600 dark:text-purple-400 font-mono">
-                    Version {product.version} · Released {product.releasedDate}
-                  </p>
-                  <p className="text-xs text-gray-500 dark:text-gray-400 mt-1 font-medium">
-                    AI-assisted Income Tax Filing Workflow
-                  </p>
+                  </h3>
+                  <span className="px-2 py-0.5 text-[10px] font-semibold bg-blue-100 text-blue-800 dark:bg-blue-900/40 dark:text-blue-300 rounded-md">
+                    {product.edition}
+                  </span>
                 </div>
+                <p className="text-sm font-semibold text-purple-600 dark:text-purple-400 font-mono">
+                  Version {product.version} · Released {product.releasedDate}
+                </p>
+                <p className="text-xs text-gray-500 dark:text-gray-400 mt-1 font-medium">
+                  AI-assisted Income Tax Filing Workflow
+                </p>
+              </div>
 
-                {/* Small Branding (Top Right) */}
-                <div className="hidden sm:flex flex-col items-end text-right shrink-0">
-                  <span className="text-[9px] uppercase tracking-wider text-gray-400 dark:text-gray-500">Built by</span>
-                  <span className="text-xs font-bold text-gray-700 dark:text-gray-300">Sourav Sadhukhan</span>
-                </div>
+              {/* Small Branding (Top Right, below close button) */}
+              <div className="absolute top-[68px] right-6 hidden sm:flex flex-col items-end text-right">
+                <span className="text-[9px] uppercase tracking-wider text-gray-400 dark:text-gray-500 font-bold">Built by</span>
+                <span className="text-xs font-bold text-gray-700 dark:text-gray-300">Sourav Sadhukhan</span>
               </div>
 
               <button
@@ -287,6 +289,19 @@ export const ProductModal: React.FC<ProductModalProps> = ({
                   <p className="text-sm md:text-base text-gray-700 dark:text-gray-300 leading-relaxed font-light">
                     {product.longDescription}
                   </p>
+                </div>
+
+                {/* How to execute tip box */}
+                <div className="p-4 rounded-xl border border-blue-100 dark:border-blue-900/40 bg-blue-50/20 dark:bg-blue-950/20 flex gap-3 items-start select-text">
+                  <span className="text-lg shrink-0 select-none">💡</span>
+                  <div className="space-y-1">
+                    <h5 className="text-xs font-bold text-blue-800 dark:text-blue-300 uppercase tracking-wider">
+                      How to execute this workflow
+                    </h5>
+                    <p className="text-xs text-gray-600 dark:text-gray-400 leading-relaxed font-light">
+                      Download or copy the workflow, then paste it directly into your preferred AI chat assistant (such as <strong className="text-gray-800 dark:text-gray-200">ChatGPT</strong>, <strong className="text-gray-800 dark:text-gray-200">Claude</strong>, or <strong className="text-gray-800 dark:text-gray-200">Gemini</strong>) to initiate the step-by-step guided filing session.
+                    </p>
+                  </div>
                 </div>
 
                 {/* Features & Target Audience Grid */}
@@ -383,7 +398,7 @@ export const ProductModal: React.FC<ProductModalProps> = ({
                   {copied ? (
                     <>
                       <Check className="w-4 h-4" />
-                      ✓ Workflow Copied
+                      Workflow Copied
                     </>
                   ) : (
                     <>
