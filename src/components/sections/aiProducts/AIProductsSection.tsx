@@ -28,16 +28,21 @@ export const AIProductsSection: React.FC<Props> = ({ isDark, isAppLoaded }) => {
       if (hash === '#product=itr-copilot') {
         const product = aiProducts.find((p) => p.id === 'itr-copilot');
         if (product) {
-          // Wait 200ms for page entry settle, then scroll
+          // Wait 1000ms for preloader to fade out completely and layout to settle
           initTimeout = window.setTimeout(() => {
-            cardRef.current?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            const sectionElement = document.getElementById('ai-products');
+            if (sectionElement) {
+              sectionElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            } else {
+              cardRef.current?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            }
 
-            // Wait for scroll animation to complete, then open modal
+            // Wait 1000ms for smooth scroll completion, then open modal
             scrollTimeout = window.setTimeout(() => {
               setModalSource('deep_link');
               setSelectedProduct(product);
-            }, 800);
-          }, 200);
+            }, 1000);
+          }, 1000);
         }
       }
     };
