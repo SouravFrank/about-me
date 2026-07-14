@@ -19,6 +19,8 @@ export const AIProductsSection: React.FC<Props> = ({ isDark, isAppLoaded }) => {
   // Handle deep linking check
   useEffect(() => {
     if (!isAppLoaded) return;
+    let initTimeout: number | undefined;
+    let scrollTimeout: number | undefined;
 
     const checkHashRoute = () => {
       const hash = window.location.hash;
@@ -26,16 +28,16 @@ export const AIProductsSection: React.FC<Props> = ({ isDark, isAppLoaded }) => {
       if (hash === '#product=itr-copilot') {
         const product = aiProducts.find((p) => p.id === 'itr-copilot');
         if (product) {
-          // Scroll smoothly to card
-          cardRef.current?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+          // Wait 200ms for page entry settle, then scroll
+          initTimeout = window.setTimeout(() => {
+            cardRef.current?.scrollIntoView({ behavior: 'smooth', block: 'center' });
 
-          // Wait for scroll animation to complete, then open modal
-          const scrollTimeout = setTimeout(() => {
-            setModalSource('deep_link');
-            setSelectedProduct(product);
-          }, 800);
-
-          return () => clearTimeout(scrollTimeout);
+            // Wait for scroll animation to complete, then open modal
+            scrollTimeout = window.setTimeout(() => {
+              setModalSource('deep_link');
+              setSelectedProduct(product);
+            }, 800);
+          }, 200);
         }
       }
     };
@@ -45,7 +47,11 @@ export const AIProductsSection: React.FC<Props> = ({ isDark, isAppLoaded }) => {
 
     // Listen for hash changes
     window.addEventListener('hashchange', checkHashRoute);
-    return () => window.removeEventListener('hashchange', checkHashRoute);
+    return () => {
+      window.removeEventListener('hashchange', checkHashRoute);
+      if (initTimeout) window.clearTimeout(initTimeout);
+      if (scrollTimeout) window.clearTimeout(scrollTimeout);
+    };
   }, [isAppLoaded]);
 
   const handleLearnMore = (product: AIProduct) => {
