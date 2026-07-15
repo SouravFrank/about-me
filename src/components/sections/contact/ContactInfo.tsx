@@ -3,8 +3,25 @@ import { Mail, Phone, MapPin } from 'lucide-react';
 import SocialLinks from './SocialLinks';
 import { ContactInfoProps } from './types';
 import { contactInfo } from '../../../data';
+import { useEffect } from 'react';
+import { trackEvent, trackSessionAction } from '../../../utils/analytics';
 
 export default function ContactInfo(_: ContactInfoProps) {
+  useEffect(() => {
+    const handleCopy = () => {
+      const selection = window.getSelection()?.toString().trim() || '';
+      if (selection.includes('ssadhukhan990@gmail.com') || selection.toLowerCase().includes('ssadhukhan')) {
+        trackEvent('contact_funnel', { funnel_step: 'email_copied', method: 'copy', value: 'email' });
+        trackSessionAction('contact', 'email');
+      } else if (selection.replace(/[^0-9]/g, '').includes('9038516950')) {
+        trackEvent('contact_funnel', { funnel_step: 'phone_copied', method: 'copy', value: 'phone' });
+        trackSessionAction('contact', 'phone');
+      }
+    };
+    document.addEventListener('copy', handleCopy);
+    return () => document.removeEventListener('copy', handleCopy);
+  }, []);
+
   const getIcon = (title: string) => {
     switch (title.toLowerCase()) {
       case 'email':

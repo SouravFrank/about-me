@@ -1,10 +1,11 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { X } from 'lucide-react';
 import { sectionData } from '../../../data/sectionData';
 import CVCard from './CVCard';
 import { CVDownloadSectionProps } from './types';
 import { personalInfo } from '../../../data/personalInfo';
+import { trackEvent, trackConversion, trackSessionAction } from '../../../utils/analytics';
 
 export const CVDownloadSection: React.FC<CVDownloadSectionProps> = ({ isDark }) => {
   const [isModalOpen, setModalOpen] = useState(false);
@@ -12,7 +13,23 @@ export const CVDownloadSection: React.FC<CVDownloadSectionProps> = ({ isDark }) 
   const [downloadClicked, setDownloadClicked] = useState(false);
   const [isButtonDisabled, setButtonDisabled] = useState(false);
 
+  // Track: Resume Button Viewed
+  useEffect(() => {
+    trackEvent('resume_funnel', {
+      funnel_step: 'button_viewed',
+      resume_source: 'cv_section',
+      section: 'cv'
+    });
+  }, []);
+
   const handleDownload = () => {
+    // Track: Resume Clicked
+    trackEvent('resume_funnel', {
+      funnel_step: 'clicked',
+      resume_source: 'download_button',
+      section: 'cv'
+    });
+
     setLoadingPdf(true);
     setButtonDisabled(true);
 
@@ -22,6 +39,15 @@ export const CVDownloadSection: React.FC<CVDownloadSectionProps> = ({ isDark }) 
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
+
+    // Track: Resume Downloaded
+    trackEvent('resume_funnel', {
+      funnel_step: 'downloaded',
+      resume_source: 'download_button',
+      section: 'cv'
+    });
+    trackConversion('resume_download', { resume_source: 'download_button', section: 'cv' });
+    trackSessionAction('resume', true);
 
     setTimeout(() => {
       setDownloadClicked(true);
@@ -35,23 +61,50 @@ export const CVDownloadSection: React.FC<CVDownloadSectionProps> = ({ isDark }) 
   };
 
   const handleShow = () => {
+    // Track: Resume Clicked
+    trackEvent('resume_funnel', {
+      funnel_step: 'clicked',
+      resume_source: 'preview_button',
+      section: 'cv'
+    });
+
     setLoadingPdf(true);
     setModalOpen(true);
   };
 
+  const handleCloseModal = () => {
+    setModalOpen(false);
+    // Track: Returned to Website
+    trackEvent('resume_funnel', {
+      funnel_step: 'returned',
+      resume_source: 'preview_close',
+      section: 'cv'
+    });
+  };
+
+  const handleIframeLoad = () => {
+    setLoadingPdf(false);
+    // Track: Resume Opened
+    trackEvent('resume_funnel', {
+      funnel_step: 'opened',
+      resume_source: 'preview_iframe',
+      section: 'cv'
+    });
+  };
+
   return (
-    <div className="max-w-4xl mx-auto py-8 md:py-12 my-8 md:my-12 px-4 md:px-0">
+    <div className="max-w-4xl mx-auto py-8 md:py-12 my-8 md:my-12 px-4 md:px-0" data-section="cv" id="cv">
       <motion.div whileHover={{ scale: 1.02 }} transition={{ duration: 0.3 }}>
         <CVCard isDark={isDark} title={`${sectionData.cvDownload.titleBold} ${sectionData.cvDownload.titleLight}`} description={sectionData.cvDownload.description} onPreview={handleShow} onDownload={handleDownload} downloadClicked={downloadClicked} isButtonDisabled={isButtonDisabled} />
       </motion.div>
 
       <AnimatePresence>
         {isModalOpen && (
-          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="fixed inset-0 backdrop-blur-md z-50 flex items-center justify-center p-2 md:p-4">
-            <motion.div initial={{ scale: 0.9, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} exit={{ scale: 0.9, opacity: 0 }} transition={{ type: 'spring', damping: 20 }} className={`rounded-2xl shadow-2xl w-full max-w-[95vw] md:max-w-5xl max-h-[90vh] overflow-hidden ${isDark ? 'bg-gray-800' : 'bg-white'}`}>
+          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="fixed inset-0 backdrop-blur-md z-50 flex items-center justify-center p-2 md:p-4" onClick={handleCloseModal}>
+            <motion.div initial={{ scale: 0.9, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} exit={{ scale: 0.9, opacity: 0 }} transition={{ type: 'spring', damping: 20 }} className={`rounded-2xl shadow-2xl w-full max-w-[95vw] md:max-w-5xl max-h-[90vh] overflow-hidden ${isDark ? 'bg-gray-800' : 'bg-white'}`} onClick={(e) => e.stopPropagation()}>
               <div className={`p-4 md:p-6 border-b border-gray-200 flex justify-between items-center ${isDark ? 'bg-gray-700' : 'bg-gradient-to-r from-blue-50 to-indigo-50'}`}>
                 <h3 className={`text-xl md:text-2xl font-semibold ${isDark ? 'text-white' : 'text-gray-800'}`}>CV Preview</h3>
-                <motion.button onClick={() => setModalOpen(false)} className="p-2 hover:bg-gray-200 hover:dark:bg-gray-900 rounded-full transition-colors" whileHover={{ scale: 1.1, rotate: 90 }} whileTap={{ scale: 0.9 }}>
+                <motion.button onClick={handleCloseModal} className="p-2 hover:bg-gray-200 hover:dark:bg-gray-900 rounded-full transition-colors" whileHover={{ scale: 1.1, rotate: 90 }} whileTap={{ scale: 0.9 }}>
                   <X className={`w-5 h-5 md:w-6 md:h-6 ${isDark ? 'text-gray-300' : 'text-gray-500'}`} />
                 </motion.button>
               </div>
@@ -64,7 +117,7 @@ export const CVDownloadSection: React.FC<CVDownloadSectionProps> = ({ isDark }) 
                 )}
                 <div className={`p-4 md:p-6 ${isDark ? 'bg-gray-800' : 'bg-gray-50'}`}>
                   <div className="bg-white rounded-xl shadow-lg overflow-hidden">
-                    <iframe src={personalInfo.viewResumeLink} className="w-full h-[60vh] md:h-[70vh] border-0" title="Resume Preview" onLoad={() => setLoadingPdf(false)} />
+                    <iframe src={personalInfo.viewResumeLink} className="w-full h-[60vh] md:h-[70vh] border-0" title="Resume Preview" onLoad={handleIframeLoad} />
                   </div>
                 </div>
               </div>

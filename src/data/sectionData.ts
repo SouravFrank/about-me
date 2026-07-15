@@ -39,4 +39,9 @@ export const sectionData = {
     titleLight: 'Innovative Solutions',
     description: 'A portfolio of projects that demonstrate creativity, precision, and impact in action.',
   },
+  aiProducts: {
+    titleBold: "AI ",
+    titleLight: 'Products',
+    description: 'Practical AI workflows engineered to solve real-world problems.',
+  },
 };

@@ -1,11 +1,34 @@
+import React, { useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
 import { ExternalLink } from 'lucide-react';
 import { ArticleCardProps } from './types';
 import useIsMobile from '../../../hooks/isMobile';
-import { trackEvent, ANALYTICS_CATEGORIES } from '../../../utils/analytics';
+import { trackArticle } from '../../../utils/analytics';
 
 const ArticleCard: React.FC<ArticleCardProps> = ({ title, description, url, image, index }) => {
   const isMobile = useIsMobile();
+  const cardRef = useRef<HTMLDivElement>(null);
+  const viewTracked = useRef(false);
+
+  // Track: Article Card Visible (when it enters viewport)
+  useEffect(() => {
+    const el = cardRef.current;
+    if (!el) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting && !viewTracked.current) {
+          viewTracked.current = true;
+          trackArticle(title, 'card_visible', { article_index: index });
+          observer.disconnect();
+        }
+      },
+      { threshold: 0.25 }
+    );
+
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, [title, index]);
 
   const handleArticleClick = (e: React.MouseEvent, clickArea: string) => {
     // Prevent default behavior if it's not a direct link click
@@ -13,15 +36,18 @@ const ArticleCard: React.FC<ArticleCardProps> = ({ title, description, url, imag
       e.stopPropagation();
     }
 
-    trackEvent('article_interaction', {
-      category: ANALYTICS_CATEGORIES.CONTENT,
-      action: 'click',
-      article_title: title,
+    trackArticle(title, 'clicked', {
       article_index: index,
       click_area: clickArea,
       device_type: isMobile ? 'mobile' : 'desktop'
     });
     
+    // Fire Reading Started since they are going to read it
+    trackArticle(title, 'reading_started', {
+      article_index: index,
+      url
+    });
+
     if (clickArea === 'read_more' || clickArea === 'card') {
       window.open(url, '_blank');
     }
@@ -29,9 +55,7 @@ const ArticleCard: React.FC<ArticleCardProps> = ({ title, description, url, imag
 
   const handleArticleHover = () => {
     if (!isMobile) {
-      trackEvent('article_hover', {
-        category: ANALYTICS_CATEGORIES.INTERACTION,
-        article_title: title,
+      trackArticle(title, 'hovered', {
         article_index: index
       });
     }
@@ -39,6 +63,7 @@ const ArticleCard: React.FC<ArticleCardProps> = ({ title, description, url, imag
 
   return (
     <motion.div
+      ref={cardRef}
       className="block w-[320px] md:w-[320px] h-[350px] md:h-[310px] bg-white dark:bg-gray-800 rounded-2xl shadow-lg overflow-hidden group relative"
       whileHover={{ scale: 1.05, y: -5 }}
       whileTap={{ scale: 0.98 }}

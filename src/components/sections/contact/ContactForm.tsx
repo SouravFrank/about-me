@@ -4,6 +4,7 @@ import { Send, User, Mail, MessageSquare } from 'lucide-react';
 import emailjs from '@emailjs/browser';
 import { emailServices } from '../../../config';
 import CTAButton from '../../common/CTAButton';
+import { trackCTA, trackConversion, trackError, trackSessionAction } from '../../../utils/analytics';
 
 interface FormData {
   name: string;
@@ -38,6 +39,7 @@ export default function ContactForm() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    trackCTA('Contact Form Submit', 'click', 'contact');
     setStatus('sending');
     setErrors([]);
 
@@ -77,10 +79,14 @@ export default function ContactForm() {
         );
       }
       setStatus('success');
+      trackConversion('contact_form_success', { name: formData.name });
+      trackSessionAction('contact', 'form');
       setFormData({ name: '', contact: '', message: '' });
     } catch (error) {
       setStatus('error');
-      setErrors([error instanceof Error ? error.message : 'Something went wrong. Please try again.']);
+      const msg = error instanceof Error ? error.message : 'Something went wrong. Please try again.';
+      setErrors([msg]);
+      trackError('API Failure', msg, error instanceof Error ? error.stack : undefined, 'ContactForm', 'submit_contact');
     } finally {
       setTimeout(() => setStatus('idle'), 3000);
     }
