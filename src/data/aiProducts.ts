@@ -38,6 +38,6 @@ export const aiProducts: AIProduct[] = [
       'Developers',
     ],
     promptFilename: 'itr-copilot-v1.0.0.txt',
-    articleUrl: 'https://www.linkedin.com/in/sourav-sadhukhan/', // Placeholder for LinkedIn article
+    articleUrl: 'https://www.linkedin.com/posts/souravsadhukhan_every-tax-season-i-see-the-same-pattern-ugcPost-7482893657616834560-yAyl/?utm_source=share&utm_medium=member_desktop&rcm=ACoAACWoe4ABguERs55CSbsLiGbp8sTQQfL8bek',
   },
 ];
